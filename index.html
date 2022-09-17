@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style/style.css">
+
+  <script type="module" src="src/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+
+  <header>
+    <div class="header">
+      <div class="website_logo_container">
+        <div class="website_logo">
+          <img src="images/logo.jpg" alt="">
+        </div>
+        <p class="website_name">Slack</p>
+      </div>
+
+      <div class=" user_profile_container user_profile_container_desktop hidden">
+        <p class="username">Suhail Qureshi</p>
+        <div class="user_profile">
+          <img src="images/user.png" alt="">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="nav_container">
+      <div class="nav_btn_container">
+        <button class="nav_btn">opn nav</button>
+      </div>
+
+
+      <nav class="navbar hidden">
+        <div class="user_profile_container user_profile_container_mob">
+          <p class="username">Suhail Qureshi</p>
+          <div class="user_profile">
+            <img src="images/user.png" alt="">
+          </div>
+        </div>
+
+        <ul>
+          <li class="nav_item">
+            <svg></svg>
+            <span class="nav_item_name">Dashboard</span>
+          </li>
+          <li class="nav_item">
+            <svg></svg>
+            <span class="nav_item_name">Profile</span>
+          </li>
+          <li class="nav_item">
+            <svg></svg>
+            <span class="nav_item_name">Invest Wallet</span>
+          </li>
+          <li class="nav_item">
+            <svg></svg>
+            <span class="nav_item_name">Team summery </span>
+          </li>
+          <li class="nav_item">
+            <svg></svg>
+            <span class="nav_item_name">Income</span>
+          </li>
+          <li class="nav_item">
+            <svg></svg>
+            <span class="nav_item_name">withdrawal wallet</span>
+          </li>
+          <li class="nav_item">
+            <svg></svg>
+            <span class="nav_item_name">deposit funds transfer</span>
+          </li>
+          <li class="nav_item">
+            <svg></svg>
+            <span class="nav_item_name">Reports</span>
+          </li>
+          <li class="nav_item">
+            <svg></svg>
+            <span class="nav_item_name">Structure balance</span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class=" hidden">
+       <!-----this section main class----account_info-->
+      <div class="total_cont acc_div">
+        <div>
+          <p class="total acc_total">Total</p>
+          <p class="total_amount acc_amount">$2000</p>
+        </div>
+
+        <!----ICON HERE--->
+      </div>
+
+      <div class="wallet_cont acc_div">
+        <div class="acc_total_cont">
+          <p class="total acc_total">Wallet</p>
+          <p class="total_amount acc_amount">$2000</p>
+        </div>
+
+        <!----ICON HERE--->
+      </div>
+      
+      <div class="withdrawal_cont acc_div">
+        <div class="acc_total_cont">
+          <p class="total acc_total">Withdrawal balance</p>
+          <p class="total_amount acc_amount">$2000</p>
+        </div>
+
+        <!----ICON HERE--->
+      </div>
+
+    </section>
+
+    <section class="canvas">
+      <!-----MID PORTION----->
+
+      <canvas width="300px" height="300px" id="myC"></canvas>
+    </section>
+
+
+    <section class="container_ref_amnt">
+      <div class="referral_container">
+        <div class="ref_img_cont">
+          <p>IMAGE</p>
+          <img src="" alt="">
+        </div>
+        
+        <h4>Referral Link</h4>
+        <a href="#" class="ref_link">Example.com</a>
+        <button>Copy Referral Link</button>
+      </div>
+      <div class="add_withdraw_money">
+        <div class="btns">
+          <button class="addFund">Add Fund</button>
+          <button class="withdrawal">Withdrawal</button>
+        </div>
+        <div class="deposit_income">
+          <p>Total Deposit Income</p>
+          <p>$1000</p>
+        </div>
+
+        <div class="input_cont">
+          <p>Enter amount (in USD)</p>
+          <input type="text">
+          <button>Add Fund</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
