@@ -1,11 +1,15 @@
 :root {
   --primary-color: 265, 90%, 68%;
   --bg-primary-color: 221, 93%, 89%;
+  --dark-bg-primary-color: 221, 60%, 70%;
   --secondary-color: #fff;
   --shadow: 200, 200, 200;
   --purple: 126, 75, 247;
+  --dark-purple: 75, 38, 105;
   --blue: 89, 150, 247;
   --cyan: 11, 193, 234;
+  --silver:202, 5%, 95% ;
+  --dark-silver: 202,5%, 60%;
   --second-layer-left: -5%;
   --second-layer-top: 1%;
   --total-income-div: 215, 98%, 55%
@@ -36,8 +40,8 @@ body {
 }
 
 header {
-  position:sticky;
-  top:0;
+  position: sticky;
+  top: 0;
   padding: 0.5rem;
   z-index: 2;
   background: rgba(255, 255, 255, 0.9);
@@ -239,6 +243,108 @@ main::after {
   box-shadow: 0px 5px 15px 0px rgba(var(--cyan), 0.7), 5px 0px 15px 0px rgba(var(--cyan), 0.7);
 }
 
+.statistics_boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 2rem;
+  padding: 1rem;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  margin-bottom: 2rem;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: flex-start;
+  width: 10rem;
+  height: 15rem;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.box::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.box-1 {
+  background: rgba(var(--purple), 0.3);
+  box-shadow: 2px 2px 14px 0px rgba(var(--purple), 0.5), 1px 1px 15px 0px rgba(var(--shadow), 0.3);
+}
+
+.box-1::before {
+  background: linear-gradient(rgba(var(--dark-purple), 1), rgba(255, 255, 255, 0.3));
+  top: 50%;
+}
+
+.box-2 {
+  background: hsla(var(--bg-primary-color), 0.6);
+  box-shadow: 2px 2px 14px 0px hsla(var(--bg-primary-color), 1), 1px 1px 15px 0px rgba(var(--shadow), 0.5);
+}
+
+.box-2::before {
+  background: linear-gradient(hsla(var(--dark-bg-primary-color), 1), rgba(255, 255, 255, 0.3));
+  top: 20%;
+}
+
+.box-3 {
+  background: rgba(var(--cyan), 0.1);
+  box-shadow: 2px 2px 14px 0px rgba(var(--cyan), 0.4), 1px 1px 15px 0px rgba(var(--shadow), 0.3);
+}
+
+.box-3::before {
+  top: 50%;
+  background: linear-gradient(rgba(var(--cyan), 0.5), rgba(255,255,255,0.2));
+}
+
+.box-4 {
+  background: hsla(var(--silver), 1);
+  box-shadow: 2px 2px 10px 0px hsla(var(--dark-silver), 1);
+}
+
+.box-4::before {
+  top:70%;
+  background: linear-gradient(hsla(var(--dark-silver), 0.8), hsla(0, 0%, 100%, 0.5));
+}
+
+.icon_heading p,
+.dollar_percentage span {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.dollar_percentage p {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.box-1 .icon_heading p,
+.box-1 .dollar_percentage span {
+  color: rgba(var(--purple), 0.7);
+}
+
+.box-2 .icon_heading p,
+.box-2 .dollar_percentage span {
+  color: hsla(var(--dark-bg-primary-color), 1);
+}
+
+.box-3 .icon_heading p,
+.box-3 .dollar_percentage span {
+  color: rgba(var(--cyan), 1);
+}
+
+.box-4 .icon_heading p,
+.box-4 .dollar_percentage span {
+  color: hsla(var(--dark-silver), 1);
+}
+
+
 .referral_container {
   display: flex;
   flex-direction: column;
@@ -355,3 +461,5 @@ main::after {
 .deposit_income~div>div>button:focus {
   background-color: hsla(var(--total-income-div), 0.5);
 }
+
+/* CONVERT ALL THE RGBA TO HSLA OR VICE VERSA LATER*/
