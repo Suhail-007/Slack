@@ -8,12 +8,17 @@
   --cyan: 11, 193, 234;
   --second-layer-left: -5%;
   --second-layer-top: 1%;
+  --total-income-div: 215, 98%, 55%
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+html {
+  font-size: clamp(1rem, 3vw, 2.2rem);
 }
 
 .hidden {
@@ -31,7 +36,14 @@ body {
 }
 
 header {
+  position:sticky;
+  top:0;
   padding: 0.5rem;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-box-shadow: 1px 0px 5px 0px rgba(var(--shadow), 1);
+  -moz-box-shadow: 1px 0px 5px 0px rgba(var(--shadow), 1);
+  box-shadow: 1px 0px 5px 0px rgba(var(--shadow), 1);
 }
 
 header,
@@ -44,7 +56,13 @@ header>.header {
 header .website_logo_container {
   display: flex;
   align-items: center;
-  gap: 0 1rem;
+  gap: 0 0.5rem;
+  font-size: 1.3rem;
+  font-family: cursive;
+}
+
+.website_name {
+  text-shadow: 5px 5px 10px #000;
 }
 
 .website_logo_container .website_logo>img {
@@ -136,7 +154,7 @@ main {
   border-radius: 3rem 0 0 0;
   margin-top: 2rem;
   margin-left: 4rem;
-  padding: 2rem;
+  padding-top: 2rem;
   box-shadow: 0px 1px 10px 0px #fff;
   background-color: #fff;
   box-shadow: 1px 0px 5px 0px rgba(var(--shadow), 0.5);
@@ -225,15 +243,115 @@ main::after {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  background: rgba(var(--purple), 0.2);
+  padding: 0 1rem 1.5rem 1rem;
 }
 
 .referral_container h4 {
-  
   font-weight: 400;
 }
 
 .referral_container a {
   text-decoration: none;
-  
+  font-size: 1rem;
+  color: #000;
+}
+
+.referral_container button {
+  border: none;
+  background: none;
+  background-color: rgba(var(--purple), 0.7);
+  margin: 1.5rem 0;
+  padding: 0.8rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 1px;
+  background: linear-gradient(360deg, rgba(var(--purple), 1.0), rgba(var(--purple), 0.4));
+  -webkit-box-shadow: 5px 0px 10px 0px rgba(var(--purple), 0.5), 0px 5px 10px 1px rgba(var(--purple), 0.5);
+  -moz-box-shadow: 5px 0px 10px 0px rgba(var(--purple), 0.5), 0px 5px 10px 1px rgba(var(--purple), 0.5);
+  box-shadow: 5px 0px 10px 0px rgba(var(--purple), 0.5), 0px 5px 10px 1px rgba(var(--purple), 0.5);
+}
+
+.add_withdraw_container {
+  background: hsla(var(--bg-primary-color), 0.8);
+}
+
+.add_withdraw_container .btns_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 2rem;
+}
+
+.add_withdraw_container .btns_container button {
+  border: none;
+  background: none;
+  padding: 1rem;
+  background-color: hsla(269, 55%, 96%, 1.0);
+  color: #000;
+  transition: all 200ms ease-in-out;
+  font-weight: 400;
+  letter-spacing: 1;
+  font-size: 1.1rem;
+}
+
+.add_withdraw_container .btns_container button.active {
+  background-color: rgba(var(--purple), 0.9);
+  color: white;
+}
+
+.deposit_income {
+  background-color: hsla(var(--total-income-div), 0.5);
+  border-radius: 1rem;
+  width: 90%;
+  color: #fff;
+  padding: 0.8rem 1rem;
+  text-align: center;
+  margin: 2rem auto;
+  box-shadow: 1px 0px 10px 1px hsla(var(--total-income-div), 0.5);
+}
+
+.deposit_income~div {
+  padding: 0 1rem;
+  font-size: 1rem;
+}
+
+.deposit_income~div>div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem 0;
+  padding: 0.5rem 0;
+}
+
+.deposit_income~div>div>input {
+  border-radius: 0.7rem;
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  font-size: 1rem;
+  transition: all 150ms ease-in;
+}
+
+.deposit_income~div>div>input:focus,
+.deposit_income~div>div>input:hover {
+  outline: 3px solid hsla(var(--bg-primary-color), 1);
+}
+
+.deposit_income~div>div>button {
+  background: none;
+  border: none;
+  background-color: hsla(var(--total-income-div), 0.2);
+  color: #fff;
+  padding: 3.1rem 1.5rem;
+  border-radius: 10rem;
+  font-size: 1.1rem;
+  transition: 200ms ease-in-out;
+}
+
+
+.deposit_income~div>div>button:hover,
+.deposit_income~div>div>button:focus {
+  background-color: hsla(var(--total-income-div), 0.5);
 }

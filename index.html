@@ -21,7 +21,7 @@
         <div class="website_logo">
           <img src="images/logo.jpg" alt="">
         </div>
-        <p class="website_name">Slack</p>
+        <p class="website_name hidden">Slack</p>
       </div>
 
       <div class=" user_profile_container user_profile_container_desktop hidden">
@@ -91,7 +91,7 @@
 
   <main>
     <section class=" hidden">
-       <!-----this section main class----account_info-->
+      <!-----this section main class----account_info-->
       <div class="total_cont acc_div">
         <div>
           <p class="total acc_total">Total</p>
@@ -109,7 +109,7 @@
 
         <!----ICON HERE--->
       </div>
-      
+
       <div class="withdrawal_cont acc_div">
         <div class="acc_total_cont">
           <p class="total acc_total">Withdrawal balance</p>
@@ -123,8 +123,31 @@
 
     <section class="canvas">
       <!-----MID PORTION----->
-
+      
+     <div class="roi_income">
+       <p>Roi income</p>
+       <canvas id="roi"></canvas>
+     </div>
+      
+      
       <canvas width="300px" height="300px" id="myC"></canvas>
+      
+      <div class="statistics_boxes">
+        <div class="roi_income">
+          <div class="icon_heading">
+            <!------ICON HERE--->
+            
+            <p>Roi Income</p>
+          </div>
+          
+          <div class="dollar_percentage">
+            <p class="dollar">$840.2</p>
+            <span class="percentage">
+              +$29.1k
+            </span>
+          </div>
+        </div>
+      </div>
     </section>
 
 
@@ -134,14 +157,19 @@
           <p>IMAGE</p>
           <img src="" alt="">
         </div>
-        
+
         <h4>Referral Link</h4>
         <a href="#" class="ref_link">Example.com</a>
-        <button>Copy Referral Link</button>
+        <button>
+          <!-----ICON HERE----->
+          <span>
+            Copy Referral Link
+          </span>
+        </button>
       </div>
-      <div class="add_withdraw_money">
-        <div class="btns">
-          <button class="addFund">Add Fund</button>
+      <div class="add_withdraw_container">
+        <div class="btns_container">
+          <button class="addFund active">Add Fund</button>
           <button class="withdrawal">Withdrawal</button>
         </div>
         <div class="deposit_income">
@@ -150,9 +178,12 @@
         </div>
 
         <div class="input_cont">
-          <p>Enter amount (in USD)</p>
-          <input type="text">
-          <button>Add Fund</button>
+          <label for="amount">Enter amount (in USD)</label>
+
+          <div>
+            <input id="amount" type="text">
+            <button>Add Fund</button>
+          </div>
         </div>
       </div>
     </section>
