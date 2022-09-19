@@ -1,6 +1,6 @@
 const myChart = document.getElementById('myC');
 
-export const chart = new Chart(myChart, {
+const lineChart = new Chart(myChart, {
   type: 'line',
   data: {
     labels: [
@@ -23,5 +23,6 @@ export const chart = new Chart(myChart, {
       data: [0, 10, 5, 2, 20, 35, 30, 45, 50, 55, 60],
     }],
   },
-  options: {}
-})
+});
+
+export default lineChart

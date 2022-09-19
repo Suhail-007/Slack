@@ -9,8 +9,10 @@
   <!-- Custom Styles -->
   <link rel="stylesheet" href="style/style.css">
 
-  <script type="module" src="src/main.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://kit.fontawesome.com/912f1a9d04.js" crossorigin="anonymous"></script>
+  <script type="module" src="src/main.js"></script>
+
 </head>
 
 <body>
@@ -32,14 +34,12 @@
       </div>
     </div>
 
-
     <div class="nav_container">
-      <div class="nav_btn_container">
-        <button class="nav_btn">opn nav</button>
+      <div class="nav_btn_container" data-navBtn-container>
+        <i class="fas fa-bars nav_btn"></i>
       </div>
 
-
-      <nav class="navbar hidden">
+      <nav class="navbar" data-nav>
         <div class="user_profile_container user_profile_container_mob">
           <p class="username">Suhail Qureshi</p>
           <div class="user_profile">
@@ -123,7 +123,6 @@
 
     <!-----MID PORTION----->
     <section class="canvas">
-
       <div class="roi_income_chart_cont">
         <p>Roi income chart</p>
         <canvas id="roi"></canvas>
@@ -133,7 +132,10 @@
       <div class="line_chart">
         <canvas width="300px" height="300px" id="myC"></canvas>
       </div>
+    </section>
 
+
+    <section>
       <div class="statistics_boxes">
         <div class="box box-1">
           <div class="icon_heading">
