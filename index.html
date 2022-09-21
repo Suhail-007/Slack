@@ -8,11 +8,11 @@
   <title>Dashboard</title>
   <!-- Custom Styles -->
   <link rel="stylesheet" href="style/style.css">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://kit.fontawesome.com/912f1a9d04.js" crossorigin="anonymous"></script>
+  
   <script type="module" src="src/main.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://kit.fontawesome.com/912f1a9d04.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -121,83 +121,84 @@
 
     </section>
 
-    <!-----MID PORTION----->
+    <!-----Charts PORTION----->
     <section class="canvas">
       <div class="roi_income_chart_cont">
         <p>Roi income chart</p>
         <canvas id="roi"></canvas>
       </div>
-
-
+      
+      <div class="roi_income_chart_cont">
+        <canvas width="300px" height="300px" id="lines"></canvas>
+      </div>      
+      
       <div class="line_chart">
         <canvas width="300px" height="300px" id="myC"></canvas>
       </div>
     </section>
 
 
-    <section>
-      <div class="statistics_boxes">
-        <div class="box box-1">
-          <div class="icon_heading">
-            <!------ICON HERE--->
+    <section class="statistics_boxes">
+      <div class="box box-1">
+        <div class="icon_heading">
+          <!------ICON HERE--->
 
-            <p>Roi Income</p>
-          </div>
-
-          <div class="dollar_percentage">
-            <p class="dollar">$840.2</p>
-            <span class="sub_info">
-              +$29.1k
-            </span>
-          </div>
+          <p>Roi Income</p>
         </div>
 
+        <div class="dollar_percentage">
+          <p class="dollar">$840.2</p>
+          <span class="sub_info">
+            +$29.1k
+          </span>
+        </div>
+      </div>
 
-        <div class="box box-2">
-          <div class="icon_heading">
-            <!------ICON HERE--->
 
-            <p>Roi Income</p>
-          </div>
+      <div class="box box-2">
+        <div class="icon_heading">
+          <!------ICON HERE--->
 
-          <div class="dollar_percentage">
-            <p class="dollar">$840.2</p>
-            <span class="percentage">
-              +$29.1k
-            </span>
-          </div>
+          <p>Roi Income</p>
         </div>
 
+        <div class="dollar_percentage">
+          <p class="dollar">$840.2</p>
+          <span class="percentage">
+            +$29.1k
+          </span>
+        </div>
+      </div>
 
-        <div class="box box-3">
-          <div class="icon_heading">
-            <!------ICON HERE--->
 
-            <p>Roi Income</p>
-          </div>
+      <div class="box box-3">
+        <div class="icon_heading">
+          <!------ICON HERE--->
 
-          <div class="dollar_percentage">
-            <p class="dollar">$840.2</p>
-            <span class="sub_info">
-              +$29.1k
-            </span>
-          </div>
+          <p>Roi Income</p>
         </div>
 
+        <div class="dollar_percentage">
+          <p class="dollar">$840.2</p>
+          <span class="sub_info">
+            +$29.1k
+          </span>
+        </div>
+      </div>
 
-        <div class="box box-4">
-          <div class="icon_heading">
-            <!------ICON HERE--->
 
-            <p>Roi Income</p>
-          </div>
+      <div class="box box-4">
+        <div class="icon_heading">
+          <!------ICON HERE--->
 
-          <div class="dollar_percentage">
-            <p class="dollar">$840.2</p>
-            <span class="percentage">
-              +$29.1k
-            </span>
-          </div>
+          <p>Roi Income</p>
+        </div>
+
+        <div class="dollar_percentage">
+          <p class="dollar">$840.2</p>
+          <span class="percentage">
+            +$29.1k
+          </span>
         </div>
       </div>
     </section>
