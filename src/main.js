@@ -1,4 +1,5 @@
-import { lineChart } from './charts/charts.js'
+import { lineChart } from './charts.js'
+import { pieChart } from './charts.js'
 
 //sidebar 
 document.addEventListener('click', e => {
