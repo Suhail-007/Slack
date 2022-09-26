@@ -9,19 +9,22 @@
   <!-- Custom Styles -->
   <link rel="stylesheet" href="style/style.css">
 
-  <script type="module" src="src/main.js"></script>
+  <script type="module" src="src/js/controller.js"></script>
 
+
+  <!-------CHART JS----->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-----Font awesome------>
   <script src="https://kit.fontawesome.com/912f1a9d04.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-
   <header>
     <div class="header">
       <div class="website_logo_container">
         <div class="website_logo">
-          <img src="images/logo.jpg" alt="">
+          <img src="src/images/logo.jpg" alt="">
         </div>
         <p class="website_name hidden">Slack</p>
       </div>
@@ -29,7 +32,7 @@
       <div class=" user_profile_container user_profile_container_desktop hidden">
         <p class="username">Suhail Qureshi</p>
         <div class="user_profile">
-          <img src="images/user.png" alt="">
+          <img src="src/images/user.png" alt="">
         </div>
       </div>
     </div>
@@ -89,34 +92,7 @@
   </header>
 
   <main>
-    <section class="account_info">
-      <!-----this section main class----account_info-->
-      <div class="total_cont acc_div">
-        <div>
-          <p class="total acc_total">Total</p>
-          <p class="total_amount acc_amount">$2000</p>
-        </div>
-
-        <!----ICON HERE--->
-      </div>
-
-      <div class="wallet_cont acc_div">
-        <div class="acc_total_cont">
-          <p class="total acc_total">Wallet</p>
-          <p class="total_amount acc_amount">$2000</p>
-        </div>
-
-        <!----ICON HERE--->
-      </div>
-
-      <div class="withdrawal_cont acc_div">
-        <div class="acc_total_cont">
-          <p class="total acc_total">Withdrawal balance</p>
-          <p class="total_amount acc_amount">$2000</p>
-        </div>
-
-        <!----ICON HERE--->
-      </div>
+    <section class="account_info" data-minimal-acc-info>
 
     </section>
 
@@ -199,40 +175,6 @@
 
 
     <section class="container_ref_amnt">
-      <div class="referral_container">
-        <div class="ref_img_cont">
-          <p>IMAGE</p>
-          <img src="" alt="">
-        </div>
-
-        <h4>Referral Link</h4>
-        <a href="#" class="ref_link">Example.com</a>
-        <button>
-          <!-----ICON HERE----->
-          <span>
-            Copy Referral Link
-          </span>
-        </button>
-      </div>
-      <div class="add_withdraw_container">
-        <div class="btns_container">
-          <button class="addFund active">Add Fund</button>
-          <button class="withdrawal">Withdrawal</button>
-        </div>
-        <div class="deposit_income">
-          <p>Total Deposit Income</p>
-          <p>$1000</p>
-        </div>
-
-        <div class="input_cont">
-          <label for="amount">Enter amount (in USD)</label>
-
-          <div>
-            <input id="amount" type="text">
-            <button>Add Fund</button>
-          </div>
-        </div>
-      </div>
     </section>
   </main>
 </body>
