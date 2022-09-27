@@ -1,8 +1,18 @@
 import minimalAccInfo from './views/minimalAccView.js'
-import fundTransferView from './views/fundTransferView.js' 
+import fundTransferView from './views/fundTransferView.js'
+import statisticsView from './views/statisticsView.js';
+
 import { lineChart } from './charts.js'
 import { pieChart } from './charts.js'
-import { copyRefLink } from './model.js'
+import * as model from './model.js'
+
+//generate Html
+function generateHTML() {
+  minimalAccInfo.renderMinimalAccInfo();
+  fundTransferView.generateHTML();
+  statisticsView.generateHTML();
+}
+
 
 //sidebar 
 document.addEventListener('click', e => {
@@ -17,17 +27,14 @@ document.addEventListener('click', e => {
 });
 
 
-
-const button = document.querySelector('.copy_ref_link');
-
 function i() {
   button.addEventListener('click', copyRefLink);
 }
 
 
 function init() {
-  minimalAccInfo.renderMinimalAccInfo();
-  fundTransferView.generateHTML();
+  generateHTML();
+  fundTransferView.addHandlerCopyRef(model.copyRefLink)
 }
 
 init()

@@ -215,7 +215,7 @@ main::after {
   z-index: -2;
   border-radius: 3rem 0 0 0;
   background: hsla(var(--bg-primary-color), 0.5);
-  box-shadow: 0px 1px 10px 5px hsla(var(--bg-primary-color), 1);
+  box-shadow: -1px 1px 10px 5px hsla(var(--bg-primary-color), 1);
 }
 
 .account_info {
@@ -276,7 +276,7 @@ main::after {
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 2rem;
-  place-items:center;
+  place-items: center;
   padding: 1rem;
   font-size: clamp(0.7rem, 3vw, 1.2rem);
   margin-bottom: 2rem;
@@ -492,10 +492,33 @@ main::after {
   background-color: hsla(var(--total-income-div), 0.5);
 }
 
+.toast_copy {
+  background: rgba(255, 255, 255, 0.7);
+  font-size: clamp(0.5rem, 3vw, 1rem);
+  position: absolute;
+  min-width: 10%;
+  width: 20%;
+  max-width: 25%;
+  text-align: center;
+  bottom: 1%;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 0.5rem;
+  padding: 0.1rem 1rem;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 300ms ease-in-out;
+  -webkit-box-shadow: 1px 0px 10px 1px rgba(var(--shadow), 1);
+  -moz-box-shadow: 1px 0px 10px 1px rgba(var(--shadow), 1);
+  box-shadow: 1px 0px 10px 1px rgba(var(--shadow), 1);
+}
+
 /* CONVERT ALL THE RGBA TO HSLA OR VICE VERSA LATER*/
 
 @media(max-width: 20em) {
-   .statistics_boxes {
+  .statistics_boxes {
     grid-template-columns: 1fr;
   }
 }
@@ -640,7 +663,7 @@ main::after {
     padding-left: 12rem;
     padding-right: 1rem;
     grid-column: 1 / 3;
-    
+
   }
 
   .statistics_boxes {
@@ -654,7 +677,7 @@ main::after {
 
   .box {
     width: 10rem;
-    height: 15rem;    
+    height: 15rem;
     display: flex;
   }
 
@@ -671,7 +694,7 @@ main::after {
 
   .container_ref_amnt {
     grid-column: 3 / 5;
-    grid-row:  1/ 3;
+    grid-row: 1/ 3;
   }
 
   .referral_container {
@@ -698,7 +721,7 @@ main::after {
   body {
     font-size: 5rem;
   }
-  
+
   .user_profile_container_desktop {
     font-size: 2rem;
   }
@@ -719,12 +742,12 @@ main::after {
     padding: 0.5rem 0.8rem;
     font-size: 2.5rem;
   }
-  
+
   main {
     margin-left: 15rem;
     border-radius: 7rem 0 0 0;
   }
-  
+
   main::before {
     left: calc(var(--second-layer-left) / 4);
     top: calc(var(--second-layer-top) * 2);
@@ -768,12 +791,12 @@ main::after {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr;
   }
-  
-    .canvas > div {
-      width: 100%;
-    }
-  
-  .box{
+
+  .canvas>div {
+    width: 100%;
+  }
+
+  .box {
     width: 15rem;
     height: 20rem;
     border-radius: 2rem;
@@ -787,30 +810,30 @@ main::after {
   .ref_link {
     font-size: 3rem !important;
   }
-  
+
   .referral_container button {
-  font-size: 1.3rem;
-  padding: 1.2rem 1.5rem;
-}
+    font-size: 1.3rem;
+    padding: 1.2rem 1.5rem;
+  }
 
-.add_withdraw_container .btns_container button {
-  font-size: 1.5rem;
-}
+  .add_withdraw_container .btns_container button {
+    font-size: 1.5rem;
+  }
 
-.deposit_income {
-  font-size: 1.5rem;
-}
+  .deposit_income {
+    font-size: 1.5rem;
+  }
 
-.deposit_income~div {
-  font-size: 2rem;
-}
+  .deposit_income~div {
+    font-size: 2rem;
+  }
 
-.deposit_income~div>div>input {
-  font-size: 1.2rem;
-}
+  .deposit_income~div>div>input {
+    font-size: 1.2rem;
+  }
 
-.deposit_income~div>div>button {
-  font-size: 1.5rem;
-  padding: 3.7rem 1.5rem;
-}
+  .deposit_income~div>div>button {
+    font-size: 1.5rem;
+    padding: 3.7rem 1.5rem;
+  }
 }

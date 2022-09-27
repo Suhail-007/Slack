@@ -1,4 +1,3 @@
-const ref_link = document.querySelector('.ref_link');
-export const copyRefLink = async function() {
-  await navigator.clipboard.writeText(ref_link.innerText);
+export const copyRefLink = async function(element) {
+  await navigator.clipboard.writeText(element.innerText);
 }
