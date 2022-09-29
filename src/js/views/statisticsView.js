@@ -11,9 +11,9 @@ class StatisticsView {
         </div>
 
         <div class="dollar_percentage">
-          <p class="dollar">$840.2</p>
+          <p class="dollar">$865.2</p>
           <span class="sub_info">
-            +$29.1k
+            +20.9k
           </span>
         </div>
       </div>
@@ -23,13 +23,13 @@ class StatisticsView {
         <div class="icon_heading">
           <!------ICON HERE--->
 
-          <p>Roi Income</p>
+          <p>Direct Income</p>
         </div>
 
         <div class="dollar_percentage">
-          <p class="dollar">$840.2</p>
+          <p class="dollar">$500</p>
           <span class="percentage">
-            +$29.1k
+            -29 Trades
           </span>
         </div>
       </div>
@@ -39,13 +39,13 @@ class StatisticsView {
         <div class="icon_heading">
           <!------ICON HERE--->
 
-          <p>Roi Income</p>
+          <p>Binary Income</p>
         </div>
 
         <div class="dollar_percentage">
-          <p class="dollar">$840.2</p>
+          <p class="dollar">$750.00</p>
           <span class="sub_info">
-            +$29.1k
+            +$2.8k
           </span>
         </div>
       </div>
@@ -55,13 +55,13 @@ class StatisticsView {
         <div class="icon_heading">
           <!------ICON HERE--->
 
-          <p>Roi Income</p>
+          <p>Current Income</p>
         </div>
 
         <div class="dollar_percentage">
-          <p class="dollar">$840.2</p>
+          <p class="dollar">$500.2</p>
           <span class="percentage">
-            +$29.1k
+            +$2.95%
           </span>
         </div>
       </div>`
