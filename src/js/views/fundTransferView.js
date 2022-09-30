@@ -73,7 +73,6 @@ class FundTransferView {
       const btn = e.target.closest('.copy_ref_link');
 
       if (!btn) return;
-
       handler(ref_link);
 
       this._copyButton.innerText = 'Copied';
