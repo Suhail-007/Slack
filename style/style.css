@@ -60,7 +60,7 @@ header {
   -moz-box-shadow: 1px 0px 5px 0px rgba(var(--shadow), 1);
   box-shadow: 1px 0px 5px 0px rgba(var(--shadow), 1);
   overflow: hidden;
-  background: rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.9);
   position: sticky;
   top: 0;
 }
@@ -491,7 +491,7 @@ main::after {
   border-radius: 10rem;
   font-size: 1.1rem;
   transition: 200ms ease-in-out;
-  margin-top: 2rem;
+  margin-block: 2rem;
 }
 
 
@@ -524,9 +524,20 @@ main::after {
 }
 
 footer {
-  border: 1px solid black;
   background: #fff;
-  height: 5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  padding-block: 2rem;
+  gap: 0.5rem 0;
+  margin-top: 1rem;
+}
+
+footer a {
+  text-decoration: none;
+  color: #777;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  text-transform: capitalize;
 }
 
 /* CONVERT ALL THE RGBA TO HSLA OR VICE VERSA LATER*/
@@ -565,7 +576,6 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background: none;
     box-shadow: none;
   }
 
@@ -658,7 +668,7 @@ footer {
 
   .account_info {
     position: absolute;
-    left: -12%;
+    left: -14%;
     top: 5%;
     padding: 1rem;
   }
