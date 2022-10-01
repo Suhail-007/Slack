@@ -14,12 +14,6 @@ const generateHTML = function() {
   statisticsView.generateHTML();
 }
 
-
-function i() {
-  button.addEventListener('click', copyRefLink);
-}
-
-
 function init() {
   generateHTML();
   fundTransferView.addHandlerCopyRef(model.copyRefLink);
@@ -27,4 +21,4 @@ function init() {
   NAV_TOGGLE_BTN();
 }
 
-init()
+init();

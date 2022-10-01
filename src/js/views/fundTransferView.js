@@ -14,7 +14,9 @@ class FundTransferView {
         <h4>Referral Link</h4>
         <a href="#" class="ref_link">https://github.com/Suhail-007/dashboard-ui</a>
         <button  class="copy_ref_link">
-          <!-----ICON HERE----->
+          <svg>
+          <use href="src/images/icons.svg#clipboard"></use>
+          </svg>
           <span>
             Copy Referral Link
           </span>
@@ -71,15 +73,17 @@ class FundTransferView {
 
     this._copyButton.addEventListener('click', e => {
       const btn = e.target.closest('.copy_ref_link');
+      
+      const btnSpanElem = btn.querySelector('span');
 
       if (!btn) return;
       handler(ref_link);
 
-      this._copyButton.innerText = 'Copied';
+      btnSpanElem.innerText = 'Copied';
       this._toastCopy();
 
       setTimeout(() => {
-        this._copyButton.innerText = 'Copy Referral Link';
+        btnSpanElem.innerText = 'Copy Referral Link';
       }, 1000);
     })
   }

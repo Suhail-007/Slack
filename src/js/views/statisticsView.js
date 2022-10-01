@@ -5,8 +5,9 @@ class StatisticsView {
     let html = `
       <div class="box box-1">
         <div class="icon_heading">
-          <!------ICON HERE--->
-
+          <div>
+          <svg></svg>
+          </div>
           <p>Roi Income</p>
         </div>
 
@@ -21,7 +22,9 @@ class StatisticsView {
 
       <div class="box box-2">
         <div class="icon_heading">
-          <!------ICON HERE--->
+          <div>
+          <svg></svg>
+          </div>
 
           <p>Direct Income</p>
         </div>
@@ -37,7 +40,9 @@ class StatisticsView {
 
       <div class="box box-3">
         <div class="icon_heading">
-          <!------ICON HERE--->
+          <div>
+          <svg></svg>
+          </div>
 
           <p>Binary Income</p>
         </div>
@@ -53,7 +58,9 @@ class StatisticsView {
 
       <div class="box box-4">
         <div class="icon_heading">
-          <!------ICON HERE--->
+          <div>
+          <svg></svg>
+          </div>
 
           <p>Current Income</p>
         </div>

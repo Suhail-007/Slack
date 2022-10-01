@@ -121,6 +121,28 @@ ul li {
   text-transform: capitalize;
 }
 
+.nav_item svg {
+  width: 0px;
+  height: 0px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 400ms ease-in-out;
+  fill: hsla(var(--purple), 1.0);
+}
+
+.nav_item {
+  display: flex;
+  align-items: center;
+  transition: all 400ms ease-in-out;
+}
+
+.nav_item:hover svg {
+  opacity: 1;
+  width: 20px;
+  height: 20px;
+  margin-right: 1rem;
+}
+
 .nav_item_name {
   position: relative;
   display: flex;
@@ -143,7 +165,6 @@ ul li {
   transition: 300ms ease-in;
   opacity: 1;
 }
-
 
 .user_profile_container_mob {
   display: flex;
@@ -169,12 +190,6 @@ ul li {
 
 img {
   width: 100px;
-}
-
-svg {
-  width: 20px;
-  height: 10px;
-  display: none;
 }
 
 main {
@@ -228,16 +243,32 @@ main::after {
 .account_info .acc_div {
   width: 70%;
   height: 8rem;
+  max-height: 10rem;
   -webkit-border-radius: 2rem;
   -moz-border-radius: 2rem;
   border-radius: 1.8rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding-left: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
   align-items: center;
+  justify-content: center;
 }
 
-.acc_div>div {
+.acc_div div:first-child {
+  background: #fff;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  border-radius: 100%;
+  width: fit-content;
+}
+
+.acc_div div:first-child>svg {
+  width: 30px;
+  height: 30px;
+}
+
+.acc_div>div:last-child {
   color: #fff;
   font-size: clamp(0.8rem, 3.5vw, 2.5rem);
   font-weight: bold;
@@ -252,6 +283,10 @@ main::after {
   box-shadow: 0px 5px 15px 0px hsla(var(--purple), 0.7), 5px 0px 15px 0px hsla(var(--purple), 0.7);
 }
 
+.total_cont div:first-child>svg {
+  fill: hsla(var(--purple), 1.0);
+}
+
 .wallet_cont {
   background: linear-gradient(360deg, rgba(var(--blue), 1.0), rgba(var(--blue), 0.4));
   -webkit-box-shadow: 0px 5px 15px 0px rgba(var(--blue), 0.7), 5px 0px 15px 0px rgba(var(--blue), 0.7);
@@ -264,6 +299,12 @@ main::after {
   -webkit-box-shadow: 0px 5px 15px 0px rgba(var(--cyan), 0.7), 5px 0px 15px 0px rgba(var(--cyan), 0.7);
   -moz-box-shadow: 0px 5px 15px 0px rgba(var(--cyan), 0.7), 5px 0px 15px 0px rgba(var(--cyan), 0.7);
   box-shadow: 0px 5px 15px 0px rgba(var(--cyan), 0.7), 5px 0px 15px 0px rgba(var(--cyan), 0.7);
+}
+
+.withdrawal_cont div:first-child>svg {
+  width: 30px;
+  height: 30px;
+  fill: rgba(var(--cyan), 1.0);
 }
 
 .canvas {
@@ -294,6 +335,32 @@ main::after {
   position: relative;
 }
 
+.icon_heading p,
+.dollar_percentage span {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.dollar_percentage p {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.box .icon_heading>div {
+  background: #fff;
+  padding: 0.1rem;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  width: fit-content;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.1)
+}
+
+.box .icon_heading>div>svg {
+  width: 20px;
+  height: 20px;
+}
+
 .box::before {
   content: "";
   position: absolute;
@@ -307,6 +374,15 @@ main::after {
   box-shadow: 2px 2px 14px 0px hsla(var(--purple), 0.5), 1px 1px 15px 0px rgba(var(--shadow), 0.3);
 }
 
+.box-1 .icon_heading>div>svg {
+  fill: hsla(var(--purple), 0.7);
+}
+
+.box-1 .icon_heading p,
+.box-1 .dollar_percentage span {
+  color: hsla(var(--purple), 0.7);
+}
+
 .box-1::before {
   background: linear-gradient(rgba(var(--dark-purple), 1), rgba(255, 255, 255, 0.3));
   top: 50%;
@@ -317,6 +393,11 @@ main::after {
   box-shadow: 2px 2px 14px 0px hsla(var(--bg-primary-color), 1), 1px 1px 15px 0px rgba(var(--shadow), 0.5);
 }
 
+.box-2 .icon_heading p,
+.box-2 .dollar_percentage span {
+  color: hsla(var(--dark-bg-primary-color), 1);
+}
+
 .box-2::before {
   background: linear-gradient(hsla(var(--dark-bg-primary-color), 0.8), rgba(255, 255, 255, 0.3));
   top: 20%;
@@ -325,6 +406,11 @@ main::after {
 .box-3 {
   background: rgba(var(--cyan), 0.1);
   box-shadow: 2px 2px 14px 0px rgba(var(--cyan), 0.4), 1px 1px 15px 0px rgba(var(--shadow), 0.3);
+}
+
+.box-3 .icon_heading p,
+.box-3 .dollar_percentage span {
+  color: rgba(var(--cyan), 1);
 }
 
 .box-3::before {
@@ -340,32 +426,6 @@ main::after {
 .box-4::before {
   top: 70%;
   background: linear-gradient(hsla(var(--dark-silver), 0.8), hsla(0, 0%, 100%, 0.5));
-}
-
-.icon_heading p,
-.dollar_percentage span {
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.dollar_percentage p {
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-
-.box-1 .icon_heading p,
-.box-1 .dollar_percentage span {
-  color: hsla(var(--purple), 0.7);
-}
-
-.box-2 .icon_heading p,
-.box-2 .dollar_percentage span {
-  color: hsla(var(--dark-bg-primary-color), 1);
-}
-
-.box-3 .icon_heading p,
-.box-3 .dollar_percentage span {
-  color: rgba(var(--cyan), 1);
 }
 
 .box-4 .icon_heading p,
@@ -406,10 +466,18 @@ main::after {
   color: #fff;
   font-weight: 500;
   letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 0 0.2rem;
   background: linear-gradient(360deg, hsla(var(--purple), 1.0), hsla(var(--purple), 0.4));
   -webkit-box-shadow: 5px 0px 10px 0px hsla(var(--purple), 0.5), 0px 5px 10px 1px hsla(var(--purple), 0.5);
   -moz-box-shadow: 5px 0px 10px 0px hsla(var(--purple), 0.5), 0px 5px 10px 1px hsla(var(--purple), 0.5);
   box-shadow: 5px 0px 10px 0px hsla(var(--purple), 0.5), 0px 5px 10px 1px hsla(var(--purple), 0.5);
+}
+
+.referral_container button svg {
+  width: 25px;
+  height: 25px;
 }
 
 .add_withdraw_container {
@@ -521,16 +589,18 @@ main::after {
 /*Footer*/
 footer {
   text-align: center;
-  background: hsla(202, 99%, 99%, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   margin-top: 0.2rem;
-  padding-block: 2rem;
+  padding: 2rem 0 1rem;
   box-shadow: 0px 1px 5px 0 rgba(var(--shadow), 0.5);
   border-radius: 2rem 2rem 0 0;
   font-size: clamp(1rem, 3vw, 1.5rem);
+  color: #fff;
 }
 
 footer p {
-  margin: 0;
+  margin-inline: 0;
+  margin-bottom: 0;
 }
 
 .links_cont {
@@ -542,7 +612,7 @@ footer p {
 
 .links_cont a {
   text-decoration: none;
-  color: #777;
+  color: #fff;
   text-transform: capitalize;
 }
 
@@ -627,6 +697,10 @@ footer p {
     flex-direction: row;
   }
 
+  .nav_item:hover svg {
+    margin-inline: 0.5rem;
+  }
+
   .nav_item_name {
     position: relative;
     padding: 0.5rem 0.4rem;
@@ -681,12 +755,12 @@ footer p {
   }
 
   .account_info .acc_div {
-    width: 100%;
+    width: 90%;
     height: 7rem;
-    margin: 0 2rem;
+    margin: 0;
   }
 
-  .acc_div>div {
+  .acc_div>div:last-child {
     font-size: 1rem;
   }
 
@@ -814,10 +888,10 @@ footer p {
 
   .account_info .acc_div {
     height: 10rem;
-    margin: 0 2rem;
+    margin: 0;
   }
 
-  .acc_div>div {
+  .acc_div>div:last-child {
     font-size: 1.5rem;
   }
 
