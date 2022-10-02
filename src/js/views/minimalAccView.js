@@ -15,7 +15,20 @@ class MinimalAccView {
       </div>
 
       <div class="wallet_cont acc_div">
-        <div><svg><use></use></svg></div>        
+        <div>
+          <svg height="240px" version="1.1" viewBox="0 0 240 240" width="240px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <title />
+            <desc />
+            <g fill="none" fill-rule="evenodd" id="wallet" stroke="none" stroke-width="1">
+            <g id="bounding-box">
+            <polygon id="shape" points="0 0 240 0 240 240 0 240" />
+            </g>
+            <rect height="120" id="Rectangle" rx="15" stroke="#000" stroke-width="10" width="170" x="35" y="75" />
+            <path d="M35,75 C35,85 35,86.6666667 35,80 C35,73.3333333 35,70 35,70 C35,61.7157288 41.7157288,55 50,55 L140,55 C148.284271,55 155,61.7157288 155,70 L155,75 L35,75 Z" id="Path"/>
+            <path d="M205,155 L205,115 L154,115 C142.954305,115 134,123.954305 134,135 C134,146.045695 142.954305,155 154,155 L205,155 Z" id="lock"/>
+              </g>
+          </svg>      
+        </div>     
         <div class="acc_total_cont">
           <p class="total acc_total">Wallet</p>
           <p class="total_amount acc_amount">$2000</p>
