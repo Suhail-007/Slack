@@ -37,8 +37,8 @@ class FundTransferView {
 
           <div>
             <input id="amount" type="text">
-            <button data-add-fund>Add Fund</button>
-            <button data-withdraw-fund class="hidden">Withdraw Fund</button>
+            <button class="active" data-add-fund>Add Fund</button>
+            <button data-withdraw-fund>Withdraw Fund</button>
           </div>
         </div>
       </div>`;
@@ -88,7 +88,7 @@ class FundTransferView {
     })
   }
 
-  _toggleBtnClass(parentElem, className) {
+  _toggleClass(parentElem, className) {
     parentElem.forEach(btn => {
       btn.classList.toggle(className);
     });
@@ -101,9 +101,9 @@ class FundTransferView {
 
     this._btnsCont.addEventListener('click', e => {
       if (e.target.closest('.btns_container')) {
-        this._toggleBtnClass(Array.from(btns), 'active');
-
-        this._toggleBtnClass(Array.from(fundActionBtns), 'hidden');
+        this._toggleClass(Array.from(btns), 'active');
+        
+        this._toggleClass(Array.from(fundActionBtns), 'active');
       }
     })
   }
