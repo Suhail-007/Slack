@@ -9,7 +9,7 @@
   <!-- Custom Styles -->
   <link rel="stylesheet" href="style/style.css">
 
-  <script type="module" src="src/js/controller.js"></script>
+  <script defer="" type="module" src="src/js/controller.js"></script>
 
 
   <!-------CHART JS----->
@@ -72,7 +72,7 @@
                   <polygon id="shape" stroke-width="0" points="0 0 240 0 240 240 0 240" />
                 </g>
                 <rect height="120" id="Rectangle" rx="15" width="170" x="35" y="75" />
-                <path d="M35,75 C35,85 35,86.6666667 35,80 C35,73.3333333 35,70 35,70 C35,61.7157288 41.7157288,55 50,55 L140,55 C148.284271,55 155,61.7157288 155,70 L155,75 L35,75 Z" id="Path"/>
+                <path d="M35,75 C35,85 35,86.6666667 35,80 C35,73.3333333 35,70 35,70 C35,61.7157288 41.7157288,55 50,55 L140,55 C148.284271,55 155,61.7157288 155,70 L155,75 L35,75 Z" id="Path" />
                 <path d="M205,155 L205,115 L154,115 C142.954305,115 134,123.954305 134,135 C134,146.045695 142.954305,155 154,155 L205,155 Z" id="Rectangle" />
               </g>
             </svg>
@@ -146,11 +146,9 @@
   </header>
 
   <main>
+    <!----   <section class="account_info" data-minimal-acc-info></section>
 
-
-    <section class="account_info" data-minimal-acc-info></section>
-
-    <!-----Charts PORTION----->
+    <!-----Charts PORTION----/>
     <section class="canvas">
       <div class="roi_income_chart_cont">
         <canvas id="roi"></canvas>
@@ -161,11 +159,84 @@
       </div>
     </section>
 
-
     <section data-statistics-boxes class="statistics_boxes"></section>
 
+    <section class="container_ref_amnt"></section>--->
 
-    <section class="container_ref_amnt"></section>
+    <section class="profile_container">
+      <h2>Profile</h2>
+      <div class="user_container">
+        <div class="user_image_container">
+          <img src="src/images/user.png" alt="user profile image">
+        </div>
+        <p class="user_name">Suhail Qureshi</p>
+        <p class="user_bio">To never give up...</p>
+      </div>
+
+      <hr>
+
+      <div class="user_info">
+        <h2>User Info</h2>
+        <div>
+          <p>Gender</p>
+          <p>Male</p>
+        </div>
+        <div>
+          <p>City</p>
+          <p>new Delhi</p>
+        </div>
+        <div>
+          <p>Country</p>
+          <p>India</p>
+        </div>
+        <div>
+          <p>Phone Number</p>
+          <p>+919643938991</p>
+        </div>
+        <div>
+          <p>Email</p>
+          <p>suhuq007@gmail.com</p>
+        </div>
+      </div>
+      
+      <hr>
+      
+      <div class="settings">
+        <h2>Settings</h2>
+        <div>
+          <h3>Theme Mode</h3>
+          <label for="theme">Theme</label>
+          <select name="theme" id="theme">
+            <option value="system default">system default</option>
+            <option value="light">light</option>
+            <option value="dark">dark</option>
+          </select>
+        </div>
+        
+        <div>
+          <h3>Chart Settings</h3>
+          <div>
+            <label for="chart1">Chart 1</label>
+            <select name="chart1" id="chart1">
+              <option value="line">Line</option>
+              <option value="bar">Bar</option>
+              <option value="dark">Pie</option>
+              <option value="Doughnut">Doughnut</option>
+            </select>
+          </div>
+          <div>
+            <label for="chart1">Chart 2</label>
+            <select name="chart2" id="chart2">
+              <option value="line">Line</option>
+              <option value="bar">Bar</option>
+              <option value="dark">Pie</option>
+              <option value="Doughnut">Doughnut</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </section>
   </main>
   <footer>
     <div class="links_cont">

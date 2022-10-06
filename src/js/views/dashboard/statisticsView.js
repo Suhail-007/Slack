@@ -1,8 +1,9 @@
 class StatisticsView {
-  _parentElement = document.querySelector('[data-statistics-boxes]');
+  _parentElement = document.querySelector('main');
 
-  generateHTML() {
+  renderStatisticsView() {
     let html = `
+    <section data-statistics-boxes class="statistics_boxes">
       <div class="box box-1">
         <div class="icon_heading">
           <div>
@@ -79,7 +80,8 @@ class StatisticsView {
             +$2.95%
           </span>
         </div>
-      </div>`
+      </div>
+    </section>`
 
     this._parentElement.insertAdjacentHTML('beforeend', html);
   }

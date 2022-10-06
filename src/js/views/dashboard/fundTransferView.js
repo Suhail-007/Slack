@@ -1,10 +1,11 @@
 class FundTransferView {
-  _parentElement = document.querySelector('.container_ref_amnt');
+  _parentElement = document.querySelector('main');
   _copyButton;
   _btnsCont;
 
-  generateHTML() {
+  renderFundTransferView() {
     let html = `
+    <section class="container_ref_amnt">
       <div class="referral_container">
         <div class="ref_img_cont">
           <p>REFER A FRIEND</p>
@@ -41,7 +42,8 @@ class FundTransferView {
             <button data-withdraw-fund>Withdraw Fund</button>
           </div>
         </div>
-      </div>`;
+      </div>
+    </section>`;
 
     this._parentElement.insertAdjacentHTML('beforeend', html);
     this._copyButton = document.querySelector('.copy_ref_link');
@@ -50,6 +52,7 @@ class FundTransferView {
 
   _toastCopy() {
     const body = document.body;
+
     let html = `
       <div class="toast_copy">
         <p>Copied</p>
@@ -61,10 +64,9 @@ class FundTransferView {
 
   _hideToastCopy() {
     const toast = document.querySelector('.toast_copy');
-
     toast.style.opacity = 1;
     setTimeout(() => {
-      toast.style.opacity = 0;
+     toast.style.opacity = 0;
     }, 1000);
   }
 
@@ -73,7 +75,7 @@ class FundTransferView {
 
     this._copyButton.addEventListener('click', e => {
       const btn = e.target.closest('.copy_ref_link');
-      
+
       const btnSpanElem = btn.querySelector('span');
 
       if (!btn) return;
@@ -102,7 +104,7 @@ class FundTransferView {
     this._btnsCont.addEventListener('click', e => {
       if (e.target.closest('.btns_container')) {
         this._toggleClass(Array.from(btns), 'active');
-        
+
         this._toggleClass(Array.from(fundActionBtns), 'active');
       }
     })

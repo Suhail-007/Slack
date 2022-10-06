@@ -357,7 +357,7 @@ main::after {
   width: 30vw;
   height: 25vh;
   padding: 1rem;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   overflow: hidden;
   position: relative;
 }
@@ -550,11 +550,12 @@ main::after {
   font-size: 1.1rem;
   cursor: pointer;
   transition: 0.5s ease-in-out;
+  overflow: hidden;
 }
 
 .add_withdraw_container .btns_container button.active {
   color: white;
-  box-shadow: inset 200px 0 0 0  hsla(var(--purple), 0.9);
+  box-shadow: inset 13rem 0 0 0 hsla(var(--purple), 0.9);
 }
 
 .deposit_income {
@@ -611,8 +612,8 @@ main::after {
   display: none;
 }
 
-.input_cont>div>button.active{
-  display:block;
+.input_cont>div>button.active {
+  display: block;
   pointer-events: auto;
   animation: showBtn 500ms linear forwards;
 }
@@ -631,14 +632,14 @@ main::after {
 .toast_copy {
   background: rgba(255, 255, 255, 0.7);
   font-size: clamp(0.5rem, 3vw, 1rem);
-  position: absolute;
+  position: fixed;
   min-width: 10%;
   width: 20%;
   max-width: 25%;
   text-align: center;
-  bottom: 1%;
   left: 50%;
   right: 50%;
+  bottom: 5%;
   transform: translate(-50%, -50%);
   border-radius: 0.5rem;
   padding: 0.1rem 1rem;
@@ -683,14 +684,14 @@ footer p {
 
 /* CONVERT ALL THE RGBA TO HSLA OR VICE VERSA LATER*/
 
-@media(max-width: 20em) {
+@media screen and (max-width: 20em) {
   .statistics_boxes {
     grid-template-columns: 1fr;
   }
 }
 
 /*Desktop Version*/
-@media(min-width:1023px) {
+@media screen and (min-width:1024px) {
   body {
     position: relative;
     background: linear-gradient(135deg, var(--secondary-color), hsla(var(--bg-primary-color), 0.7) 25%) no-repeat;
@@ -999,6 +1000,11 @@ footer p {
 
   .add_withdraw_container .btns_container button {
     font-size: 1.5rem;
+  }
+  
+  .add_withdraw_container .btns_container button.active {
+    color: white;
+    box-shadow: inset 30rem 0 0 0 hsla(var(--purple), 0.9);
   }
 
   .deposit_income {

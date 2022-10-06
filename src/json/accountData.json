@@ -1,0 +1,69 @@
+[
+  {
+    "profile": 1,
+    "fullname": "suhail qureshi",
+    "profile_img": "src/images/user.png",
+    "total_income": 2000,
+    "wallet_balance": 1000,
+    "withdrawal_balance": 500,
+    "incomes": {
+    "roi_income": "$865.2",
+    "direct_income": "$500",
+    "binary_income": "$750",
+    "current_income": "$500"
+    },
+    "chart_data": [
+      {
+        "line_chart": {
+          "years": {
+            "2021": {
+              "months": ["January", "Februray", "March", "April", "May", "June", "July", "August", "September"],
+              "data": [0.30, 0.45, 0.35, 0.55, 0.35, 0.5, 0.80, 0.60, 0.2]
+            }
+          }
+        }
+      },
+      {
+        "doughnut_chart": {
+          "years": {
+            "2021": {
+              "months": ["January", "Februray", "March", "April", "May", "June"],
+              "data": [0.30, 0.45, 0.35, 0.55, 0.35, 0.5]
+            }
+          }
+        }
+      }
+    ]
+    },
+
+  {
+    "profile": 2,
+    "fullname": "David John",
+    "profile_img": "src/images/user2.png",
+    "total_income": 3000,
+    "wallet_balance": 2000,
+    "withdrawal_balance": 1000,
+    "chart_data": [
+      {
+        "line_chart": {
+          "years": {
+            "2021": {
+              "months": ["January", "Februray", "March", "April", "May", "June", "July", "August", "September"],
+              "data": [0.20, 0.25, 0.55, 0.35, 0.65, 0.70, 0.55, 0.40, 0.35]
+            }
+          }
+        }
+      },
+      {
+        "doughnut_chart": {
+          "years": {
+            "2021": {
+              "months": ["January", "Februray", "March", "April", "May", "June"],
+              "data": [0.45, 0.40, 0.35, 0.60, 0.25, 0.20]
+            }
+          }
+        }
+      }
+    ]
+  }
+]
