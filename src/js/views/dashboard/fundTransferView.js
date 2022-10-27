@@ -8,7 +8,7 @@ class FundTransferView {
     <section class="container_ref_amnt">
       <div class="referral_container">
         <div class="ref_img_cont">
-          <p>REFER A FRIEND</p>
+          <h2>REFER A FRIEND</h2>
           <img src="/src/images/refer.jpeg" alt="refer a friend">
         </div>
 
