@@ -103,6 +103,7 @@ class FundTransferView {
 
     this._btnsCont.addEventListener('click', e => {
       if (e.target.closest('.btns_container')) {
+        //add withdraw funds and add withdraw tabs
         this._toggleClass(Array.from(btns), 'active');
 
         this._toggleClass(Array.from(fundActionBtns), 'active');

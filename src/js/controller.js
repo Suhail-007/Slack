@@ -1,14 +1,15 @@
 import * as model from './model.js';
 import fundTransferView from './views/dashboard/fundTransferView.js';
-import { NAV_TOGGLE_BTN } from './helper.js';
+import dashboardView from './views/dashboard/dashboardView.js';
+import profileView from './views/profileView.js'
 
 
+dashboardView.renderDashboardView();
+//profileView._generateHTML();
 
 function init() {
-  model.generateHTML();
-  fundTransferView.addHandlerCopyRef(model.copyRefLink);
-  fundTransferView.activeBtn();
-  NAV_TOGGLE_BTN();
+//  model.generateHTML();
+  model.NAV_TOGGLE_BTN();
 }
 
 init();

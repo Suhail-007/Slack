@@ -1,3 +1,4 @@
+import * as model from '../../model.js'
 import minimalAccInfo from './minimalAccView.js';
 import fundTransferView from './fundTransferView.js';
 import statisticsView from './statisticsView.js';
@@ -8,12 +9,17 @@ class DashboardView {
 
   renderDashboardView() {
     minimalAccInfo.renderMinimalAccView();
-//    chartView.renderChart();
+    chartView.renderChart();
     statisticsView.renderStatisticsView();
     fundTransferView.renderFundTransferView();
+    
+    this._initDashboardFunctions();
   }
   
-  
+  _initDashboardFunctions() {
+    fundTransferView.addHandlerCopyRef(model.copyRefLink);
+    fundTransferView.activeBtn();
+  }
 }
 
-export const dashboard = new DashboardView();
+export default new DashboardView();

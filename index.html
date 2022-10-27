@@ -9,13 +9,12 @@
   <!-- Custom Styles -->
   <link rel="stylesheet" href="style/style.css">
 
-  <script defer="" type="module" src="src/js/controller.js"></script>
+  <script type="module" src="src/js/controller.js"></script>
 
+  <!----CHART JS----->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <!-------CHART JS----->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-----Font awesome------>
+  <!----Font awesome------>
   <script src="https://kit.fontawesome.com/912f1a9d04.js" crossorigin="anonymous"></script>
 </head>
 
@@ -71,7 +70,7 @@
                 <g id="bounding-box">
                   <polygon id="shape" stroke-width="0" points="0 0 240 0 240 240 0 240" />
                 </g>
-                <rect height="120" id="Rectangle" rx="15" width="170" x="35" y="75" />
+                <rect height="120" rx="15" width="170" x="35" y="75" />
                 <path d="M35,75 C35,85 35,86.6666667 35,80 C35,73.3333333 35,70 35,70 C35,61.7157288 41.7157288,55 50,55 L140,55 C148.284271,55 155,61.7157288 155,70 L155,75 L35,75 Z" id="Path" />
                 <path d="M205,155 L205,115 L154,115 C142.954305,115 134,123.954305 134,135 C134,146.045695 142.954305,155 154,155 L205,155 Z" id="Rectangle" />
               </g>
@@ -86,7 +85,7 @@
             <span class="nav_item_name">Team summery </span>
           </li>
           <li class="nav_item">
-            <svg id="income" data-name="Layer 1" id="Layer_1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+            <svg id="income" data-name="Layer 1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
               <path d="M97.07,244.82H438.66a5,5,0,0,0,5-5V47.11a5,5,0,0,0-5-5H97.07a5,5,0,0,0-5,5V239.82A5,5,0,0,0,97.07,244.82ZM371.43,52.11c5,10.79,23.59,44.59,62.23,47.31v88.09C395,190.24,376.41,224,371.43,234.82H164.3c-5-10.78-23.59-44.58-62.23-47.31V99.42c38.64-2.72,57.25-36.52,62.23-47.31ZM102.07,197.54c29.4,2.39,45.06,25.53,51.17,37.28H102.07Zm280.48,37.28c6.21-11.71,22-34.85,51.11-37.27v37.27ZM433.66,89.4c-29.4-2.4-45.06-25.53-51.17-37.29h51.17ZM153.18,52.11C147,63.83,131.14,87,102.07,89.39V52.11Z" />
               <path d="M478.3,333.57a35.08,35.08,0,0,0-39.74-18.82L336.9,338.63a27.72,27.72,0,0,0-3.32-1.9L256.4,299.34a149.06,149.06,0,0,0-99.24-10.83l-46.92,11.17H75v-44a5,5,0,0,0-5-5H36.18a5,5,0,0,0,0,10H65V459.89H36.18a5,5,0,0,0,0,10H70a5,5,0,0,0,5-5V401h60L222.11,435a145.38,145.38,0,0,0,116.76-5L467,366.77A24.88,24.88,0,0,0,478.3,333.57ZM462.55,357.8,334.44,420.94a135.26,135.26,0,0,1-108.7,4.7l-88-34.26A5.1,5.1,0,0,0,136,391H75V309.68h35.78a5,5,0,0,0,1.16-.13l47.5-11.31A139,139,0,0,1,252,308.34l77.18,37.39a17.92,17.92,0,0,1,9.47,20.78,16.82,16.82,0,0,1-18.3,12.22L205.46,363.94a5,5,0,1,0-1.27,9.92l114.92,14.79a26,26,0,0,0,3.39.22,26.87,26.87,0,0,0,25.84-19.74A27.94,27.94,0,0,0,345,347l95.82-22.5A25.12,25.12,0,0,1,469.32,338,14.86,14.86,0,0,1,462.55,357.8Z" style="fill:#231f20" />
               <path d="M268.42,189.11H268c-17.49-.47-20.67-11.12-20.78-11.51a5,5,0,1,0-9.7,2.41c.17.7,4.24,16.1,25.35,18.73V212a5,5,0,1,0,10,0V198.73c11.95-2,22.62-11.69,25-23.59,1.42-7.11,1.52-24.88-28.21-36.34-15.93-6.14-24-15.26-22-25,1.72-8.59,10.83-15.93,19.65-15.93h.42c17.37.47,20.63,11,20.79,11.57a5,5,0,0,0,9.69-2.46c-.17-.7-4.24-16.09-25.34-18.73V75a5,5,0,0,0-10,0V88.2c-12.09,2-22.63,11.67-25,23.59-1.42,7.12-1.52,24.89,28.21,36.35,15.93,6.14,23.95,15.26,22,25C286.35,181.77,277.24,189.11,268.42,189.11Z" style="fill:#231f20" />
@@ -146,98 +145,8 @@
   </header>
 
   <main>
-    <!----   <section class="account_info" data-minimal-acc-info></section>
-
-    <!-----Charts PORTION----/>
-    <section class="canvas">
-      <div class="roi_income_chart_cont">
-        <canvas id="roi"></canvas>
-      </div>
-
-      <div class="roi_income_chart_cont">
-        <canvas width="300px" height="300px" id="lines"></canvas>
-      </div>
-    </section>
-
-    <section data-statistics-boxes class="statistics_boxes"></section>
-
-    <section class="container_ref_amnt"></section>--->
-
-    <section class="profile_container">
-      <h2>Profile</h2>
-      <div class="user_container">
-        <div class="user_image_container">
-          <img src="src/images/user.png" alt="user profile image">
-        </div>
-        <p class="user_name">Suhail Qureshi</p>
-        <p class="user_bio">To never give up...</p>
-      </div>
-
-      <hr>
-
-      <div class="user_info">
-        <h2>User Info</h2>
-        <div>
-          <p>Gender</p>
-          <p>Male</p>
-        </div>
-        <div>
-          <p>City</p>
-          <p>new Delhi</p>
-        </div>
-        <div>
-          <p>Country</p>
-          <p>India</p>
-        </div>
-        <div>
-          <p>Phone Number</p>
-          <p>+919643938991</p>
-        </div>
-        <div>
-          <p>Email</p>
-          <p>suhuq007@gmail.com</p>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="settings">
-        <h2>Settings</h2>
-        <div>
-          <h3>Theme Mode</h3>
-          <label for="theme">Theme</label>
-          <select name="theme" id="theme">
-            <option value="system default">system default</option>
-            <option value="light">light</option>
-            <option value="dark">dark</option>
-          </select>
-        </div>
-
-        <div>
-          <h3>Chart Settings</h3>
-          <div>
-            <label for="chart1">Chart 1</label>
-            <select name="chart1" id="chart1">
-              <option value="line">Line</option>
-              <option value="bar">Bar</option>
-              <option value="dark">Pie</option>
-              <option value="Doughnut">Doughnut</option>
-            </select>
-          </div>
-          <div>
-            <label for="chart1">Chart 2</label>
-            <select name="chart2" id="chart2">
-              <option value="line">Line</option>
-              <option value="bar">Bar</option>
-              <option value="dark">Pie</option>
-              <option value="Doughnut">Doughnut</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-    </section>
   </main>
+
   <footer>
     <div class="links_cont">
       <a href="#">Link</a>
@@ -252,7 +161,8 @@
       <a href="#">link</a>
     </div>
 
-    <p>&copy; Slash 2022-23</p </footer>
+    <p>&copy; Slash 2022-23</p>
+  </footer>
 </body>
 
 </html>
