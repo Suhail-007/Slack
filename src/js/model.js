@@ -6,8 +6,6 @@ export const copyRefLink = async function(element) {
   await navigator.clipboard.writeText(element.innerText);
 }
 
-//create a switch which will check on which option user is clicking on side bar then call the appropiate view to generate the html
-
 export const renderTab = function(e) {
   const elem = e.target.closest('.nav_item');
   const dataset = elem?.dataset.nav.toLowerCase();
@@ -16,7 +14,7 @@ export const renderTab = function(e) {
 
   switch (dataset) {
     case 'dashboard':
-      dashboardView.renderDashboardView();
+      dashboardView.renderDashboardMarkup();
       fundTransferView.addHandlerCopyRef(copyRefLink);
       fundTransferView.activeBtn();
       break;

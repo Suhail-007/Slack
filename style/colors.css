@@ -1,0 +1,58 @@
+:root {
+  /*Primary Values*/
+  --bg-primary: hsla(221, 93%, 89%, 1);
+  --purple-primary: hsla(258, 91%, 63%, 1);
+  --silver-primary: hsla(202, 5%, 95%, 1);
+  --total-income-div: 215, 98%, 55%;
+
+  /*Secondary Values*/
+  --secondary-bg-color: #fff;
+
+  /*Primary light values*/
+  --bg-primary-alpha-five: hsla(221, 93%, 89%, 0.5);
+  --bg-primary-alpha-six: hsla(221, 93%, 89%, 0.6);
+  --bg-primary-alpha-seven: hsla(221, 93%, 89%, 0.7);
+  --bg-primary-alpha-eight: hsla(221, 93%, 89%, 0.8);
+  --purple-primary-alpha-two: hsla(258, 91%, 63%, 0.2);
+  --purple-primary-alpha-three: hsla(258, 91%, 63%, 0.3);
+  --purple-primary-alpha-four: hsla(258, 91%, 63%, 0.4);
+  --purple-primary-alpha-five: hsla(258, 91%, 63%, 0.5);
+  --purple-primary-alpha-seven: hsla(258, 91%, 63%, 0.7);
+  --purple-primary-alpha-nine: hsla(258, 91%, 63%, 0.9);
+
+  --dark-purple-alpha-three: rgba(75, 38, 105, 0.3);
+
+
+  --shadow-alpha-three: rgba(200, 200, 200, 0.3);
+  --shadow-alpha-five: rgba(200, 200, 200, 0.5);
+  --shadow-alpha-six: rgba(200, 200, 200, 0.6);
+
+  --dark-bg-primary-alpha-eight: hsla(221, 60%, 70%, 0.8);
+  
+
+
+  /*primary dark values*/
+  --dark-silver-primary: hsla(202, 5%, 60%, 1);
+  --dark-bg-primary-color: hsla(221, 60%, 70%, 1);
+  --dark-purple: rgba(128, 73, 169, 1);
+
+  /*secondary dark values*/
+  --dark-silver-alpha-eight: hsla(202, 5%, 60%, 0.8);
+
+/*Least used once*/
+--white-bg: #fff;
+  --border-primary: hsl(258, 91%, 63%);
+
+  /* RGBA COLOR VALUES*/
+  --light-shadow-white: rgba(200, 200, 200, 1);
+
+  /*black shadows*/
+  --medium-shadow-black: rgba(0, 0, 0, 0.3);
+  --shadow: rgba(200, 200, 200, 1);
+  --blue: 89, 150, 247;
+  --cyan: 11, 193, 234;
+
+  /*Values for calc function*/
+  --second-layer-left: -5%;
+  --second-layer-top: 1%;
+}

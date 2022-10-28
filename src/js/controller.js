@@ -2,11 +2,11 @@ import * as model from './model.js';
 import fundTransferView from './views/dashboard/fundTransferView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
 import profileView from './views/profileView.js'
-import {NAV_TOGGLE_BTN} from './helper.js'
+import { NAV_TOGGLE_BTN } from './helper.js'
 
 
 const controlDashboard = function() {
-  dashboardView.renderDashboardView();
+  dashboardView.renderDashboardMarkup();
 }
 
 const controlNavTab = function() {
@@ -17,7 +17,6 @@ const controlFundTransferView = function() {
   fundTransferView.addHandlerCopyRef(model.copyRefLink);
   fundTransferView.activeBtn();
 }
-
 
 function init() {
   controlDashboard();

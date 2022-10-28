@@ -7,9 +7,9 @@ import chartView from './chartView.js'
 class DashboardView {
   _parentElement = document.querySelector('main');
 
-  renderDashboardView() {
+  renderDashboardMarkup() {
     minimalAccInfo.renderMinimalAccView();
-    chartView.renderChart();
+   // chartView.renderChart();
     statisticsView.renderStatisticsView();
     fundTransferView.renderFundTransferView();
   }
