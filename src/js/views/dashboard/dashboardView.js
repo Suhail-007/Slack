@@ -12,14 +12,13 @@ class DashboardView {
     chartView.renderChart();
     statisticsView.renderStatisticsView();
     fundTransferView.renderFundTransferView();
-    
-    this._initDashboardFunctions();
+  }
+
+  addHandlerNavTabs(handler) {
+    const tabContainer = document.querySelector('[data-nav]');
+    tabContainer.addEventListener('click', handler);
   }
   
-  _initDashboardFunctions() {
-    fundTransferView.addHandlerCopyRef(model.copyRefLink);
-    fundTransferView.activeBtn();
-  }
 }
 
 export default new DashboardView();
