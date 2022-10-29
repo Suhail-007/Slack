@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 @import url('./colors.css');
+@import url('./themes.css');
 
 *,
 *::before,
@@ -32,14 +33,14 @@ body {
   min-width: 100vw;
   min-height: 100vh;
   position: relative;
-  background: linear-gradient(135deg, var(--secondary-bg-color), var(--bg-primary)) no-repeat;
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)) no-repeat;
 }
 
 header {
   padding: 0.5rem 1rem;
   z-index: 2;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--nav-bg);
   position: sticky;
   top: 0;
   box-shadow: 1px 0px 5px 0px var(--shadow);
@@ -79,7 +80,7 @@ header .website_logo_container {
   pointer-events: none;
   font-size: clamp(0.7rem, 3.5vw, 2.5rem);
   transition: all 300ms ease-in-out;
-  background: linear-gradient(135deg, var(--secondary-bg-color), var(--bg-primar));
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
   box-shadow: 0px 1px 15px 2px var(--shadow-alpha-six);
 }
 
@@ -101,6 +102,7 @@ ul {
 ul li {
   padding: 0.5rem;
   text-transform: capitalize;
+  color: var(--font-primary);
 }
 
 .nav_item svg {
@@ -155,6 +157,8 @@ ul li {
   opacity: 1;
 }
 
+
+
 .user_profile_container_mob {
   display: flex;
   justify-content: space-between;
@@ -164,6 +168,7 @@ ul li {
 
 .user_profile_container .username {
   font-weight: bold;
+  color: var(--font-primary);
 }
 
 .user_profile_container .user_profile {
@@ -187,7 +192,7 @@ main {
   margin-top: 2rem;
   margin-left: 4rem;
   box-shadow: 0px 1px 10px 0px #fff;
-  background-color: #fff;
+  background-color: var(--white-bg);
   box-shadow: 1px 0px 5px 0px var(--shadow-alpha-five);
 }
 
@@ -202,8 +207,7 @@ main::before {
   z-index: -1;
   border-radius: 3rem 0 0 0;
   background: var(--bg-primary-alpha-five);
-  box-shadow: inset 0px 1px 5px 3px #fff,
-    0px 1px 5px 3px var(--bg-primary);
+  box-shadow: inset 0px 1px 5px 3px var(--layer-one), 0px 1px 5px 3px var(--layer-one-secondary);
 }
 
 /*second layer*/
@@ -217,7 +221,7 @@ main::after {
   z-index: -2;
   border-radius: 3rem 0 0 0;
   background: var(--bg-primary-alpha-five);
-  box-shadow: -1px 1px 10px 5px var(--bg-primary);
+  box-shadow: -1px 1px 10px 5px var(--layer-two-shadow);
 }
 
 .account_info {
@@ -363,6 +367,7 @@ main::after {
 .dollar_percentage p {
   margin: 0;
   margin-bottom: 0.5rem;
+  color: var(--font-primary);
 }
 
 .icon_heading p,
@@ -457,7 +462,8 @@ main::after {
 }
 
 .box-4 .icon_heading p,
-.box-4 .dollar_percentage span {
+.box-4 .dollar_percentage span,
+.box-4 .dollar_percentage p {
   color: var(--dark-silver);
 }
 
@@ -467,6 +473,7 @@ main::after {
   align-items: flex-start;
   background: var(--purple-primary-alpha-three);
   padding: 0 1rem 1.5rem 1rem;
+  color: var(--font-primary);
 }
 
 .ref_img_cont img {
@@ -480,7 +487,7 @@ main::after {
 .referral_container a {
   text-decoration: none;
   font-size: 1rem;
-  color: #000;
+  color: var(--font-primary);
   font-size: clamp(0.9rem, 3.5vw, 2rem);
 }
 
@@ -540,7 +547,7 @@ main::after {
 }
 
 .deposit_income {
-  background-color:var(--blue-primary-alpha-five);
+  background-color: var(--blue-primary-alpha-five);
   border-radius: 1rem;
   width: 90%;
   color: #fff;
@@ -571,7 +578,12 @@ main::after {
   width: 100%;
   transition: all 150ms ease-in;
   font-size: clamp(1rem, 3.5vw, 1.5rem);
-  background: var(--white-bg);
+  background: var(--bg-primary-alpha-eight);
+}
+
+.input_cont label {
+  color:var(--font-primary);
+  font-size: clamp(0.9rem, 3.5vw, 1.5rem);
 }
 
 .deposit_income~div>div>input:focus,
@@ -666,7 +678,8 @@ footer p {
 /*Profile Tab */
 .profile_container {
   padding: 1rem 1rem 1rem 2rem;
-  background: var(--secondary-bg-color);
+  background: var(--bg-secondary);
+  color: var(--font-primary);
 }
 
 .heading h2 {
@@ -751,7 +764,7 @@ hr {
 @media screen and (min-width:1024px) {
   body {
     position: relative;
-    background: linear-gradient(135deg, var(--secondary-bg-color), var(--bg-primary-alpha-seven) 25%) no-repeat;
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary-alpha-seven) 25%) no-repeat;
     font-size: clamp(1rem, 3vh, 3rem);
   }
 

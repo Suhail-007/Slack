@@ -9,7 +9,7 @@ class DashboardView {
 
   renderDashboardMarkup() {
     minimalAccInfo.renderMinimalAccView();
-   // chartView.renderChart();
+    chartView.renderChart();
     statisticsView.renderStatisticsView();
     fundTransferView.renderFundTransferView();
   }

@@ -3,7 +3,7 @@ class ProfileView {
   renderProfileView() {
     this._generateHTML();
   }
-  
+
   _generateHTML() {
     const html = `
       <section class="profile_container">
@@ -69,10 +69,10 @@ class ProfileView {
             <div>
               <label for="chart1">Chart 1</label>
               <select name="chart1" id="chart1">
+                <option value="Doughnut">Doughnut</option>
                 <option value="line">Line</option>
                 <option value="bar">Bar</option>
                 <option value="dark">Pie</option>
-                <option value="Doughnut">Doughnut</option>
               </select>
             </div>
               
@@ -89,8 +89,8 @@ class ProfileView {
         </div>
     
       </section>`
-      
-      this._parentElement.insertAdjacentHTML('beforeend', html);
+
+    this._parentElement.insertAdjacentHTML('beforeend', html);
   }
 }
 
