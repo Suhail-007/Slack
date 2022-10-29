@@ -282,16 +282,14 @@ main::after {
 }
 
 .wallet_cont {
-  background: linear-gradient(360deg, rgba(var(--blue), 1.0), rgba(var(--blue), 0.4));
-  -webkit-box-shadow: 0px 5px 15px 0px rgba(var(--blue), 0.7), 5px 0px 15px 0px rgba(var(--blue), 0.7);
-  -moz-box-shadow: 0px 5px 15px 0px rgba(var(--blue), 0.7), 5px 0px 15px 0px rgba(var(--blue), 0.7);
-  box-shadow: 0px 5px 15px 0px rgba(var(--blue), 0.7), 5px 0px 15px 0px rgba(var(--blue), 0.7);
+  background: linear-gradient(360deg, var(--blue-secondary), var(--blue-secondary-alpha-four));
+  box-shadow: 0px 5px 15px 0px var(--blue-secondary-alpha-seven), 5px 0px 15px 0px var(--blue-secondary-alpha-seven);
 }
 
 .wallet_cont div:first-child>svg rect,
 .wallet_cont div:first-child>svg #Path {
-  fill: rgba(var(--blue), 0.7);
-  stroke: rgba(var(--blue), 0.7);
+  fill: var(--blue-secondary-alpha-seven);
+  stroke: var(--blue-secondary-alpha-seven);
   stroke-width: 1;
 }
 
@@ -301,14 +299,12 @@ main::after {
 }
 
 .withdrawal_cont {
-  background: linear-gradient(360deg, rgba(var(--cyan), 1.0), rgba(var(--cyan), 0.4));
-  -webkit-box-shadow: 0px 5px 15px 0px rgba(var(--cyan), 0.7), 5px 0px 15px 0px rgba(var(--cyan), 0.7);
-  -moz-box-shadow: 0px 5px 15px 0px rgba(var(--cyan), 0.7), 5px 0px 15px 0px rgba(var(--cyan), 0.7);
-  box-shadow: 0px 5px 15px 0px rgba(var(--cyan), 0.7), 5px 0px 15px 0px rgba(var(--cyan), 0.7);
+  background: linear-gradient(360deg, var(--cyan-primary), var(--cyan-primary-alpha-four));
+  box-shadow: 0px 5px 15px 0px var(--cyan-primary-alpha-seven), 5px 0px 15px 0px var(--cyan-primary-alpha-seven);
 }
 
 .withdrawal_cont div:first-child>svg {
-  fill: rgba(var(--cyan), 1.0);
+  fill: var(--cyan-primary);
 }
 
 .canvas {
@@ -426,24 +422,24 @@ main::after {
 }
 
 .box-3 {
-  background: rgba(var(--cyan), 0.1);
-  box-shadow: 2px 2px 14px 0px rgba(var(--cyan), 0.4), 1px 1px 15px 0px var(--shadow-alpha-three);
+  background: var(--cyan-primary-alpha-three);
+  box-shadow: 2px 2px 14px 0px var(--cyan-primary-alpha-seven), 1px 1px 15px 0px var(--shadow-alpha-three);
 }
 
 .box-3 .icon_heading p,
 .box-3 .dollar_percentage span {
-  color: rgba(var(--cyan), 1);
+  color: var(--cyan-primary);
 }
 
 .box-3 .icon_heading>div>svg {
-  fill: rgba(var(--cyan), 1);
-  stroke: rgba(var(--cyan), 1);
+  fill: var(--cyan-primary);
+  stroke: var(--cyan-primary);
   stroke-width: 10px;
 }
 
 .box-3::before {
   top: 50%;
-  background: linear-gradient(rgba(var(--cyan), 0.5), rgba(255, 255, 255, 0.2));
+  background: linear-gradient(var(--cyan-primary-alpha-five), rgba(255, 255, 255, 0.2));
 }
 
 .box-4 {
@@ -544,14 +540,14 @@ main::after {
 }
 
 .deposit_income {
-  background-color: hsla(var(--total-income-div), 0.5);
+  background-color:var(--blue-primary-alpha-five);
   border-radius: 1rem;
   width: 90%;
   color: #fff;
   padding: 0.8rem 1rem;
   text-align: center;
   margin: 2rem auto;
-  box-shadow: 1px 0px 10px 1px hsla(var(--total-income-div), 0.5);
+  box-shadow: 1px 0px 10px 1px var(--blue-primary-alpha-five);
   font-size: clamp(0.9rem, 3.5vw, 1.5rem);
 }
 
@@ -580,7 +576,7 @@ main::after {
 
 .deposit_income~div>div>input:focus,
 .deposit_income~div>div>input:hover {
-  outline: 3px solid hsla(var(--total-income-div), 0.3);
+  outline: 3px solid var(--blue-primary-alpha-three);
 }
 
 .deposit_income~div>div>button {
@@ -613,7 +609,7 @@ main::after {
 
 .deposit_income~div>div>button.active:hover,
 .deposit_income~div>div>button.active:focus {
-  background-color: hsla(var(--total-income-div), 0.5);
+  background-color: var(--blue-primary-alpha-five);
 }
 
 .toast_copy {

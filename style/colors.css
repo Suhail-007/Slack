@@ -3,16 +3,19 @@
   --bg-primary: hsla(221, 93%, 89%, 1);
   --purple-primary: hsla(258, 91%, 63%, 1);
   --silver-primary: hsla(202, 5%, 95%, 1);
-  --total-income-div: 215, 98%, 55%;
+  --blue-primary: hsla(215, 98%, 55%, 1);
+  --cyan-primary: hsla(191, 91%, 48%, 1);
 
   /*Secondary Values*/
   --secondary-bg-color: #fff;
+  --blue-secondary: hsla(215, 98%, 55%, 1);
 
-  /*Primary light values*/
+  /* light values*/
   --bg-primary-alpha-five: hsla(221, 93%, 89%, 0.5);
   --bg-primary-alpha-six: hsla(221, 93%, 89%, 0.6);
   --bg-primary-alpha-seven: hsla(221, 93%, 89%, 0.7);
   --bg-primary-alpha-eight: hsla(221, 93%, 89%, 0.8);
+
   --purple-primary-alpha-two: hsla(258, 91%, 63%, 0.2);
   --purple-primary-alpha-three: hsla(258, 91%, 63%, 0.3);
   --purple-primary-alpha-four: hsla(258, 91%, 63%, 0.4);
@@ -22,14 +25,22 @@
 
   --dark-purple-alpha-three: rgba(75, 38, 105, 0.3);
 
-
   --shadow-alpha-three: rgba(200, 200, 200, 0.3);
   --shadow-alpha-five: rgba(200, 200, 200, 0.5);
   --shadow-alpha-six: rgba(200, 200, 200, 0.6);
 
   --dark-bg-primary-alpha-eight: hsla(221, 60%, 70%, 0.8);
-  
 
+  --blue-primary-alpha-three: hsla(215, 98%, 55%, 0.3);
+  --blue-primary-alpha-five: hsla(215, 98%, 55%, 0.5);
+
+  --blue-secondary-alpha-four: hsla(215, 98%, 55%, 0.4);
+  --blue-secondary-alpha-seven: hsla(215, 98%, 55%, 0.7);
+
+  --cyan-primary-alpha-three: hsla(191, 91%, 48%, 0.3);
+  --cyan-primary-alpha-four: hsla(191, 91%, 48%, 0.4);
+  --cyan-primary-alpha-five: hsla(191, 91%, 48%, 0.5);
+  --cyan-primary-alpha-seven: hsla(191, 91%, 48%, 0.7);
 
   /*primary dark values*/
   --dark-silver-primary: hsla(202, 5%, 60%, 1);
@@ -39,8 +50,8 @@
   /*secondary dark values*/
   --dark-silver-alpha-eight: hsla(202, 5%, 60%, 0.8);
 
-/*Least used once*/
---white-bg: #fff;
+  /*Least used values*/
+  --white-bg: #fff;
   --border-primary: hsl(258, 91%, 63%);
 
   /* RGBA COLOR VALUES*/
@@ -49,8 +60,6 @@
   /*black shadows*/
   --medium-shadow-black: rgba(0, 0, 0, 0.3);
   --shadow: rgba(200, 200, 200, 1);
-  --blue: 89, 150, 247;
-  --cyan: 11, 193, 234;
 
   /*Values for calc function*/
   --second-layer-left: -5%;
