@@ -1,5 +1,9 @@
+import { theme } from '../model.js';
+
 class ProfileView {
   _parentElement = document.querySelector('main');
+  _settingsElem;
+
   renderProfileView() {
     this._generateHTML();
   }
@@ -49,17 +53,17 @@ class ProfileView {
     
         <hr>
     
-        <div class="settings">
+        <div data-settings class="settings">
           <h2 class="">Settings</h2>
             
           <div>
             <h3>Theme Mode</h3>
             <div>
               <label for="theme">Theme</label>
-              <select name="theme" id="theme">
-                <option value="system default">system default</option>
-                <option value="light">light</option>
-                <option value="dark">dark</option>
+              <select data-select='theme' name="theme" id="theme">
+                <option ${theme.mode === 'system default' ? 'selected' : ''} value="system default">system default</option>
+                <option ${theme.mode === 'light' ? 'selected' : ''} value="light">light</option>
+                <option ${theme.mode === 'dark' ? 'selected' : ''} value="dark">dark</option>
               </select>
             </div>
           </div>
@@ -67,22 +71,22 @@ class ProfileView {
           <div>
             <h3>Chart Settings</h3>
             <div>
-              <label for="chart1">Chart 1</label>
-              <select name="chart1" id="chart1">
-                <option value="Doughnut">Doughnut</option>
+              <label for="chartOne">Chart 1</label>
+              <select data-select='chartOne' name="chartOne" id="chartOne">
+                <option selected value="Doughnut">Doughnut</option>
                 <option value="line">Line</option>
                 <option value="bar">Bar</option>
-                <option value="dark">Pie</option>
+                <option value="pie">Pie</option>
               </select>
             </div>
               
             <div>
-              <label for="chart1">Chart 2</label>
-              <select name="chart2" id="chart2">
-                <option value="line">Line</option>
+              <label for="chartTwo">Chart 2</label>
+              <select data-select='chartTwo' name="chartTwo" id="chartTwo">
+                <option selected value="line">Line</option>
                 <option value="bar">Bar</option>
-                <option value="dark">Pie</option>
-               <option value="Doughnut">Doughnut</option>
+                <option value="pie">Pie</option>
+                <option value="doughnut">Doughnut</option>
               </select>
             </div>
           </div>
@@ -92,6 +96,18 @@ class ProfileView {
 
     this._parentElement.insertAdjacentHTML('beforeend', html);
   }
+
+  addHandlerSettings(handler) {
+    this._settingsElem = document.querySelector('[data-settings]');
+
+    this._settingsElem.addEventListener('click', handler);
+  }
+
+/*  _checkSelectedThemeValue(themeMode) {
+    if (themeMode === 'system default') return 'selected';
+    if (themeMode === 'light') return 'selected';
+    if (themeMode === 'dark') return 'selected';
+  }*/
 }
 
 export default new ProfileView();

@@ -18,11 +18,17 @@ const controlFundTransferView = function() {
   fundTransferView.activeBtn();
 }
 
+
 function init() {
   controlDashboard();
   controlFundTransferView();
   controlNavTab();
   NAV_TOGGLE_BTN();
+
+
+  model.getLocalStorage();
+  model.initTheme();
+  
 }
 
 init();
