@@ -61,9 +61,9 @@ class ProfileView {
             <div>
               <label for="theme">Theme</label>
               <select data-select='theme' name="theme" id="theme">
-                <option ${theme.mode === 'system default' ? 'selected' : ''} value="system default">system default</option>
-                <option ${theme.mode === 'light' ? 'selected' : ''} value="light">light</option>
-                <option ${theme.mode === 'dark' ? 'selected' : ''} value="dark">dark</option>
+                <option ${this._isSelectedValue('system default')} value="system default">system default</option>
+                <option ${this._isSelectedValue('light')} value="light">light</option>
+                <option ${this._isSelectedValue('dark')} value="dark">dark</option>
               </select>
             </div>
           </div>
@@ -103,11 +103,15 @@ class ProfileView {
     this._settingsElem.addEventListener('click', handler);
   }
 
-/*  _checkSelectedThemeValue(themeMode) {
-    if (themeMode === 'system default') return 'selected';
-    if (themeMode === 'light') return 'selected';
-    if (themeMode === 'dark') return 'selected';
-  }*/
+  _isSelectedValue(value) {
+    value = value.toLowerCase();
+    
+    const selectedTheme = theme.mode;
+
+    if (selectedTheme === value) return 'selected';
+    if (selectedTheme === value) return 'selected';
+    if (selectedTheme === value) return 'selected';
+  }
 }
 
 export default new ProfileView();
