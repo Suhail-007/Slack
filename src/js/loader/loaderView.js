@@ -10,4 +10,6 @@ export const loader = function() {
     
     parentElem.innerHTML = '';
     parentElem.insertAdjacentHTML('afterbegin', html);
+    
+    return Promise.resolve('');
 }
