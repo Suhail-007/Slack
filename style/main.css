@@ -1,12 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 @import url('./colors.css');
 @import url('./themes.css');
+@import url('./loader.css');
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   font-family: 'Rubik', sans-serif;
+}
+
+html {
+  font-size: 62.5%;
 }
 
 /*hide profile for mob view*/
@@ -157,8 +162,6 @@ ul li {
   opacity: 1;
 }
 
-
-
 .user_profile_container_mob {
   display: flex;
   justify-content: space-between;
@@ -194,6 +197,7 @@ main {
   box-shadow: 0px 1px 10px 0px #fff;
   background-color: var(--white-bg);
   box-shadow: 1px 0px 5px 0px var(--shadow-alpha-five);
+  min-height: 100vh;
 }
 
 /*first layer*/

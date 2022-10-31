@@ -2,14 +2,15 @@ import * as model from '../../model.js'
 import minimalAccInfo from './minimalAccView.js';
 import fundTransferView from './fundTransferView.js';
 import statisticsView from './statisticsView.js';
-import chartView from './chartView.js'
+import chartView from './chartView.js';
 
 class DashboardView {
   _parentElement = document.querySelector('main');
 
-  renderDashboardMarkup() {
+  async renderDashboardMarkup() {
+    this._parentElement.innerHTML = '';
     minimalAccInfo.renderMinimalAccView();
-   // chartView.renderChart();
+    //  chartView.renderChart();
     statisticsView.renderStatisticsView();
     fundTransferView.renderFundTransferView();
   }
@@ -18,7 +19,7 @@ class DashboardView {
     const tabContainer = document.querySelector('[data-nav]');
     tabContainer.addEventListener('click', handler);
   }
-  
+
 }
 
 export default new DashboardView();

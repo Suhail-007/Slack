@@ -1,6 +1,9 @@
 import dashboardView from './views/dashboard/dashboardView.js';
 import fundTransferView from './views/dashboard/fundTransferView.js';
 import profileView from './views/profileView.js';
+import { Delay } from './delay/delay.js'
+import { loader } from './loader/loaderView.js';
+
 
 export const chartTypes = {
   typeOne: 'doughnut',
@@ -15,10 +18,14 @@ export const copyRefLink = async function(element) {
   await navigator.clipboard.writeText(element.innerText);
 }
 
-export const renderTab = function(e) {
+export const renderTab = async function(e) {
   const elem = e.target.closest('.nav_item');
   const dataset = elem?.dataset.nav.toLowerCase();
   const main = document.querySelector('main');
+
+  await loader();
+  await Delay(1000);
+
   main.innerHTML = '';
 
   switch (dataset) {
@@ -111,6 +118,6 @@ export const setLocalStorage = function(key, value) {
 //get saved value from Local Storage
 export const getLocalStorage = function() {
   const selectedTheme = JSON.parse(localStorage.getItem('selectedTheme'));
-  
+
   theme.mode = selectedTheme ? selectedTheme : theme.mode;
 }

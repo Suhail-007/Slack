@@ -14,7 +14,7 @@ class FundTransferView {
 
         <h4>Referral Link</h4>
         <a href="#" class="ref_link">https://github.com/Suhail-007/dashboard-ui</a>
-        <button  class="copy_ref_link">
+        <button class="copy_ref_link">
           <svg>
           <use href="src/images/icons.svg#clipboard"></use>
           </svg>
@@ -72,7 +72,6 @@ class FundTransferView {
 
   addHandlerCopyRef(handler) {
     const ref_link = document.querySelector('.ref_link');
-
     this._copyButton.addEventListener('click', e => {
       const btn = e.target.closest('.copy_ref_link');
 
