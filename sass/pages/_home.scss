@@ -1,4 +1,13 @@
-//hide profile for mob view
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+//hide profile for mob view 
+//temporary placed here
 .user_profile_container_desktop {
   display: none;
 }

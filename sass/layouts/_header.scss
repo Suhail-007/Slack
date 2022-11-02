@@ -1,13 +1,7 @@
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .header {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
 
   & .website_logo_container {
     display: flex;
