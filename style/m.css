@@ -3,16 +3,6 @@
 @import url('./themes.css');
 @import url('./loader.css');
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  font-family: 'Rubik', sans-serif;
-}
-
-html {
-  font-size: 62.5%;
-}
 
 /*hide profile for mob view*/
 .user_profile_container_desktop {
@@ -57,6 +47,7 @@ header>.header {
   justify-content: space-between;
   align-items: center;
 }
+
 
 header .website_logo_container {
   display: flex;
@@ -586,7 +577,7 @@ main::after {
 }
 
 .input_cont label {
-  color:var(--font-primary);
+  color: var(--font-primary);
   font-size: clamp(0.9rem, 3.5vw, 1.5rem);
 }
 
@@ -841,7 +832,7 @@ hr {
     margin-inline: 0.5rem;
   }
 
-  .nav_item_name {
+  .nav-item_name {
     position: relative;
     padding: 0.5rem 0.4rem;
     letter-spacing: 0;
@@ -849,11 +840,11 @@ hr {
     white-space: nowrap;
   }
 
-  .nav_item_name::before {
+  .nav-item_name::before {
     bottom: 0;
   }
 
-  .nav_item_name:hover::before {
+  .nav-item_name:hover::before {
     transition: 300ms ease-in;
     opacity: 1;
   }
@@ -994,7 +985,7 @@ hr {
     flex-direction: row;
   }
 
-  .nav_item_name {
+  .nav-item_name {
     padding: 0.5rem 0.8rem;
     font-size: 2.5rem;
   }
