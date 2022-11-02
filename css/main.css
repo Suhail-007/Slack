@@ -28,6 +28,20 @@ body {
   background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)) no-repeat;
 }
 
+.website-logo > img {
+  border-radius: 3rem;
+  width: 100%;
+}
+
+.ref_img_cont img {
+  width: 3rem;
+}
+
+.website_logo_container {
+  font-size: 1.3rem;
+  font-family: cursive;
+}
+
 .navbar {
   position: fixed;
   top: 0;
@@ -124,22 +138,32 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-.header .website_logo_container {
+.header .website-logo-container {
   display: flex;
   align-items: center;
   gap: 0 0.5rem;
   font-size: 1.3rem;
   font-family: cursive;
 }
-.header .website_logo_container .website_logo > img {
-  border-radius: 3rem;
-  width: 10%;
+.header .website-logo-container .website-logo {
+  width: 10rem;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0.5rem 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 0.5rem 1.6rem 0 rgba(200, 200, 200, 0.6);
+}
+header .nav_btn_container svg {
+  transform: scale(1.1);
+  fill: hsl(258deg, 91%, 63%);
 }
 
 .user_profile_container_desktop {
