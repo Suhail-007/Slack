@@ -54,7 +54,7 @@ $white-bg: #fff;
 $nav-bg: rgba(255, 255, 255, 0.9);
 $border-primary: hsl(258, 91%, 63%);
 $layer-one: rgba(255, 255, 255, 1);
-$layer-one-secondary: var(--bg-primary);
+$layer-one-secondary: $bg-primary;
 $layer-two-shadow: hsla(221, 93%, 89%, 1);
 $input-bg: #fff;
 
@@ -65,9 +65,11 @@ $light-shadow-white: rgba(200, 200, 200, 1);
 $medium-shadow-black: rgba(0, 0, 0, 0.3);
 $shadow: rgba(200, 200, 200, 1);
 
+/*Font Color*/
+$font-primary: #000;
+
 /*Values for calc function*/
 $second-layer-left: -5%;
 $second-layer-top: 1%;
 
-/*Font Color*/
-$font-primary: #000;
+$border-top-left-radius: 4rem;

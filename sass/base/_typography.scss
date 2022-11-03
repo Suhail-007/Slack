@@ -1,4 +1,20 @@
  .website_logo_container {
-   font-size: 1.3rem;
+   font-size: 1.6rem;
    font-family: cursive;
+ }
+
+ .acc_div>div:last-child {
+   color: #fff;
+   font-size: 1.3rem;
+   font-weight: bold;
+   letter-spacing: .3rem;
+   text-transform: capitalize;
+   text-align: left;
+   justify-self: start;
+
+   & p {
+     margin: 0;
+     margin-bottom: 1rem;
+   }
+
  }

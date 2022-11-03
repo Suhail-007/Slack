@@ -1,0 +1,51 @@
+.acc_div div:first-child {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: 100%;
+  width: fit-content;
+  padding: 0.8rem;
+
+  &>svg {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+.total_cont {
+  background: linear-gradient(360deg, $purple-primary, $purple-primary-alpha-four);
+  box-shadow: 0px 5px 15px 0px $purple-primary-alpha-seven, 5px 0px 15px 0px $purple-primary-alpha-seven;
+
+  & div:first-child>svg {
+    fill: $purple-primary;
+  }
+}
+
+.wallet_cont {
+  background: linear-gradient(360deg, $blue-secondary, $blue-secondary-alpha-four);
+  box-shadow: 0px 5px 15px 0px $blue-secondary-alpha-seven, 5px 0px 15px 0px $blue-secondary-alpha-seven;
+
+  & div:first-child {
+
+    & svg rect,
+    & svg #Path {
+      fill: $blue-secondary-alpha-seven;
+      stroke: $blue-secondary-alpha-seven;
+    }
+
+    & svg #lock {
+      stroke: #fff;
+      stroke-width: 5;
+      stroke-width: 5;
+    }
+  }
+}
+
+.withdrawal_cont {
+  background: linear-gradient(360deg, $cyan-primary, $cyan-primary-alpha-four);
+  box-shadow: 0px 5px 15px 0px $cyan-primary-alpha-seven, 5px 0px 15px 0px $cyan-primary-alpha-seven;
+  
+  & div:first-child>svg {
+    fill: $cyan-primary;
+  }
+}

@@ -6,8 +6,13 @@
 /*Least used values*/
 /* RGBA COLOR VALUES*/
 /*black shadows*/
-/*Values for calc function*/
 /*Font Color*/
+/*Values for calc function*/
+@keyframes load {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 *,
 *::before,
 *::after {
@@ -25,7 +30,57 @@ body {
   min-width: 100vw;
   min-height: 100vh;
   position: relative;
-  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)) no-repeat;
+  background: linear-gradient(135deg, #fff, hsl(221deg, 93%, 89%)) no-repeat;
+}
+
+.section-loader-cont {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  padding-top: 10rem;
+}
+.section-loader-cont svg {
+  width: 5rem;
+  height: 5rem;
+  fill: hsl(258deg, 91%, 63%);
+  animation: load 1.5s infinite;
+}
+
+main {
+  position: relative;
+  border-top-left-radius: 4rem;
+  margin-top: 4rem;
+  margin-left: 4rem;
+  box-shadow: 0px 1px 10px 0px #fff;
+  background-color: #fff;
+  box-shadow: 1px 0px 5px 0px rgba(200, 200, 200, 0.5);
+  min-height: 100vh;
+}
+main::after {
+  content: "";
+  position: absolute;
+  left: -5%;
+  right: 0;
+  top: 1%;
+  bottom: 0;
+  z-index: -2;
+  border-top-left-radius: 4rem;
+  background: hsla(221deg, 93%, 89%, 0.5);
+  box-shadow: -1px 1px 10px 5px hsl(221deg, 93%, 89%);
+}
+main::before {
+  content: "";
+  position: absolute;
+  left: -2.5%;
+  right: 0;
+  top: 0.5%;
+  bottom: 0;
+  z-index: -1;
+  border-top-left-radius: 4rem;
+  background: hsla(221deg, 93%, 89%, 0.5);
+  box-shadow: inset 0px 1px 5px 3px rgb(255, 255, 255), 0px 1px 5px 3px hsl(221deg, 93%, 89%);
 }
 
 .website-logo > img {
@@ -38,8 +93,65 @@ body {
 }
 
 .website_logo_container {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   font-family: cursive;
+}
+
+.acc_div > div:last-child {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 0.3rem;
+  text-transform: capitalize;
+  text-align: left;
+  justify-self: start;
+}
+.acc_div > div:last-child p {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.acc_div div:first-child {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: 100%;
+  width: fit-content;
+  padding: 0.8rem;
+}
+.acc_div div:first-child > svg {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.total_cont {
+  background: linear-gradient(360deg, hsl(258deg, 91%, 63%), hsla(258deg, 91%, 63%, 0.4));
+  box-shadow: 0px 5px 15px 0px hsla(258deg, 91%, 63%, 0.7), 5px 0px 15px 0px hsla(258deg, 91%, 63%, 0.7);
+}
+.total_cont div:first-child > svg {
+  fill: hsl(258deg, 91%, 63%);
+}
+
+.wallet_cont {
+  background: linear-gradient(360deg, hsl(215deg, 98%, 55%), hsla(215deg, 98%, 55%, 0.4));
+  box-shadow: 0px 5px 15px 0px hsla(215deg, 98%, 55%, 0.7), 5px 0px 15px 0px hsla(215deg, 98%, 55%, 0.7);
+}
+.wallet_cont div:first-child svg rect, .wallet_cont div:first-child svg #Path {
+  fill: hsla(215deg, 98%, 55%, 0.7);
+  stroke: hsla(215deg, 98%, 55%, 0.7);
+}
+.wallet_cont div:first-child svg #lock {
+  stroke: #fff;
+  stroke-width: 5;
+  stroke-width: 5;
+}
+
+.withdrawal_cont {
+  background: linear-gradient(360deg, hsl(191deg, 91%, 48%), hsla(191deg, 91%, 48%, 0.4));
+  box-shadow: 0px 5px 15px 0px hsla(191deg, 91%, 48%, 0.7), 5px 0px 15px 0px hsla(191deg, 91%, 48%, 0.7);
+}
+.withdrawal_cont div:first-child > svg {
+  fill: hsl(191deg, 91%, 48%);
 }
 
 .navbar {
@@ -161,9 +273,29 @@ header {
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 0.5rem 1.6rem 0 rgba(200, 200, 200, 0.6);
 }
-header .nav_btn_container svg {
+header .nav_container_btn svg {
   transform: scale(1.1);
   fill: hsl(258deg, 91%, 63%);
+}
+
+.account_info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2.4rem 0;
+  padding: 8rem 0;
+}
+.account_info .acc_div {
+  width: 25rem;
+  height: 10rem;
+  padding-left: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 0 1rem;
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
+  border-radius: 1.8rem;
 }
 
 .user_profile_container_desktop {

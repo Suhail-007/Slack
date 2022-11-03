@@ -55,7 +55,7 @@
   --nav-bg: rgba(255, 255, 255, 0.9);
   --border-primary: hsl(258, 91%, 63%);
   --layer-one: rgba(255, 255, 255, 1);
-  --layer-one-secondary: var(--bg-primary);
+  --layer-one-secondary: $bg-primary;
   --layer-two-shadow: hsla(221, 93%, 89%, 1);
   --input-bg: #fff;
   

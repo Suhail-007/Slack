@@ -15,12 +15,65 @@ body {
   min-width: 100vw;
   min-height: 100vh;
   position: relative;
-  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)) no-repeat;
+  background: linear-gradient(135deg, $bg-secondary, $bg-primary) no-repeat;
+}
+
+.section-loader-cont {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  padding-top: 10rem;
+
+  & svg {
+    width: 5rem;
+    height: 5rem;
+    fill: hsla(258, 91%, 63%, 1);
+    animation: load 1.5s infinite;
+  }
+}
+
+main {
+  position: relative;
+  border-top-left-radius: $border-top-left-radius;
+  margin-top: 4rem;
+  margin-left: 4rem;
+  box-shadow: 0px 1px 10px 0px #fff;
+  background-color: $white-bg;
+  box-shadow: 1px 0px 5px 0px $shadow-alpha-five;
+  min-height: 100vh;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: $second-layer-left;
+    right: 0;
+    top: $second-layer-top;
+    bottom: 0;
+    z-index: -2;
+    border-top-left-radius: $border-top-left-radius;
+    background: $bg-primary-alpha-five;
+    box-shadow: -1px 1px 10px 5px $layer-two-shadow;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: calc($second-layer-left / 2);
+    right: 0;
+    top: calc($second-layer-top / 2);
+    bottom: 0;
+    z-index: -1;
+    border-top-left-radius: $border-top-left-radius;
+    background: $bg-primary-alpha-five;
+    box-shadow: inset 0px 1px 5px 3px $layer-one, 0px 1px 5px 3px $layer-one-secondary;
+  }
 }
 
 .website-logo>img {
   border-radius: 3rem;
-  width:100%;
+  width: 100%;
 }
 
 .ref_img_cont img {
