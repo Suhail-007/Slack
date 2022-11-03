@@ -40,9 +40,9 @@ main {
   border-top-left-radius: $border-top-left-radius;
   margin-top: 4rem;
   margin-left: 4rem;
-  box-shadow: 0px 1px 10px 0px #fff;
+  box-shadow: 0px .1rem 10px 0px #fff;
   background-color: $white-bg;
-  box-shadow: 1px 0px 5px 0px $shadow-alpha-five;
+  box-shadow: .1rem 0px 5px 0px $shadow-alpha-five;
   min-height: 100vh;
 
   &::after {
@@ -55,7 +55,7 @@ main {
     z-index: -2;
     border-top-left-radius: $border-top-left-radius;
     background: $bg-primary-alpha-five;
-    box-shadow: -1px 1px 10px 5px $layer-two-shadow;
+    box-shadow: -.1rem .1rem 10px 5px $layer-two-shadow;
   }
 
   &::before {
@@ -68,7 +68,7 @@ main {
     z-index: -1;
     border-top-left-radius: $border-top-left-radius;
     background: $bg-primary-alpha-five;
-    box-shadow: inset 0px 1px 5px 3px $layer-one, 0px 1px 5px 3px $layer-one-secondary;
+    box-shadow: inset 0px .1rem 5px 3px $layer-one, 0px .1rem 5px 3px $layer-one-secondary;
   }
 }
 

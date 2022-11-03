@@ -54,9 +54,9 @@ main {
   border-top-left-radius: 4rem;
   margin-top: 4rem;
   margin-left: 4rem;
-  box-shadow: 0px 1px 10px 0px #fff;
+  box-shadow: 0px 0.1rem 10px 0px #fff;
   background-color: #fff;
-  box-shadow: 1px 0px 5px 0px rgba(200, 200, 200, 0.5);
+  box-shadow: 0.1rem 0px 5px 0px rgba(200, 200, 200, 0.5);
   min-height: 100vh;
 }
 main::after {
@@ -69,7 +69,7 @@ main::after {
   z-index: -2;
   border-top-left-radius: 4rem;
   background: hsla(221deg, 93%, 89%, 0.5);
-  box-shadow: -1px 1px 10px 5px hsl(221deg, 93%, 89%);
+  box-shadow: -0.1rem 0.1rem 10px 5px hsl(221deg, 93%, 89%);
 }
 main::before {
   content: "";
@@ -81,7 +81,7 @@ main::before {
   z-index: -1;
   border-top-left-radius: 4rem;
   background: hsla(221deg, 93%, 89%, 0.5);
-  box-shadow: inset 0px 1px 5px 3px rgb(255, 255, 255), 0px 1px 5px 3px hsl(221deg, 93%, 89%);
+  box-shadow: inset 0px 0.1rem 5px 3px rgb(255, 255, 255), 0px 0.1rem 5px 3px hsl(221deg, 93%, 89%);
 }
 
 .website-logo > img {
@@ -99,10 +99,15 @@ main::before {
 }
 
 /* Navbar */
-.nav__item--name {
+li .nav__item--name {
   padding: 0.5rem;
   text-transform: capitalize;
   color: #000;
+  transition: color 200ms;
+  user-select: none;
+}
+li:hover .nav__item--name {
+  color: hsl(258deg, 91%, 63%);
 }
 
 .acc_div > div:last-child {
@@ -119,47 +124,40 @@ main::before {
   margin-bottom: 1rem;
 }
 
-.acc_div div:first-child {
-  background: #fff;
-  display: flex;
-  align-items: center;
-  border-radius: 100%;
-  width: fit-content;
-  padding: 0.8rem;
-}
-.acc_div div:first-child > svg {
-  width: 3.5rem;
-  height: 3.5rem;
+/* Statistics view */
+.dollar-percentage p {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--font-primary);
 }
 
-.total_cont {
-  background: linear-gradient(360deg, hsl(258deg, 91%, 63%), hsla(258deg, 91%, 63%, 0.4));
-  box-shadow: 0px 5px 15px 0px hsla(258deg, 91%, 63%, 0.7), 5px 0px 15px 0px hsla(258deg, 91%, 63%, 0.7);
-}
-.total_cont div:first-child > svg {
-  fill: hsl(258deg, 91%, 63%);
+.icon_heading p,
+.dollar-percentage span {
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
-.wallet_cont {
-  background: linear-gradient(360deg, hsl(215deg, 98%, 55%), hsla(215deg, 98%, 55%, 0.4));
-  box-shadow: 0px 5px 15px 0px hsla(215deg, 98%, 55%, 0.7), 5px 0px 15px 0px hsla(215deg, 98%, 55%, 0.7);
-}
-.wallet_cont div:first-child svg rect, .wallet_cont div:first-child svg #Path {
-  fill: hsla(215deg, 98%, 55%, 0.7);
-  stroke: hsla(215deg, 98%, 55%, 0.7);
-}
-.wallet_cont div:first-child svg #lock {
-  stroke: #fff;
-  stroke-width: 5;
-  stroke-width: 5;
+.box-1 .icon_heading p,
+.box-1 .dollar-percentage span {
+  color: hsla(258deg, 91%, 63%, 0.7);
 }
 
-.withdrawal_cont {
-  background: linear-gradient(360deg, hsl(191deg, 91%, 48%), hsla(191deg, 91%, 48%, 0.4));
-  box-shadow: 0px 5px 15px 0px hsla(191deg, 91%, 48%, 0.7), 5px 0px 15px 0px hsla(191deg, 91%, 48%, 0.7);
+.box-2 .icon_heading p,
+.box-2 .dollar-percentage span {
+  color: hsl(221deg, 60%, 70%);
 }
-.withdrawal_cont div:first-child > svg {
-  fill: hsl(191deg, 91%, 48%);
+
+.box-3 .icon_heading p,
+.box-3 .dollar-percentage span {
+  color: hsl(191deg, 91%, 48%);
+}
+
+.box-4 .icon_heading p,
+.box-4 .dollar-percentage span,
+.box-4 .dollar-percentage p {
+  color: var(--dark-silver);
 }
 
 .navbar {
@@ -173,7 +171,7 @@ main::before {
   font-size: clamp(0.7rem, 3.5vw, 2.5rem);
   transition: all 300ms ease-in-out;
   background: linear-gradient(135deg, #fff, hsl(221deg, 93%, 89%));
-  box-shadow: 0px 1px 15px 2px rgba(200, 200, 200, 0.6);
+  box-shadow: 0px 0.1rem 1.5rem 0.2rem rgba(200, 200, 200, 0.6);
 }
 .navbar.open {
   right: 0;
@@ -194,7 +192,7 @@ main::before {
   transition: all 400ms ease-in-out;
   width: fit-content;
   position: relative;
-  margin-top: 1.6rem;
+  margin-top: 1rem;
 }
 .navbar > ul > li svg {
   width: 0px;
@@ -203,10 +201,6 @@ main::before {
   pointer-events: none;
   transition: all 400ms ease-in-out;
   fill: hsl(258deg, 91%, 63%);
-}
-.navbar > ul > li #income, .navbar > ul > li #invest_wallet {
-  stroke: hsl(258deg, 91%, 63%);
-  stroke-width: 1rem;
 }
 .navbar > ul > li:hover svg {
   opacity: 1;
@@ -219,7 +213,7 @@ main::before {
   position: absolute;
   left: 0.1rem;
   right: 0;
-  bottom: 0;
+  bottom: -0.1rem;
   border-bottom: 4px solid hsl(258deg, 91%, 63%);
   border-radius: 1rem;
   transition: 300ms ease-in;
@@ -229,6 +223,10 @@ main::before {
 .navbar > ul > li:hover::before {
   transition: 300ms ease-in;
   opacity: 1;
+}
+.navbar > ul > li #income, .navbar > ul > li #invest_wallet {
+  stroke: hsl(258deg, 91%, 63%);
+  stroke-width: 1rem;
 }
 
 .user-profile-container_mob {
@@ -250,6 +248,136 @@ main::before {
   height: 7rem;
   border-radius: 100%;
   box-shadow: 0 0 1.6rem 0.5rem rgba(0, 0, 0, 0.3);
+}
+
+.acc_div div:first-child {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: 100%;
+  width: fit-content;
+  padding: 0.8rem;
+}
+.acc_div div:first-child > svg {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.total_cont {
+  background: linear-gradient(360deg, hsl(258deg, 91%, 63%), hsla(258deg, 91%, 63%, 0.4));
+  box-shadow: 0px 5px 1.5rem 0px hsla(258deg, 91%, 63%, 0.7), 5px 0px 1.5rem 0px hsla(258deg, 91%, 63%, 0.7);
+}
+.total_cont div:first-child > svg {
+  fill: hsl(258deg, 91%, 63%);
+}
+
+.wallet_cont {
+  background: linear-gradient(360deg, hsl(215deg, 98%, 55%), hsla(215deg, 98%, 55%, 0.4));
+  box-shadow: 0px 5px 1.5rem 0px hsla(215deg, 98%, 55%, 0.7), 5px 0px 1.5rem 0px hsla(215deg, 98%, 55%, 0.7);
+}
+.wallet_cont div:first-child svg rect, .wallet_cont div:first-child svg #Path {
+  fill: hsla(215deg, 98%, 55%, 0.7);
+  stroke: hsla(215deg, 98%, 55%, 0.7);
+}
+.wallet_cont div:first-child svg #lock {
+  stroke: #fff;
+  stroke-width: 5;
+  stroke-width: 5;
+}
+
+.withdrawal_cont {
+  background: linear-gradient(360deg, hsl(191deg, 91%, 48%), hsla(191deg, 91%, 48%, 0.4));
+  box-shadow: 0px 5px 1.5rem 0px hsla(191deg, 91%, 48%, 0.7), 5px 0px 1.5rem 0px hsla(191deg, 91%, 48%, 0.7);
+}
+.withdrawal_cont div:first-child > svg {
+  fill: hsl(191deg, 91%, 48%);
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: flex-start;
+  width: 12rem;
+  height: 18rem;
+  padding: 1rem 1rem 1.5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  position: relative;
+}
+.box::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.box .icon_heading > div {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  box-shadow: 0.3rem 0.3rem 0.5rem 0 rgba(0, 0, 0, 0.1);
+}
+.box .icon_heading > div > svg {
+  width: 2rem;
+  height: 2rem;
+}
+.box-1 {
+  background: hsla(258deg, 91%, 63%, 0.5);
+  box-shadow: 0.2rem 0.2rem 1.4rem 0 hsla(258deg, 91%, 63%, 0.7), 0.1rem 0.1rem 1.5rem 0 rgba(200, 200, 200, 0.3);
+}
+.box-1::before {
+  background: linear-gradient(hsl(258deg, 91%, 63%), rgba(255, 255, 255, 0.3));
+  top: 50%;
+}
+.box-1 .icon_heading > div {
+  padding-left: 0.2rem;
+}
+.box-1 .icon_heading > div > svg {
+  fill: hsla(258deg, 91%, 63%, 0.7);
+}
+.box-2 {
+  background: hsla(221deg, 93%, 89%, 0.6);
+  box-shadow: 0.2rem 0.2rem 1.4rem 0 hsl(221deg, 93%, 89%), 0.1rem 0.1rem 1.5rem 0 rgba(200, 200, 200, 0.5);
+}
+.box-2::before {
+  background: linear-gradient(hsla(221deg, 60%, 70%, 0.8), rgba(255, 255, 255, 0.3));
+  top: 20%;
+}
+.box-2 .icon_heading > div > svg {
+  fill: hsl(221deg, 60%, 70%);
+  fill-opacity: 1;
+  stroke: none;
+  stroke-width: 1rem;
+}
+.box-3 {
+  background: hsla(191deg, 91%, 48%, 0.3);
+  box-shadow: 0.2rem 0.2rem 1.4rem 0px hsla(191deg, 91%, 48%, 0.7), 0.1rem 0.1rem 1.5rem 0 rgba(200, 200, 200, 0.3);
+}
+.box-3::before {
+  top: 50%;
+  background: linear-gradient(hsla(191deg, 91%, 48%, 0.5), rgba(255, 255, 255, 0.2));
+}
+.box-3 .icon_heading > div > svg {
+  fill: hsl(191deg, 91%, 48%);
+  stroke: hsl(191deg, 91%, 48%);
+  stroke-width: 1rem;
+}
+.box-4 {
+  background: hsl(202deg, 5%, 95%);
+  box-shadow: 0.2rem 0.2rem 1rem 0 hsl(202deg, 5%, 60%);
+}
+.box-4::before {
+  top: 70%;
+  background: linear-gradient(hsla(202deg, 5%, 60%, 0.8), hsla(0deg, 0%, 100%, 0.5));
+}
+.box-4 .icon_heading > div > svg {
+  fill: hsl(202deg, 5%, 60%);
 }
 
 .header {
@@ -308,6 +436,16 @@ header .nav_container_btn svg {
 .canvas {
   margin: 8rem 0;
   padding: 0 1.6rem;
+}
+
+.statistics_boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 2rem;
+  place-items: center;
+  padding: 1rem;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
 }
 
 .user_profile_container_desktop {

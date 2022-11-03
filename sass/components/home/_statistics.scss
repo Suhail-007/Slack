@@ -1,0 +1,103 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: flex-start;
+  width: 12rem;
+  height: 18rem;
+  padding: 1rem 1rem 1.5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  & .icon_heading>div {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: .5rem;
+    padding: 0.3rem;
+    width: 2.8rem;
+    height: 2.8rem;
+    box-shadow: .3rem .3rem .5rem 0 rgba(0, 0, 0, 0.1);
+
+    &>svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  &-1 {
+    background: $purple-primary-alpha-five;
+    box-shadow: .2rem .2rem 1.4rem 0 $purple-primary-alpha-seven, .1rem .1rem 1.5rem 0 $shadow-alpha-three;
+
+    &::before {
+      background: linear-gradient($purple-primary, rgba(255, 255, 255, 0.3));
+      top: 50%;
+    }
+
+    & .icon_heading>div {
+      padding-left: 0.2rem;
+
+      &>svg {
+        fill: $purple-primary-alpha-seven;
+      }
+    }
+  }
+
+  &-2 {
+    background: $bg-primary-alpha-six;
+    box-shadow: .2rem .2rem 1.4rem 0 $bg-primary, .1rem .1rem 1.5rem 0 $shadow-alpha-five;
+
+    &::before {
+      background: linear-gradient($dark-bg-primary-alpha-eight, rgba(255, 255, 255, 0.3));
+      top: 20%;
+    }
+
+    & .icon_heading>div>svg {
+      fill: $dark-bg-primary-color;
+      fill-opacity: 1;
+      stroke: none;
+      stroke-width: 1rem;
+    }
+  }
+
+  &-3 {
+    background: $cyan-primary-alpha-three;
+    box-shadow: .2rem .2rem 1.4rem 0px $cyan-primary-alpha-seven, .1rem .1rem 1.5rem 0 $shadow-alpha-three;
+
+    &::before {
+      top: 50%;
+      background: linear-gradient($cyan-primary-alpha-five, rgba(255, 255, 255, 0.2));
+    }
+
+    & .icon_heading>div>svg {
+      fill: $cyan-primary;
+      stroke: $cyan-primary;
+      stroke-width: 1rem;
+    }
+  }
+
+  &-4 {
+    background: $silver-primary;
+    box-shadow: .2rem .2rem 1rem 0 $dark-silver-primary;
+
+    &::before {
+      top: 70%;
+      background: linear-gradient($dark-silver-alpha-eight, hsla(0, 0%, 100%, 0.5));
+    }
+
+    & .icon_heading>div>svg {
+      fill: $dark-silver-primary;
+    }
+
+  }
+}

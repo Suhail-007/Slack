@@ -7,8 +7,9 @@
 @import 'base/typography';
 @import 'base/utilities';
 
-@import 'components/minimalAccInfo';
-@import 'components/navbar';
+@import 'components/home/navbar';
+@import 'components/home/minimalAccInfo';
+@import 'components/home/statistics';
 
 @import 'layouts/header';
 

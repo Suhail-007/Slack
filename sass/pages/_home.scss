@@ -25,7 +25,7 @@ header {
 
   & .acc_div {
     width: 25rem;
-    height: 13rem; 
+    height: 13rem;
     padding-left: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -42,6 +42,17 @@ header {
   margin: 8rem 0;
   padding: 0 1.6rem;
 }
+
+.statistics_boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 2rem;
+  place-items: center;
+  padding: 1rem;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+}
+
 
 //hide profile for mob view 
 //temporary placed here
