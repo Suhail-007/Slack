@@ -3,6 +3,13 @@
    font-family: cursive;
  }
 
+ /* Navbar */
+ .nav__item--name {
+   padding: 0.5rem;
+   text-transform: capitalize;
+   color: $font-primary;
+ }
+
  .acc_div>div:last-child {
    color: #fff;
    font-size: 1.3rem;
@@ -16,5 +23,4 @@
      margin: 0;
      margin-bottom: 1rem;
    }
-
  }

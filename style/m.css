@@ -3,11 +3,6 @@
 @import url('./loader.css');
 
 
-.canvas {
-  margin: 5rem 0;
-  padding: 0 1rem;
-}
-
 .statistics_boxes {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -529,7 +524,7 @@ hr {
     margin-inline: 0.5rem;
   }
 
-  .nav-item_name {
+  .nav__item--name {
     position: relative;
     padding: 0.5rem 0.4rem;
     letter-spacing: 0;
@@ -537,11 +532,11 @@ hr {
     white-space: nowrap;
   }
 
-  .nav-item_name::before {
+  .nav__item--name::before {
     bottom: 0;
   }
 
-  .nav-item_name:hover::before {
+  .nav__item--name:hover::before {
     transition: 300ms ease-in;
     opacity: 1;
   }
@@ -682,7 +677,7 @@ hr {
     flex-direction: row;
   }
 
-  .nav-item_name {
+  .nav__item--name {
     padding: 0.5rem 0.8rem;
     font-size: 2.5rem;
   }
