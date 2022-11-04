@@ -1,6 +1,6 @@
 import * as model from '../../model.js'
 import minimalAccInfo from './minimalAccView.js';
-import fundTransferView from './fundTransferView.js';
+import fundTransferView from './renderReferralTransferView.js';
 import statisticsView from './statisticsView.js';
 import chartView from './chartView.js';
 
@@ -10,9 +10,9 @@ class DashboardView {
   async renderDashboardMarkup() {
     this._parentElement.innerHTML = '';
     minimalAccInfo.renderMinimalAccView();
-    //  chartView.renderChart();
+    // chartView.renderChart();
     statisticsView.renderStatisticsView();
-    fundTransferView.renderFundTransferView();
+    fundTransferView.renderReferralTransferView();
   }
 
   addHandlerNavTabs(handler) {

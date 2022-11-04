@@ -3,18 +3,18 @@ class FundTransferView {
   _copyButton;
   _btnsCont;
 
-  renderFundTransferView() {
+  renderReferralTransferView() {
     let html = `
-    <section class="container_ref_amnt">
+    <section class="section_ref_transfer">
       <div class="referral_container">
+        <h2>REFER A FRIEND</h2>
         <div class="ref_img_cont">
-          <h2>REFER A FRIEND</h2>
           <img src="./src/images/refer.jpeg" alt="refer a friend">
         </div>
 
         <h4>Referral Link</h4>
         <a href="#" class="ref_link">https://github.com/Suhail-007/dashboard-ui</a>
-        <button class="copy_ref_link">
+        <button class="copy_ref_link btn-purple">
           <svg>
           <use href="src/images/icons.svg#clipboard"></use>
           </svg>
@@ -25,8 +25,8 @@ class FundTransferView {
       </div>
       <div class="add_withdraw_container">
         <div class="btns_container">
-          <button class="active">Add Fund</button>
-          <button>Withdrawal</button>
+          <button class="btn-grey-animated active">Add Fund</button>
+          <button class="btn-grey-animated">Withdrawal</button>
         </div>
         <div class="deposit_income">
           <p>Total Deposit Income</p>
@@ -38,8 +38,8 @@ class FundTransferView {
 
           <div>
             <input id="amount" type="text">
-            <button class="active" data-add-fund>Add Fund</button>
-            <button data-withdraw-fund>Withdraw Fund</button>
+            <button class="btn-light-blue active" data-add-fund>Add Fund</button>
+            <button class="btn-light-blue" data-withdraw-fund>Withdraw Fund</button>
           </div>
         </div>
       </div>

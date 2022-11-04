@@ -1,0 +1,78 @@
+.referral_container {
+  margin-top: 10rem;
+
+  .ref_img_cont img {
+    width: 100%;
+  }
+
+  & button svg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+.add_withdraw_container {
+  background: $bg-primary-alpha-five;
+
+  & .btns_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 2rem;
+  }
+
+  & .btns_container button.active {
+    color: white;
+    box-shadow: inset 20rem 0 0 0 $purple-primary-alpha-nine;
+  }
+
+
+  .deposit_income {
+    background-color: $blue-primary-alpha-five;
+    border-radius: 1.6rem;
+    width: 90%;
+    margin: 5rem auto;
+    padding: 2rem 1rem;
+    box-shadow: .5rem .5rem 1rem .1rem $blue-primary-alpha-three;
+
+    &~div>label {
+      color: $font-primary;
+      font-size: 1.6rem;
+    }
+
+    &~div>div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem 0;
+      padding: 1rem;
+
+      &>input {
+        border-radius: 1.1rem;
+        border: none;
+        padding: 1.6rem;
+        width: 100%;
+        transition: all 150ms ease-in;
+        font-size: 1.6rem;
+        background: $bg-primary-alpha-eight;
+      }
+
+      & button.active {
+        display: block;
+        pointer-events: auto;
+        animation: showBtn 500ms linear forwards;
+
+        &:hover,
+        &:focus {
+          background-color: $blue-primary-alpha-three;
+        }
+      }
+    }
+  }
+
+}
+
+.deposit_income~div>div>input:focus,
+.deposit_income~div>div>input:hover {
+  outline: 3px solid $blue-primary-alpha-three;
+  outline-offset: 0.1rem;
+}

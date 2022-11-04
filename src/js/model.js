@@ -1,5 +1,5 @@
 import dashboardView from './views/dashboard/dashboardView.js';
-import fundTransferView from './views/dashboard/fundTransferView.js';
+import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { Delay } from './delay/delay.js'
 import { loader } from './loader/loaderView.js';

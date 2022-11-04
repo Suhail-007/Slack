@@ -1,0 +1,47 @@
+.btn-purple {
+  display: flex;
+  align-items: center;
+  gap: 0 0.2rem;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.3rem;
+  letter-spacing: 1;
+  margin: 2rem 0;
+  padding: 1.3rem;
+  border: none;
+  background: none;
+  border-radius: 0.6rem;
+  background: linear-gradient(360deg, $purple-primary, $purple-primary-alpha-four);
+  box-shadow: .5rem 0 1rem 0 $purple-primary-alpha-four, 0 .5rem 1rem .1rem $purple-primary-alpha-four;
+}
+
+.btn-grey-animated {
+  border: none;
+  background: none;
+  padding: 1.6rem;
+  background-color: hsla(269, 55%, 96%, 1);
+  color: #000;
+  font-weight: 400;
+  letter-spacing: 1;
+  font-size: 1.6rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 0.5s ease-in-out;
+  box-shadow: inset 0 0 0 0 $purple-primary-alpha-nine;
+}
+
+.btn-light-blue {
+  background: none;
+  border: none;
+  background-color: $blue-primary-alpha-five;
+  color: #fff;
+  padding: 1.8rem 1.6rem;
+  border-radius: 10rem;
+  font-size: 1.7rem;
+  margin-block: 3.2rem;
+  cursor: pointer;
+  pointer-events: none;
+  transition: 500ms ease;
+  opacity: 0;
+  display: none;
+}

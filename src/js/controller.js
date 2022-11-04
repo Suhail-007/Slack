@@ -1,5 +1,5 @@
 import * as model from './model.js';
-import fundTransferView from './views/dashboard/fundTransferView.js';
+import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
 import profileView from './views/profileView.js'
 import { NAV_TOGGLE_BTN } from './helper.js';

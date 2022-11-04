@@ -12,7 +12,7 @@ li {
     transition: color 200ms;
     user-select: none;
   }
-  
+
   &:hover .nav__item--name {
     color: $border-primary;
   }
@@ -34,13 +34,17 @@ li {
 }
 
 /* Statistics view */
+.statistics_boxes {
+  font-size: 1.3rem;
+}
 .dollar-percentage p {
   margin: 0;
   margin-bottom: 0.5rem;
   font-size: 1.3rem;
   font-weight: 500;
-  color: var(--font-primary);
+  color: $font-primary;
 }
+
 
 .icon_heading p,
 .dollar-percentage span {
@@ -66,5 +70,41 @@ li {
 .box-4 .icon_heading p,
 .box-4 .dollar-percentage span,
 .box-4 .dollar-percentage p {
-  color: var(--dark-silver);
+  color: $dark-silver-primary;
+}
+
+/* Referral Container And fund transfer */
+.section_ref_transfer {
+
+  .referral_container {
+    color: $font-primary;
+
+    & h2 {
+      font-size: 2.5rem;
+      font-weight: 400;
+    }
+
+    & h4 {
+      font-size: 1.8rem;
+      font-weight: 400;
+    }
+
+    & a {
+      text-decoration: none;
+      font-size: 1.6rem;
+      color: $font-primary;
+    }
+  }
+
+  .deposit_income {
+    color: #fff;
+    text-align: center;
+    font-size: 1.7rem;
+
+    &~div {
+      padding: 0 1rem;
+      font-size: 1.8rem;
+    }
+
+  }
 }
