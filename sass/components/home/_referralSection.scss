@@ -54,6 +54,12 @@
         transition: all 150ms ease-in;
         font-size: 1.6rem;
         background: $bg-primary-alpha-eight;
+
+        &:focus,
+        &:hover {
+          outline: 3px solid $blue-primary-alpha-three;
+          outline-offset: 0.1rem;
+        }
       }
 
       & button.active {
@@ -69,10 +75,4 @@
     }
   }
 
-}
-
-.deposit_income~div>div>input:focus,
-.deposit_income~div>div>input:hover {
-  outline: 3px solid $blue-primary-alpha-three;
-  outline-offset: 0.1rem;
 }
