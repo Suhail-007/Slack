@@ -61,7 +61,6 @@ header {
 }
 
 .toast_copy {
-  background: rgba(255, 255, 255, .8);
   font-size: 1.3rem;
   position: fixed;
   width: 10rem;
@@ -70,11 +69,12 @@ header {
   right: 50%;
   bottom: 5%;
   transform: translate(-50%, -50%);
-  border-radius: 0.8rem;
-  padding: .8rem 1.6rem;
+  border-radius: 10rem;
+  padding: .6rem 2rem;
   z-index: 3;
   opacity: 0;
   pointer-events: none;
+  background: rgba(255, 255, 255, .8);
   transition: all 300ms ease-in-out;
   box-shadow: .1rem 0px 10px .1rem $shadow;
 }

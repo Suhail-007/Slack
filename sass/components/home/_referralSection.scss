@@ -1,8 +1,12 @@
 .referral_container {
   margin-top: 10rem;
 
-  .ref_img_cont img {
-    width: 100%;
+  .ref_img_cont {
+    width: 35rem;
+    
+    & img {
+      width: 100%;
+    }
   }
 
   & button svg {
