@@ -1,85 +1,5 @@
 /*Footer*/
 
-
-/*Profile Tab */
-.profile_container {
-  padding: 1rem 1rem 1rem 2rem;
-  background: $bg-secondary;
-  color: $font-primary;
-}
-
-.heading h2 {
-  letter-spacing: .1rem;
-}
-
-.user_name_bio_container {
-  display: flex;
-  gap: 0 2rem;
-  padding-bottom: 1rem;
-}
-
-.user_image_container>img {
-  border-radius: 100%;
-  backdrop-filter: blur(5px);
-  filter: drop-shadow(5px 5px 10px var(--light-shadow-white));
-}
-
-.user_image_container+div>p {
-  font-size: clamp(1rem, 3.5vw, 1.4rem);
-}
-
-hr {
-  border: none;
-  background-color: #777;
-  border-top: .1rem solid var(--light-shadow-white);
-}
-
-.user_info_container,
-.settings>div {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.5rem 0;
-  padding-bottom: 2rem;
-}
-
-.user_info_container h2 {
-  grid-column: span 2;
-}
-
-.user_info_container>div,
-.settings>div>div {
-  display: flex;
-  grid-column: span 2;
-  justify-content: space-between;
-  border-radius: 0.3rem;
-  box-shadow: .1rem .1rem 5px 0 var(--medium-shadow-black);
-  padding-inline: 0.5rem;
-}
-
-.user_info_container>div>p:not(.email) {
-  text-transform: capitalize;
-}
-
-.settings>div>div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-block: 0.5rem;
-}
-
-.settings>div>div>select {
-  appearance: none;
-  background: #fff;
-  text-align: center;
-  padding: 0.5rem;
-  font-style: clamp(0.8rem, 3.5vw, 1rem);
-  text-transform: capitalize;
-  border-radius: 0.3rem;
-  outline: none;
-}
-
-/* CONVERT ALL THE RGBA TO HSLA OR VICE VERSA LATER and changing values to rgba/hsla for theming purposes so i can set alpha on each value according to theme*/
-
 @media screen and (max-width: 20em) {
   .statistics_boxes {
     grid-template-columns: 1fr;
@@ -87,7 +7,7 @@ hr {
 }
 
 /*Desktop Version*/
-@media screen and (min-width:1024px) {
+@media screen and (min-width:1024px) {second layer
   body {
     position: relative;
     background: linear-gradient(135deg, $bg-secondary, var(--bg-primary-alpha-seven) 25%) no-repeat;
@@ -203,7 +123,7 @@ hr {
     top: calc($second-layer-top / 4);
   }
 
-  /*second layer*/
+  
   main::after {
     left: calc($second-layer-left/3);
     top: $second-layer-top;
@@ -295,7 +215,7 @@ hr {
 }
 
 
-@media(min-width:2560px) {
+/* @media(min-width:2560px) {second layer
   body {
     font-size: 5rem;
   }
@@ -332,7 +252,7 @@ hr {
     border-radius: 7rem 0 0 0;
   }
 
-  /*second layer*/
+  
   main::after {
     left: calc($second-layer-left/2);
     top: calc($second-layer-top * 4);
@@ -419,4 +339,4 @@ hr {
     font-size: 1.5rem;
     padding: 3.7rem 1.5rem;
   }
-}
+} */

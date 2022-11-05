@@ -10,19 +10,19 @@ class ProfileView {
 
   _generateHTML() {
     const html = `
-      <section class="profile_container">
-        <div class="tab_heading heading">
+      <section class="section section__profile">
+        <div class="section__heading tab_heading u-heading-spacing--small">
           <h2>Profile</h2>
         </div>
     
-        <div class="user_name_bio_container">
-          <div class="user_image_container">
+        <div class="user__profile">
+          <div class="user__profile-photo">
             <img src="src/images/user.png" alt="user profile image">
           </div>
           <div>
             <p class="user_name">Suhail Qureshi</p>
             <p class="user_bio">To never give up...</p>
-            </div>
+          </div>
         </div>
     
         <hr>
