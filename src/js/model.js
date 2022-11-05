@@ -4,7 +4,6 @@ import profileView from './views/profileView.js';
 import { Delay } from './delay/delay.js'
 import { loader } from './loader/loaderView.js';
 
-
 export const chartTypes = {
   typeOne: 'doughnut',
   typeTwo: 'line',
