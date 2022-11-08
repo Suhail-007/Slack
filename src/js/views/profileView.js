@@ -11,27 +11,29 @@ class ProfileView {
   _generateHTML() {
     const html = `
       <section class="section section__profile">
-        <div class="section__heading tab_heading u-heading-spacing--small">
+        <div class="section__heading tab-heading u-letter-spacing-small">
           <h2>Profile</h2>
         </div>
     
-        <div class="user__profile">
-          <div class="user__profile-photo">
+        <div class="profile__cont">
+          <div class="profile__cont-photo">
             <img src="src/images/user.png" alt="user profile image">
           </div>
           <div>
-            <p class="user_name">Suhail Qureshi</p>
-            <p class="user_bio">To never give up...</p>
+            <p class="profile__user-name">Suhail Qureshi</p>
+            <p class="profile__bio">To never give up...</p>
           </div>
         </div>
     
-        <hr>
-    
-        <div class="user_info_container">
-          <h2 class="heading">User Info</h2>
+        <div class="profile__info">
+          <h3 class="tab-heading u-letter-spacing-small">User Info</h3>
           <div>
             <p>Gender</p>
             <p>Male</p>
+          </div>
+          <div>
+            <p>Birthday</p>
+            <p>June 5, 1998</p>
           </div>
           <div>
             <p>City</p>
@@ -53,11 +55,11 @@ class ProfileView {
     
         <hr>
     
-        <div data-settings class="settings">
-          <h2 class="">Settings</h2>
+        <div data-settings class="section__settings">
+          <h3 class="tab-heading u-letter-spacing-small">Settings</h3>
             
           <div>
-            <h3>Theme Mode</h3>
+            <h4>Theme Mode</h4>
             <div>
               <label for="theme">Theme</label>
               <select data-select='theme' name="theme" id="theme">
@@ -69,7 +71,7 @@ class ProfileView {
           </div>
     
           <div>
-            <h3>Chart Settings</h3>
+            <h4 class="u-letter-spacing-small">Chart Settings</h4>
             <div>
               <label for="chartOne">Chart 1</label>
               <select data-select='chartOne' name="chartOne" id="chartOne">
@@ -105,7 +107,7 @@ class ProfileView {
 
   _isSelectedValue(value) {
     value = value.toLowerCase();
-    
+
     const selectedTheme = theme.mode;
 
     if (selectedTheme === value) return 'selected';

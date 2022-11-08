@@ -1,8 +1,11 @@
 .section__profile {
-  .user__profile {
+  & h3 {
+    grid-column: span 2;
+  }
+
+  .profile__cont {
     display: flex;
     gap: 0 2rem;
-    padding-bottom: 1rem;
 
     &-photo {
       width: 10rem;
@@ -15,58 +18,55 @@
       }
 
       &+div>p {
-        font-size: $default-font-size;
+        font-size: 1.4rem;
       }
     }
   }
-}
 
-hr {
-  border: none;
-  background-color: #777;
-  margin-block: 2rem;
-  border-top: .1rem solid $light-shadow-white;
-}
+  hr {
+    border: none;
+    background-color: #777;
+    margin-block: 4rem;
+    display: block;
+    border-top: .1rem solid $light-shadow-white;
+  }
 
-.user_info_container,
-.settings>div {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.5rem 0;
-}
+  .profile__info,
+  .section__settings>div {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem 0;
+  }
 
-.user_info_container h2 {
-  grid-column: span 2;
-}
+  .profile__info>div,
+  .section__settings>div>div {
+    display: flex;
+    grid-column: span 2;
+    justify-content: space-between;
+    border-radius: 0.3rem;
+    box-shadow: .1rem .1rem 5px 0 $medium-shadow-black;
+    padding-inline: 0.5rem;
+  }
 
-.user_info_container>div,
-.settings>div>div {
-  display: flex;
-  grid-column: span 2;
-  justify-content: space-between;
-  border-radius: 0.3rem;
-  box-shadow: .1rem .1rem 5px 0 var(--medium-shadow-black);
-  padding-inline: 0.5rem;
-}
+  .profile__info>div>p:not(.email) {
+    text-transform: capitalize;
+  }
 
-.user_info_container>div>p:not(.email) {
-  text-transform: capitalize;
-}
+  .section__settings>div>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 0.5rem;
 
-.settings>div>div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-block: 0.5rem;
-}
-
-.settings>div>div>select {
-  appearance: none;
-  background: #fff;
-  text-align: center;
-  padding: 0.5rem;
-  font-style: clamp(0.8rem, 3.5vw, 1rem);
-  text-transform: capitalize;
-  border-radius: 0.3rem;
-  outline: none;
+    &>select {
+      appearance: none;
+      background: #fff;
+      text-align: center;
+      padding: 0.5rem;
+      font-style: clamp(0.8rem, 3.5vw, 1rem);
+      text-transform: capitalize;
+      border-radius: 0.3rem;
+      outline: none;
+    }
+  }
 }

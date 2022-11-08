@@ -112,3 +112,9 @@ li {
 .section {
   color: $font-primary;
 }
+
+// Global declarations
+.tab-heading {
+  font-size: $default-font-size;
+  margin-bottom: 1rem;
+}

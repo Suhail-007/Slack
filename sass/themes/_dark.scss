@@ -1,0 +1,67 @@
+.dark {
+  /*Primary Values*/
+  $bg-primary: black;
+
+  /*Secondary Values*/
+  $bg-secondary: black;
+
+  /* light values*/
+  $bg-primary-alpha-five: hsla(221, 1%, 15%, 0.5);
+  $bg-primary-alpha-six: hsla(221, 93%, 89%, 0.6);
+  $bg-primary-alpha-seven: hsla(221, 93%, 89%, 0.7);
+  $bg-primary-alpha-eight: hsla(221, 93%, 89%, 0.8);
+
+
+  $purple-primary-alpha-five: hsla(258, 92%, 37%, 0.5);
+  $purple-primary-alpha-seven: hsla(258, 100%, 84%, 1);
+
+  $dark-purple-alpha-three: rgba(75, 38, 105, 0.3);
+
+  $shadow-alpha-three: rgba(200, 200, 200, 0.3);
+  $shadow-alpha-five: rgba(200, 200, 200, 0.5);
+  $shadow-alpha-six: rgba(200, 200, 200, 0.6);
+
+  $dark-bg-primary-alpha-eight: hsla(221, 60%, 70%, 0.8);
+
+  $blue-primary-alpha-three: hsla(215, 98%, 55%, 0.3);
+  $blue-primary-alpha-five: hsla(215, 98%, 55%, 0.5);
+
+  $blue-secondary-alpha-four: hsla(215, 98%, 55%, 0.4);
+  $blue-secondary-alpha-seven: hsla(215, 98%, 55%, 0.7);
+
+  $cyan-primary-alpha-three: hsla(191, 91%, 48%, 0.3);
+  $cyan-primary-alpha-four: hsla(191, 91%, 48%, 0.4);
+  $cyan-primary-alpha-five: hsla(191, 91%, 48%, 0.5);
+  $cyan-primary-alpha-seven: hsla(191, 91%, 48%, 0.7);
+
+  /*primary dark values*/
+  $dark-silver-primary: hsla(202, 5%, 60%, 1);
+  $dark-bg-primary-color: hsla(221, 60%, 70%, 1);
+  $dark-purple: rgba(128, 73, 169, 1);
+
+  /*secondary dark values*/
+  $dark-silver-alpha-eight: hsla(202, 5%, 60%, 0.8);
+
+  /*Least used values*/
+  $white-bg: #232323;
+  $nav-bg: #000;
+  $border-primary: hsl(258, 91%, 63%);
+  $layer-one: rgba(105, 105, 105, 1);
+  $layer-one-secondary: hsla(221, 0%, 26%, 1);
+  $layer-two-shadow: hsla(221, 0%, 45%, 1);
+  $input-bg: hsla(221, 1%, 15%, 0.5);
+
+  /* RGBA COLOR VALUES*/
+  $light-shadow-white: rgba(200, 200, 200, 1);
+
+  /*black shadows*/
+  $medium-shadow-black: rgba(0, 0, 0, 0.3);
+  $shadow: rgba(200, 200, 200, 1);
+
+  /*Values for calc function*/
+  $second-layer-left: -5%;
+  $second-layer-top: 1%;
+  
+  /*Font Colors*/
+  $font-primary: #fff;
+}

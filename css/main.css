@@ -222,8 +222,17 @@ li:hover .nav__item--name {
   color: #000;
 }
 
-.u-heading-spacing--small {
-  letter-spacing: 0.1rem;
+.tab-heading {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.u-letter-spacing-small {
+  letter-spacing: 0.1rem !important;
+}
+
+.u-margin-bottom-small {
+  margin-bottom: 1rem !important;
 }
 
 .btn-purple {
@@ -275,7 +284,7 @@ li:hover .nav__item--name {
 }
 
 .section {
-  padding: 1rem 1rem 0 2rem;
+  padding: 1rem 1rem 3rem 2rem;
   min-height: 100vh;
   background: #fff;
 }
@@ -677,64 +686,57 @@ header .nav_container_btn svg {
   display: none;
 }
 
-.section__profile .user__profile {
+.section__profile h3 {
+  grid-column: span 2;
+}
+.section__profile .profile__cont {
   display: flex;
   gap: 0 2rem;
-  padding-bottom: 1rem;
 }
-.section__profile .user__profile-photo {
+.section__profile .profile__cont-photo {
   width: 10rem;
   backdrop-filter: blur(5px);
   filter: drop-shadow(5px 5px 10px var(--light-shadow-white));
   clip-path: circle(5rem at 50% 50%);
 }
-.section__profile .user__profile-photo img {
+.section__profile .profile__cont-photo img {
   width: 100%;
 }
-.section__profile .user__profile-photo + div > p {
-  font-size: 1.6rem;
+.section__profile .profile__cont-photo + div > p {
+  font-size: 1.4rem;
 }
-
-hr {
+.section__profile hr {
   border: none;
   background-color: #777;
-  margin-block: 2rem;
+  margin-block: 4rem;
+  display: block;
   border-top: 0.1rem solid rgb(200, 200, 200);
 }
-
-.user_info_container,
-.settings > div {
+.section__profile .profile__info,
+.section__profile .section__settings > div {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.5rem 0;
 }
-
-.user_info_container h2 {
-  grid-column: span 2;
-}
-
-.user_info_container > div,
-.settings > div > div {
+.section__profile .profile__info > div,
+.section__profile .section__settings > div > div {
   display: flex;
   grid-column: span 2;
   justify-content: space-between;
   border-radius: 0.3rem;
-  box-shadow: 0.1rem 0.1rem 5px 0 var(--medium-shadow-black);
+  box-shadow: 0.1rem 0.1rem 5px 0 rgba(0, 0, 0, 0.3);
   padding-inline: 0.5rem;
 }
-
-.user_info_container > div > p:not(.email) {
+.section__profile .profile__info > div > p:not(.email) {
   text-transform: capitalize;
 }
-
-.settings > div > div {
+.section__profile .section__settings > div > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-block: 0.5rem;
 }
-
-.settings > div > div > select {
+.section__profile .section__settings > div > div > select {
   appearance: none;
   background: #fff;
   text-align: center;
@@ -743,6 +745,19 @@ hr {
   text-transform: capitalize;
   border-radius: 0.3rem;
   outline: none;
+}
+
+.dark {
+  /*Primary Values*/
+  /*Secondary Values*/
+  /* light values*/
+  /*primary dark values*/
+  /*secondary dark values*/
+  /*Least used values*/
+  /* RGBA COLOR VALUES*/
+  /*black shadows*/
+  /*Values for calc function*/
+  /*Font Colors*/
 }
 
 /*# sourceMappingURL=main.css.map */
