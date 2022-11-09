@@ -11,8 +11,8 @@
   border: none;
   background: none;
   border-radius: 0.6rem;
-  background: linear-gradient(360deg, $purple-primary, $purple-primary-alpha-four);
-  box-shadow: .5rem 0 1rem 0 $purple-primary-alpha-four, 0 .5rem 1rem .1rem $purple-primary-alpha-four;
+  background: linear-gradient(360deg, var(--purple-primary), var(--purple-primary-alpha-four));
+  box-shadow: .5rem 0 1rem 0 var(--purple-primary-alpha-four), 0 .5rem 1rem .1rem var(--purple-primary-alpha-four);
 }
 
 .btn-grey-animated {
@@ -27,13 +27,13 @@
   cursor: pointer;
   overflow: hidden;
   transition: 0.5s ease-in-out;
-  box-shadow: inset 0 0 0 0 $purple-primary-alpha-nine;
+  box-shadow: inset 0 0 0 0 var(--purple-primary-alpha-nine);
 }
 
 .btn-light-blue {
   background: none;
   border: none;
-  background-color: $blue-primary-alpha-five;
+  background-color: var(--blue-primary-alpha-five);
   color: #fff;
   padding: 1.8rem 1.6rem;
   border-radius: 10rem;

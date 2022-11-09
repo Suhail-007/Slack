@@ -13,24 +13,24 @@
 }
 
 .total_cont {
-  background: linear-gradient(360deg, $purple-primary, $purple-primary-alpha-four);
-  box-shadow: 0px 5px 1.5rem 0px $purple-primary-alpha-seven, 5px 0px 1.5rem 0px $purple-primary-alpha-seven;
+  background: linear-gradient(360deg, var(--purple-primary), var(--purple-primary-alpha-four));
+  box-shadow: 0px 5px 1.5rem 0px var(--purple-primary-alpha-seven), 5px 0px 1.5rem 0px var(--purple-primary-alpha-seven);
 
   & div:first-child>svg {
-    fill: $purple-primary;
+    fill: var(--purple-primary);
   }
 }
 
 .wallet_cont {
-  background: linear-gradient(360deg, $blue-secondary, $blue-secondary-alpha-four);
-  box-shadow: 0px 5px 1.5rem 0px $blue-secondary-alpha-seven, 5px 0px 1.5rem 0px $blue-secondary-alpha-seven;
+  background: linear-gradient(360deg, var(--blue-secondary), var(--blue-secondary-alpha-four));
+  box-shadow: 0px 5px 1.5rem 0px var(--blue-secondary-alpha-seven), 5px 0px 1.5rem 0px var(--blue-secondary-alpha-seven);
 
   & div:first-child {
 
     & svg rect,
     & svg #Path {
-      fill: $blue-secondary-alpha-seven;
-      stroke: $blue-secondary-alpha-seven;
+      fill: var(--blue-secondary-alpha-seven);
+      stroke: var(--blue-secondary-alpha-seven);
     }
 
     & svg #lock {
@@ -42,10 +42,10 @@
 }
 
 .withdrawal_cont {
-  background: linear-gradient(360deg, $cyan-primary, $cyan-primary-alpha-four);
-  box-shadow: 0px 5px 1.5rem 0px $cyan-primary-alpha-seven, 5px 0px 1.5rem 0px $cyan-primary-alpha-seven;
+  background: linear-gradient(360deg, var(--cyan-primary), var(--cyan-primary-alpha-four));
+  box-shadow: 0px 5px 1.5rem 0px var(--cyan-primary-alpha-seven), 5px 0px 1.5rem 0px var(--cyan-primary-alpha-seven);
   
   & div:first-child>svg {
-    fill: $cyan-primary;
+    fill: var(--cyan-primary);
   }
 }

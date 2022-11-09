@@ -10,7 +10,7 @@
 @media screen and (min-width:1024px) {second layer
   body {
     position: relative;
-    background: linear-gradient(135deg, $bg-secondary, var(--bg-primary-alpha-seven) 25%) no-repeat;
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary-alpha-seven) 25%) no-repeat;
     font-size: clamp(1rem, 3vh, 3rem);
   }
 
@@ -320,7 +320,7 @@
 
   .add_withdraw_container .btns_container button.active {
     color: white;
-    box-shadow: inset 30rem 0 0 0 $purple-primary-alpha-nine;
+    box-shadow: inset 30rem 0 0 0 var(--purple-primary-alpha-nine);;
   }
 
   .deposit_income {

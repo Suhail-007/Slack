@@ -16,7 +16,7 @@ body {
   min-width: 100vw;
   min-height: 100vh;
   position: relative;
-  background: linear-gradient(135deg, $bg-secondary, $bg-primary) no-repeat;
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)) no-repeat;
 }
 
 .website-logo>img {
@@ -46,8 +46,8 @@ main {
   margin-left: 4rem;
   min-height: 100vh;
   overflow: hidden;
-  background-color: $white-bg;
-  box-shadow: .1rem 0 .5rem 0 $shadow-alpha-five;
+  background-color: var(--white-bg);
+  box-shadow: .1rem 0 .5rem 0 var(--shadow-alpha-five);
 
   &::after {
     content: "";
@@ -58,8 +58,8 @@ main {
     bottom: 0;
     z-index: -2;
     border-top-left-radius: $border-top-left-radius;
-    background: $bg-primary-alpha-five;
-    box-shadow: -.1rem .1rem 1rem .5rem $layer-two-shadow;
+    background: var(--bg-primary)-alpha-five;
+    box-shadow: -.1rem .1rem 1rem .5rem var(--layer-two-shadow);
   }
 
   &::before {
@@ -71,8 +71,8 @@ main {
     bottom: 0;
     z-index: -1;
     border-top-left-radius: $border-top-left-radius;
-    background: $bg-primary-alpha-five;
-    box-shadow: inset 0px .1rem .5rem .3rem $layer-one, 0px .1rem .5rem .3rem $layer-one-secondary;
+    background: var(--bg-primary)-alpha-five;
+    box-shadow: inset 0px .1rem .5rem .3rem var(--layer-one), 0px .1rem .5rem .3rem var(--layer-one)-secondary;
   }
 }
 
@@ -81,7 +81,7 @@ main {
   background: rgba(0, 0, 0, 0.1);
   margin-top: 0.2rem;
   padding: 5rem 0 2.5rem;
-  box-shadow: 0px .1rem 5px 0 $shadow;
+  box-shadow: 0px .1rem 5px 0 var(--shadow);
   border-radius: 2rem 2rem 0 0;
   font-size: $default-font-size;
   color: #fff;

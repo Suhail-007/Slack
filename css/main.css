@@ -1,12 +1,60 @@
-/*Primary Values*/
-/*Secondary Values*/
-/*light values*/
-/*primary dark values*/
-/*secondary dark values*/
-/*Least used values*/
-/* RGBA COLOR VALUES*/
-/*black shadows*/
-/*Font Color*/
+:root {
+  /*Primary Values*/
+  --bg-primary: hsla(221, 93%, 89%, 1);
+  --purple-primary: hsla(258, 91%, 63%, 1);
+  --silver-primary: hsla(202, 5%, 95%, 1);
+  --blue-primary: hsla(215, 98%, 55%, 1);
+  --cyan-primary: hsla(191, 91%, 48%, 1);
+  /*Secondary Values*/
+  --bg-secondary: #fff;
+  --blue-secondary: hsla(215, 98%, 55%, 1);
+  /*light values*/
+  --bg-primary-alpha-five: hsla(221, 93%, 89%, 0.5);
+  --bg-primary-alpha-six: hsla(221, 93%, 89%, 0.6);
+  --bg-primary-alpha-seven: hsla(221, 93%, 89%, 0.7);
+  --bg-primary-alpha-eight: hsla(221, 93%, 89%, 0.8);
+  --purple-primary-alpha-two: hsla(258, 91%, 63%, 0.2);
+  --purple-primary-alpha-three: hsla(258, 91%, 63%, 0.3);
+  --purple-primary-alpha-four: hsla(258, 91%, 63%, 0.4);
+  --purple-primary-alpha-five: hsla(258, 91%, 63%, 0.5);
+  --purple-primary-alpha-seven: hsla(258, 91%, 63%, 0.7);
+  --purple-primary-alpha-nine: hsla(258, 91%, 63%, 0.9);
+  --dark-purple-alpha-three: rgba(75, 38, 105, 0.3);
+  --shadow-alpha-three: rgba(200, 200, 200, 0.3);
+  --shadow-alpha-five: rgba(200, 200, 200, 0.5);
+  --shadow-alpha-six: rgba(200, 200, 200, 0.6);
+  --dark-bg-primary-alpha-eight: hsla(221, 60%, 70%, 0.8);
+  --blue-primary-alpha-three: hsla(215, 98%, 55%, 0.3);
+  --blue-primary-alpha-five: hsla(215, 98%, 55%, 0.5);
+  --blue-secondary-alpha-four: hsla(215, 98%, 55%, 0.4);
+  --blue-secondary-alpha-seven: hsla(215, 98%, 55%, 0.7);
+  --cyan-primary-alpha-three: hsla(191, 91%, 48%, 0.3);
+  --cyan-primary-alpha-four: hsla(191, 91%, 48%, 0.4);
+  --cyan-primary-alpha-five: hsla(191, 91%, 48%, 0.5);
+  --cyan-primary-alpha-seven: hsla(191, 91%, 48%, 0.7);
+  /*primary dark values*/
+  --dark-silver-primary: hsla(202, 5%, 60%, 1);
+  --dark-bg-primary-color: hsla(221, 60%, 70%, 1);
+  --dark-purple: rgba(128, 73, 169, 1);
+  /*secondary dark values*/
+  --dark-silver-alpha-eight: hsla(202, 5%, 60%, 0.8);
+  /*Least used values*/
+  --white-bg: #fff;
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --border-primary: hsl(258, 91%, 63%);
+  --layer-one: rgba(255, 255, 255, 1);
+  --layer-one-secondary: --bg-primary;
+  --layer-two-shadow: hsla(221, 93%, 89%, 1);
+  --input-bg: #fff;
+  /* RGBA COLOR VALUES*/
+  --light-shadow-white: rgba(200, 200, 200, 1);
+  /*black shadows*/
+  --medium-shadow-black: rgba(0, 0, 0, 0.3);
+  --shadow: rgba(200, 200, 200, 1);
+  /*Font Color*/
+  --font-primary: #000;
+}
+
 /*Values for calc function*/
 @keyframes load {
   100% {
@@ -36,7 +84,7 @@ body {
   min-width: 100vw;
   min-height: 100vh;
   position: relative;
-  background: linear-gradient(135deg, #fff, hsl(221deg, 93%, 89%)) no-repeat;
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)) no-repeat;
 }
 
 .website-logo > img {
@@ -65,8 +113,8 @@ main {
   margin-left: 4rem;
   min-height: 100vh;
   overflow: hidden;
-  background-color: #fff;
-  box-shadow: 0.1rem 0 0.5rem 0 rgba(200, 200, 200, 0.5);
+  background-color: var(--white-bg);
+  box-shadow: 0.1rem 0 0.5rem 0 var(--shadow-alpha-five);
 }
 main::after {
   content: "";
@@ -77,8 +125,8 @@ main::after {
   bottom: 0;
   z-index: -2;
   border-top-left-radius: 4rem;
-  background: hsla(221deg, 93%, 89%, 0.5);
-  box-shadow: -0.1rem 0.1rem 1rem 0.5rem hsl(221deg, 93%, 89%);
+  background: var(--bg-primary) -alpha-five;
+  box-shadow: -0.1rem 0.1rem 1rem 0.5rem var(--layer-two-shadow);
 }
 main::before {
   content: "";
@@ -89,8 +137,8 @@ main::before {
   bottom: 0;
   z-index: -1;
   border-top-left-radius: 4rem;
-  background: hsla(221deg, 93%, 89%, 0.5);
-  box-shadow: inset 0px 0.1rem 0.5rem 0.3rem rgb(255, 255, 255), 0px 0.1rem 0.5rem 0.3rem hsl(221deg, 93%, 89%);
+  background: var(--bg-primary) -alpha-five;
+  box-shadow: inset 0px 0.1rem 0.5rem 0.3rem var(--layer-one), 0px 0.1rem 0.5rem 0.3rem var(--layer-one) -secondary;
 }
 
 .footer {
@@ -98,7 +146,7 @@ main::before {
   background: rgba(0, 0, 0, 0.1);
   margin-top: 0.2rem;
   padding: 5rem 0 2.5rem;
-  box-shadow: 0px 0.1rem 5px 0 rgb(200, 200, 200);
+  box-shadow: 0px 0.1rem 5px 0 var(--shadow);
   border-radius: 2rem 2rem 0 0;
   font-size: 1.6rem;
   color: #fff;
@@ -128,12 +176,12 @@ main::before {
 li .nav__item--name {
   padding: 0.5rem;
   text-transform: capitalize;
-  color: #000;
+  color: var(--font-primary);
   transition: color 200ms;
   user-select: none;
 }
 li:hover .nav__item--name {
-  color: hsl(258deg, 91%, 63%);
+  color: var(--border-primary);
 }
 
 .acc_div > div:last-child {
@@ -160,7 +208,7 @@ li:hover .nav__item--name {
   margin-bottom: 0.5rem;
   font-size: 1.3rem;
   font-weight: 500;
-  color: #000;
+  color: var(--font-primary);
 }
 
 .icon_heading p,
@@ -171,28 +219,28 @@ li:hover .nav__item--name {
 
 .box-1 .icon_heading p,
 .box-1 .dollar-percentage span {
-  color: hsla(258deg, 91%, 63%, 0.7);
+  color: var(--purple-primary-alpha-seven);
 }
 
 .box-2 .icon_heading p,
 .box-2 .dollar-percentage span {
-  color: hsl(221deg, 60%, 70%);
+  color: var(--dark-bg-primary-color);
 }
 
 .box-3 .icon_heading p,
 .box-3 .dollar-percentage span {
-  color: hsl(191deg, 91%, 48%);
+  color: var(--cyan-primary);
 }
 
 .box-4 .icon_heading p,
 .box-4 .dollar-percentage span,
 .box-4 .dollar-percentage p {
-  color: hsl(202deg, 5%, 60%);
+  color: var(--dark-silver-primary);
 }
 
 /* Referral Container And fund transfer */
 .section_ref_transfer .referral_container {
-  color: #000;
+  color: var(--font-primary);
 }
 .section_ref_transfer .referral_container h2 {
   font-size: 2.5rem;
@@ -205,7 +253,7 @@ li:hover .nav__item--name {
 .section_ref_transfer .referral_container a {
   text-decoration: none;
   font-size: 1.6rem;
-  color: #000;
+  color: var(--font-primary);
 }
 .section_ref_transfer .deposit_income {
   color: #fff;
@@ -219,7 +267,7 @@ li:hover .nav__item--name {
 
 /* Profile Section */
 .section {
-  color: #000;
+  color: var(--font-primary);
 }
 
 .tab-heading {
@@ -248,8 +296,8 @@ li:hover .nav__item--name {
   border: none;
   background: none;
   border-radius: 0.6rem;
-  background: linear-gradient(360deg, hsl(258deg, 91%, 63%), hsla(258deg, 91%, 63%, 0.4));
-  box-shadow: 0.5rem 0 1rem 0 hsla(258deg, 91%, 63%, 0.4), 0 0.5rem 1rem 0.1rem hsla(258deg, 91%, 63%, 0.4);
+  background: linear-gradient(360deg, var(--purple-primary), var(--purple-primary-alpha-four));
+  box-shadow: 0.5rem 0 1rem 0 var(--purple-primary-alpha-four), 0 0.5rem 1rem 0.1rem var(--purple-primary-alpha-four);
 }
 
 .btn-grey-animated {
@@ -264,13 +312,13 @@ li:hover .nav__item--name {
   cursor: pointer;
   overflow: hidden;
   transition: 0.5s ease-in-out;
-  box-shadow: inset 0 0 0 0 hsla(258deg, 91%, 63%, 0.9);
+  box-shadow: inset 0 0 0 0 var(--purple-primary-alpha-nine);
 }
 
 .btn-light-blue {
   background: none;
   border: none;
-  background-color: hsla(215deg, 98%, 55%, 0.5);
+  background-color: var(--blue-primary-alpha-five);
   color: #fff;
   padding: 1.8rem 1.6rem;
   border-radius: 10rem;
@@ -286,7 +334,7 @@ li:hover .nav__item--name {
 .section {
   padding: 1rem 1rem 3rem 2rem;
   min-height: 100vh;
-  background: #fff;
+  background: var(--bg-secondary);
 }
 
 .acc_div div:first-child {
@@ -303,20 +351,20 @@ li:hover .nav__item--name {
 }
 
 .total_cont {
-  background: linear-gradient(360deg, hsl(258deg, 91%, 63%), hsla(258deg, 91%, 63%, 0.4));
-  box-shadow: 0px 5px 1.5rem 0px hsla(258deg, 91%, 63%, 0.7), 5px 0px 1.5rem 0px hsla(258deg, 91%, 63%, 0.7);
+  background: linear-gradient(360deg, var(--purple-primary), var(--purple-primary-alpha-four));
+  box-shadow: 0px 5px 1.5rem 0px var(--purple-primary-alpha-seven), 5px 0px 1.5rem 0px var(--purple-primary-alpha-seven);
 }
 .total_cont div:first-child > svg {
-  fill: hsl(258deg, 91%, 63%);
+  fill: var(--purple-primary);
 }
 
 .wallet_cont {
-  background: linear-gradient(360deg, hsl(215deg, 98%, 55%), hsla(215deg, 98%, 55%, 0.4));
-  box-shadow: 0px 5px 1.5rem 0px hsla(215deg, 98%, 55%, 0.7), 5px 0px 1.5rem 0px hsla(215deg, 98%, 55%, 0.7);
+  background: linear-gradient(360deg, var(--blue-secondary), var(--blue-secondary-alpha-four));
+  box-shadow: 0px 5px 1.5rem 0px var(--blue-secondary-alpha-seven), 5px 0px 1.5rem 0px var(--blue-secondary-alpha-seven);
 }
 .wallet_cont div:first-child svg rect, .wallet_cont div:first-child svg #Path {
-  fill: hsla(215deg, 98%, 55%, 0.7);
-  stroke: hsla(215deg, 98%, 55%, 0.7);
+  fill: var(--blue-secondary-alpha-seven);
+  stroke: var(--blue-secondary-alpha-seven);
 }
 .wallet_cont div:first-child svg #lock {
   stroke: #fff;
@@ -325,11 +373,11 @@ li:hover .nav__item--name {
 }
 
 .withdrawal_cont {
-  background: linear-gradient(360deg, hsl(191deg, 91%, 48%), hsla(191deg, 91%, 48%, 0.4));
-  box-shadow: 0px 5px 1.5rem 0px hsla(191deg, 91%, 48%, 0.7), 5px 0px 1.5rem 0px hsla(191deg, 91%, 48%, 0.7);
+  background: linear-gradient(360deg, var(--cyan-primary), var(--cyan-primary-alpha-four));
+  box-shadow: 0px 5px 1.5rem 0px var(--cyan-primary-alpha-seven), 5px 0px 1.5rem 0px var(--cyan-primary-alpha-seven);
 }
 .withdrawal_cont div:first-child > svg {
-  fill: hsl(191deg, 91%, 48%);
+  fill: var(--cyan-primary);
 }
 
 .box {
@@ -367,56 +415,56 @@ li:hover .nav__item--name {
   height: 2rem;
 }
 .box-1 {
-  background: hsla(258deg, 91%, 63%, 0.5);
-  box-shadow: 0.2rem 0.2rem 1.4rem 0 hsla(258deg, 91%, 63%, 0.7), 0.1rem 0.1rem 1.5rem 0 rgba(200, 200, 200, 0.3);
+  background: var(--purple-primary-alpha-five);
+  box-shadow: 0.2rem 0.2rem 1.4rem 0 var(--purple-primary-alpha-seven), 0.1rem 0.1rem 1.5rem 0 var(--shadow) -alpha-three;
 }
 .box-1::before {
-  background: linear-gradient(hsl(258deg, 91%, 63%), rgba(255, 255, 255, 0.3));
+  background: linear-gradient(var(--purple-primary), rgba(255, 255, 255, 0.3));
   top: 50%;
 }
 .box-1 .icon_heading > div {
   padding-left: 0.2rem;
 }
 .box-1 .icon_heading > div > svg {
-  fill: hsla(258deg, 91%, 63%, 0.7);
+  fill: var(--purple-primary-alpha-seven);
 }
 .box-2 {
-  background: hsla(221deg, 93%, 89%, 0.6);
-  box-shadow: 0.2rem 0.2rem 1.4rem 0 hsl(221deg, 93%, 89%), 0.1rem 0.1rem 1.5rem 0 rgba(200, 200, 200, 0.5);
+  background: var(--bg-primary) -alpha-six;
+  box-shadow: 0.2rem 0.2rem 1.4rem 0 var(--bg-primary), 0.1rem 0.1rem 1.5rem 0 var(--shadow) -alpha-five;
 }
 .box-2::before {
-  background: linear-gradient(hsla(221deg, 60%, 70%, 0.8), rgba(255, 255, 255, 0.3));
+  background: linear-gradient(var(--dark-bg-primary-alpha-eight), rgba(255, 255, 255, 0.3));
   top: 20%;
 }
 .box-2 .icon_heading > div > svg {
-  fill: hsl(221deg, 60%, 70%);
+  fill: var(--dark-bg-primary-color);
   fill-opacity: 1;
   stroke: none;
   stroke-width: 1rem;
 }
 .box-3 {
-  background: hsla(191deg, 91%, 48%, 0.3);
-  box-shadow: 0.2rem 0.2rem 1.4rem 0px hsla(191deg, 91%, 48%, 0.7), 0.1rem 0.1rem 1.5rem 0 rgba(200, 200, 200, 0.3);
+  background: var(--cyan-primary-alpha-three);
+  box-shadow: 0.2rem 0.2rem 1.4rem 0px var(--cyan-primary-alpha-seven), 0.1rem 0.1rem 1.5rem 0 var(--shadow) -alpha-three;
 }
 .box-3::before {
   top: 50%;
-  background: linear-gradient(hsla(191deg, 91%, 48%, 0.5), rgba(255, 255, 255, 0.2));
+  background: linear-gradient(var(--cyan-primary-alpha-five), rgba(255, 255, 255, 0.2));
 }
 .box-3 .icon_heading > div > svg {
-  fill: hsl(191deg, 91%, 48%);
-  stroke: hsl(191deg, 91%, 48%);
+  fill: var(--cyan-primary);
+  stroke: var(--cyan-primary);
   stroke-width: 1rem;
 }
 .box-4 {
-  background: hsl(202deg, 5%, 95%);
-  box-shadow: 0.2rem 0.2rem 1rem 0 hsl(202deg, 5%, 60%);
+  background: var(--silver-primary);
+  box-shadow: 0.2rem 0.2rem 1rem 0 var(--dark-silver-primary);
 }
 .box-4::before {
   top: 70%;
-  background: linear-gradient(hsla(202deg, 5%, 60%, 0.8), hsla(0deg, 0%, 100%, 0.5));
+  background: linear-gradient(var(--dark-silver-alpha-eight), hsla(0deg, 0%, 100%, 0.5));
 }
 .box-4 .icon_heading > div > svg {
-  fill: hsl(202deg, 5%, 60%);
+  fill: var(--dark-silver-primary);
 }
 
 .referral_container {
@@ -434,7 +482,7 @@ li:hover .nav__item--name {
 }
 
 .add_withdraw_container {
-  background: hsla(221deg, 93%, 89%, 0.5);
+  background: var(--bg-primary-alpha-five);
 }
 .add_withdraw_container .btns_container {
   display: grid;
@@ -443,18 +491,18 @@ li:hover .nav__item--name {
 }
 .add_withdraw_container .btns_container button.active {
   color: white;
-  box-shadow: inset 20rem 0 0 0 hsla(258deg, 91%, 63%, 0.9);
+  box-shadow: inset 20rem 0 0 0 var(--purple-primary-alpha-nine);
 }
 .add_withdraw_container .deposit_income {
-  background-color: hsla(215deg, 98%, 55%, 0.5);
+  background-color: var(--blue-primary-alpha-five);
   border-radius: 1.6rem;
   width: 90%;
   margin: 5rem auto;
   padding: 2rem 1rem;
-  box-shadow: 0.5rem 0.5rem 1rem 0.1rem hsla(215deg, 98%, 55%, 0.3);
+  box-shadow: 0.5rem 0.5rem 1rem 0.1rem var(--blue-primary-alpha-three);
 }
 .add_withdraw_container .deposit_income ~ div > label {
-  color: #000;
+  color: var(--font-primary);
   font-size: 1.6rem;
 }
 .add_withdraw_container .deposit_income ~ div > div {
@@ -471,10 +519,10 @@ li:hover .nav__item--name {
   width: 100%;
   transition: all 150ms ease-in;
   font-size: 1.6rem;
-  background: hsla(221deg, 93%, 89%, 0.8);
+  background: var(--bg-primary-alpha-eight);
 }
 .add_withdraw_container .deposit_income ~ div > div > input:focus, .add_withdraw_container .deposit_income ~ div > div > input:hover {
-  outline: 3px solid hsla(215deg, 98%, 55%, 0.3);
+  outline: 3px solid var(--blue-primary-alpha-three);
   outline-offset: 0.1rem;
 }
 .add_withdraw_container .deposit_income ~ div > div button.active {
@@ -483,7 +531,7 @@ li:hover .nav__item--name {
   animation: showBtn 500ms linear forwards;
 }
 .add_withdraw_container .deposit_income ~ div > div button.active:hover, .add_withdraw_container .deposit_income ~ div > div button.active:focus {
-  background-color: hsla(215deg, 98%, 55%, 0.3);
+  background-color: var(--blue-primary-alpha-three);
 }
 
 .header {
@@ -512,8 +560,8 @@ li:hover .nav__item--name {
   pointer-events: none;
   font-size: clamp(0.7rem, 3.5vw, 2.5rem);
   transition: all 300ms ease-in-out;
-  background: linear-gradient(135deg, #fff, hsl(221deg, 93%, 89%));
-  box-shadow: 0px 0.1rem 1.5rem 0.2rem rgba(200, 200, 200, 0.6);
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
+  box-shadow: 0px 0.1rem 1.5rem 0.2rem var(--shadow-alpha-six);
 }
 .navbar.open {
   right: 0;
@@ -542,7 +590,7 @@ li:hover .nav__item--name {
   opacity: 0;
   pointer-events: none;
   transition: all 400ms ease-in-out;
-  fill: hsl(258deg, 91%, 63%);
+  fill: var(--border-primary);
 }
 .navbar > ul > li:hover svg {
   opacity: 1;
@@ -556,7 +604,7 @@ li:hover .nav__item--name {
   left: 0.1rem;
   right: 0;
   bottom: -0.1rem;
-  border-bottom: 4px solid hsl(258deg, 91%, 63%);
+  border-bottom: 4px solid var(--border-primary);
   border-radius: 1rem;
   transition: 300ms ease-in;
   transition-delay: 100ms;
@@ -567,7 +615,7 @@ li:hover .nav__item--name {
   opacity: 1;
 }
 .navbar > ul > li #income, .navbar > ul > li #invest_wallet {
-  stroke: hsl(258deg, 91%, 63%);
+  stroke: var(--purple-primary);
   stroke-width: 1rem;
 }
 
@@ -579,7 +627,7 @@ li:hover .nav__item--name {
 }
 .user-profile-container_username {
   font-weight: bold;
-  color: #000;
+  color: var(--font-primary);
   margin-right: 1rem;
 }
 .user-profile-container_profile {
@@ -589,7 +637,7 @@ li:hover .nav__item--name {
   width: 7rem;
   height: 7rem;
   border-radius: 100%;
-  box-shadow: 0 0 1.6rem 0.5rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 1.6rem 0.5rem var(--medium-shadow-black);
 }
 
 header {
@@ -601,12 +649,12 @@ header {
   top: 0;
   z-index: 2;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0px 0.5rem 1.6rem 0 rgba(200, 200, 200, 0.6);
+  background: var(--nav-bg);
+  box-shadow: 0px 0.5rem 1.6rem 0 var(--shadow-alpha-six);
 }
 header .nav_container_btn svg {
   transform: scale(1.1);
-  fill: hsl(258deg, 91%, 63%);
+  fill: var(--border-primary);
 }
 
 .account_info {
@@ -646,9 +694,9 @@ header .nav_container_btn svg {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background: hsla(258deg, 91%, 63%, 0.3);
+  background: var(--purple-primary-alpha-three);
   padding: 0 1rem 1.5rem 1rem;
-  color: #000;
+  color: var(--font-primary);
 }
 
 .toast_copy {
@@ -667,7 +715,7 @@ header .nav_container_btn svg {
   pointer-events: none;
   background: rgba(255, 255, 255, 0.8);
   transition: all 300ms ease-in-out;
-  box-shadow: 0.1rem 0px 10px 0.1rem rgb(200, 200, 200);
+  box-shadow: 0.1rem 0px 10px 0.1rem var(--shadow);
 }
 
 .user_profile_container_desktop {
@@ -710,7 +758,7 @@ header .nav_container_btn svg {
   background-color: #777;
   margin-block: 4rem;
   display: block;
-  border-top: 0.1rem solid rgb(200, 200, 200);
+  border-top: 0.1rem solid var(--light-shadow-white);
 }
 .section__profile .profile__info,
 .section__profile .section__settings > div {
@@ -724,7 +772,7 @@ header .nav_container_btn svg {
   grid-column: span 2;
   justify-content: space-between;
   border-radius: 0.3rem;
-  box-shadow: 0.1rem 0.1rem 5px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0.1rem 0.1rem 5px 0 var(--medium-shadow-black);
   padding-inline: 0.5rem;
 }
 .section__profile .profile__info > div > p:not(.email) {
@@ -749,15 +797,53 @@ header .nav_container_btn svg {
 
 .dark {
   /*Primary Values*/
+  --bg-primary: black;
   /*Secondary Values*/
+  --bg-secondary: black;
   /* light values*/
+  --bg-primary-alpha-five: hsla(221, 1%, 15%, 0.5);
+  --bg-primary-alpha-six: hsla(221, 93%, 89%, 0.6);
+  --bg-primary-alpha-seven: hsla(221, 93%, 89%, 0.7);
+  --bg-primary-alpha-eight: hsla(221, 93%, 89%, 0.8);
+  --purple-primary-alpha-five: hsla(258, 92%, 37%, 0.5);
+  --purple-primary-alpha-seven: hsla(258, 100%, 84%, 1);
+  --dark-purple-alpha-three: rgba(75, 38, 105, 0.3);
+  --shadow-alpha-three: rgba(200, 200, 200, 0.3);
+  --shadow-alpha-five: rgba(200, 200, 200, 0.5);
+  --shadow-alpha-six: rgba(200, 200, 200, 0.6);
+  --dark-bg-primary-alpha-eight: hsla(221, 60%, 70%, 0.8);
+  --blue-primary-alpha-three: hsla(215, 98%, 55%, 0.3);
+  --blue-primary-alpha-five: hsla(215, 98%, 55%, 0.5);
+  --blue-secondary-alpha-four: hsla(215, 98%, 55%, 0.4);
+  --blue-secondary-alpha-seven: hsla(215, 98%, 55%, 0.7);
+  --cyan-primary-alpha-three: hsla(191, 91%, 48%, 0.3);
+  --cyan-primary-alpha-four: hsla(191, 91%, 48%, 0.4);
+  --cyan-primary-alpha-five: hsla(191, 91%, 48%, 0.5);
+  --cyan-primary-alpha-seven: hsla(191, 91%, 48%, 0.7);
   /*primary dark values*/
+  --dark-silver-primary: hsla(202, 5%, 60%, 1);
+  --dark-bg-primary-color: hsla(221, 60%, 70%, 1);
+  --dark-purple: rgba(128, 73, 169, 1);
   /*secondary dark values*/
+  --dark-silver-alpha-eight: hsla(202, 5%, 60%, 0.8);
   /*Least used values*/
+  --white-bg: #232323;
+  --nav-bg: #000;
+  --border-primary: hsl(258, 91%, 63%);
+  --layer-one: rgba(105, 105, 105, 1);
+  --layer-one-secondary: hsla(221, 0%, 26%, 1);
+  --layer-two-shadow: hsla(221, 0%, 45%, 1);
+  --input-bg: hsla(221, 1%, 15%, 0.5);
   /* RGBA COLOR VALUES*/
+  --light-shadow-white: rgba(200, 200, 200, 1);
   /*black shadows*/
+  --medium-shadow-black: rgba(0, 0, 0, 0.3);
+  --shadow: rgba(200, 200, 200, 1);
   /*Values for calc function*/
+  --second-layer-left: -5%;
+  --second-layer-top: 1%;
   /*Font Colors*/
+  --font-primary: #fff;
 }
 
 /*# sourceMappingURL=main.css.map */

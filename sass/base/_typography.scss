@@ -8,13 +8,13 @@ li {
   & .nav__item--name {
     padding: 0.5rem;
     text-transform: capitalize;
-    color: $font-primary;
+    color: var(--font-primary);
     transition: color 200ms;
     user-select: none;
   }
 
   &:hover .nav__item--name {
-    color: $border-primary;
+    color: var(--border-primary);
   }
 }
 
@@ -43,7 +43,7 @@ li {
   margin-bottom: 0.5rem;
   font-size: 1.3rem;
   font-weight: 500;
-  color: $font-primary;
+  color: var(--font-primary);
 }
 
 .icon_heading p,
@@ -54,30 +54,30 @@ li {
 
 .box-1 .icon_heading p,
 .box-1 .dollar-percentage span {
-  color: $purple-primary-alpha-seven;
+  color: var(--purple-primary-alpha-seven);
 }
 
 .box-2 .icon_heading p,
 .box-2 .dollar-percentage span {
-  color: $dark-bg-primary-color;
+  color: var(--dark-bg-primary-color);
 }
 
 .box-3 .icon_heading p,
 .box-3 .dollar-percentage span {
-  color: $cyan-primary;
+  color: var(--cyan-primary);
 }
 
 .box-4 .icon_heading p,
 .box-4 .dollar-percentage span,
 .box-4 .dollar-percentage p {
-  color: $dark-silver-primary;
+  color: var(--dark-silver-primary);
 }
 
 /* Referral Container And fund transfer */
 .section_ref_transfer {
 
   .referral_container {
-    color: $font-primary;
+    color: var(--font-primary);
 
     & h2 {
       font-size: 2.5rem;
@@ -92,7 +92,7 @@ li {
     & a {
       text-decoration: none;
       font-size: 1.6rem;
-      color: $font-primary;
+      color: var(--font-primary);
     }
   }
 
@@ -110,7 +110,7 @@ li {
 
 /* Profile Section */
 .section {
-  color: $font-primary;
+  color: var(--font-primary);
 }
 
 // Global declarations

@@ -28,7 +28,7 @@
     background-color: #777;
     margin-block: 4rem;
     display: block;
-    border-top: .1rem solid $light-shadow-white;
+    border-top: .1rem solid var(--light-shadow-white);
   }
 
   .profile__info,
@@ -44,7 +44,7 @@
     grid-column: span 2;
     justify-content: space-between;
     border-radius: 0.3rem;
-    box-shadow: .1rem .1rem 5px 0 $medium-shadow-black;
+    box-shadow: .1rem .1rem 5px 0 var(--medium-shadow-black);
     padding-inline: 0.5rem;
   }
 

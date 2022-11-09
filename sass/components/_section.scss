@@ -1,5 +1,5 @@
 .section {
   padding: 1rem 1rem 3rem 2rem;
   min-height: $section-min-height;
-  background: $bg-secondary;
+  background: var(--bg-secondary);
 }
