@@ -77,30 +77,16 @@ main {
 }
 
 .footer {
-  text-align: center;
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--bg-footer);
   margin-top: 0.2rem;
   padding: 5rem 0 2.5rem;
   box-shadow: 0px .1rem 5px 0 var(--shadow);
   border-radius: 2rem 2rem 0 0;
-  font-size: $default-font-size;
-  color: #fff;
-
-  & p {
-    margin-inline: 0;
-    margin-bottom: 0;
-  }
 
   &__links-cont {
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
     gap: 1.6rem 0;
-
-    & a {
-      text-decoration: none;
-      color: #fff;
-      text-transform: capitalize;
-    }
   }
 }

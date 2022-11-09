@@ -3,6 +3,12 @@
   font-family: cursive;
 }
 
+// Global declarations
+.tab-heading {
+  font-size: $default-font-size;
+  margin-bottom: 1rem;
+}
+
 /* Navbar */
 li {
   & .nav__item--name {
@@ -109,12 +115,57 @@ li {
 }
 
 /* Profile Section */
-.section {
-  color: var(--font-primary);
+.section__profile {
+  & h3 {
+    font-size: 1.8rem;
+  }
+  
+  & h4 {
+    font-size: 1.5rem;
+  }
 }
 
-// Global declarations
-.tab-heading {
+.profile__cont-photo {
+  &+div>p {
+    font-size: 1.4rem;
+  }
+}
+
+.profile__info>div>p {
+  font-size: 1.3rem;
+
+  &:not(.email) {
+    text-transform: capitalize;
+  }
+}
+
+.section__settings>div>div {
+  &>label {
+    font-size: 1.3rem;
+  }
+
+  &>select {
+    text-align: center;
+    font-style: 1.3rem;
+    text-transform: capitalize;
+  }
+}
+
+
+//FOOTER
+.footer {
+  text-align: center;
   font-size: $default-font-size;
-  margin-bottom: 1rem;
+  color: #fff;
+
+  & p {
+    margin-inline: 0;
+    margin-bottom: 0;
+  }
+
+  & a {
+    text-decoration: none;
+    color: #fff;
+    text-transform: capitalize;
+  }
 }

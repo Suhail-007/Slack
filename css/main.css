@@ -5,6 +5,7 @@
   --silver-primary: hsla(202, 5%, 95%, 1);
   --blue-primary: hsla(215, 98%, 55%, 1);
   --cyan-primary: hsla(191, 91%, 48%, 1);
+  --bg-footer: rgba(0,0,0,.1);
   /*Secondary Values*/
   --bg-secondary: #fff;
   --blue-secondary: hsla(215, 98%, 55%, 1);
@@ -142,18 +143,11 @@ main::before {
 }
 
 .footer {
-  text-align: center;
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--bg-footer);
   margin-top: 0.2rem;
   padding: 5rem 0 2.5rem;
   box-shadow: 0px 0.1rem 5px 0 var(--shadow);
   border-radius: 2rem 2rem 0 0;
-  font-size: 1.6rem;
-  color: #fff;
-}
-.footer p {
-  margin-inline: 0;
-  margin-bottom: 0;
 }
 .footer__links-cont {
   display: grid;
@@ -161,15 +155,15 @@ main::before {
   justify-items: center;
   gap: 1.6rem 0;
 }
-.footer__links-cont a {
-  text-decoration: none;
-  color: #fff;
-  text-transform: capitalize;
-}
 
 .website_logo_container {
   font-size: 1.6rem;
   font-family: cursive;
+}
+
+.tab-heading {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
 }
 
 /* Navbar */
@@ -266,13 +260,46 @@ li:hover .nav__item--name {
 }
 
 /* Profile Section */
-.section {
-  color: var(--font-primary);
+.section__profile h3 {
+  font-size: 1.8rem;
+}
+.section__profile h4 {
+  font-size: 1.5rem;
 }
 
-.tab-heading {
+.profile__cont-photo + div > p {
+  font-size: 1.4rem;
+}
+
+.profile__info > div > p {
+  font-size: 1.3rem;
+}
+.profile__info > div > p:not(.email) {
+  text-transform: capitalize;
+}
+
+.section__settings > div > div > label {
+  font-size: 1.3rem;
+}
+.section__settings > div > div > select {
+  text-align: center;
+  font-style: 1.3rem;
+  text-transform: capitalize;
+}
+
+.footer {
+  text-align: center;
   font-size: 1.6rem;
-  margin-bottom: 1rem;
+  color: #fff;
+}
+.footer p {
+  margin-inline: 0;
+  margin-bottom: 0;
+}
+.footer a {
+  text-decoration: none;
+  color: #fff;
+  text-transform: capitalize;
 }
 
 .u-letter-spacing-small {
@@ -335,6 +362,15 @@ li:hover .nav__item--name {
   padding: 1rem 1rem 3rem 2rem;
   min-height: 100vh;
   background: var(--bg-secondary);
+  color: var(--font-primary);
+}
+.section_items {
+  display: flex;
+  grid-column: span 2;
+  justify-content: space-between;
+  border-radius: 0.3rem;
+  box-shadow: 0.1rem 0.1rem 5px 0 var(--medium-shadow-black);
+  padding-inline: 0.5rem;
 }
 
 .acc_div div:first-child {
@@ -416,7 +452,7 @@ li:hover .nav__item--name {
 }
 .box-1 {
   background: var(--purple-primary-alpha-five);
-  box-shadow: 0.2rem 0.2rem 1.4rem 0 var(--purple-primary-alpha-seven), 0.1rem 0.1rem 1.5rem 0 var(--shadow) -alpha-three;
+  box-shadow: 0.2rem 0.2rem 1.4rem 0 var(--purple-primary-alpha-seven), 0.1rem 0.1rem 1.5rem 0 var(--shadow-alpha-three);
 }
 .box-1::before {
   background: linear-gradient(var(--purple-primary), rgba(255, 255, 255, 0.3));
@@ -429,8 +465,8 @@ li:hover .nav__item--name {
   fill: var(--purple-primary-alpha-seven);
 }
 .box-2 {
-  background: var(--bg-primary) -alpha-six;
-  box-shadow: 0.2rem 0.2rem 1.4rem 0 var(--bg-primary), 0.1rem 0.1rem 1.5rem 0 var(--shadow) -alpha-five;
+  background: var(--bg-primary-alpha-six);
+  box-shadow: 0.2rem 0.2rem 1.4rem 0 var(--bg-primary), 0.1rem 0.1rem 1.5rem 0 var(--shadow-alpha-five);
 }
 .box-2::before {
   background: linear-gradient(var(--dark-bg-primary-alpha-eight), rgba(255, 255, 255, 0.3));
@@ -444,7 +480,7 @@ li:hover .nav__item--name {
 }
 .box-3 {
   background: var(--cyan-primary-alpha-three);
-  box-shadow: 0.2rem 0.2rem 1.4rem 0px var(--cyan-primary-alpha-seven), 0.1rem 0.1rem 1.5rem 0 var(--shadow) -alpha-three;
+  box-shadow: 0.2rem 0.2rem 1.4rem 0px var(--cyan-primary-alpha-seven), 0.1rem 0.1rem 1.5rem 0 var(--shadow-alpha-three);
 }
 .box-3::before {
   top: 50%;
@@ -520,6 +556,7 @@ li:hover .nav__item--name {
   transition: all 150ms ease-in;
   font-size: 1.6rem;
   background: var(--bg-primary-alpha-eight);
+  color: var(--font-primary);
 }
 .add_withdraw_container .deposit_income ~ div > div > input:focus, .add_withdraw_container .deposit_income ~ div > div > input:hover {
   outline: 3px solid var(--blue-primary-alpha-three);
@@ -750,9 +787,6 @@ header .nav_container_btn svg {
 .section__profile .profile__cont-photo img {
   width: 100%;
 }
-.section__profile .profile__cont-photo + div > p {
-  font-size: 1.4rem;
-}
 .section__profile hr {
   border: none;
   background-color: #777;
@@ -773,10 +807,7 @@ header .nav_container_btn svg {
   justify-content: space-between;
   border-radius: 0.3rem;
   box-shadow: 0.1rem 0.1rem 5px 0 var(--medium-shadow-black);
-  padding-inline: 0.5rem;
-}
-.section__profile .profile__info > div > p:not(.email) {
-  text-transform: capitalize;
+  padding-inline: 1.6rem;
 }
 .section__profile .section__settings > div > div {
   display: flex;
@@ -787,10 +818,7 @@ header .nav_container_btn svg {
 .section__profile .section__settings > div > div > select {
   appearance: none;
   background: #fff;
-  text-align: center;
   padding: 0.5rem;
-  font-style: clamp(0.8rem, 3.5vw, 1rem);
-  text-transform: capitalize;
   border-radius: 0.3rem;
   outline: none;
 }
@@ -798,6 +826,7 @@ header .nav_container_btn svg {
 .dark {
   /*Primary Values*/
   --bg-primary: black;
+  --bg-footer: #232323;
   /*Secondary Values*/
   --bg-secondary: black;
   /* light values*/
@@ -805,13 +834,6 @@ header .nav_container_btn svg {
   --bg-primary-alpha-six: hsla(221, 93%, 89%, 0.6);
   --bg-primary-alpha-seven: hsla(221, 93%, 89%, 0.7);
   --bg-primary-alpha-eight: hsla(221, 93%, 89%, 0.8);
-  --purple-primary-alpha-five: hsla(258, 92%, 37%, 0.5);
-  --purple-primary-alpha-seven: hsla(258, 100%, 84%, 1);
-  --dark-purple-alpha-three: rgba(75, 38, 105, 0.3);
-  --shadow-alpha-three: rgba(200, 200, 200, 0.3);
-  --shadow-alpha-five: rgba(200, 200, 200, 0.5);
-  --shadow-alpha-six: rgba(200, 200, 200, 0.6);
-  --dark-bg-primary-alpha-eight: hsla(221, 60%, 70%, 0.8);
   --blue-primary-alpha-three: hsla(215, 98%, 55%, 0.3);
   --blue-primary-alpha-five: hsla(215, 98%, 55%, 0.5);
   --blue-secondary-alpha-four: hsla(215, 98%, 55%, 0.4);
@@ -822,10 +844,17 @@ header .nav_container_btn svg {
   --cyan-primary-alpha-seven: hsla(191, 91%, 48%, 0.7);
   /*primary dark values*/
   --dark-silver-primary: hsla(202, 5%, 60%, 1);
-  --dark-bg-primary-color: hsla(221, 60%, 70%, 1);
+  --dark-bg-primary-color: hsla(221, 100%, 97%, 1);
   --dark-purple: rgba(128, 73, 169, 1);
   /*secondary dark values*/
   --dark-silver-alpha-eight: hsla(202, 5%, 60%, 0.8);
+  --dark-purple-alpha-three: rgba(75, 38, 105, 0.3);
+  --dark-bg-primary-alpha-eight: hsla(221, 60%, 70%, 0.8);
+  --purple-primary-alpha-five: hsla(258, 92%, 37%, 0.5);
+  --purple-primary-alpha-seven: hsla(258, 100%, 84%, 1);
+  --shadow-alpha-three: rgba(200, 200, 200, 0.3);
+  --shadow-alpha-five: rgba(200, 200, 200, .5);
+  --shadow-alpha-six: rgba(200, 200, 200, 0.6);
   /*Least used values*/
   --white-bg: #232323;
   --nav-bg: #000;
