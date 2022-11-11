@@ -37,18 +37,19 @@
   .profile__info>div,
   .section__settings>div>div {
     display: flex;
+    background: var(--bg-secondary);
     grid-column: span 2;
     justify-content: space-between;
     border-radius: 0.3rem;
     box-shadow: .1rem .1rem 5px 0 var(--medium-shadow-black);
-    padding-inline: 1.6rem;
+    padding-inline: 1.8rem;
   }
 
   .section__settings>div>div {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-block: .5rem;
+    padding-block: .8rem;
 
     &>select {
       appearance: none;

@@ -80,9 +80,9 @@ li {
 }
 
 /* Referral Container And fund transfer */
-.section_ref_transfer {
+.section__bottom {
 
-  .referral_container {
+  &-ref {
     color: var(--font-primary);
 
     & h2 {
@@ -90,7 +90,7 @@ li {
       font-weight: 400;
     }
 
-    & h4 {
+    &__sub-head {
       font-size: 1.8rem;
       font-weight: 400;
     }
@@ -115,15 +115,6 @@ li {
 }
 
 /* Profile Section */
-.section__profile {
-  & h3 {
-    font-size: 1.8rem;
-  }
-  
-  & h4 {
-    font-size: 1.5rem;
-  }
-}
 
 .profile__cont-photo {
   &+div>p {
@@ -146,7 +137,7 @@ li {
 
   &>select {
     text-align: center;
-    font-style: 1.3rem;
+    font-size: 1.1rem;
     text-transform: capitalize;
   }
 }

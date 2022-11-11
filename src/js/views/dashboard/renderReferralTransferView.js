@@ -5,16 +5,16 @@ class FundTransferView {
 
   renderReferralTransferView() {
     let html = `
-    <section class="section_ref_transfer">
-      <div class="referral_container">
+    <section class="section__bottom">
+      <div class="section__bottom-ref">
         <h2>REFER A FRIEND</h2>
-        <div class="ref_img_cont">
+        <div class="section__bottom-ref__img-cont">
           <img src="./src/images/refer.jpeg" alt="refer a friend">
         </div>
 
-        <h4>Referral Link</h4>
-        <a href="#" class="ref_link">https://github.com/Suhail-007/dashboard-ui</a>
-        <button class="copy_ref_link btn-purple">
+        <h4 class="section__bottom-ref__sub-head">Referral Link</h4>
+        <a href="#" data-ref-link class="ref_link">https://github.com/Suhail-007/dashboard-ui</a>
+        <button data-copy-btn class="copy_ref_link btn-purple">
           <svg>
           <use href="src/images/icons.svg#clipboard"></use>
           </svg>
@@ -23,8 +23,8 @@ class FundTransferView {
           </span>
         </button>
       </div>
-      <div class="add_withdraw_container">
-        <div class="btns_container">
+      <div class="investWallet">
+        <div data-investWallet-btns class="investWallet__btns">
           <button class="btn-grey-animated active">Add Fund</button>
           <button class="btn-grey-animated">Withdrawal</button>
         </div>
@@ -46,8 +46,8 @@ class FundTransferView {
     </section>`;
 
     this._parentElement.insertAdjacentHTML('beforeend', html);
-    this._copyButton = document.querySelector('.copy_ref_link');
-    this._btnsCont = document.querySelector('.btns_container');
+    this._copyButton = document.querySelector('[data-copy-btn]');
+    this._btnsCont = document.querySelector('[data-investWallet-btns]');
   }
 
   _toastCopy() {
@@ -66,19 +66,19 @@ class FundTransferView {
     const toast = document.querySelector('.toast_copy');
     toast.style.opacity = 1;
     setTimeout(() => {
-     toast.style.opacity = 0;
+      toast.style.opacity = 0;
     }, 1000);
   }
 
   addHandlerCopyRef(handler) {
-    const ref_link = document.querySelector('.ref_link');
+    const refLink = document.querySelector('[data-ref-link]');
     this._copyButton.addEventListener('click', e => {
-      const btn = e.target.closest('.copy_ref_link');
+      const btn = e.target.closest('[data-copy-btn]');
 
       const btnSpanElem = btn.querySelector('span');
 
       if (!btn) return;
-      handler(ref_link);
+      handler(refLink);
 
       btnSpanElem.innerText = 'Copied';
       this._toastCopy();
@@ -96,12 +96,12 @@ class FundTransferView {
   }
 
   activeBtn() {
-    const btns = document.querySelectorAll('.btns_container button');
+    const btns = document.querySelectorAll('[data-investWallet-btns] button');
 
     const fundActionBtns = document.querySelectorAll('.input_cont button');
 
     this._btnsCont.addEventListener('click', e => {
-      if (e.target.closest('.btns_container')) {
+      if (e.target.closest('[data-investWallet-btns]')) {
         //add withdraw funds and add withdraw tabs
         this._toggleClass(Array.from(btns), 'active');
 

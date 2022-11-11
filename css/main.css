@@ -260,13 +260,6 @@ li:hover .nav__item--name {
 }
 
 /* Profile Section */
-.section__profile h3 {
-  font-size: 1.8rem;
-}
-.section__profile h4 {
-  font-size: 1.5rem;
-}
-
 .profile__cont-photo + div > p {
   font-size: 1.4rem;
 }
@@ -283,7 +276,7 @@ li:hover .nav__item--name {
 }
 .section__settings > div > div > select {
   text-align: center;
-  font-style: 1.3rem;
+  font-size: 1.1rem;
   text-transform: capitalize;
 }
 
@@ -358,10 +351,64 @@ li:hover .nav__item--name {
   display: none;
 }
 
+.investWallet_cont {
+  background: var(--bg-primary-alpha-five);
+}
+.investWallet_cont_btns_cont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 2rem;
+}
+.investWallet_cont .btns_container button.active {
+  color: white;
+  box-shadow: inset 20rem 0 0 0 var(--purple-primary-alpha-nine);
+}
+.investWallet_cont .deposit_income {
+  background-color: var(--blue-primary-alpha-five);
+  border-radius: 1.6rem;
+  width: 90%;
+  margin: 5rem auto;
+  padding: 2rem 1rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.1rem var(--blue-primary-alpha-three);
+}
+.investWallet_cont .deposit_income ~ div > label {
+  color: var(--font-primary);
+  font-size: 1.6rem;
+}
+.investWallet_cont .deposit_income ~ div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem 0;
+  padding: 1rem;
+}
+.investWallet_cont .deposit_income ~ div > div > input {
+  border-radius: 1.1rem;
+  border: none;
+  padding: 1.6rem;
+  width: 100%;
+  transition: all 150ms ease-in;
+  font-size: 1.6rem;
+  background: var(--bg-primary-alpha-eight);
+  color: var(--font-primary);
+}
+.investWallet_cont .deposit_income ~ div > div > input:focus, .investWallet_cont .deposit_income ~ div > div > input:hover {
+  outline: 3px solid var(--blue-primary-alpha-three);
+  outline-offset: 0.1rem;
+}
+.investWallet_cont .deposit_income ~ div > div button.active {
+  display: block;
+  pointer-events: auto;
+  animation: showBtn 500ms linear forwards;
+}
+.investWallet_cont .deposit_income ~ div > div button.active:hover, .investWallet_cont .deposit_income ~ div > div button.active:focus {
+  background-color: var(--blue-primary-alpha-three);
+}
+
 .section {
   padding: 1rem 1rem 3rem 2rem;
   min-height: 100vh;
-  background: var(--bg-secondary);
+  background-color: var(--white-bg);
   color: var(--font-primary);
 }
 .section_items {
@@ -371,6 +418,12 @@ li:hover .nav__item--name {
   border-radius: 0.3rem;
   box-shadow: 0.1rem 0.1rem 5px 0 var(--medium-shadow-black);
   padding-inline: 0.5rem;
+}
+.section h3 {
+  font-size: 1.8rem;
+}
+.section h4 {
+  font-size: 1.5rem;
 }
 
 .acc_div div:first-child {
@@ -517,60 +570,6 @@ li:hover .nav__item--name {
   height: 2.5rem;
 }
 
-.add_withdraw_container {
-  background: var(--bg-primary-alpha-five);
-}
-.add_withdraw_container .btns_container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-radius: 2rem;
-}
-.add_withdraw_container .btns_container button.active {
-  color: white;
-  box-shadow: inset 20rem 0 0 0 var(--purple-primary-alpha-nine);
-}
-.add_withdraw_container .deposit_income {
-  background-color: var(--blue-primary-alpha-five);
-  border-radius: 1.6rem;
-  width: 90%;
-  margin: 5rem auto;
-  padding: 2rem 1rem;
-  box-shadow: 0.5rem 0.5rem 1rem 0.1rem var(--blue-primary-alpha-three);
-}
-.add_withdraw_container .deposit_income ~ div > label {
-  color: var(--font-primary);
-  font-size: 1.6rem;
-}
-.add_withdraw_container .deposit_income ~ div > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem 0;
-  padding: 1rem;
-}
-.add_withdraw_container .deposit_income ~ div > div > input {
-  border-radius: 1.1rem;
-  border: none;
-  padding: 1.6rem;
-  width: 100%;
-  transition: all 150ms ease-in;
-  font-size: 1.6rem;
-  background: var(--bg-primary-alpha-eight);
-  color: var(--font-primary);
-}
-.add_withdraw_container .deposit_income ~ div > div > input:focus, .add_withdraw_container .deposit_income ~ div > div > input:hover {
-  outline: 3px solid var(--blue-primary-alpha-three);
-  outline-offset: 0.1rem;
-}
-.add_withdraw_container .deposit_income ~ div > div button.active {
-  display: block;
-  pointer-events: auto;
-  animation: showBtn 500ms linear forwards;
-}
-.add_withdraw_container .deposit_income ~ div > div button.active:hover, .add_withdraw_container .deposit_income ~ div > div button.active:focus {
-  background-color: var(--blue-primary-alpha-three);
-}
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -616,7 +615,6 @@ li:hover .nav__item--name {
 .navbar > ul > li {
   display: flex;
   align-items: center;
-  transition: all 400ms ease-in-out;
   width: fit-content;
   position: relative;
   margin-top: 1rem;
@@ -803,17 +801,18 @@ header .nav_container_btn svg {
 .section__profile .profile__info > div,
 .section__profile .section__settings > div > div {
   display: flex;
+  background: var(--bg-secondary);
   grid-column: span 2;
   justify-content: space-between;
   border-radius: 0.3rem;
   box-shadow: 0.1rem 0.1rem 5px 0 var(--medium-shadow-black);
-  padding-inline: 1.6rem;
+  padding-inline: 1.8rem;
 }
 .section__profile .section__settings > div > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-block: 0.5rem;
+  padding-block: 0.8rem;
 }
 .section__profile .section__settings > div > div > select {
   appearance: none;

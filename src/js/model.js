@@ -19,7 +19,10 @@ export const copyRefLink = async function(element) {
 
 export const renderTab = async function(e) {
   const elem = e.target.closest('.nav_item');
-  const dataset = elem?.dataset.nav.toLowerCase();
+
+  if (!elem) return
+
+  const dataset = elem.dataset.nav.toLowerCase();
   const main = document.querySelector('main');
 
   await loader();
