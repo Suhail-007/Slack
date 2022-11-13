@@ -26,7 +26,7 @@ export const renderTab = async function(e) {
   const main = document.querySelector('main');
 
   await loader();
-  await Delay(1000);
+  await  Delay(1000);
 
   main.innerHTML = '';
 

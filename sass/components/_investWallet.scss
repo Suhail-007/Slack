@@ -1,37 +1,45 @@
-.investWallet_cont{
+.investWallet {
   background: var(--bg-primary-alpha-five);
-//need to correct the BEM METHOD //ELEMENT NAME
-  &_btns_cont {
+
+  &__btns {
     display: grid;
     grid-template-columns: 1fr 1fr;
     border-radius: 2rem;
   }
 
-  & .btns_container button.active {
+  &__btns button.active {
     color: white;
     box-shadow: inset 20rem 0 0 0 var(--purple-primary-alpha-nine);
   }
 
-
-  .deposit_income {
+  &__deposit-income {
     background-color: var(--blue-primary-alpha-five);
     border-radius: 1.6rem;
     width: 90%;
     margin: 5rem auto;
     padding: 2rem 1rem;
+    color: #fff;
+    text-align: center;
+    font-size: 1.7rem;
     box-shadow: .5rem .5rem 1rem .1rem var(--blue-primary-alpha-three);
+  }
 
-    &~div>label {
+  &__input-cont {
+    padding: 0 1rem;
+    font-size: 1.8rem;
+
+    &>label {
       color: var(--font-primary);
       font-size: 1.6rem;
     }
 
-    &~div>div {
+    &__input__btns {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 0.5rem 0;
       padding: 1rem;
+
 
       &>input {
         border-radius: 1.1rem;
@@ -62,5 +70,4 @@
       }
     }
   }
-
 }

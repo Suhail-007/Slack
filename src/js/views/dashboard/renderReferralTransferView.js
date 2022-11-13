@@ -28,15 +28,15 @@ class FundTransferView {
           <button class="btn-grey-animated active">Add Fund</button>
           <button class="btn-grey-animated">Withdrawal</button>
         </div>
-        <div class="deposit_income">
+        <div class="investWallet__deposit-income">
           <p>Total Deposit Income</p>
           <p>$1000</p>
         </div>
 
-        <div class="input_cont">
+        <div class="investWallet__input-cont">
           <label for="amount">Enter amount (in USD)</label>
 
-          <div>
+          <div data-addWithdraw-btns class="investWallet__input-cont__input__btns">
             <input id="amount" type="text">
             <button class="btn-light-blue active" data-add-fund>Add Fund</button>
             <button class="btn-light-blue" data-withdraw-fund>Withdraw Fund</button>
@@ -98,7 +98,7 @@ class FundTransferView {
   activeBtn() {
     const btns = document.querySelectorAll('[data-investWallet-btns] button');
 
-    const fundActionBtns = document.querySelectorAll('.input_cont button');
+    const fundActionBtns = document.querySelectorAll('[data-addWithdraw-btns] button');
 
     this._btnsCont.addEventListener('click', e => {
       if (e.target.closest('[data-investWallet-btns]')) {

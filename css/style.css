@@ -233,30 +233,21 @@ li:hover .nav__item--name {
 }
 
 /* Referral Container And fund transfer */
-.section_ref_transfer .referral_container {
+.section__bottom-ref {
   color: var(--font-primary);
 }
-.section_ref_transfer .referral_container h2 {
+.section__bottom-ref h2 {
   font-size: 2.5rem;
   font-weight: 400;
 }
-.section_ref_transfer .referral_container h4 {
+.section__bottom-ref__sub-head {
   font-size: 1.8rem;
   font-weight: 400;
 }
-.section_ref_transfer .referral_container a {
+.section__bottom-ref a {
   text-decoration: none;
   font-size: 1.6rem;
   color: var(--font-primary);
-}
-.section_ref_transfer .deposit_income {
-  color: #fff;
-  text-align: center;
-  font-size: 1.7rem;
-}
-.section_ref_transfer .deposit_income ~ div {
-  padding: 0 1rem;
-  font-size: 1.8rem;
 }
 
 /* Profile Section */
@@ -351,38 +342,45 @@ li:hover .nav__item--name {
   display: none;
 }
 
-.investWallet_cont {
+.investWallet {
   background: var(--bg-primary-alpha-five);
 }
-.investWallet_cont_btns_cont {
+.investWallet__btns {
   display: grid;
   grid-template-columns: 1fr 1fr;
   border-radius: 2rem;
 }
-.investWallet_cont .btns_container button.active {
+.investWallet__btns button.active {
   color: white;
   box-shadow: inset 20rem 0 0 0 var(--purple-primary-alpha-nine);
 }
-.investWallet_cont .deposit_income {
+.investWallet__deposit-income {
   background-color: var(--blue-primary-alpha-five);
   border-radius: 1.6rem;
   width: 90%;
   margin: 5rem auto;
   padding: 2rem 1rem;
+  color: #fff;
+  text-align: center;
+  font-size: 1.7rem;
   box-shadow: 0.5rem 0.5rem 1rem 0.1rem var(--blue-primary-alpha-three);
 }
-.investWallet_cont .deposit_income ~ div > label {
+.investWallet__input-cont {
+  padding: 0 1rem;
+  font-size: 1.8rem;
+}
+.investWallet__input-cont > label {
   color: var(--font-primary);
   font-size: 1.6rem;
 }
-.investWallet_cont .deposit_income ~ div > div {
+.investWallet__input-cont__input__btns {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem 0;
   padding: 1rem;
 }
-.investWallet_cont .deposit_income ~ div > div > input {
+.investWallet__input-cont__input__btns > input {
   border-radius: 1.1rem;
   border: none;
   padding: 1.6rem;
@@ -392,16 +390,16 @@ li:hover .nav__item--name {
   background: var(--bg-primary-alpha-eight);
   color: var(--font-primary);
 }
-.investWallet_cont .deposit_income ~ div > div > input:focus, .investWallet_cont .deposit_income ~ div > div > input:hover {
+.investWallet__input-cont__input__btns > input:focus, .investWallet__input-cont__input__btns > input:hover {
   outline: 3px solid var(--blue-primary-alpha-three);
   outline-offset: 0.1rem;
 }
-.investWallet_cont .deposit_income ~ div > div button.active {
+.investWallet__input-cont__input__btns button.active {
   display: block;
   pointer-events: auto;
   animation: showBtn 500ms linear forwards;
 }
-.investWallet_cont .deposit_income ~ div > div button.active:hover, .investWallet_cont .deposit_income ~ div > div button.active:focus {
+.investWallet__input-cont__input__btns button.active:hover, .investWallet__input-cont__input__btns button.active:focus {
   background-color: var(--blue-primary-alpha-three);
 }
 
@@ -556,16 +554,16 @@ li:hover .nav__item--name {
   fill: var(--dark-silver-primary);
 }
 
-.referral_container {
+.section__bottom {
   margin-top: 10rem;
 }
-.referral_container .ref_img_cont {
+.section__bottom-ref__img-cont {
   width: 35rem;
 }
-.referral_container .ref_img_cont img {
+.section__bottom-ref__img-cont img {
   width: 100%;
 }
-.referral_container button svg {
+.section__bottom button svg {
   width: 2.5rem;
   height: 2.5rem;
 }
@@ -725,12 +723,12 @@ header .nav_container_btn svg {
   padding: 1rem;
 }
 
-.referral_container {
+.section__bottom-ref {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background: var(--purple-primary-alpha-three);
-  padding: 0 1rem 1.5rem 1rem;
+  padding: 5rem 1.5rem;
   color: var(--font-primary);
 }
 
@@ -874,4 +872,4 @@ header .nav_container_btn svg {
   --font-primary: #fff;
 }
 
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=style.css.map */
