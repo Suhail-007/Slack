@@ -1,9 +1,9 @@
 import lineConfig from '../../charts/lineChart.js';
-import pieConfig from '../../charts/pieChart.js';
+import pieConfig from '../../charts/doughnutChart.js';
 
 class ChartView {
   _parentElement = document.querySelector('main');
-  _pieChart;
+  _doughnutChart;
   _lineChart;
   
   renderChart() {
@@ -18,7 +18,7 @@ class ChartView {
       </section>`
       
     this._parentElement.insertAdjacentHTML('beforeend', html);
-    this._pieChart = document.getElementById('roi');
+    this._doughnutChart = document.getElementById('roi');
     this._lineChart = document.getElementById('lines').getContext('2d');
     this._createChart();
   }
@@ -26,7 +26,7 @@ class ChartView {
   _createChart() {
     const linechart = new Chart(this._lineChart, lineConfig);
     
-     const pieChart = new Chart(this._pieChart, pieConfig);
+     const doughnutChart = new Chart(this._doughnutChart, pieConfig);
   }
 }
 

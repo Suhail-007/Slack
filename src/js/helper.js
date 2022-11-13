@@ -10,3 +10,8 @@ export const NAV_TOGGLE_BTN = function() {
     if (btn) sideBar.classList.add('open');
   });
 };
+
+export const chartTypes = {
+  typeOne: 'doughnut',
+  typeTwo: 'line',
+}

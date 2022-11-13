@@ -24,15 +24,13 @@ const controlFundTransferView = async function() {
 
 
 function init() {
+  model.getLocalStorage();
+  model.initTheme();
+  
   controlDashboard();
   controlFundTransferView();
   controlNavTab();
   NAV_TOGGLE_BTN();
-
-
-  model.getLocalStorage();
-  model.initTheme();
-
 }
 
 init();

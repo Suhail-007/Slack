@@ -10,7 +10,7 @@ class DashboardView {
   async renderDashboardMarkup() {
     this._parentElement.innerHTML = '';
     minimalAccInfo.renderMinimalAccView();
-    // chartView.renderChart();
+    chartView.renderChart();
     statisticsView.renderStatisticsView();
     fundTransferView.renderReferralTransferView();
   }

@@ -3,11 +3,7 @@ import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { Delay } from './delay/delay.js'
 import { loader } from './loader/loaderView.js';
-
-export const chartTypes = {
-  typeOne: 'doughnut',
-  typeTwo: 'line',
-}
+import {chartTypes} from './helper.js';
 
 export const theme = {
   mode: 'system default',
@@ -26,8 +22,11 @@ export const renderTab = async function(e) {
   const main = document.querySelector('main');
 
   await loader();
-  await  Delay(1000);
-
+  await Delay(1000);
+  
+  //get chart specifically
+  
+  
   main.innerHTML = '';
 
   switch (dataset) {
@@ -35,6 +34,7 @@ export const renderTab = async function(e) {
       dashboardView.renderDashboardMarkup();
       fundTransferView.addHandlerCopyRef(copyRefLink);
       fundTransferView.activeBtn();
+      
       break;
 
     case 'profile':
@@ -51,6 +51,7 @@ export const settings = function(e) {
   let selectElem;
 
   if (elem && e.target.closest(`[data-select=theme]`)) {
+    //get select tag 
     selectElem = e.target.closest(`[data-select=theme]`);
     applyTheme(selectElem);
   }
@@ -59,7 +60,10 @@ export const settings = function(e) {
     selectElem = e.target.closest(`[data-select=chartOne]`);
 
     selectElem.addEventListener('change', (e) => {
-      console.log(e.target.value);
+      const selectedValue = e.target.value;
+      chartTypes.typeOne = selectedValue;
+      
+      setLocalStorage('chartTypeOne', chartTypes.typeOne);
     }, { once: true });
 
   }
@@ -68,14 +72,19 @@ export const settings = function(e) {
     selectElem = e.target.closest(`[data-select=chartTwo]`);
 
     selectElem.addEventListener('change', (e) => {
-      console.log(e.target.value);
+      const selectedValue = e.target.value;
+      chartTypes.typeTwo = selectedValue;
+      console.log(selectedValue);
+      setLocalStorage('chartTypeTwo', chartTypes.typeTwo);
     }, { once: true });
   }
 }
 
 
 const applyTheme = function(elem) {
+  //assign event listener to select tag
   elem.addEventListener('change', (e) => {
+    //get value
     const selectedValue = e.target.value.toLowerCase();
     const body = document.body;
 
@@ -120,6 +129,13 @@ export const setLocalStorage = function(key, value) {
 //get saved value from Local Storage
 export const getLocalStorage = function() {
   const selectedTheme = JSON.parse(localStorage.getItem('selectedTheme'));
+  const chartOne = JSON.parse(localStorage.getItem('chartTypeOne'));
+  const chartTwo = JSON.parse(localStorage.getItem('chartTypeTwo'));
 
   theme.mode = selectedTheme ? selectedTheme : theme.mode;
+  
+  chartTypes.typeOne = chartOne ? chartOne : chartTypes.chartOne;
+  chartTypes.typeTwo = chartTwo ? chartTwo : chartTypes.chartTwo;
+  
+  console.log(chartTypes);
 }

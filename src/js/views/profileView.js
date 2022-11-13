@@ -1,3 +1,4 @@
+import { chartTypes } from '../helper.js'
 import { theme } from '../model.js';
 
 class ProfileView {
@@ -75,20 +76,20 @@ class ProfileView {
             <div>
               <label for="chartOne">Chart 1</label>
               <select data-select='chartOne' name="chartOne" id="chartOne">
-                <option selected value="Doughnut">Doughnut</option>
-                <option value="line">Line</option>
-                <option value="bar">Bar</option>
-                <option value="pie">Pie</option>
+                <option ${this._isSelectedValue('doughtnut', 'typeOne')} value="doughnut">Doughnut</option>
+                <option ${this._isSelectedValue('line', 'typeOne')} value="line">Line</option>
+                <option ${this._isSelectedValue('bar', 'typeOne')} value="bar">Bar</option>
+                <option ${this._isSelectedValue('pie', 'typeOne')} value="pie">Pie</option>
               </select>
             </div>
               
             <div>
               <label for="chartTwo">Chart 2</label>
               <select data-select='chartTwo' name="chartTwo" id="chartTwo">
-                <option selected value="line">Line</option>
-                <option value="bar">Bar</option>
-                <option value="pie">Pie</option>
-                <option value="doughnut">Doughnut</option>
+                <option ${this._isSelectedValue('line', 'typeTwo')} value="line">Line</option>
+                <option ${this._isSelectedValue('bar', 'typeTwo')} value="bar">Bar</option>
+                <option ${this._isSelectedValue('pie', 'typeTwo')} value="pie">Pie</option>
+                <option ${this._isSelectedValue('doughnut', 'typeTwo')} value="doughnut">Doughnut</option>
               </select>
             </div>
           </div>
@@ -105,15 +106,23 @@ class ProfileView {
     this._settingsElem.addEventListener('click', handler);
   }
 
-  _isSelectedValue(value) {
+  _isSelectedValue(value, selectOption = 'theme') {
     value = value.toLowerCase();
 
-    const selectedTheme = theme.mode;
+    if (selectOption === 'theme') {
+      const selectedTheme = theme.mode;
+      if (selectedTheme === value) return 'selected';
+    }
 
-    if (selectedTheme === value) return 'selected';
-    if (selectedTheme === value) return 'selected';
-    if (selectedTheme === value) return 'selected';
+    if (selectOption === 'typeOne') {
+      const selectedTheme = chartTypes.typeOne;
+      if (selectedTheme === value) return 'selected';
+    }
+
+    if (selectOption === 'typeTwo') {
+      const selectedTheme = chartTypes.typeTwo;
+      if (selectedTheme === value) return 'selected'
+    }
   }
 }
-
 export default new ProfileView();
