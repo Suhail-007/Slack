@@ -134,8 +134,8 @@ export const getLocalStorage = function() {
 
   theme.mode = selectedTheme ? selectedTheme : theme.mode;
   
-  chartTypes.typeOne = chartOne ? chartOne : chartTypes.chartOne;
-  chartTypes.typeTwo = chartTwo ? chartTwo : chartTypes.chartTwo;
+  chartTypes.typeOne = chartOne ? chartOne : 'doughnut';
+  chartTypes.typeTwo = chartTwo ? chartTwo : 'line';
   
   console.log(chartTypes);
 }
