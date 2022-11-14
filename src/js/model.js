@@ -3,7 +3,7 @@ import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { Delay } from './delay/delay.js'
 import { loader } from './loader/loaderView.js';
-import {chartTypes} from './helper.js';
+import { chartTypes } from './helper.js';
 
 export const theme = {
   mode: 'system default',
@@ -23,10 +23,10 @@ export const renderTab = async function(e) {
 
   await loader();
   await Delay(1000);
-  
+
   //get chart specifically
-  
-  
+
+
   main.innerHTML = '';
 
   switch (dataset) {
@@ -34,7 +34,7 @@ export const renderTab = async function(e) {
       dashboardView.renderDashboardMarkup();
       fundTransferView.addHandlerCopyRef(copyRefLink);
       fundTransferView.activeBtn();
-      
+
       break;
 
     case 'profile':
@@ -62,7 +62,7 @@ export const settings = function(e) {
     selectElem.addEventListener('change', (e) => {
       const selectedValue = e.target.value;
       chartTypes.typeOne = selectedValue;
-      
+
       setLocalStorage('chartTypeOne', chartTypes.typeOne);
     }, { once: true });
 
@@ -133,9 +133,7 @@ export const getLocalStorage = function() {
   const chartTwo = JSON.parse(localStorage.getItem('chartTypeTwo'));
 
   theme.mode = selectedTheme ? selectedTheme : theme.mode;
-  
+
   chartTypes.typeOne = chartOne ? chartOne : 'doughnut';
   chartTypes.typeTwo = chartTwo ? chartTwo : 'line';
-  
-  console.log(chartTypes);
 }
