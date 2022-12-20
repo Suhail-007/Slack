@@ -45,34 +45,33 @@ main {
   margin-top: 4rem;
   margin-left: 4rem;
   min-height: 100vh;
-  overflow: hidden;
   background-color: var(--white-bg);
   box-shadow: .1rem 0 .5rem 0 var(--shadow-alpha-five);
 
-  &::after {
-    content: "";
-    position: absolute;
-    top: $second-layer-top;
-    left: $second-layer-left;
-    right: 0;
-    bottom: 0;
-    z-index: -2;
-    border-top-left-radius: $border-top-left-radius;
-    background: var(--bg-primary)-alpha-five;
-    box-shadow: -.1rem .1rem 1rem .5rem var(--layer-two-shadow);
-  }
-
+  &::after,
   &::before {
     content: "";
     position: absolute;
-    top: calc($second-layer-top / 2);
-    left: calc($second-layer-left / 2);
     right: 0;
     bottom: 0;
-    z-index: -1;
+    background: var(--bg-primary-alpha-five);
     border-top-left-radius: $border-top-left-radius;
-    background: var(--bg-primary)-alpha-five;
-    box-shadow: inset 0px .1rem .5rem .3rem var(--layer-one), 0px .1rem .5rem .3rem var(--layer-one)-secondary;
+  }
+
+  //first overlay
+  &::before {
+    top: $second-layer-top;
+    left: calc($second-layer-left / 2);
+    z-index: -1;
+    box-shadow: 0 .1rem .5rem .3rem var(--layer-one-secondary);
+  }
+
+  //second overlay
+  &::after {
+    top: calc($second-layer-top * 3);
+    left: $second-layer-left;
+    z-index: -2;
+    box-shadow: -.1rem .1rem 1rem .5rem var(--layer-two-shadow);
   }
 }
 
