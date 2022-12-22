@@ -1,4 +1,4 @@
-import {chartTypes} from '../helper.js';
+import { chartTypes } from '../config.js';
 
 //xAxisData
 const months = [
@@ -17,7 +17,7 @@ const months = [
 const data = [0.30, 0.45, 0.35, 0.55, 0.35, 0.5, 0.80, 0.60, 0.2];
 
 const config = {
-  type: chartTypes.typeTwo,
+  type: chartTypes.chartTwo,
   data: {
     labels: months,
     datasets: [{
@@ -26,7 +26,7 @@ const config = {
       backgroundColor: '#fff',
       fill: {
         target: 'origin',
-        above:(context) => {
+        above: (context) => {
           const chart = context.chart;
           const { data, chartArea, scales, ctx } = chart;
           if (!chartArea) return null
@@ -58,7 +58,6 @@ function belowGradient(ctx, data, chartArea, scales) {
   gradientBackground.addColorStop(0, 'rgba(142, 74, 237, 0.4)');
   gradientBackground.addColorStop(1, 'rgba(142, 74, 237, 0.1)');
   return gradientBackground;
-
 }
 
-export default config 
+export default config

@@ -3,7 +3,7 @@ import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { Delay } from './delay/delay.js'
 import { loader } from './loader/loaderView.js';
-import { chartTypes } from './helper.js';
+import { chartTypes } from './config.js';
 
 export const theme = {
   mode: 'system default',
@@ -23,9 +23,6 @@ export const renderTab = async function(e) {
 
   await loader();
   await Delay(1000);
-
-  //get chart specifically
-
 
   main.innerHTML = '';
 
@@ -61,11 +58,10 @@ export const settings = function(e) {
 
     selectElem.addEventListener('change', (e) => {
       const selectedValue = e.target.value;
-      chartTypes.typeOne = selectedValue;
+      chartTypes.chartOne = selectedValue;
 
-      setLocalStorage('chartTypeOne', chartTypes.typeOne);
+      setLocalStorage('chartTypeOne', chartTypes.chartOne);
     }, { once: true });
-
   }
 
   if (elem && e.target.closest(`[data-select=chartTwo]`)) {
@@ -73,9 +69,9 @@ export const settings = function(e) {
 
     selectElem.addEventListener('change', (e) => {
       const selectedValue = e.target.value;
-      chartTypes.typeTwo = selectedValue;
-      console.log(selectedValue);
-      setLocalStorage('chartTypeTwo', chartTypes.typeTwo);
+      chartTypes.chartTwo = selectedValue;
+
+      setLocalStorage('chartTypeTwo', chartTypes.chartTwo);
     }, { once: true });
   }
 }
@@ -134,6 +130,6 @@ export const getLocalStorage = function() {
 
   theme.mode = selectedTheme ? selectedTheme : theme.mode;
 
-  chartTypes.typeOne = chartOne ? chartOne : 'doughnut';
-  chartTypes.typeTwo = chartTwo ? chartTwo : 'line';
+  chartTypes.chartOne = chartOne ? chartOne : 'doughnut';
+  chartTypes.chartTwo = chartTwo ? chartTwo : 'line';
 }

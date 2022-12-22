@@ -1,12 +1,11 @@
-import { chartTypes } from '../helper.js'
+import { chartTypes } from '../config.js'
 
 export const getChartLocalStorage = function() {
   const chartOne = JSON.parse(localStorage.getItem('chartTypeOne'));
 
-  chartTypes.typeOne = chartOne ? chartOne : chartTypes.chartOne;
+  chartTypes.chartOne = chartOne ? chartOne : chartTypes.chartOne;
   
-  const chart = chartTypes.typeOne;
-  console.log(chart);
+  const chart = chartTypes.chartOne;
   return chart
 }
 
@@ -24,7 +23,7 @@ const months = [
 const data = [0.30, 0.45, 0.35, 0.55, 0.35, 0.5];
 
 const config = {
-  type: chartTypes.typeOne,
+  type: chartTypes.chartOne,
   data: {
     labels: months,
     datasets: [{

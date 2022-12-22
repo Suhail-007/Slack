@@ -1,4 +1,4 @@
-import { chartTypes } from '../helper.js'
+import { chartTypes } from '../config.js'
 import { theme } from '../model.js';
 
 class ProfileView {
@@ -76,20 +76,20 @@ class ProfileView {
             <div>
               <label for="chartOne">Chart 1</label>
               <select data-select='chartOne' name="chartOne" id="chartOne">
-                <option ${this._isSelectedValue('doughtnut', 'typeOne')} value="doughnut">Doughnut</option>
-                <option ${this._isSelectedValue('line', 'typeOne')} value="line">Line</option>
-                <option ${this._isSelectedValue('bar', 'typeOne')} value="bar">Bar</option>
-                <option ${this._isSelectedValue('pie', 'typeOne')} value="pie">Pie</option>
+                <option ${this._isSelectedValue('doughtnut', 'chartOne')} value="doughnut">Doughnut</option>
+                <option ${this._isSelectedValue('line', 'chartOne')} value="line">Line</option>
+                <option ${this._isSelectedValue('bar', 'chartOne')} value="bar">Bar</option>
+                <option ${this._isSelectedValue('pie', 'chartOne')} value="pie">Pie</option>
               </select>
             </div>
               
             <div>
               <label for="chartTwo">Chart 2</label>
               <select data-select='chartTwo' name="chartTwo" id="chartTwo">
-                <option ${this._isSelectedValue('line', 'typeTwo')} value="line">Line</option>
-                <option ${this._isSelectedValue('bar', 'typeTwo')} value="bar">Bar</option>
-                <option ${this._isSelectedValue('pie', 'typeTwo')} value="pie">Pie</option>
-                <option ${this._isSelectedValue('doughnut', 'typeTwo')} value="doughnut">Doughnut</option>
+                <option ${this._isSelectedValue('line', 'chartTwo')} value="line">Line</option>
+                <option ${this._isSelectedValue('bar', 'chartTwo')} value="bar">Bar</option>
+                <option ${this._isSelectedValue('pie', 'chartTwo')} value="pie">Pie</option>
+                <option ${this._isSelectedValue('doughnut', 'chartTwo')} value="doughnut">Doughnut</option>
               </select>
             </div>
           </div>
@@ -114,13 +114,13 @@ class ProfileView {
       if (selectedTheme === value) return 'selected';
     }
 
-    if (selectOption === 'typeOne') {
-      const selectedTheme = chartTypes.typeOne;
+    if (selectOption === 'chartOne') {
+      const selectedTheme = chartTypes.chartOne;
       if (selectedTheme === value) return 'selected';
     }
 
-    if (selectOption === 'typeTwo') {
-      const selectedTheme = chartTypes.typeTwo;
+    if (selectOption === 'chartTwo') {
+      const selectedTheme = chartTypes.chartTwo;
       if (selectedTheme === value) return 'selected'
     }
   }
