@@ -198,12 +198,16 @@ li:hover .nav__item--name {
   font-size: 1.3rem;
   font-weight: 500;
   color: var(--font-primary);
+  position: relative;
+  z-index: 10;
 }
 
 .icon_heading p,
 .dollar-percentage span {
   text-transform: uppercase;
   font-weight: bold;
+  position: relative;
+  z-index: 10;
 }
 
 .box-1 .icon_heading p,

@@ -50,12 +50,16 @@ li {
   font-size: 1.3rem;
   font-weight: 500;
   color: var(--font-primary);
+  position: relative;
+  z-index: 10;
 }
 
 .icon_heading p,
 .dollar-percentage span {
   text-transform: uppercase;
   font-weight: bold;
+  position: relative;
+  z-index: 10;
 }
 
 .box-1 .icon_heading p,
@@ -81,7 +85,6 @@ li {
 
 /* Referral Container And fund transfer */
 .section__bottom {
-
   &-ref {
     color: var(--font-primary);
 
@@ -104,7 +107,6 @@ li {
 }
 
 /* Profile Section */
-
 .profile__cont-photo {
   &+div>p {
     font-size: 1.4rem;

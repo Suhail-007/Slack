@@ -3,6 +3,8 @@ import doughnutConfig from '../../charts/doughnutChart.js';
 
 import { chartTypes } from '../../config.js'
 
+//The most common is net income divided by the total cost of the investment, or ROI = Net income / Cost of investment x 100.
+
 class ChartView {
   _parentElement = document.querySelector('main');
   _doughnutChart;
