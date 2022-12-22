@@ -399,6 +399,7 @@ li:hover .nav__item--name {
 }
 
 .section {
+  border-top-left-radius: 4rem;
   padding: 1rem 1rem 3rem 2rem;
   min-height: 100vh;
   background-color: var(--white-bg);
@@ -860,9 +861,6 @@ header .nav_container_btn svg {
   /*black shadows*/
   --medium-shadow-black: rgba(0, 0, 0, 0.3);
   --shadow: rgba(200, 200, 200, 1);
-  /*Values for calc function*/
-  --second-layer-left: -5%;
-  --second-layer-top: 1%;
   /*Font Colors*/
   --font-primary: #fff;
 }

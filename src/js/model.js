@@ -1,8 +1,6 @@
 import dashboardView from './views/dashboard/dashboardView.js';
 import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
-import { Delay } from './delay/delay.js'
-import { loader } from './loader/loaderView.js';
 import { chartTypes } from './config.js';
 
 export const theme = {
@@ -21,22 +19,22 @@ export const renderTab = async function(e) {
   const dataset = elem.dataset.nav.toLowerCase();
   const main = document.querySelector('main');
 
-  await loader();
-  await Delay(1000);
-
   main.innerHTML = '';
 
   switch (dataset) {
     case 'dashboard':
+      await dashboardView.loader();
+      await dashboardView.Delay(1000);
       dashboardView.renderDashboardMarkup();
       fundTransferView.addHandlerCopyRef(copyRefLink);
       fundTransferView.activeBtn();
-
       break;
 
     case 'profile':
+      await profileView.loader();
+      await profileView.Delay(1000);
       profileView.renderProfileView();
-      profileView.addHandlerSettings(settings)
+      profileView.addHandlerSettings(settings);
       break;
     default:
       return
@@ -112,7 +110,7 @@ const systemDefaultTheme = function() {
 }
 
 //initialize the theme on pahe load
-export const initTheme = function() {
+export const initThemeLocalStorage = function() {
   //apply the theme
   theme.mode === 'system default' ? systemDefaultTheme() : theme.mode === 'light' ? '' : theme.mode === 'dark' ? document.body.classList.add('dark') : '';
 }

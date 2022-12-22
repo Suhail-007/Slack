@@ -1,11 +1,13 @@
+import View from './View.js'
 import { chartTypes } from '../config.js'
 import { theme } from '../model.js';
 
-class ProfileView {
-  _parentElement = document.querySelector('main');
+class ProfileView extends View {
+  _parentElem = document.querySelector('main');
   _settingsElem;
 
   renderProfileView() {
+    this.clear();
     this._generateHTML();
   }
 
@@ -97,7 +99,7 @@ class ProfileView {
     
       </section>`
 
-    this._parentElement.insertAdjacentHTML('beforeend', html);
+    this._parentElem.insertAdjacentHTML('beforeend', html);
   }
 
   addHandlerSettings(handler) {

@@ -1,4 +1,6 @@
-class StatisticsView {
+import View from '../View.js'
+
+class StatisticsView extends View {
   _parentElement = document.querySelector('main');
 
   renderStatisticsView() {

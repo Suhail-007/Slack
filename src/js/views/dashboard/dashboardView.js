@@ -1,14 +1,14 @@
-import * as model from '../../model.js'
+import View from '../View.js'
 import minimalAccInfo from './minimalAccView.js';
 import fundTransferView from './renderReferralTransferView.js';
 import statisticsView from './statisticsView.js';
 import chartView from './chartView.js';
 
-class DashboardView {
-  _parentElement = document.querySelector('main');
+class DashboardView extends View {
+  _parentElem = document.querySelector('main');
 
   async renderDashboardMarkup() {
-    this._parentElement.innerHTML = '';
+    this._parentElem.innerHTML = '';
     minimalAccInfo.renderMinimalAccView();
     chartView.renderChart();
     statisticsView.renderStatisticsView();

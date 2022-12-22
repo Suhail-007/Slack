@@ -1,4 +1,6 @@
-class MinimalAccView {
+import View from '../View.js'
+
+class MinimalAccView extends View {
   _parentElement = document.querySelector('main');
 
   renderMinimalAccView() {

@@ -1,4 +1,6 @@
-class FundTransferView {
+import View from '../View.js'
+
+class FundTransferView extends View {
   _parentElement = document.querySelector('main');
   _copyButton;
   _btnsCont;
