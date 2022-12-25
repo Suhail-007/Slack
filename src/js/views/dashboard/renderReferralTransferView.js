@@ -18,7 +18,7 @@ class FundTransferView extends View {
         <a href="#" data-ref-link class="ref_link">https://github.com/Suhail-007/dashboard-ui</a>
         <button data-copy-btn class="copy_ref_link btn-purple">
           <svg>
-          <use href="src/images/icons.svg#clipboard"></use>
+          <use href="src/images/icons.svg#icon_copy"></use>
           </svg>
           <span>
             Copy Referral Link

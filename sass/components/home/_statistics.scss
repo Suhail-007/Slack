@@ -26,6 +26,7 @@
     border-radius: .5rem;
     padding: 0.3rem;
     width: 2.8rem;
+    position: relative;
     height: 2.8rem;
     box-shadow: .3rem .3rem .5rem 0 rgba(0, 0, 0, 0.1);
 
@@ -63,7 +64,7 @@
     }
 
     & .icon_heading>div>svg {
-      fill: var(--dark-bg-primary-color);
+      fill: var(--dark-bg-primary-alpha-eight);
       fill-opacity: 1;
       stroke: none;
       stroke-width: 1rem;
@@ -81,7 +82,6 @@
 
     & .icon_heading>div>svg {
       fill: var(--cyan-primary);
-      stroke: var(--cyan-primary);
       stroke-width: 1rem;
     }
   }
