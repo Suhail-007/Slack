@@ -1,10 +1,10 @@
 import View from '../View.js'
 
 class StatisticsView extends View {
-  _parentElement = document.querySelector('main');
+  // _parentElement = document.querySelector('main');
 
   renderStatisticsView() {
-    let html = `
+    return `
     <section data-statistics-boxes class="statistics_boxes">
       <div class="box box-1">
         <div class="icon_heading">
@@ -85,7 +85,7 @@ class StatisticsView extends View {
       </div>
     </section>`
 
-    this._parentElement.insertAdjacentHTML('beforeend', html);
+    // this._parentElement.insertAdjacentHTML('beforeend', html);
   }
 }
 

@@ -1,14 +1,17 @@
 import * as model from './model.js';
-import fundTransferView from './views/dashboard/renderReferralTransferView.js';
+import homeView from './views/homeView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
+import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { NAV_TOGGLE_BTN } from './helper.js';
-import { firebaseApp } from './firebase-app.js';
+// import { firebaseApp } from './firebase-app.js';
+
 
 class App {
   async init() {
     model.getLocalStorage();
     model.initThemeLocalStorage();
+    homeView.generateHomeMarkup();
 
     await this.controlDashboard();
     NAV_TOGGLE_BTN();
@@ -19,7 +22,7 @@ class App {
   async controlDashboard() {
     await dashboardView.loader();
     await dashboardView.Delay(1000);
-    dashboardView.renderDashboardMarkup();
+    dashboardView.generateDashboardSections();
   }
 
   controlNavTab() {

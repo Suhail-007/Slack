@@ -17,15 +17,12 @@ export const renderTab = async function(e) {
   if (!elem) return
 
   const dataset = elem.dataset.nav.toLowerCase();
-  const main = document.querySelector('main');
-
-  main.innerHTML = '';
-
+  
   switch (dataset) {
     case 'dashboard':
       await dashboardView.loader();
       await dashboardView.Delay(1000);
-      dashboardView.renderDashboardMarkup();
+      dashboardView.generateDashboardSections();
       fundTransferView.addHandlerCopyRef(copyRefLink);
       fundTransferView.activeBtn();
       break;

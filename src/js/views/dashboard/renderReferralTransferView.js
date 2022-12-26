@@ -1,12 +1,12 @@
 import View from '../View.js'
 
 class FundTransferView extends View {
-  _parentElement = document.querySelector('main');
+  // _parentElement = document.querySelector('main');
   _copyButton;
   _btnsCont;
 
   renderReferralTransferView() {
-    let html = `
+    return `
     <section class="section__bottom">
       <div class="section__bottom-ref">
         <h2>REFER A FRIEND</h2>
@@ -47,9 +47,7 @@ class FundTransferView extends View {
       </div>
     </section>`;
 
-    this._parentElement.insertAdjacentHTML('beforeend', html);
-    this._copyButton = document.querySelector('[data-copy-btn]');
-    this._btnsCont = document.querySelector('[data-investWallet-btns]');
+    // ._parentElement.insertAdjacentHTML('beforeend', html);
   }
 
   _toastCopy() {
@@ -73,6 +71,8 @@ class FundTransferView extends View {
   }
 
   addHandlerCopyRef(handler) {
+    this._copyButton = document.querySelector('[data-copy-btn]');
+    this._btnsCont = document.querySelector('[data-investWallet-btns]');
     const refLink = document.querySelector('[data-ref-link]');
     this._copyButton.addEventListener('click', e => {
       const btn = e.target.closest('[data-copy-btn]');

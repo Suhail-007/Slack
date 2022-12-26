@@ -7,11 +7,13 @@ class ProfileView extends View {
   _settingsElem;
 
   renderProfileView() {
+    //using clear fpr temporary here will add real data from api and call render function then
     this.clear();
     this._generateHTML();
   }
 
   _generateHTML() {
+    console.log('running');
     const html = `
       <section class="section section__profile">
         <div class="section__heading tab-heading u-letter-spacing-small">
@@ -96,15 +98,12 @@ class ProfileView extends View {
             </div>
           </div>
         </div>
-    
       </section>`
-
-    this._parentElem.insertAdjacentHTML('beforeend', html);
+    this._parentElem.insertAdjacentHTML('afterbegin', html);
   }
 
   addHandlerSettings(handler) {
     this._settingsElem = document.querySelector('[data-settings]');
-
     this._settingsElem.addEventListener('click', handler);
   }
 
@@ -127,4 +126,5 @@ class ProfileView extends View {
     }
   }
 }
+
 export default new ProfileView();

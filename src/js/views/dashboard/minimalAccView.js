@@ -1,10 +1,10 @@
 import View from '../View.js'
 
 class MinimalAccView extends View {
-  _parentElement = document.querySelector('main');
+  // _parentElement = document.querySelector('main');
 
   renderMinimalAccView() {
-    let html = `
+    return `
     <section class="account_info" data-minimal-acc-info>
       <div class="total_cont acc_div">
         <div>
@@ -43,7 +43,7 @@ class MinimalAccView extends View {
       </div>
     </section>`
 
-    this._parentElement.insertAdjacentHTML('beforeend', html);
+    // this._parentElement.insertAdjacentHTML('beforeend', html);
   }
 }
 
