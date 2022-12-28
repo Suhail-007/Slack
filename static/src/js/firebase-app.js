@@ -1,11 +1,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js'
-
-// If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js'
-
-// Add Firebase products that you want to use
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
-import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js'
+import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, deleteField, setDoc } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js'
 
 const firebaseConfig = {
   apiKey: "AIzaSyB0YK0OmBjg6AFeqa-Kl3sm0_b1FWZfQV4",
@@ -19,34 +15,28 @@ const firebaseConfig = {
 
 export const firebaseApp = initializeApp(firebaseConfig);
 
-//database
 export const db = getFirestore(firebaseApp);
-// console.log(db);
-
-//user login auth
+const auth = getAuth();
 
 // const analytics = getAnalytics(firebaseApp);
+export const getUser = async function(email, password) {
+  try {
+   const userCreadentials = await signInWithEmailAndPassword(auth, email, password);
+    return userCreadentials.user;
+  } catch (e) {
+    console.log(e.code, e.message);
+  }
+}
 
 
 // try {
-//   createUserWithEmailAndPassword(auth, 'dastaanq007@gmail.com', '123456').then((userCredentials) => {
+//   signInWithEmailAndPassword(auth, 'dastaanq007@gmail.com', '123456').then((userCredentials) => {
+//     console.log(userCredentials);
 //     const user = userCredentials.user;
-//     console.log(user);
+
+//     // console.log(user);
 //   })
 // } catch (e) {
-//   console.log(e.code, e.message);
+//   // console.log(e.code);
+//   console.log(e);
 // }
-
-
-export const auth = getAuth();
-try {
-  signInWithEmailAndPassword(auth, 'dastaanq007@gmail.com', '123456').then((userCredentials) => {
-    console.log(userCredentials);
-    const user = userCredentials.user;
-    
-    // console.log(user);
-  })
-} catch (e) {
-  // console.log(e.code);
-  console.log(e);
-}

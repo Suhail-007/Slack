@@ -37,6 +37,7 @@ export const renderTab = async function() {
     case '/index.html':
       loginView._generateMarkup();
       loginView.isFocus();
+      loginView.getLoginCredentials();
       break;
 
     case 'dashboard':

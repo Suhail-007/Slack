@@ -1,10 +1,10 @@
 import View from './View.js';
+import { getUser } from '../firebase-app.js'
 
 class loginView extends View {
   _parentElem = document.querySelector('main');
 
   _generateMarkup() {
-
     const html = `
     <section class="form">
       <div class="form__website-logo">
@@ -15,11 +15,11 @@ class loginView extends View {
 
         <h2 class="form__login__heading">Login to your account</h2>
 
-        <form>
-          <input autocomplete='on' title='example@example.com' type="email" id="email" />
+        <form enctype='multipart/form-data' method='get'>
+          <input autocomplete='on' title='example@example.com' type="email" id="email" name='email'/>
           <label for="email">Email</label>
 
-          <input autocomplete='on' type='text' id='password'>
+          <input autocomplete='on' type='text' name='password' id='password'>
           <label for="password">Password</label>
 
           <button type="submit">Log in</button>
@@ -29,13 +29,13 @@ class loginView extends View {
       </div>
     </section>`
 
-this._parentElem.innerHTML = '';
+    this._parentElem.innerHTML = '';
     this._parentElem.insertAdjacentHTML('beforeend', html);
   }
 
   isFocus() {
     const form = document.querySelector('form');
-    
+
     form.addEventListener('input', e => {
 
       if (e.target.id === 'email' || e.target.id === 'password') {
@@ -51,8 +51,20 @@ this._parentElem.innerHTML = '';
     })
   }
   
-  getUser() {
+  getLoginCredentials() {
+    const form = document.querySelector('form');
     
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const fd = [...new FormData(form)];
+      const userObj = Object.fromEntries(fd);
+      this.#getUserFromFirebase(userObj)
+    })
+  }
+
+  #getUserFromFirebase(userObj) {
+    const {email, password} = userObj;
+    getUser(email, password);
   }
 }
 
