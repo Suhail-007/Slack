@@ -1,0 +1,117 @@
+.form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content max-content;
+  row-gap: 1rem;
+  border-top-left-radius: $border-top-left-radius;
+  position: relative;
+
+  &__website-logo {
+    width: 100%;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, transparent 50%, var(--white-bg));
+    }
+
+    & img {
+      width: 100%;
+      border-top-left-radius: $border-top-left-radius;
+    }
+  }
+
+
+  &__login {
+    justify-self: center;
+    width: 100%;
+    display: grid;
+    position: absolute;
+    backdrop-filter: blur(20px);
+    transform: translateY(18rem);
+    border-radius: 2rem 2rem 0 0;
+    border-top: 1px solid #CACACA;
+
+    &__heading {
+      font-size: 2rem;
+      font-weight: 400;
+      justify-self: center;
+      color: var(--font-primary);
+    }
+
+    &>form {
+      justify-self: center;
+      color: var(--font-primary);
+      width: 60%;
+
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(6, min-content);
+      margin-top: 1rem;
+      row-gap: .8rem;
+
+      & label {
+        font-size: 1.3rem;
+        transition: all .3s;
+        width: fit-content;
+        color: var(--grey-light);
+        letter-spacing: 1px;
+        transform: translate(1rem, -3.2rem);
+      }
+
+      & input {
+        font-family: inherit;
+        font-size: 1.3rem;
+        padding: .8rem;
+        border: none;
+        border-radius: 2px;
+        outline: 1px solid var(--font-primary);
+
+        &:focus+label {
+          padding-inline: .5rem;
+          color: var(--font-primary);
+          background: var(--white-bg);
+          transform: translate(1rem, -5rem) scale(.9);
+        }
+
+        &:invalid {
+          outline: 1px solid red;
+        }
+
+        &:focus:valid {
+          outline: 1px solid #31A61E;
+        }
+      }
+
+
+      & button {
+        justify-self: center;
+
+        width: 30%;
+        border: none;
+        transition: width .3s;
+        padding: 1rem 1.5rem;
+        border-radius: $border-top-left-radius;
+        background: var(--blue-primary-alpha-three);
+
+        &:focus,
+        &:hover {
+          width: 60%;
+        }
+      }
+
+      .signup {
+        font-size: 1.4rem;
+
+        &>a {
+          margin-left: .5rem;
+        }
+      }
+    }
+  }
+}

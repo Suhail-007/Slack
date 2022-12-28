@@ -54,6 +54,7 @@
   --shadow: rgba(200, 200, 200, 1);
   /*Font Color*/
   --font-primary: #000;
+  --grey-light: #999;
 }
 
 /*Values for calc function*/
@@ -89,7 +90,7 @@ body {
 }
 
 .website-logo > img {
-  border-radius: 3rem;
+  border-radius: 100px;
   width: 100%;
 }
 
@@ -620,6 +621,9 @@ li:hover .nav__item--name {
   position: relative;
   margin-top: 1rem;
 }
+.navbar > ul > li a {
+  text-decoration: none;
+}
 .navbar > ul > li svg {
   width: 0px;
   height: 0px;
@@ -821,6 +825,104 @@ header .nav_container_btn svg {
   padding: 0.5rem;
   border-radius: 0.3rem;
   outline: none;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content max-content;
+  row-gap: 1rem;
+  border-top-left-radius: 4rem;
+  position: relative;
+}
+.form__website-logo {
+  width: 100%;
+  position: relative;
+}
+.form__website-logo::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 50%, var(--white-bg));
+}
+.form__website-logo img {
+  width: 100%;
+  border-top-left-radius: 4rem;
+}
+.form__login {
+  justify-self: center;
+  width: 100%;
+  display: grid;
+  position: absolute;
+  backdrop-filter: blur(20px);
+  transform: translateY(18rem);
+  border-radius: 2rem 2rem 0 0;
+  border-top: 1px solid #CACACA;
+}
+.form__login__heading {
+  font-size: 2rem;
+  font-weight: 400;
+  justify-self: center;
+  color: var(--font-primary);
+}
+.form__login > form {
+  justify-self: center;
+  color: var(--font-primary);
+  width: 60%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(6, min-content);
+  margin-top: 1rem;
+  row-gap: 0.8rem;
+}
+.form__login > form label {
+  font-size: 1.3rem;
+  transition: all 0.3s;
+  width: fit-content;
+  color: var(--grey-light);
+  letter-spacing: 1px;
+  transform: translate(1rem, -3.2rem);
+}
+.form__login > form input {
+  font-family: inherit;
+  font-size: 1.3rem;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 2px;
+  outline: 1px solid var(--font-primary);
+}
+.form__login > form input:focus + label {
+  padding-inline: 0.5rem;
+  color: var(--font-primary);
+  background: var(--white-bg);
+  transform: translate(1rem, -5rem) scale(0.9);
+}
+.form__login > form input:invalid {
+  outline: 1px solid red;
+}
+.form__login > form input:focus:valid {
+  outline: 1px solid #31A61E;
+}
+.form__login > form button {
+  justify-self: center;
+  width: 30%;
+  border: none;
+  transition: width 0.3s;
+  padding: 1rem 1.5rem;
+  border-radius: 4rem;
+  background: var(--blue-primary-alpha-three);
+}
+.form__login > form button:focus, .form__login > form button:hover {
+  width: 60%;
+}
+.form__login > form .signup {
+  font-size: 1.4rem;
+}
+.form__login > form .signup > a {
+  margin-left: 0.5rem;
 }
 
 .dark {

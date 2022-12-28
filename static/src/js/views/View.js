@@ -12,6 +12,10 @@ export default class View {
     this._parentElem.insetAdjacentHTML('beforeend', markup);
   }
 
+  setTitle(title) {
+    document.title = title;
+  }
+
   Delay(ms) {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -37,6 +41,6 @@ export default class View {
   clear() {
     this._parentElem.innerHTML = '';
   }
-  
-  
+
+
 }

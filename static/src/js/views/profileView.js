@@ -13,7 +13,6 @@ class ProfileView extends View {
   }
 
   _generateHTML() {
-    console.log('running');
     const html = `
       <section class="section section__profile">
         <div class="section__heading tab-heading u-letter-spacing-small">
@@ -22,7 +21,7 @@ class ProfileView extends View {
     
         <div class="profile__cont">
           <div class="profile__cont-photo">
-            <img src="src/images/user.png" alt="user profile image">
+            <img src="./static/src/images/user.png" alt="user profile image">
           </div>
           <div>
             <p class="profile__user-name">Suhail Qureshi</p>

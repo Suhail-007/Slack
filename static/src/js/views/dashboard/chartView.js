@@ -10,8 +10,8 @@ class ChartView {
   _doughnutChart;
   _lineChart;
 
-  renderChart() {
-    let html = `
+  generateChartMarkup() {
+    const html = `
       <section class="canvas"
         <div class="roi_income_chart_cont">
           <canvas id="roi"></canvas>
@@ -21,20 +21,19 @@ class ChartView {
         </div>
       </section>`
 
-    this._parentElement.insertAdjacentHTML('beforeend', html);
-    this._doughnutChart = document.getElementById('roi');
-    this._lineChart = document.getElementById('lines');
-    this._createChart();
+    return html
   }
 
-  _createChart() {
+  createChart() {
+    this._doughnutChart = document.getElementById('roi');
+    this._lineChart = document.getElementById('lines');
+    
     const lineChart = new Chart(this._lineChart, lineConfig);
 
     const doughnutChart = new Chart(this._doughnutChart, doughnutConfig);
 
     this._updateChartColor(doughnutChart, 'doughnutChart');
     this._updateChartColor(lineChart, 'lineChart');
-    // console.log(lineChart.config.data);
   }
 
   //it takes a chart which and a chart variable which user want to update

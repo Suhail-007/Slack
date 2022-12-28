@@ -1,4 +1,5 @@
 import dashboardView from './views/dashboard/dashboardView.js';
+import loginView from './views/loginView.js';
 import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { chartTypes } from './config.js';
@@ -11,14 +12,22 @@ export const copyRefLink = async function(element) {
   await navigator.clipboard.writeText(element.innerText);
 }
 
-export const renderTab = async function(e) {
-  const elem = e.target.closest('.nav_item');
+export const router = {
+  '/': {
+    path: 'login',
+  }
 
-  if (!elem) return
+}
 
-  const dataset = elem.dataset.nav.toLowerCase();
-  
-  switch (dataset) {
+export const renderTab = async function() {
+  console.log(location.pathname);
+  const pathName = location.pathname;
+
+  switch (pathName) {
+    case '/':
+      loginView._generateMarkup();
+      break;
+
     case 'dashboard':
       await dashboardView.loader();
       await dashboardView.Delay(1000);

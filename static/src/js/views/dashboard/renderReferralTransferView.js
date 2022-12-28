@@ -1,7 +1,6 @@
 import View from '../View.js'
 
 class FundTransferView extends View {
-  // _parentElement = document.querySelector('main');
   _copyButton;
   _btnsCont;
 
@@ -11,14 +10,14 @@ class FundTransferView extends View {
       <div class="section__bottom-ref">
         <h2>REFER A FRIEND</h2>
         <div class="section__bottom-ref__img-cont">
-          <img src="./src/images/refer.jpeg" alt="refer a friend">
+          <img src="./static/src/images/refer.jpeg" alt="refer a friend">
         </div>
 
         <h4 class="section__bottom-ref__sub-head">Referral Link</h4>
         <a href="#" data-ref-link class="ref_link">https://github.com/Suhail-007/dashboard-ui</a>
         <button data-copy-btn class="copy_ref_link btn-purple">
           <svg>
-          <use href="src/images/icons.svg#icon_copy"></use>
+          <use href="./static/src/images/icons.svg#icon_copy"></use>
           </svg>
           <span>
             Copy Referral Link
@@ -46,9 +45,7 @@ class FundTransferView extends View {
         </div>
       </div>
     </section>`;
-
-    // ._parentElement.insertAdjacentHTML('beforeend', html);
-  }
+    }
 
   _toastCopy() {
     const body = document.body;

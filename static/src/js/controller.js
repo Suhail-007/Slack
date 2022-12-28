@@ -1,5 +1,6 @@
 import * as model from './model.js';
 import homeView from './views/homeView.js';
+import loginView from './views/loginView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
 import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
@@ -13,8 +14,8 @@ class App {
     model.initThemeLocalStorage();
     homeView.generateHomeMarkup();
 
-    await this.controlDashboard();
     NAV_TOGGLE_BTN();
+    await this.controlDashboard();
     this.controlNavTab();
     this.controlFundTransferView();
   }
@@ -36,5 +37,6 @@ class App {
 }
 
 const app = new App();
+model.renderTab();
 
-app.init();
+// app.init();

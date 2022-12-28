@@ -1,5 +1,5 @@
 .nav__container {
-  &__btn > svg {
+  &__btn>svg {
     width: 3.5rem;
     height: 3.5rem;
     fill: var(--purple-primary);
@@ -40,6 +40,10 @@
       width: fit-content;
       position: relative;
       margin-top: 1rem;
+
+      & a {
+        text-decoration: none;
+      }
 
       & svg {
         width: 0px;

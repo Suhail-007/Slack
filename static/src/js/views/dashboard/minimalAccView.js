@@ -1,15 +1,13 @@
 import View from '../View.js'
 
 class MinimalAccView extends View {
-  // _parentElement = document.querySelector('main');
-
   renderMinimalAccView() {
     return `
     <section class="account_info" data-minimal-acc-info>
       <div class="total_cont acc_div">
         <div>
           <svg>
-            <use xlink:href="src/images/icons.svg#icon_total-money"></use>
+            <use xlink:href="./static/src/images/icons.svg#icon_total-money"></use>
           </svg>
         </div>
         <div>
@@ -21,7 +19,7 @@ class MinimalAccView extends View {
       <div class="wallet_cont acc_div">
         <div>
           <svg>
-            <use href="src/images/icons.svg#icon-wallet"></use>
+            <use href="./static/src/images/icons.svg#icon-wallet"></use>
           </svg>
         </div>     
         <div class="acc_total_cont">
@@ -33,7 +31,7 @@ class MinimalAccView extends View {
       <div class="withdrawal_cont acc_div">
         <div>
         <svg>
-          <use href="src/images/icons.svg#icon_withdraw-wallet"></use>
+          <use href="./static/src/images/icons.svg#icon_withdraw-wallet"></use>
         </svg>
         </div>
         <div class="acc_total_cont">
@@ -42,8 +40,6 @@ class MinimalAccView extends View {
         </div>
       </div>
     </section>`
-
-    // this._parentElement.insertAdjacentHTML('beforeend', html);
   }
 }
 

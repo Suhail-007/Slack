@@ -1,7 +1,6 @@
 import View from '../View.js'
 
 class StatisticsView extends View {
-  // _parentElement = document.querySelector('main');
 
   renderStatisticsView() {
     return `
@@ -10,7 +9,7 @@ class StatisticsView extends View {
         <div class="icon_heading">
           <div>
           <svg>
-            <use href="src/images/icons.svg#icon_chart"></use>
+            <use href="./static/src/images/icons.svg#icon_chart"></use>
           </svg>
           </div>
           <p>Roi Income</p>
@@ -24,12 +23,11 @@ class StatisticsView extends View {
         </div>
       </div>
 
-
       <div class="box box-2">
         <div class="icon_heading">
           <div>
           <svg>
-            <use href="src/images/icons.svg#icon_money-bag"></use>
+            <use href="./static/src/images/icons.svg#icon_money-bag"></use>
           </svg>
           </div>
 
@@ -44,12 +42,11 @@ class StatisticsView extends View {
         </div>
       </div>
 
-
       <div class="box box-3">
         <div class="icon_heading">
           <div>
           <svg>
-            <use href="src/images/icons.svg#icon_binary-income"></use>
+            <use href="./static/src/images/icons.svg#icon_binary-income"></use>
           </svg>
           </div>
 
@@ -64,12 +61,11 @@ class StatisticsView extends View {
         </div>
       </div>
 
-
       <div class="box box-4">
         <div class="icon_heading">
           <div>
           <svg>
-            <use href=src/images/icons.svg#current_income></use>
+            <use href=./static/src/images/icons.svg#current_income></use>
           </svg>
           </div>
 
@@ -84,8 +80,6 @@ class StatisticsView extends View {
         </div>
       </div>
     </section>`
-
-    // this._parentElement.insertAdjacentHTML('beforeend', html);
   }
 }
 
