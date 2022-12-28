@@ -37,6 +37,6 @@ class App {
 }
 
 const app = new App();
-model.renderTab();
+model.renderTab()
 
 // app.init();

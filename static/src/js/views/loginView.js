@@ -8,7 +8,7 @@ class loginView extends View {
     const html = `
     <section class="form">
       <div class="form__website-logo">
-        <img src="/static/src/images/m_logo.jpg" alt="Slack (website logo)">
+        <img loading='lazy' src="/static/src/images/m_logo.jpg" alt="Slack (website logo)">
       </div>
 
       <div class="form__login">
@@ -16,21 +16,43 @@ class loginView extends View {
         <h2 class="form__login__heading">Login to your account</h2>
 
         <form>
-          <input type="email" id="email" />
+          <input autocomplete='on' title='example@example.com' type="email" id="email" />
           <label for="email">Email</label>
 
-          <input type="password" id="password">
+          <input autocomplete='on' type='text' id='password'>
           <label for="password">Password</label>
 
           <button type="submit">Log in</button>
-
 
           <p class="signup">Don't have account yet?<a href="#">Sign up</a></p>
         </form>
       </div>
     </section>`
 
+this._parentElem.innerHTML = '';
     this._parentElem.insertAdjacentHTML('beforeend', html);
+  }
+
+  isFocus() {
+    const form = document.querySelector('form');
+    
+    form.addEventListener('input', e => {
+
+      if (e.target.id === 'email' || e.target.id === 'password') {
+        const inputId = e.target.id;
+        const input = form.querySelector(`#${inputId}`);
+
+        input.addEventListener('blur', e => {
+          const label = document.querySelector(`label[for="${inputId}"]`);
+
+          e.target.value !== '' ? label.classList.add('not-empty') : label.classList.remove('not-empty');
+        })
+      }
+    })
+  }
+  
+  getUser() {
+    
   }
 }
 

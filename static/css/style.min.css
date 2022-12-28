@@ -94,17 +94,20 @@ body {
   width: 100%;
 }
 
-.section-loader-cont {
+.section-loader {
   height: 100%;
   width: 100%;
   display: grid;
   place-items: center;
+  row-gap: 1rem;
   padding: 8rem 2rem 2rem;
+  color: var(--purple-primary);
+  font-size: 1.6rem;
 }
-.section-loader-cont svg {
+.section-loader svg {
   width: 5rem;
   height: 5rem;
-  fill: hsl(258deg, 91%, 63%);
+  fill: currentColor;
   animation: load 1.5s infinite;
 }
 
@@ -898,7 +901,7 @@ header .nav_container_btn svg {
   padding-inline: 0.5rem;
   color: var(--font-primary);
   background: var(--white-bg);
-  transform: translate(1rem, -5rem) scale(0.9);
+  transform: translate(1rem, -4.7rem) scale(0.9);
 }
 .form__login > form input:invalid {
   outline: 1px solid red;
@@ -923,6 +926,13 @@ header .nav_container_btn svg {
 }
 .form__login > form .signup > a {
   margin-left: 0.5rem;
+}
+
+.not-empty {
+  transform: translate(1rem, -5rem) scale(0.9) !important;
+  padding-inline: 0.5rem !important;
+  color: var(--font-primary) !important;
+  background: var(--white-bg) !important;
 }
 
 .dark {

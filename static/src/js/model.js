@@ -13,19 +13,30 @@ export const copyRefLink = async function(element) {
 }
 
 export const router = {
-  '/': {
-    path: 'login',
+  '/index.html': {
+    view: async function() {
+      await loginView.loader();
+      await loginView.Delay(500);
+      loginView._generateMarkup();
+      loginView.isFocus();
+    },
   }
 
 }
 
 export const renderTab = async function() {
-  console.log(location.pathname);
-  const pathName = location.pathname;
+  // console.log(location.pathname);
+  const pathname = location.pathname;
 
-  switch (pathName) {
+  // if (router[pathname]) {
+  //   router[pathname].view();
+  // }
+
+  switch (pathname) {
     case '/':
+    case '/index.html':
       loginView._generateMarkup();
+      loginView.isFocus();
       break;
 
     case 'dashboard':

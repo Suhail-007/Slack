@@ -76,7 +76,7 @@
           padding-inline: .5rem;
           color: var(--font-primary);
           background: var(--white-bg);
-          transform: translate(1rem, -5rem) scale(.9);
+          transform: translate(1rem, -4.7rem) scale(.9);
         }
 
         &:invalid {
@@ -114,4 +114,11 @@
       }
     }
   }
+}
+
+.not-empty {
+  transform: translate(1rem, -5rem) scale(.9) !important;
+  padding-inline: .5rem !important;
+  color: var(--font-primary) !important;
+  background: var(--white-bg) !important;
 }
