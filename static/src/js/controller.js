@@ -12,6 +12,7 @@ class App {
   async init() {
     model.getLocalStorage();
     model.initThemeLocalStorage();
+    model.renderFromHistory();
     homeView.generateHomeMarkup();
 
     NAV_TOGGLE_BTN();
@@ -37,6 +38,6 @@ class App {
 }
 
 const app = new App();
-model.renderTab()
 
 // app.init();
+// model.renderTab()

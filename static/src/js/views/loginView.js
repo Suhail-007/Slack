@@ -1,11 +1,12 @@
 import View from './View.js';
 import { getUser } from '../firebase-app.js'
+import { updateURL } from '../helper.js'
 
 class loginView extends View {
   _parentElem = document.querySelector('main');
 
   _generateMarkup() {
-    const html = `
+    return `
     <section class="form">
       <div class="form__website-logo">
         <img loading='lazy' src="/static/src/images/m_logo.jpg" alt="Slack (website logo)">
@@ -21,16 +22,23 @@ class loginView extends View {
 
           <input autocomplete='on' type='text' name='password' id='password'>
           <label for="password">Password</label>
-
+          
+          <section class="section__error">
+            <p class="section__error__msg"></p>
+          </section>
+          
           <button type="submit">Log in</button>
 
-          <p class="signup">Don't have account yet?<a href="#">Sign up</a></p>
+          <p class="signup">Don't have account yet?<a href="/signup">Sign up</a></p>
         </form>
       </div>
     </section>`
+  }
 
-    this._parentElem.innerHTML = '';
-    this._parentElem.insertAdjacentHTML('beforeend', html);
+  initFormFunctions() {
+    this.isFocus();
+    this.getLoginCredentials();
+    this.preventAnchorDefault();
   }
 
   isFocus() {
@@ -50,10 +58,10 @@ class loginView extends View {
       }
     })
   }
-  
+
   getLoginCredentials() {
     const form = document.querySelector('form');
-    
+
     form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(form)];
@@ -62,9 +70,25 @@ class loginView extends View {
     })
   }
 
-  #getUserFromFirebase(userObj) {
-    const {email, password} = userObj;
-    getUser(email, password);
+  async #getUserFromFirebase(userObj) {
+    try {
+      const { email, password } = userObj;
+      this._data.user = await getUser(email, password);
+
+      if (this._data.user) updateURL('/Dashboard');
+
+    } catch (err) {
+      this.renderError(err.code, 'login');
+    }
+  }
+  
+  preventAnchorDefault() {
+    const signupElem = document.querySelector('a[href="/signup"]');
+    
+    signupElem.addEventListener('click', e => {
+      e.preventDefault();
+      updateURL(e.target.href);
+    })
   }
 }
 

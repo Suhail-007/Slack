@@ -7,11 +7,6 @@ import chartView from './chartView.js';
 class DashboardView extends View {
   _parentElem = document.querySelector('main');
   
-  constructor() {
-    super()
-    this.setTitle('Slack || Dashboard');
-  }
-
   generateDashboardSections() {
     this._parentElem.innerHTML = '';
     const sections = `
@@ -22,7 +17,7 @@ class DashboardView extends View {
     `
     this._parentElem.insertAdjacentHTML('beforeend', sections);
 
-    // chartView.createChart();
+    chartView.createChart();
   }
 
   addHandlerNavTabs(handler) {

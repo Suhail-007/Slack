@@ -23,8 +23,8 @@ export const getUser = async function(email, password) {
   try {
    const userCreadentials = await signInWithEmailAndPassword(auth, email, password);
     return userCreadentials.user;
-  } catch (e) {
-    console.log(e.code, e.message);
+  } catch (err) {
+    throw err
   }
 }
 

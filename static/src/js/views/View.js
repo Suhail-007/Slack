@@ -9,7 +9,7 @@ export default class View {
 
     this.clear();
 
-    this._parentElem.insetAdjacentHTML('beforeend', markup);
+    this._parentElem.insertAdjacentHTML('beforeend', markup);
   }
 
   setTitle(title) {
@@ -42,5 +42,18 @@ export default class View {
     this._parentElem.innerHTML = '';
   }
 
+  renderError(msg, className) {
+    const sectionError = document.querySelector('.section__error');
+    const errorMsgElem = sectionError.querySelector('p');
+    errorMsgElem.textContent = msg;
+    sectionError.classList.add(className);
 
+    if (className === 'default') this.clear();
+
+    //remove a 2 secssecs
+    setTimeout(() => {
+      sectionError.classList.remove(className);
+      errorMsgElem.textContent = '';
+    }, 2000);
+  }
 }

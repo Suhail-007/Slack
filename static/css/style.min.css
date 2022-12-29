@@ -55,6 +55,7 @@
   /*Font Color*/
   --font-primary: #000;
   --grey-light: #999;
+  --error: hsla(0, 100%, 78%, .6);
 }
 
 /*Values for calc function*/
@@ -341,6 +342,36 @@ li:hover .nav__item--name {
   transition: 500ms ease;
   opacity: 0;
   display: none;
+}
+
+.section__error {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+.section__error.default {
+  text-align: center;
+  padding-top: 10rem;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+.section__error.login {
+  text-align: center;
+  border-radius: 3px;
+  background: var(--error);
+  width: 100%;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+.section__error.login > p {
+  color: red;
+}
+.section__error__msg {
+  font-size: 1.5rem;
+  color: red;
 }
 
 .investWallet {
@@ -913,6 +944,7 @@ header .nav_container_btn svg {
   justify-self: center;
   width: 30%;
   border: none;
+  margin-top: 2rem;
   transition: width 0.3s;
   padding: 1rem 1.5rem;
   border-radius: 4rem;

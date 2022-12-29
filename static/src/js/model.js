@@ -3,6 +3,7 @@ import loginView from './views/loginView.js';
 import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { chartTypes } from './config.js';
+import { updateURL } from './helper.js';
 
 export const theme = {
   mode: 'system default',
@@ -11,6 +12,8 @@ export const theme = {
 export const copyRefLink = async function(element) {
   await navigator.clipboard.writeText(element.innerText);
 }
+
+export const user = {};
 
 export const router = {
   '/index.html': {
@@ -24,6 +27,10 @@ export const router = {
 
 }
 
+export const renderFromHistory = function() {
+  window.addEventListener('popstate', renderTab);
+}
+
 export const renderTab = async function() {
   // console.log(location.pathname);
   const pathname = location.pathname;
@@ -35,9 +42,8 @@ export const renderTab = async function() {
   switch (pathname) {
     case '/':
     case '/index.html':
-      loginView._generateMarkup();
-      loginView.isFocus();
-      loginView.getLoginCredentials();
+      loginView.renderData(user);
+      loginView.initFormFunctions();
       break;
 
     case 'dashboard':
