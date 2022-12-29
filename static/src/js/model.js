@@ -1,5 +1,7 @@
-import dashboardView from './views/dashboard/dashboardView.js';
 import loginView from './views/loginView.js';
+import signUpView from './views/signupView.js';
+import homeView from './views/homeView.js';
+import dashboardView from './views/dashboard/dashboardView.js';
 import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { chartTypes } from './config.js';
@@ -31,6 +33,10 @@ export const renderFromHistory = function() {
   window.addEventListener('popstate', renderTab);
 }
 
+export const windowLoad = function() {
+  window.addEventListener('load', renderTab);
+}
+
 export const renderTab = async function() {
   // console.log(location.pathname);
   const pathname = location.pathname;
@@ -43,10 +49,16 @@ export const renderTab = async function() {
     case '/':
     case '/index.html':
       loginView.renderData(user);
-      loginView.initFormFunctions();
+      loginView.initFormFunctions(renderTab);
+      // homeView.removeHeaderFooter();
       break;
 
-    case 'dashboard':
+    case '/signup':
+      signUpView.renderData(user);
+      break;
+
+    case '/dashboard':
+      homeView.generateHomeMarkup();
       await dashboardView.loader();
       await dashboardView.Delay(1000);
       dashboardView.generateDashboardSections();

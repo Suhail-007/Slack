@@ -2,10 +2,20 @@ import View from './View.js';
 
 class homeView extends View {
   _parentElem = document.body;
-  
+
   generateHomeMarkup() {
     this._parentElem.insertAdjacentHTML('beforebegin', this.generateHeaderMarkup());
     this._parentElem.insertAdjacentHTML('beforeend', this.generateFooterMarkup());
+  }
+
+  removeHeaderFooter() {
+    //temporary function
+    const header = document.querySelector('header')
+    const footer = document.querySelector('footer');
+    
+    if(!header && !footer) return
+    header.style.display = 'none'
+    footer.style.display = 'none'
   }
 
   generateHeaderMarkup() {

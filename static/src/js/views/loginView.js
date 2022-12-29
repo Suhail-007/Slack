@@ -35,10 +35,9 @@ class loginView extends View {
     </section>`
   }
 
-  initFormFunctions() {
+  initFormFunctions(router) {
     this.isFocus();
-    this.getLoginCredentials();
-    this.preventAnchorDefault();
+    this.getLoginCredentials(router);
   }
 
   isFocus() {
@@ -59,35 +58,37 @@ class loginView extends View {
     })
   }
 
-  getLoginCredentials() {
+  getLoginCredentials(router) {
     const form = document.querySelector('form');
 
     form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(form)];
       const userObj = Object.fromEntries(fd);
-      this.#getUserFromFirebase(userObj)
+      this.#getUserFromFirebase(userObj, router)
     })
   }
 
-  async #getUserFromFirebase(userObj) {
+  async #getUserFromFirebase(userObj, router) {
     try {
       const { email, password } = userObj;
       this._data.user = await getUser(email, password);
+      if (!this._data.user) return
 
-      if (this._data.user) updateURL('/Dashboard');
-
+      updateURL('/Dashboard');
+      router()
     } catch (err) {
       this.renderError(err.code, 'login');
     }
   }
-  
-  preventAnchorDefault() {
+
+  preventAnchorDefault(model) {
     const signupElem = document.querySelector('a[href="/signup"]');
-    
+
     signupElem.addEventListener('click', e => {
       e.preventDefault();
       updateURL(e.target.href);
+      model.renderTab();
     })
   }
 }

@@ -1,10 +1,10 @@
 import View from './View.js';
 
-class signupView extends View {
+class SignUpView extends View {
   _parentElem = document.querySelector('main');
-
+  
   _generateMarkup() {
-
+return 'Sigup Page'
     const html = `
     <section class="form">
       <div class="form__website-logo">
@@ -30,10 +30,12 @@ class signupView extends View {
       </div>
     </section>`
 
-    this._parentElem.insertAdjacentHTML('beforeend', html);
+    // this._parentElem.insertAdjacentHTML('beforeend', html);
   }
 
   logIn() {
 
   }
 }
+
+export default new SignUpView()

@@ -1,6 +1,7 @@
 import * as model from './model.js';
 import homeView from './views/homeView.js';
 import loginView from './views/loginView.js';
+import signUpView from './views/signupView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
 import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
@@ -13,31 +14,33 @@ class App {
     model.getLocalStorage();
     model.initThemeLocalStorage();
     model.renderFromHistory();
-    homeView.generateHomeMarkup();
-
+    model.windowLoad();
+    
     NAV_TOGGLE_BTN();
-    await this.controlDashboard();
-    this.controlNavTab();
-    this.controlFundTransferView();
+    loginView.preventAnchorDefault(model);
+    // homeView.generateHomeMarkup();
+    // await this.controlDashboard();
+    // this.controlNavTab();
+    // this.controlFundTransferView();
   }
 
-  async controlDashboard() {
-    await dashboardView.loader();
-    await dashboardView.Delay(1000);
-    dashboardView.generateDashboardSections();
-  }
+  // async controlDashboard() {
+  //   await dashboardView.loader();
+  //   await dashboardView.Delay(1000);
+  //   dashboardView.generateDashboardSections();
+  // }
 
-  controlNavTab() {
-    dashboardView.addHandlerNavTabs(model.renderTab);
-  }
+  // controlNavTab() {
+  //   dashboardView.addHandlerNavTabs(model.renderTab);
+  // }
 
-  controlFundTransferView() {
-    fundTransferView.addHandlerCopyRef(model.copyRefLink);
-    fundTransferView.activeBtn();
-  }
+  // controlFundTransferView() {
+  //   fundTransferView.addHandlerCopyRef(model.copyRefLink);
+  //   fundTransferView.activeBtn();
+  // }
 }
 
 const app = new App();
 
-// app.init();
+app.init();
 // model.renderTab()
