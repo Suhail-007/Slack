@@ -65,17 +65,18 @@ class loginView extends View {
       e.preventDefault();
       const fd = [...new FormData(form)];
       const userObj = Object.fromEntries(fd);
-      this.#getUserFromFirebase(userObj, router)
+      this.#getUserFromFirebase(userObj, router);
     })
   }
 
   async #getUserFromFirebase(userObj, router) {
     try {
       const { email, password } = userObj;
-      this._data.user = await getUser(email, password);
-      if (!this._data.user) return
+      this._data = await getUser(email, password);
+      
+      if (!this._data) return
 
-      updateURL('/Dashboard');
+      updateURL('/dashboard');
       router()
     } catch (err) {
       this.renderError(err.code, 'login');
@@ -84,6 +85,8 @@ class loginView extends View {
 
   preventAnchorDefault(model) {
     const signupElem = document.querySelector('a[href="/signup"]');
+    
+    if(!signupElem) return
 
     signupElem.addEventListener('click', e => {
       e.preventDefault();

@@ -15,29 +15,14 @@ class App {
     model.initThemeLocalStorage();
     model.renderFromHistory();
     model.windowLoad();
-    
+
     NAV_TOGGLE_BTN();
-    loginView.preventAnchorDefault(model);
-    // homeView.generateHomeMarkup();
-    // await this.controlDashboard();
-    // this.controlNavTab();
-    // this.controlFundTransferView();
+    this.#controllerLogin();
   }
 
-  // async controlDashboard() {
-  //   await dashboardView.loader();
-  //   await dashboardView.Delay(1000);
-  //   dashboardView.generateDashboardSections();
-  // }
-
-  // controlNavTab() {
-  //   dashboardView.addHandlerNavTabs(model.renderTab);
-  // }
-
-  // controlFundTransferView() {
-  //   fundTransferView.addHandlerCopyRef(model.copyRefLink);
-  //   fundTransferView.activeBtn();
-  // }
+  #controllerLogin() {
+    loginView.preventAnchorDefault(model);
+  }
 }
 
 const app = new App();
