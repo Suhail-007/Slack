@@ -26,7 +26,6 @@ export const router = {
       loginView.isFocus();
     },
   }
-
 }
 
 export const renderFromHistory = function() {
@@ -38,9 +37,7 @@ export const windowLoad = function() {
 }
 
 export const renderTab = async function() {
-  // console.log(location.pathname);
   const pathname = location.pathname;
-
   // if (router[pathname]) {
   //   router[pathname].view();
   // }
@@ -109,7 +106,6 @@ export const settings = function(e) {
     }, { once: true });
   }
 }
-
 
 const applyTheme = function(elem) {
   //assign event listener to select tag

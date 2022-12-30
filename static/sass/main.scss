@@ -10,6 +10,7 @@
 @import 'components/buttons';
 @import 'components/error';
 @import 'components/investWallet';
+@import 'components/form';
 @import 'components/section';
 @import 'components/home/minimalAccInfo';
 @import 'components/home/statistics';
@@ -19,7 +20,7 @@
 @import 'layouts/navbar';
 
 @import 'pages/home';
-@import 'pages/profile';
 @import 'pages/login';
+@import 'pages/profile';
 
 @import 'themes/dark';

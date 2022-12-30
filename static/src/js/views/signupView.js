@@ -11,9 +11,9 @@ return 'Sigup Page'
         <img src="/static/src/images/m_logo.jpg" alt="Slack (website logo)">
       </div>
 
-      <div class="form__login">
+      <div class="form__container">
 
-        <h2 class="form__login__heading">Login to your account</h2>
+        <h2 class="form__container__heading">Login to your account</h2>
 
         <form>
           <input type="email" id="email" />

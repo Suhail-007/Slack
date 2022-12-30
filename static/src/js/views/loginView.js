@@ -7,27 +7,31 @@ class loginView extends View {
 
   _generateMarkup() {
     return `
-    <section class="form">
-      <div class="form__website-logo">
-        <img loading='lazy' src="/static/src/images/m_logo.jpg" alt="Slack (website logo)">
+    <section class="form__section">
+      <div class="form__section__logo--lg">
+        <img class="form__section__img" loading='lazy' src="/static/src/images/m_logo.jpg" alt="Slack (website logo)">
       </div>
 
-      <div class="form__login">
+      <div class="form__container form__container--blur">
 
-        <h2 class="form__login__heading">Login to your account</h2>
+        <h2 class="form__container__heading login__heading">Login to your account</h2>
 
-        <form enctype='multipart/form-data' method='get'>
-          <input autocomplete='on' title='example@example.com' type="email" id="email" name='email'/>
-          <label for="email">Email</label>
-
-          <input autocomplete='on' type='text' name='password' id='password'>
-          <label for="password">Password</label>
+        <form class="login__form" >
+          <div class="input__label">
+            <input class="input__label__input" autocomplete='on' type="email" id="email" name='email'/>
+            <label class="input__label__label" for="email">Email</label>
+          </div>
+          
+          <div class="input__label">
+            <input class="input__label__input" autocomplete='on' type='text' name='password' id='password'>
+            <label class="input__label__label" for="password">Password</label>
+          </div>
           
           <section class="section__error">
             <p class="section__error__msg"></p>
           </section>
           
-          <button type="submit">Log in</button>
+          <button class="form__btn login-btn" type="submit">Log in</button>
 
           <p class="signup">Don't have account yet?<a href="/signup">Sign up</a></p>
         </form>
@@ -38,6 +42,7 @@ class loginView extends View {
   initFormFunctions(router) {
     this.isFocus();
     this.getLoginCredentials(router);
+    this.setTitle('Log In || Slack')
   }
 
   isFocus() {
