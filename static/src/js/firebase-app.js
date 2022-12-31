@@ -21,22 +21,23 @@ const auth = getAuth();
 // const analytics = getAnalytics(firebaseApp);
 export const getUser = async function(email, password) {
   try {
-   const userCreadentials = await signInWithEmailAndPassword(auth, email, password);
+    const userCreadentials = await signInWithEmailAndPassword(auth, email, password);
     return userCreadentials.user;
   } catch (err) {
     throw err
   }
 }
 
-
-// try {
-//   signInWithEmailAndPassword(auth, 'dastaanq007@gmail.com', '123456').then((userCredentials) => {
-//     console.log(userCredentials);
-//     const user = userCredentials.user;
-
-//     // console.log(user);
-//   })
-// } catch (e) {
-//   // console.log(e.code);
-//   console.log(e);
-// }
+export const createUser = async function(email, password) {
+  try {
+    const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+    const user = await userCredentials.user;
+    
+    return {
+      user,
+      userId: user.id,
+    }
+  } catch (err) {
+    throw err
+  }
+}

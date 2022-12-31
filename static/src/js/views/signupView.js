@@ -1,4 +1,6 @@
 import View from './View.js';
+import { createUser } from '../firebase-app.js'
+import { updateURL } from '../helper.js'
 
 class SignUpView extends View {
   _parentElem = document.querySelector('main');
@@ -51,13 +53,18 @@ class SignUpView extends View {
 
   getSignInDetails() {
     const form = document.querySelector('form');
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const fd = new FormData(form);
-      const userInfoObj = Object.fromEntries(fd);
-      const isSame = this.#isPasswordsSame(userInfoObj);
-      if(!isSame) this.renderError('Passwords do not match', 'login');
-    })
+    try {
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const userInfoObj = Object.fromEntries(fd);
+        const isSame = this.#isPasswordsSame(userInfoObj);
+        if (!isSame) throw new Error('Passwords do not match');
+        const user = await createUser(userInfoObj.email, userInfoObj.password);
+      })
+    } catch (err) {
+      this.renderError(err, 'logic');
+    }
   }
 
   #isPasswordsSame(userInfoObj) {
