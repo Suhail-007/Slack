@@ -1,10 +1,5 @@
 import * as model from './model.js';
-// import homeView from './views/homeView.js';
 import loginView from './views/loginView.js';
-// import signUpView from './views/signupView.js';
-// import dashboardView from './views/dashboard/dashboardView.js';
-// import fundTransferView from './views/dashboard/renderReferralTransferView.js';
-// import profileView from './views/profileView.js';
 import { NAV_TOGGLE_BTN } from './helper.js';
 import { firebaseApp } from './firebase-app.js';
 

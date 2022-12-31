@@ -1,0 +1,23 @@
+.signup__form {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  width: 70%;
+  row-gap: 1rem;
+
+  &>input {
+    margin-bottom: 1rem;
+    padding: .7rem 1rem;
+    font-family: inherit;
+    font-size: 1.3rem;
+  }
+  
+  &>label {
+    font-size: 1.2rem;
+  }
+
+  .signup-btn,
+  &>.signup--login {
+    margin-inline: auto;
+  }
+}

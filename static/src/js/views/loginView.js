@@ -12,18 +12,18 @@ class loginView extends View {
         <img class="form__section__img" loading='lazy' src="/static/src/images/m_logo.jpg" alt="Slack (website logo)">
       </div>
 
-      <div class="form__container form__container--blur">
+      <div class="login__form__cont form__container form__container--blur">
 
         <h2 class="form__container__heading login__heading">Login to your account</h2>
 
         <form class="login__form" >
           <div class="input__label">
-            <input class="input__label__input" autocomplete='on' type="email" id="email" name='email'/>
+            <input class="input__label__input"  type="email" id="email" name='email'/>
             <label class="input__label__label" for="email">Email</label>
           </div>
           
           <div class="input__label">
-            <input class="input__label__input" autocomplete='on' type='text' name='password' id='password'>
+            <input class="input__label__input" type='text' name='password' id='password'>
             <label class="input__label__label" for="password">Password</label>
           </div>
           
@@ -33,7 +33,7 @@ class loginView extends View {
           
           <button class="form__btn login-btn" type="submit">Log in</button>
 
-          <p class="signup">Don't have account yet?<a href="/signup">Sign up</a></p>
+          <p class="signup--login">Don't have account yet?<a href="/signup">Sign up</a></p>
         </form>
       </div>
     </section>`
@@ -78,7 +78,7 @@ class loginView extends View {
     try {
       const { email, password } = userObj;
       this._data = await getUser(email, password);
-      
+
       if (!this._data) return
 
       updateURL('/dashboard');
@@ -90,8 +90,8 @@ class loginView extends View {
 
   preventAnchorDefault(model) {
     const signupElem = document.querySelector('a[href="/signup"]');
-    
-    if(!signupElem) return
+
+    if (!signupElem) return
 
     signupElem.addEventListener('click', e => {
       e.preventDefault();

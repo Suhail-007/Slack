@@ -2,6 +2,10 @@
   justify-self: center !important;
 }
 
+.login__form__cont {
+  justify-self: center;
+}
+
 .login__form {
   justify-self: center;
   color: var(--font-primary);
@@ -16,13 +20,5 @@
 
   & button {
     justify-self: center;
-  }
-}
-
-.signup {
-  font-size: 1.4rem;
-
-  &>a {
-    margin-left: .5rem;
   }
 }

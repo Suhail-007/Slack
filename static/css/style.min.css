@@ -460,12 +460,9 @@ li:hover .nav__item--name {
 }
 
 .form__container {
-  display: none;
-  justify-self: center;
   width: 100%;
   display: grid;
-  position: absolute;
-  transform: translateY(18rem);
+  transform: translateY(-4rem);
   border-radius: 2rem 2rem 0 0;
   border-top: 1px solid #CACACA;
 }
@@ -490,7 +487,7 @@ li:hover .nav__item--name {
   border-radius: 2px;
   outline: 0.5px solid var(--font-primary);
 }
-.input__label__input:invalid {
+.input__label__input:focus:invalid {
   outline: 1px solid red;
 }
 .input__label__input:focus:valid {
@@ -525,6 +522,13 @@ li:hover .nav__item--name {
 }
 .form__btn:focus, .form__btn:hover {
   width: 60%;
+}
+
+.signup--login {
+  font-size: 1.4rem;
+}
+.signup--login > a {
+  margin-left: 0.5rem;
 }
 
 .not-empty {
@@ -911,6 +915,10 @@ header .nav_container_btn svg {
   justify-self: center !important;
 }
 
+.login__form__cont {
+  justify-self: center;
+}
+
 .login__form {
   justify-self: center;
   color: var(--font-primary);
@@ -923,13 +931,6 @@ header .nav_container_btn svg {
 }
 .login__form button {
   justify-self: center;
-}
-
-.signup {
-  font-size: 1.4rem;
-}
-.signup > a {
-  margin-left: 0.5rem;
 }
 
 .section__profile h3 {
@@ -983,6 +984,26 @@ header .nav_container_btn svg {
   padding: 0.5rem;
   border-radius: 0.3rem;
   outline: none;
+}
+
+.signup__form {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  width: 70%;
+  row-gap: 1rem;
+}
+.signup__form > input {
+  margin-bottom: 1rem;
+  padding: 0.7rem 1rem;
+  font-family: inherit;
+  font-size: 1.3rem;
+}
+.signup__form > label {
+  font-size: 1.2rem;
+}
+.signup__form .signup-btn, .signup__form > .signup--login {
+  margin-inline: auto;
 }
 
 .dark {

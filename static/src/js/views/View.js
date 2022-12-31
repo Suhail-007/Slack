@@ -2,12 +2,12 @@ export default class View {
   _data;
   _parentElem;
 
-  renderData(data) {
+  renderData(data, clearParent = true) {
     this._data = data;
 
     const markup = this._generateMarkup();
 
-    this.clear();
+    if (clearParent) this.clear();
 
     this._parentElem.insertAdjacentHTML('beforeend', markup);
   }
