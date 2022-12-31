@@ -16,25 +16,25 @@ class SignUpView extends View {
 
         <form class="signup__form">
           <label for="Fn">Full Name</label>
-          <input class="input__label__input" id="Fn" required type="text" placeholder="Full name">
+          <input class="input__label__input" id="Fn" required type="text" name="fullname" placeholder="Full name">
 
           <label for="email">Email</label>
           <input class="input__label__input" placeholder="Email" required class="" type="email" id="email" name='email' />
 
           <label for="password">Password</label>
-          <input class="input__label__input" placeholder="Password@0" required pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$' title='Password should contain a number, a capital letter, a small letter and a symbol' type="text" id="password">
+          <input class="input__label__input" placeholder="Password@0" required pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$' title='Password should contain a number, a capital letter, a small letter and a symbol' type="text" name="password" id="password">
 
-          <label for="re-password">Re-Password (re-type your password)</label>
-          <input class="input__label__input" placeholder="Password@0" required pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$' title='Password should contain a number, a capital letter, a small letter and a symbol' type="text" id="re-password">
+          <label for="Repassword">Retype Password (re-type your password)</label>
+          <input class="input__label__input" placeholder="Password@0" required pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$' title='Password should contain a number, a capital letter, a small letter and a symbol' type="text" name="Repassword" id="Repassword">
 
           <label for="dob">DOB</label>
-          <input required id="dob" type="date" value="">
+          <input name="dob" required id="dob" type="date" value="">
 
           <label for="state">State</label>
-          <input class="input__label__input" placeholder="state you're currently living in" required id="state" type="text" value="">
+          <input class="input__label__input" placeholder="state you're currently living in" required id="state"name="state" type="text" value="">
 
           <label for="country">Country</label>
-          <input class="input__label__input" placeholder="country you're currently living in" required id="country" type="text" value="">
+          <input class="input__label__input" placeholder="country you're currently living in" required id="country" type="text" name="country" value="">
 
 
           <section class="section__error">
@@ -49,8 +49,23 @@ class SignUpView extends View {
     </section>`
   }
 
-  logIn() {
+  getSignInDetails() {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const userInfoObj = Object.fromEntries(fd);
+      const isSame = this.#isPasswordsSame(userInfoObj);
+      if(!isSame) this.renderError('Passwords do not match', 'login');
+    })
+  }
 
+  #isPasswordsSame(userInfoObj) {
+    let { password, Repassword: rePassword } = userInfoObj;
+    password = password.split('');
+    rePassword = rePassword.split('');
+    const isSame = password.every((l, i) => rePassword[i] === l);
+    return isSame
   }
 }
 

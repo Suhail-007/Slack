@@ -45,13 +45,14 @@ export const renderTab = async function() {
   switch (pathname) {
     case '/':
     case '/index.html':
-      loginView.renderData(user);
-      loginView.initFormFunctions(renderTab);
+      signUpView.renderData(user);
+      signUpView.getSignInDetails();
+      // loginView.renderData(user);
+      // loginView.initFormFunctions(renderTab);
       // homeView.removeHeaderFooter();
       break;
 
     case '/signup':
-      signUpView.renderData(user);
       break;
 
     case '/dashboard':
