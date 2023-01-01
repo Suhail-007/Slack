@@ -89,14 +89,18 @@
 .form__btn {
   width: 30%;
   border: none;
-  transition: width .3s;
+  transition: all .3s;
   padding: 1rem 1.5rem;
+  color: var(--font-primary);
   border-radius: $border-top-left-radius;
   background: var(--blue-primary-alpha-three);
+  transform: translateY(0);
 
   &:focus,
-  &:hover {
+  &:hover,
+  &:active {
     width: 60%;
+    transform: translateY(-.5rem);
   }
 }
 
@@ -105,6 +109,7 @@
 
   &>a {
     margin-left: .5rem;
+    color: var(--blue-primary);
   }
 }
 

@@ -60,17 +60,21 @@ class SignUpView extends View {
     </section>`
   }
 
-  getSignInDetails() {
+  getSignInDetails(router) {
     const form = document.querySelector('form');
     try {
       form.addEventListener('submit', async e => {
         e.preventDefault();
         const fd = new FormData(form);
         const userInfoObj = Object.fromEntries(fd);
-        console.log(userInfoObj);
         const isSame = this.#isPasswordsSame(userInfoObj);
+        
         if (!isSame) throw new Error('Passwords do not match');
+        
         const user = await createUser(userInfoObj.email, userInfoObj.password);
+        console.log(user);
+        updateURL('/')
+        router();
       })
     } catch (err) {
       this.renderError(err, 'logic');

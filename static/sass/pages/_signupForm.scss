@@ -4,6 +4,7 @@
   justify-self: center;
   width: 70%;
   row-gap: 1rem;
+  color: var(--font-primary);
 
   &__profile {
     display: grid;
@@ -17,6 +18,9 @@
     &__fake {
       width: 6rem;
       grid-row: span 2;
+      background: #F0F0F0;
+      padding: .5rem;
+      
       
       & > img {
         width: 100%;
@@ -25,7 +29,6 @@
     
     label {
       font-size: 1.3rem;
-      color: var(--font-primary);
     }
 
     input {
