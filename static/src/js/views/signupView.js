@@ -17,6 +17,15 @@ class SignUpView extends View {
         <h2 class="form__container__heading login__heading">Create Account</h2>
 
         <form class="signup__form">
+        
+        <div class="signup__form__profile">
+          <div class="signup__form__profile__fake">
+          <img src="static/src/images/avatar.png"/>
+          </div>
+          <label for="profile">Choose a profile pic</label>
+          <input accept="image/png image/jpg image/jpeg" id="profile" type="file" name="profile">
+        </div>
+        
           <label for="Fn">Full Name</label>
           <input class="input__label__input" id="Fn" required type="text" name="fullname" placeholder="Full name">
 
@@ -58,6 +67,7 @@ class SignUpView extends View {
         e.preventDefault();
         const fd = new FormData(form);
         const userInfoObj = Object.fromEntries(fd);
+        console.log(userInfoObj);
         const isSame = this.#isPasswordsSame(userInfoObj);
         if (!isSame) throw new Error('Passwords do not match');
         const user = await createUser(userInfoObj.email, userInfoObj.password);
