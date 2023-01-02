@@ -6,6 +6,7 @@ import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { chartTypes } from './config.js';
 import { updateURL } from './helper.js';
+import { loginUser, createUserSendEmailVerif, createUserData } from './firebase-app.js';
 
 export const theme = {
   mode: 'system default',
@@ -15,7 +16,10 @@ export const copyRefLink = async function(element) {
   await navigator.clipboard.writeText(element.innerText);
 }
 
-export const user = {};
+export const userData = {
+  user: {},
+  themeMode: 'system default'
+};
 
 export const router = {
   '/index.html': {
@@ -24,6 +28,7 @@ export const router = {
       await loginView.Delay(500);
       loginView._generateMarkup();
       loginView.isFocus();
+      console.log(userData);
     },
   }
 }
@@ -45,14 +50,14 @@ export const renderTab = async function() {
   switch (pathname) {
     case '/':
     case '/index.html':
-      loginView.renderData(user);
-      loginView.initFormFunctions(renderTab);
+      loginView.renderData(userData);
+      loginView.initFormFunctions(renderTab, loginUser);
       homeView.removeHeaderFooter();
       break;
 
     case '/signup':
-      signUpView.renderData(user);
-      signUpView.getSignInDetails(renderTab);
+      signUpView.renderData(userData);
+      signUpView.getSignInDetails(renderTab, createUserSendEmailVerif, createUserData);
       break;
 
     case '/dashboard':

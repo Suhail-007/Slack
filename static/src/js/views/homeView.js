@@ -12,8 +12,8 @@ class homeView extends View {
     //temporary function
     const header = document.querySelector('header')
     const footer = document.querySelector('footer');
-    
-    if(!header && !footer) return
+
+    if (!header && !footer) return
     header.style.display = 'none'
     footer.style.display = 'none'
   }
@@ -31,7 +31,7 @@ class homeView extends View {
     
           <!----this is for desktop version---->
           <div class=" user_profile_container user_profile_container_desktop hidden">
-            <p class="username">Suhail Qureshi</p>
+            <p class="username"><a href='/profile'>Suhail Qureshi</a></p>
             <div class="user_profile">
               <img src="./static/src/images/user.png" alt="user profile desktop">
             </div>
@@ -114,7 +114,7 @@ class homeView extends View {
                 <svg>
                   <use xlink:href="./static/src/images/icons.svg#icon_logout"></use>
                 </svg>
-                <span class="nav__item--name">Logout</span>
+                <span href='/logout' class="nav__item--name">Logout</span>
               </li>
             </ul>
           </nav>
@@ -141,7 +141,6 @@ class homeView extends View {
       <p>&copy; Slash 2022-23</p>
     </footer>`
   }
-
 }
 
 export default new homeView();

@@ -1,5 +1,4 @@
 import View from './View.js';
-import { getUser } from '../firebase-app.js'
 import { updateURL } from '../helper.js'
 
 class loginView extends View {
@@ -39,9 +38,9 @@ class loginView extends View {
     </section>`
   }
 
-  initFormFunctions(router) {
+  initFormFunctions(router, loginUser) {
     this.isFocus();
-    this.getLoginCredentials(router);
+    this.getLoginCredentials(router, loginUser);
     this.setTitle('Log In || Slack')
   }
 
@@ -63,23 +62,23 @@ class loginView extends View {
     })
   }
 
-  getLoginCredentials(router) {
+  getLoginCredentials(router, loginUser) {
     const form = document.querySelector('form');
 
     form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(form)];
       const userObj = Object.fromEntries(fd);
-      this.#getUserFromFirebase(userObj, router);
+      this.#getUserFromFirebase(userObj, router, loginUser);
     })
   }
 
-  async #getUserFromFirebase(userObj, router) {
+  async #getUserFromFirebase(userObj, router, loginUser) {
     try {
       const { email, password } = userObj;
-      this._data = await getUser(email, password);
+      const user = await loginUser(email, password);
 
-      if (!this._data) return
+      if (!this._data) throw new Error()
 
       updateURL('/dashboard');
       router()

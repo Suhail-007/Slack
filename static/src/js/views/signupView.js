@@ -1,5 +1,4 @@
 import View from './View.js';
-import { createUser } from '../firebase-app.js'
 import { updateURL } from '../helper.js'
 
 class SignUpView extends View {
@@ -30,13 +29,16 @@ class SignUpView extends View {
           <input class="input__label__input" id="Fn" required type="text" name="fullname" placeholder="Full name">
 
           <label for="email">Email</label>
-          <input class="input__label__input" placeholder="Email" required class="" type="email" id="email" name='email' />
+          <input class="input__label__input" placeholder="Email" required type="email" id="email" name='email' />
 
           <label for="password">Password</label>
           <input class="input__label__input" placeholder="Password@0" required pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$' title='Password should contain a number, a capital letter, a small letter and a symbol' type="text" name="password" id="password">
 
           <label for="Repassword">Retype Password (re-type your password)</label>
           <input class="input__label__input" placeholder="Password@0" required pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$' title='Password should contain a number, a capital letter, a small letter and a symbol' type="text" name="Repassword" id="Repassword">
+          
+          <label for="phoneNum">Phone Number</label>
+          <input class="input__label__input" placeholder="+919999999999" type="number" id="phoneNum" name='phoneNum' />
 
           <label for="dob">DOB</label>
           <input name="dob" required id="dob" type="date" value="">
@@ -60,25 +62,31 @@ class SignUpView extends View {
     </section>`
   }
 
-  getSignInDetails(router) {
+  getSignInDetails(router, createUserSendEmailVerif, createUserData) {
     const form = document.querySelector('form');
-    try {
-      form.addEventListener('submit', async e => {
+    form.addEventListener('submit', async e => {
+      try {
         e.preventDefault();
         const fd = new FormData(form);
         const userInfoObj = Object.fromEntries(fd);
         const isSame = this.#isPasswordsSame(userInfoObj);
-        
-        if (!isSame) throw new Error('Passwords do not match');
-        
-        const user = await createUser(userInfoObj.email, userInfoObj.password);
-        console.log(user);
+
+        if (!isSame) throw Error('Passwords do not match');
+
+        const user = await createUserSendEmailVerif(userInfoObj.email, userInfoObj.password);
+        //create important properties to user obj of firebase
+        user.displayName = userInfoObj.fullname;
+        user.photoURL = userInfoObj.profile.name;
+        user.email = userInfoObj.email;
+        user.phoneNumber = userInfoObj.phoneNum;
+        //create user data on firebase database
+        createUserData(user);
         updateURL('/')
         router();
-      })
-    } catch (err) {
-      this.renderError(err, 'logic');
-    }
+      } catch (err) {
+        this.renderError(err, 'login');
+      }
+    })
   }
 
   #isPasswordsSame(userInfoObj) {
