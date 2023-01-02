@@ -37,8 +37,11 @@ class SignUpView extends View {
           <label for="Repassword">Retype Password (re-type your password)</label>
           <input class="input__label__input" placeholder="Password@0" required pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$' title='Password should contain a number, a capital letter, a small letter and a symbol' type="text" name="Repassword" id="Repassword">
           
-          <label for="phoneNum">Phone Number</label>
-          <input class="input__label__input" placeholder="+919999999999" type="number" id="phoneNum" name='phoneNum' />
+          <label for="phone">Phone Number</label>
+          <div class="signup__form__phone-input">
+          <input type='tel' size='3' maxlength='3' name='countryCode' placeholder='+91'>
+            <input class="input__label__input" placeholder="99999-99999" type="tel" pattern="[0-9]{5}-[0-9]{5}" size='11' maxlength='11' id="phone" name='phone' />
+          </div>
 
           <label for="dob">DOB</label>
           <input name="dob" required id="dob" type="date" value="">
@@ -47,7 +50,7 @@ class SignUpView extends View {
           <input class="input__label__input" placeholder="state you're currently living in" required id="state"name="state" type="text" value="">
 
           <label for="country">Country</label>
-          <input class="input__label__input" placeholder="country you're currently living in" required id="country" type="text" name="country" value="">
+          <input class="input__label__input" placeholder="country you're currently living in" required id="country" type="text" name="country">
 
 
           <section class="section__error">
@@ -70,15 +73,19 @@ class SignUpView extends View {
         const fd = new FormData(form);
         const userInfoObj = Object.fromEntries(fd);
         const isSame = this.#isPasswordsSame(userInfoObj);
+        const isInputsCorrect = this.isInputsCorrect(userInfoObj);
 
         if (!isSame) throw Error('Passwords do not match');
 
+        if (!isInputsCorrect) throw Error('Please enter full name');
+
         const user = await createUserSendEmailVerif(userInfoObj.email, userInfoObj.password);
-        //create important properties to user obj of firebase
+
+        //create important properties on user obj of firebase
         user.displayName = userInfoObj.fullname;
         user.photoURL = userInfoObj.profile.name;
         user.email = userInfoObj.email;
-        user.phoneNumber = userInfoObj.phoneNum;
+        user.phoneNumber = userInfoObj.countryCode + userInfoObj.phone;
         //create user data on firebase database
         createUserData(user);
         updateURL('/')
@@ -87,6 +94,12 @@ class SignUpView extends View {
         this.renderError(err, 'login');
       }
     })
+  }
+
+  isInputsCorrect(userInfoObj) {
+    let { fullname } = userInfoObj;
+    fullname = fullname.includes(' ');
+    return fullname
   }
 
   #isPasswordsSame(userInfoObj) {

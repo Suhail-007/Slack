@@ -55,13 +55,14 @@
     border: none;
     border-radius: 2px;
     outline: .5px solid var(--font-primary);
+    transition: all .2s ease-in-out;
 
     &:focus:invalid {
-      outline: 1px solid red;
+      outline: 2px solid red;
     }
 
     &:focus:valid {
-      outline: 1px solid #31A61E;
+      outline: 2px solid #31A61E;
     }
   }
 

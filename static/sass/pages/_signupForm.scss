@@ -20,13 +20,13 @@
       grid-row: span 2;
       background: #F0F0F0;
       padding: .5rem;
-      
-      
-      & > img {
+
+
+      &>img {
         width: 100%;
       }
     }
-    
+
     label {
       font-size: 1.3rem;
     }
@@ -45,6 +45,22 @@
 
   &>label {
     font-size: 1.2rem;
+  }
+
+  &__phone-input {
+    display: flex;
+    gap: 0 1rem;
+
+    & :first-child {
+      flex-basis: 5rem;
+      width: 100%;
+      font-family: inherit;
+      font-size: 1.3rem;
+      padding: .8rem;
+      outline: .5px solid var(--font-primary);
+      border: none;
+      border-radius: 2px;
+    }
   }
 
   .signup-btn,

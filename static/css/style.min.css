@@ -486,12 +486,13 @@ li:hover .nav__item--name {
   border: none;
   border-radius: 2px;
   outline: 0.5px solid var(--font-primary);
+  transition: all 0.2s ease-in-out;
 }
 .input__label__input:focus:invalid {
-  outline: 1px solid red;
+  outline: 2px solid red;
 }
 .input__label__input:focus:valid {
-  outline: 1px solid #31A61E;
+  outline: 2px solid #31A61E;
 }
 .input__label__label {
   position: absolute;
@@ -1030,6 +1031,20 @@ header .nav_container_btn svg {
 }
 .signup__form > label {
   font-size: 1.2rem;
+}
+.signup__form__phone-input {
+  display: flex;
+  gap: 0 1rem;
+}
+.signup__form__phone-input :first-child {
+  flex-basis: 5rem;
+  width: 100%;
+  font-family: inherit;
+  font-size: 1.3rem;
+  padding: 0.8rem;
+  outline: 0.5px solid var(--font-primary);
+  border: none;
+  border-radius: 2px;
 }
 .signup__form .signup-btn, .signup__form > .signup--login {
   margin-inline: auto;

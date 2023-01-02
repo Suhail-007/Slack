@@ -37,7 +37,6 @@ export const createUserSendEmailVerif = async function(email, password) {
     return user
   } catch (err) {
     throw err
-    console.log(err, 'err');
   }
 }
 
@@ -52,7 +51,7 @@ export const createUserData = async function(user) {
     profilePic: user.photoURL,
     userEmail: user.email,
     uid: user.uid,
-    phoneNUM: user.phoneNumber,
+    phone: user.phoneNumber,
   })
 }
 
