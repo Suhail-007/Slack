@@ -1,5 +1,6 @@
 import View from './View.js';
 import { updateURL } from '../helper.js'
+import { defaultUserPic } from '../config.js'
 
 class SignUpView extends View {
   _parentElem = document.querySelector('main');
@@ -83,17 +84,22 @@ class SignUpView extends View {
 
         //create important properties on user obj of firebase
         user.displayName = userInfoObj.fullname;
-        user.photoURL = userInfoObj.profile.name;
+        user.photoURL = this.#setUserPic(userInfoObj);
         user.email = userInfoObj.email;
         user.phoneNumber = userInfoObj.countryCode + userInfoObj.phone;
-        //create user data on firebase database
+
+        //create user data in firebase database
         createUserData(user);
-        updateURL('/')
+        updateURL('/');
         router();
       } catch (err) {
         this.renderError(err, 'login');
       }
     })
+  }
+
+  #setUserPic(user) {
+    return user.profile.name === '' ? defaultUserPic : user.profile.name;
   }
 
   isInputsCorrect(userInfoObj) {
@@ -111,4 +117,4 @@ class SignUpView extends View {
   }
 }
 
-export default new SignUpView()
+export default new SignUpView();

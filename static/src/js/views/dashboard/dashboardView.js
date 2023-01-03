@@ -7,6 +7,10 @@ import chartView from './chartView.js';
 class DashboardView extends View {
   _parentElem = document.querySelector('main');
   
+  _generateMarkup() {
+    
+  }
+  
   generateDashboardSections() {
     this._parentElem.innerHTML = '';
     const sections = `

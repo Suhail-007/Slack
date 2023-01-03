@@ -50,7 +50,7 @@
   /* RGBA COLOR VALUES*/
   --light-shadow-white: rgba(200, 200, 200, 1);
   /*black shadows*/
-  --medium-shadow-black: rgba(0, 0, 0, 0.3);
+  --shadow-alpha-three: rgba(0, 0, 0, 0.3);
   --shadow: rgba(200, 200, 200, 1);
   /*Font Color*/
   --font-primary: #000;
@@ -414,7 +414,7 @@ li:hover .nav__item--name {
   grid-column: span 2;
   justify-content: space-between;
   border-radius: 0.3rem;
-  box-shadow: 0.1rem 0.1rem 5px 0 var(--medium-shadow-black);
+  box-shadow: 0.1rem 0.1rem 5px 0 var(--shadow-alpha-three);
   padding-inline: 0.5rem;
 }
 .section h3 {
@@ -670,7 +670,7 @@ li:hover .nav__item--name {
   width: 7rem;
   height: 7rem;
   border-radius: 100%;
-  box-shadow: 0 0 1.6rem 0.5rem var(--medium-shadow-black);
+  box-shadow: 0 0 1.6rem 0.5rem var(--shadow-alpha-three);
 }
 
 header {
@@ -803,7 +803,7 @@ header .nav_container_btn svg {
   grid-column: span 2;
   justify-content: space-between;
   border-radius: 0.3rem;
-  box-shadow: 0.1rem 0.1rem 5px 0 var(--medium-shadow-black);
+  box-shadow: 0.1rem 0.1rem 5px 0 var(--shadow-alpha-three);
   padding-inline: 1.8rem;
 }
 .section__profile .section__settings > div > div {
@@ -863,7 +863,7 @@ header .nav_container_btn svg {
   /* RGBA COLOR VALUES*/
   --light-shadow-white: rgba(200, 200, 200, 1);
   /*black shadows*/
-  --medium-shadow-black: rgba(0, 0, 0, 0.3);
+  --shadow-alpha-three: rgba(0, 0, 0, 0.3);
   --shadow: rgba(200, 200, 200, 1);
   /*Values for calc function*/
   --second-layer-left: -5%;

@@ -90,17 +90,21 @@
 .form__btn {
   width: 30%;
   border: none;
-  transition: all .3s;
   padding: 1rem 1.5rem;
+  transform: translateY(0);
   color: var(--font-primary);
   border-radius: $border-top-left-radius;
   background: var(--blue-primary-alpha-three);
-  transform: translateY(0);
+  box-shadow: 0 1rem 1rem 0 var(--shadow-alpha-five);
+  transition: width .3s ease-in-out .2s,
+    box-shadow .2s ease-in-out,
+    transform .2s ease-in-out;
 
   &:focus,
   &:hover,
   &:active {
     width: 60%;
+    box-shadow: 0 1rem 1rem 0 var(--shadow-alpha-three);
     transform: translateY(-.5rem);
   }
 }

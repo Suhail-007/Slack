@@ -1,7 +1,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js'
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
-import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, deleteField, setDoc } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js'
+import { getFirestore, collection, addDoc, getDocs, getDoc, doc, deleteDoc, updateDoc, deleteField, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js'
 
 const firebaseConfig = {
   apiKey: "AIzaSyB0YK0OmBjg6AFeqa-Kl3sm0_b1FWZfQV4",
@@ -31,7 +31,7 @@ export const loginUser = async function(email, password) {
 export const createUserSendEmailVerif = async function(email, password) {
   try {
     const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
-    
+
     const user = await userCredentials.user;
     sendEmailVerif();
     return user
@@ -53,6 +53,14 @@ export const createUserData = async function(user) {
     uid: user.uid,
     phone: user.phoneNumber,
   })
+}
+
+export const getUserData = async function() {
+  const user = auth.currentUser;
+  const querySnap = await onSnapshot(doc(db, "users", user.uid));
+  return {
+    userData: querySnap.data(),
+  }
 }
 
 export const sendEmailVerif = async function() {
