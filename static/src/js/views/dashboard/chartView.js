@@ -10,8 +10,8 @@ class ChartView {
   _doughnutChart;
   _lineChart;
 
-  generateChartMarkup() {
-    const html = `
+  renderChart() {
+    return `
       <section class="canvas"
         <div class="roi_income_chart_cont">
           <canvas id="roi"></canvas>
@@ -20,14 +20,12 @@ class ChartView {
           <canvas width="300px" height="300px" id="lines"></canvas>
         </div>
       </section>`
-
-    return html
   }
 
   createChart() {
     this._doughnutChart = document.getElementById('roi');
     this._lineChart = document.getElementById('lines');
-    
+
     const lineChart = new Chart(this._lineChart, lineConfig);
 
     const doughnutChart = new Chart(this._doughnutChart, doughnutConfig);

@@ -1,7 +1,9 @@
 import View from '../View.js'
 
 class MinimalAccView extends View {
-  renderMinimalAccView() {
+  _parentElem = document.querySelector('main');
+  
+  _generateMarkup() {
     return `
     <section class="account_info" data-minimal-acc-info>
       <div class="total_cont acc_div">

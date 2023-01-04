@@ -6,22 +6,15 @@ import chartView from './chartView.js';
 
 class DashboardView extends View {
   _parentElem = document.querySelector('main');
-  
-  _generateMarkup() {
-    
-  }
-  
-  generateDashboardSections() {
-    this._parentElem.innerHTML = '';
-    const sections = `
-    ${minimalAccInfo.renderMinimalAccView()}
-    ${chartView.generateChartMarkup()}
-    ${statisticsView.renderStatisticsView()}
-    ${fundTransferView.renderReferralTransferView()}
-    `
-    this._parentElem.insertAdjacentHTML('beforeend', sections);
 
-    chartView.createChart();
+  _generateMarkup() {
+    const sections = `
+      ${minimalAccInfo.renderData(this._data, false, false)}
+      ${chartView.renderChart()}
+      ${statisticsView.renderData(this._data, false, false)}
+      ${fundTransferView.renderData(this._data, false, false)}`;
+
+    return sections;
   }
 
   addHandlerNavTabs(handler) {

@@ -3,7 +3,8 @@ import View from './View.js';
 class homeView extends View {
   _parentElem = document.body;
 
-  generateHomeMarkup() {
+  generateHomeMarkup(data) {
+    this._data = data.data;
     this._parentElem.insertAdjacentHTML('beforebegin', this.generateHeaderMarkup());
     this._parentElem.insertAdjacentHTML('beforeend', this.generateFooterMarkup());
   }
@@ -31,9 +32,9 @@ class homeView extends View {
     
           <!----this is for desktop version---->
           <div class=" user_profile_container user_profile_container_desktop hidden">
-            <p class="username"><a href='/profile'>Suhail Qureshi</a></p>
+            <p class="username"><a href='/profile'>${this._data.fullname}</a></p>
             <div class="user_profile">
-              <img src="./static/src/images/user.png" alt="user profile desktop">
+              <img src="${this._data.profilePic}" alt="user profile desktop">
             </div>
           </div>
         </div>
@@ -47,9 +48,8 @@ class homeView extends View {
     
           <nav class="navbar" data-nav>
             <div class="user-profile-container user-profile-container_mob">
-              <p class="user-profile-container_username">Suhail Qureshi</p>
+              <p class="user-profile-container_username">${this._data.fullname}</p>
               <div class="user-profile-container_profile">
-                <img src="./static/src/images/user.png" alt="user profile mob">
               </div>
             </div>
     

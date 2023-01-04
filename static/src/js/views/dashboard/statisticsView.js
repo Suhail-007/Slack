@@ -1,8 +1,9 @@
 import View from '../View.js'
 
 class StatisticsView extends View {
+  _parentElem = document.querySelector('main');
 
-  renderStatisticsView() {
+  _generateMarkup() {
     return `
     <section data-statistics-boxes class="statistics_boxes">
       <div class="box box-1">

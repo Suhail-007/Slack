@@ -7,6 +7,7 @@ import profileView from './views/profileView.js';
 import { chartTypes } from './config.js';
 import { updateURL } from './helper.js';
 import { loginUser, createUserSendEmailVerif, createUserData, getUserData } from './firebase-app.js';
+import chartView from './views/dashboard/chartView.js';
 
 export const theme = {
   mode: 'system default',
@@ -16,8 +17,9 @@ export const copyRefLink = async function(element) {
   await navigator.clipboard.writeText(element.innerText);
 }
 
-export const userData = {
-  user: {},
+const user = {
+  //it will be created only when user log in
+  // data: {},
   themeMode: 'system default'
 };
 
@@ -28,7 +30,6 @@ export const router = {
       await loginView.Delay(500);
       loginView._generateMarkup();
       loginView.isFocus();
-      console.log(userData);
     },
   }
 }
@@ -50,22 +51,26 @@ export const renderTab = async function() {
   switch (pathname) {
     case '/':
     case '/index.html':
-      loginView.renderData(userData);
+      loginView.renderData(user);
       loginView.initFormFunctions(renderTab, loginUser);
       homeView.removeHeaderFooter();
       break;
 
     case '/signup':
-      signUpView.renderData(userData);
+      signUpView.renderData(user);
       signUpView.getSignInDetails(renderTab, createUserSendEmailVerif, createUserData);
       break;
 
     case '/dashboard':
-      homeView.generateHomeMarkup();
+      user.data = await getUserData(user);
+      homeView.generateHomeMarkup(user);
+      scrollToTop()
       await dashboardView.loader();
       await dashboardView.Delay(1000);
-      dashboardView.generateDashboardSections();
-      userData.user = getUserData();
+      dashboardView.renderData(user);
+      chartView.createChart();
+
+
       fundTransferView.addHandlerCopyRef(copyRefLink);
       fundTransferView.activeBtn();
       break;
@@ -79,6 +84,13 @@ export const renderTab = async function() {
     default:
       return
   }
+}
+
+const scrollToTop = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
 }
 
 export const settings = function(e) {

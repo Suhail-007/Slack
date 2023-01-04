@@ -1,10 +1,11 @@
 import View from '../View.js'
 
 class FundTransferView extends View {
+  _parentElem = document.querySelector('main');
   _copyButton;
   _btnsCont;
 
-  renderReferralTransferView() {
+  _generateMarkup() {
     return `
     <section class="section__bottom">
       <div class="section__bottom-ref">
