@@ -23,14 +23,47 @@ const user = {
   themeMode: 'system default'
 };
 
-export const router = {
-  '/index.html': {
+const router = {
+  '/': {
     view: async function() {
       await loginView.loader();
       await loginView.Delay(500);
-      loginView._generateMarkup();
-      loginView.isFocus();
-    },
+      loginView.renderData(user);
+      loginView.initFormFunctions(router, loginUser);
+      homeView.removeHeaderFooter();
+    }
+  },
+
+  'signup': {
+    view: async function() {
+      signUpView.renderData(user);
+      signUpView.getSignInDetails(renderTab, createUserSendEmailVerif, createUserData);
+    }
+  },
+
+  '/dashboard': {
+    view: async function() {
+      user.data = await getUserData(user);
+      homeView.generateHomeMarkup(user);
+      scrollToTop();
+
+      await dashboardView.loader();
+      await dashboardView.Delay(1000);
+      dashboardView.renderData(user);
+      chartView.createChart();
+
+      fundTransferView.addHandlerCopyRef(copyRefLink);
+      fundTransferView.activeBtn();
+    }
+  },
+
+  'profile': {
+    view: async function() {
+      await profileView.loader();
+      await profileView.Delay(1000);
+      profileView.renderProfileView();
+      profileView.addHandlerSettings(settings);
+    }
   }
 }
 
@@ -44,45 +77,8 @@ export const windowLoad = function() {
 
 export const renderTab = async function() {
   const pathname = location.pathname;
-  // if (router[pathname]) {
-  //   router[pathname].view();
-  // }
-
-  switch (pathname) {
-    case '/':
-    case '/index.html':
-      loginView.renderData(user);
-      loginView.initFormFunctions(renderTab, loginUser);
-      homeView.removeHeaderFooter();
-      break;
-
-    case '/signup':
-      signUpView.renderData(user);
-      signUpView.getSignInDetails(renderTab, createUserSendEmailVerif, createUserData);
-      break;
-
-    case '/dashboard':
-      user.data = await getUserData(user);
-      homeView.generateHomeMarkup(user);
-      scrollToTop()
-      await dashboardView.loader();
-      await dashboardView.Delay(1000);
-      dashboardView.renderData(user);
-      chartView.createChart();
-
-
-      fundTransferView.addHandlerCopyRef(copyRefLink);
-      fundTransferView.activeBtn();
-      break;
-
-    case 'profile':
-      await profileView.loader();
-      await profileView.Delay(1000);
-      profileView.renderProfileView();
-      profileView.addHandlerSettings(settings);
-      break;
-    default:
-      return
+  if (router[pathname]) {
+    await router[pathname].view();
   }
 }
 
