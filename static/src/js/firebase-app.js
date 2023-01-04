@@ -44,10 +44,10 @@ export const loginUser = async function(email, password) {
   }
 }
 
+//create user & send user email verification
 export const createUserSendEmailVerif = async function(email, password) {
   try {
     const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
-
     const user = await userCredentials.user;
     sendEmailVerif();
     return user
@@ -61,6 +61,7 @@ const signoutUser = async function() {
   console.log(signout, 'signout');
 }
 
+//when user sign up create user data in firebase database
 export const createUserData = async function(user) {
   await setDoc(doc(db, 'users', user.uid), {
     fullname: user.displayName,
@@ -72,17 +73,26 @@ export const createUserData = async function(user) {
   uploadPic(user.uid, user.photoURL)
 }
 
-export const getUserData = async function() {
-  try {
-    const currUser = auth.currentUser;
-    const docSnap = await getDoc(doc(db, "users", currUser.uid));
-    if (docSnap.exists()) return docSnap.data();
-    throw Error('erorrrrr')
-  } catch (err) {
-    throw err
-  }
+export const getUserData = function(user) {
+  const currUser = auth.currentUser;
+  return new Promise(function(resolve, reject) {
+    onSnapshot(doc(db, "users", currUser.uid), doc => {
+      if (doc.exists()) {
+        user.data = doc.data();
+        resolve();
+      }
+      reject('data not found');
+    });
+  });
 }
 
 export const sendEmailVerif = async function() {
   await sendEmailVerification(auth.currentUser);
+}
+
+export const firebaseObj = {
+  doc,
+  onSnapshot,
+  auth,
+  db
 }

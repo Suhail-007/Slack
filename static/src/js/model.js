@@ -6,7 +6,7 @@ import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { chartTypes } from './config.js';
 import { updateURL } from './helper.js';
-import { loginUser, createUserSendEmailVerif, createUserData, getUserData } from './firebase-app.js';
+import { loginUser, createUserSendEmailVerif, createUserData, getUserData, firebaseObj } from './firebase-app.js';
 import chartView from './views/dashboard/chartView.js';
 
 export const theme = {
@@ -29,7 +29,7 @@ const router = {
       await loginView.loader();
       await loginView.Delay(500);
       loginView.renderData(user);
-      loginView.initFormFunctions(router, loginUser);
+      loginView.initFormFunctions(renderTab, loginUser);
       homeView.removeHeaderFooter();
     }
   },
@@ -43,7 +43,7 @@ const router = {
 
   '/dashboard': {
     view: async function() {
-      user.data = await getUserData(user);
+      await getUserData(user);
       homeView.generateHomeMarkup(user);
       scrollToTop();
 

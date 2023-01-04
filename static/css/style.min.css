@@ -498,7 +498,7 @@ li:hover .nav__item--name {
   top: 20%;
   left: 0;
   font-size: 1.3rem;
-  padding: 0.2rem;
+  padding: 0 0.2rem;
   transition: all 0.3s;
   color: var(--grey-light);
   letter-spacing: 1px;
