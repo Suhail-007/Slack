@@ -6,7 +6,7 @@ import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { chartTypes } from './config.js';
 import { updateURL } from './helper.js';
-import { loginUser, createUserSendEmailVerif, createUserData, getUserData, firebaseObj } from './firebase-app.js';
+import { loginUser, createUserSendEmailVerif, createUserData, getUserData, getUserImage } from './firebase-app.js';
 import chartView from './views/dashboard/chartView.js';
 
 export const theme = {
@@ -26,34 +26,47 @@ const user = {
 const router = {
   '/': {
     view: async function() {
-      await loginView.loader();
-      await loginView.Delay(500);
-      loginView.renderData(user);
-      loginView.initFormFunctions(renderTab, loginUser);
-      homeView.removeHeaderFooter();
+      try {
+        await loginView.loader();
+        await loginView.Delay(500);
+        loginView.renderData(user);
+        loginView.initFormFunctions(renderTab, loginUser);
+        homeView.removeHeaderFooter();
+      } catch (err) {
+        loginView.renderError(err, 'login')
+      }
     }
   },
 
-  'signup': {
+  '/signup': {
     view: async function() {
-      signUpView.renderData(user);
-      signUpView.getSignInDetails(renderTab, createUserSendEmailVerif, createUserData);
+      try {
+        signUpView.renderData(user);
+        signUpView.getSignInDetails(renderTab, createUserSendEmailVerif, createUserData);
+        signUpView.previewUserProfile();
+      } catch (err) {
+        signUpView.renderError(err, 'login')
+      }
     }
   },
 
   '/dashboard': {
     view: async function() {
-      await getUserData(user);
-      homeView.generateHomeMarkup(user);
-      scrollToTop();
+      try {
+        await getUserData(user);
+        await getUserImage(user.data)
+        homeView.generateHomeMarkup(user);
+        scrollToTop();
 
-      await dashboardView.loader();
-      await dashboardView.Delay(1000);
-      dashboardView.renderData(user);
-      chartView.createChart();
+        await dashboardView.loader();
+        await dashboardView.Delay(1000);
+        dashboardView.renderData(user);
+        chartView.createChart();
 
-      fundTransferView.addHandlerCopyRef(copyRefLink);
-      fundTransferView.activeBtn();
+        fundTransferView.addHandlerCopyRef(copyRefLink);
+        fundTransferView.activeBtn();
+      } catch (err) {
+      }
     }
   },
 

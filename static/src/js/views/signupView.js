@@ -20,7 +20,7 @@ class SignUpView extends View {
         
         <div class="signup__form__profile">
           <div class="signup__form__profile__fake">
-          <img loading='lazy' src="${defaultUserPic}"/>
+          <img data-img-preview loading='lazy' src="${defaultUserPic}"/>
           </div>
           <label for="profile">Choose a profile pic</label>
           <input accept="image/png image/jpg image/jpeg" id="profile" type="file" name="profile">
@@ -84,22 +84,18 @@ class SignUpView extends View {
 
         //create important properties on user obj of firebase
         user.displayName = userInfoObj.fullname;
-        user.photoURL = this.#setUserPic(userInfoObj);
+        user.photoURL = userInfoObj.profile;
         user.email = userInfoObj.email;
         user.phoneNumber = userInfoObj.countryCode + userInfoObj.phone;
 
         //create user data in firebase database
-        createUserData(user);
+        await createUserData(user);
         updateURL('/');
         router();
       } catch (err) {
         this.renderError(err, 'login');
       }
     })
-  }
-
-  #setUserPic(user) {
-    return user.profile.name === '' ? defaultUserPic : user.profile.name;
   }
 
   isInputsCorrect(userInfoObj) {
@@ -114,6 +110,19 @@ class SignUpView extends View {
     rePassword = rePassword.split('');
     const isSame = password.every((l, i) => rePassword[i] === l);
     return isSame
+  }
+
+  previewUserProfile() {
+    const inputImgElem = document.querySelector('#profile');
+
+    inputImgElem.addEventListener('change', () => {
+      const img = document.querySelector('[data-img-preview]');
+      const file = inputImgElem.files[0];
+      
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.addEventListener('load', () => img.src = fileReader.result);
+    })
   }
 }
 

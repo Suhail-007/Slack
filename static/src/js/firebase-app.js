@@ -2,8 +2,7 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebas
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
 import { getFirestore, collection, addDoc, getDocs, getDoc, doc, deleteDoc, updateDoc, deleteField, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
-import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js";
-
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB0YK0OmBjg6AFeqa-Kl3sm0_b1FWZfQV4",
@@ -20,19 +19,9 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig);
 
 //init services
-const storage = getStorage(firebaseApp);
+const storage = getStorage();
 export const db = getFirestore(firebaseApp);
 const auth = getAuth();
-
-const imagesRef = ref(storage, 'images');
-
-function uploadPic(user, file) {
-  const usrPic = ref(imagesRef, user);
-  uploadBytes(usrPic, file).then((snapshot) => {
-    console.log(snapshot);
-    console.log('Uploaded a blob or file!');
-  });
-}
 
 // const analytics = getAnalytics(firebaseApp);
 export const loginUser = async function(email, password) {
@@ -63,14 +52,18 @@ const signoutUser = async function() {
 
 //when user sign up create user data in firebase database
 export const createUserData = async function(user) {
-  await setDoc(doc(db, 'users', user.uid), {
-    fullname: user.displayName,
-    profilePic: user.photoURL,
-    userEmail: user.email,
-    uid: user.uid,
-    phone: user.phoneNumber,
-  });
-  uploadPic(user.uid, user.photoURL)
+  try {
+    await setDoc(doc(db, 'users', user.uid), {
+      fullname: user.displayName,
+      profilePic: user.photoURL.name,
+      userEmail: user.email,
+      uid: user.uid,
+      phone: user.phoneNumber,
+    });
+    await uploadPic(user.uid, user.photoURL);
+  } catch (err) {
+    throw err
+  }
 }
 
 export const getUserData = function(user) {
@@ -90,9 +83,28 @@ export const sendEmailVerif = async function() {
   await sendEmailVerification(auth.currentUser);
 }
 
-export const firebaseObj = {
-  doc,
-  onSnapshot,
-  auth,
-  db
+const imagesRef = ref(storage, 'images');
+
+const uploadPic = async function(user, file) {
+  //it's like this inside of images folder create user(user.id) folder there create a file name(file param) and upload that file to server. i.e images/user/file(same name as user have saved)
+  try {
+    const profilePicRef = ref(storage, `images/${user}/${file.name}`);
+
+    const snapshot = await uploadBytes(profilePicRef, file)
+    console.log('Image uploaded to server');
+    return snapshot
+  } catch (err) {
+    throw err
+  }
+}
+
+export const getUserImage = async function(user) {
+  try {
+    const profilePicRef = ref(storage, `images/${user.uid}/${user.profilePic}`);
+
+    const imgUrl = await getDownloadURL(profilePicRef);
+    user.profilePic = imgUrl;
+  } catch (err) {
+    throw err
+  }
 }
