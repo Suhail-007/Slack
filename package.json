@@ -4,12 +4,12 @@
   "description": "Dashboard ui for investing",
   "main": "index.js",
   "scripts": {
-    "watch:sass": "sass static/sass/main.scss static/css/style.min.css -w",
+    "watch:sass": "sass sass/main.scss ./css/style.min.css -w",
     "devserver": "live-server",
     "start": "npm-run-all --parallel devserver watch:sass",
-    "compile:sass": "sass static/sass/main.scss static/css/style.comp.css",
-    "post:css": "postcss --use autoprefixer -b 'last 10 versions' static/css/style.concat.css -o static/css/style.prefix.css",
-    "compress:css": "sass static/css/style.prefix.css static/css/style.min.css --style compressed",
+    "compile:sass": "sass ./sass/main.scss ./css/style.comp.css",
+    "post:css": "postcss --use autoprefixer -b 'last 10 versions' ./css/style.concat.css -o ./css/style.prefix.css",
+    "compress:css": "sass ./css/style.prefix.css ./css/style.min.css --style compressed",
     "build:css": "npm-run-all compile:sass post:css compress:css"
   },
   "repository": {

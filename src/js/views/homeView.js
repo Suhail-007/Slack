@@ -26,7 +26,7 @@ class homeView extends View {
         <div class="header">
           <div class="website-logo-container">
             <div class="website-logo">
-              <img src="/static/src/images/m_logo.jpg" alt="Slack (website logo)">
+              <img src="/src/images/m_logo.jpg" alt="Slack (website logo)">
             </div>
             <p class="website_name">Slack</p>
           </div>
@@ -43,7 +43,7 @@ class homeView extends View {
         <div class="nav__container">
           <div class="nav__container__btn" data-navBtn-container>
             <svg>
-              <use xlink:href="./static/src/images/icons.svg#icon_hamburger-menu"></use>
+              <use xlink:href="./src/images/icons.svg#icon_hamburger-menu"></use>
             </svg>
           </div>
     
@@ -58,63 +58,63 @@ class homeView extends View {
             <ul>
               <li data-nav="dashboard" class="nav_item">
                 <svg>
-                  <use xlink:href="./static/src/images/icons.svg#icon_dashboard"></use>
+                  <use xlink:href="./src/images/icons.svg#icon_dashboard"></use>
                 </svg>
                 <a href='/dashboard' class="nav__item--name">Dashboard</a>
               </li>
               <li data-nav="profile" class="nav_item">
                 <svg>
-                  <use href="./static/src/images/icons.svg#icon_profile"></use>
+                  <use href="./src/images/icons.svg#icon_profile"></use>
                 </svg>
                 <a href='/profile' class="nav__item--name">Profile</a>
               </li>
               <li data-nav="invest wallet" class="nav_item">
                 <svg>
-                  <use xlink:href="./static/src/images/icons.svg#icon_invest-wallet"></use>
+                  <use xlink:href="./src/images/icons.svg#icon_invest-wallet"></use>
                 </svg>
     
                 <span class="nav__item--name">Invest Wallet</span>
               </li>
               <li data-nav="team summary" class="nav_item">
                 <svg>
-                  <use href="./static/src/images/icons.svg#icon_team-summary"></use>
+                  <use href="./src/images/icons.svg#icon_team-summary"></use>
                 </svg>
                 <span class="nav__item--name">Team summary </span>
               </li>
               <li data-nav="income" class="nav_item">
                 <svg>
-                  <use xlink:href="./static/src/images/icons.svg#icon_income"></use>
+                  <use xlink:href="./src/images/icons.svg#icon_income"></use>
                 </svg>
                 <span class="nav__item--name">Income</span>
               </li>
               <li data-nav="withdraw wallet" class="nav_item">
                 <svg>
-                  <use xlink:href="./static/src/images/icons.svg#icon_withdraw-wallet"></use>
+                  <use xlink:href="./src/images/icons.svg#icon_withdraw-wallet"></use>
                 </svg>
                 <span class="nav__item--name">withdrawal wallet</span>
               </li>
               <li data-nav="deposit funds transfer" class="nav_item">
                 <svg class="i">
-                  <use href="./static/src/images/icons.svg#icon-wallet"></use>
+                  <use href="./src/images/icons.svg#icon-wallet"></use>
                 </svg>
                 <span class="nav__item--name">deposit funds transfer</span>
               </li>
               <li data-nav="reports" class="nav_item">
                 <svg>
-                  <use xlink:href="./static/src/images/icons.svg#icon_report"></use>
+                  <use xlink:href="./src/images/icons.svg#icon_report"></use>
                 </svg>
                 <span class="nav__item--name">Reports</span>
               </li>
               <li data-nav="structure balance" class="nav_item">
                 <svg>
-                  <use xlink:href="./static/src/images/icons.svg#icon_structure-balance"></use>
+                  <use xlink:href="./src/images/icons.svg#icon_structure-balance"></use>
                 </svg>
                 <span class="nav__item--name">Structure balance</span>
               </li>
     
               <li class="nav_item">
                 <svg>
-                  <use xlink:href="./static/src/images/icons.svg#icon_logout"></use>
+                  <use xlink:href="./src/images/icons.svg#icon_logout"></use>
                 </svg>
                 <span href='/logout' class="nav__item--name">Logout</span>
               </li>

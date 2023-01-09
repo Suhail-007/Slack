@@ -9,7 +9,7 @@ class SignUpView extends View {
     return `
     <section class="form__section">
       <div class="form__section__logo--lg">
-        <img class="form__section__img" loading='lazy' src="/static/src/images/m_logo.jpg" alt="Slack (website logo)">
+        <img class="form__section__img" loading='lazy' src="/src/images/m_logo.jpg" alt="Slack (website logo)">
       </div>
 
       <div class="form__container form__container--blur">
@@ -86,7 +86,7 @@ class SignUpView extends View {
 
         //create user data in firebase database
         await createUserData(user, userInfoObj);
-        updateURL('/');
+        updateURL('');
         router();
       } catch (err) {
         this.renderError(err, 'error');

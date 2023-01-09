@@ -8,7 +8,7 @@ class loginView extends View {
     return `
     <section class="form__section">
       <div class="form__section__logo--lg">
-        <img class="form__section__img" loading='lazy' src="/static/src/images/m_logo.jpg" alt="Slack (website logo)">
+        <img class="form__section__img" loading='lazy' src="./src/images/m_logo.jpg" alt="Slack (website logo)">
       </div>
 
       <div class="login__form__cont form__container form__container--blur">
@@ -23,7 +23,7 @@ class loginView extends View {
           
           <div class="input__label">
             <svg data-show-password class='sm-svg input__label__password'>
-              <use href="./static/src/images/icons.svg#icon-eye"></use>
+              <use href="../src/images/icons.svg#icon-eye"></use>
             </svg>
             <input class="input__label__input" type='text' name='password' id='password'>
             <label class="input__label__label" for="password">Password</label>
@@ -35,7 +35,7 @@ class loginView extends View {
           
           <button class="form__btn login-btn" type="submit">Log in</button>
 
-          <p class="signup--login">Don't have account yet?<a href="/signup">Sign up</a></p>
+          <p class="signup--login">Don't have account yet?<a data-signup href="/signup">Sign up</a></p>
         </form>
       </div>
     </section>`
@@ -44,7 +44,8 @@ class loginView extends View {
   initFormFunctions(router, loginUser) {
     this.isFocus();
     this.getLoginCredentials(router, loginUser);
-    this.setTitle('Log In || Slack')
+    this.setTitle('Log In || Slack');
+    this.togglePasswordInputType();
   }
 
   isFocus() {
@@ -85,22 +86,25 @@ class loginView extends View {
 
       //if users exist update url and call router to redirect users to login page
       //else firebase will throw an error 
-      updateURL('/dashboard');
+      updateURL('dashboard');
       router()
     } catch (err) {
       this.renderError(err.code, 'error');
     }
   }
 
-  preventAnchorDefault(model) {
-    const signupElem = document.querySelector('a[href="/signup"]');
+  preventAnchorDefault(renderTab) {
+    const signupElem = document.querySelector('[data-signup]');
 
     if (!signupElem) return
 
-    signupElem.addEventListener('click', e => {
+    signupElem.addEventListener('click', async e => {
       e.preventDefault();
-      updateURL(e.target.href);
-      model.renderTab();
+
+      updateURL('signup');
+      await this.loader();
+      await this.Delay(2000);
+      renderTab();
     })
   }
 

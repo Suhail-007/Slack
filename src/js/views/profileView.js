@@ -21,7 +21,7 @@ class ProfileView extends View {
     
         <div class="profile__cont">
           <div class="profile__cont-photo">
-            <img src="./static/src/images/user.png" alt="user profile image">
+            <img src="./src/images/user.png" alt="user profile image">
           </div>
           <div>
             <p class="profile__user-name">Suhail Qureshi</p>

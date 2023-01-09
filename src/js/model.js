@@ -24,14 +24,14 @@ const user = {
 };
 
 const router = {
-  '/': {
+  'null': {
     view: async function() {
       try {
         await loginView.loader();
         await loginView.Delay(500);
         loginView.renderData(user);
         loginView.initFormFunctions(renderTab, loginUser);
-        loginView.togglePasswordInputType();
+        loginView.preventAnchorDefault(renderTab);
         homeView.removeHeaderFooter();
       } catch (err) {
         loginView.renderError(err, 'login')
@@ -39,7 +39,7 @@ const router = {
     }
   },
 
-  '/signup': {
+  'signup': {
     view: async function() {
       try {
         signUpView.renderData(user);
@@ -51,7 +51,7 @@ const router = {
     }
   },
 
-  '/dashboard': {
+  'dashboard': {
     view: async function() {
       try {
         await getUserData(user);
@@ -66,8 +66,7 @@ const router = {
 
         fundTransferView.addHandlerCopyRef(copyRefLink);
         fundTransferView.activeBtn();
-      } catch (err) {
-      }
+      } catch (err) {}
     }
   },
 
@@ -81,19 +80,22 @@ const router = {
   }
 }
 
+export const renderTab = async function() {
+  const url = new URL(location.href);
+  const page = url.searchParams.get('page');
+  if (router[page]) {
+    await router[page].view();
+  }
+}
+
 export const renderFromHistory = function() {
   window.addEventListener('popstate', renderTab);
 }
 
 export const windowLoad = function() {
-  window.addEventListener('load', renderTab);
-}
-
-export const renderTab = async function() {
-  const pathname = location.pathname;
-  if (router[pathname]) {
-    await router[pathname].view();
-  }
+  window.addEventListener('load', () => {
+    renderTab();
+  });
 }
 
 const scrollToTop = function() {

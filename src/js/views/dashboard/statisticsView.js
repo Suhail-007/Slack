@@ -10,7 +10,7 @@ class StatisticsView extends View {
         <div class="icon_heading">
           <div>
           <svg>
-            <use href="./static/src/images/icons.svg#icon_chart"></use>
+            <use href="./src/images/icons.svg#icon_chart"></use>
           </svg>
           </div>
           <p>Roi Income</p>
@@ -28,7 +28,7 @@ class StatisticsView extends View {
         <div class="icon_heading">
           <div>
           <svg>
-            <use href="./static/src/images/icons.svg#icon_money-bag"></use>
+            <use href="./src/images/icons.svg#icon_money-bag"></use>
           </svg>
           </div>
 
@@ -47,7 +47,7 @@ class StatisticsView extends View {
         <div class="icon_heading">
           <div>
           <svg>
-            <use href="./static/src/images/icons.svg#icon_binary-income"></use>
+            <use href="./src/images/icons.svg#icon_binary-income"></use>
           </svg>
           </div>
 
@@ -66,7 +66,7 @@ class StatisticsView extends View {
         <div class="icon_heading">
           <div>
           <svg>
-            <use href=./static/src/images/icons.svg#current_income></use>
+            <use href=./src/images/icons.svg#current_income></use>
           </svg>
           </div>
 
