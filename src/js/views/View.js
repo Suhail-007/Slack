@@ -43,7 +43,7 @@ export default class View {
     this._parentElem.innerHTML = '';
   }
 
-  renderError(msg, className) {
+  renderError(msg, className, ms) {
     const sectionError = document.querySelector('.section__error');
     const errorMsgElem = sectionError.querySelector('p');
     errorMsgElem.textContent = msg;
@@ -55,6 +55,6 @@ export default class View {
     setTimeout(() => {
       sectionError.classList.remove(className);
       errorMsgElem.textContent = '';
-    }, 2000);
+    }, ms);
   }
 }

@@ -82,14 +82,14 @@ class loginView extends View {
       const { email, password } = userObj;
       const user = await loginUser(email, password);
 
-      if (user) this.renderError('Logging User', 'success');
+      if (user) this.renderError('Logging User', 'success', 2000);
 
       //if users exist update url and call router to redirect users to login page
       //else firebase will throw an error 
       updateURL('dashboard');
       router()
     } catch (err) {
-      this.renderError(err.code, 'error');
+      this.renderError(err.code, 'error', 2000);
     }
   }
 

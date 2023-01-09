@@ -66,16 +66,20 @@ const router = {
 
         fundTransferView.addHandlerCopyRef(copyRefLink);
         fundTransferView.activeBtn();
-      } catch (err) {}
+      } catch (err) {
+
+      }
     }
   },
 
   'profile': {
     view: async function() {
-      await profileView.loader();
-      await profileView.Delay(1000);
-      profileView.renderProfileView();
-      profileView.addHandlerSettings(settings);
+      try {
+        await profileView.loader();
+        await profileView.Delay(1000);
+        profileView.renderProfileView();
+        profileView.addHandlerSettings(settings);
+      } catch (e) {}
     }
   }
 }
