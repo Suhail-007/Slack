@@ -35,7 +35,7 @@ class homeView extends View {
           <div class=" user_profile_container user_profile_container_desktop hidden">
             <p class="username"><a href='/profile'>${this._data.fullname}</a></p>
             <div class="user_profile">
-              <img src="${this.#setUserPic(this._data)}" alt="user profile">
+              <img src="${this._data.profilePic}" alt="user profile">
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@ class homeView extends View {
             <div class="user-profile-container user-profile-container_mob">
               <p class="user-profile-container_username">${this._data.fullname}</p>
               <div class="user-profile-container_profile">
-                <img src="${this.#setUserPic(this._data)}" alt="user profile desktop">
+                <img src="${this.#setUserPic(this._data)}" alt="user profile mobile">
               </div>
             </div>
     
@@ -145,7 +145,7 @@ class homeView extends View {
   }
 
   #setUserPic(user) {
-    return user.profilePic === '' ? defaultUserPic : user.profilePic;
+    return user.profilePic ? user.profilePic : defaultUserPic;
   }
 }
 

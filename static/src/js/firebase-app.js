@@ -51,17 +51,23 @@ const signoutUser = async function() {
 }
 
 //when user sign up create user data in firebase database
-export const createUserData = async function(user) {
+export const createUserData = async function(user, formData) {
   try {
     await setDoc(doc(db, 'users', user.uid), {
-      fullname: user.displayName,
-      profilePic: user.photoURL.name,
-      userEmail: user.email,
+      fullname: formData.fullname,
+      profilePic: formData.profile.name,
+      userEmail: formData.email,
       uid: user.uid,
-      phone: user.phoneNumber,
+      phone: formData.countryCode + formData.phone,
+      dob: formData.dob,
+      state: formData.state,
+      country: formData.country
     });
-    await uploadPic(user.uid, user.photoURL);
+    //if theres no profile don't upload it to servers
+    if (formData.profile.name === '') return
+    await uploadPic(user.uid, formData.profile);
   } catch (err) {
+    console.log(err);
     throw err
   }
 }
@@ -90,7 +96,7 @@ const uploadPic = async function(user, file) {
   try {
     const profilePicRef = ref(storage, `images/${user}/${file.name}`);
 
-    const snapshot = await uploadBytes(profilePicRef, file)
+    const snapshot = await uploadBytes(profilePicRef, file);
     console.log('Image uploaded to server');
     return snapshot
   } catch (err) {
@@ -100,6 +106,8 @@ const uploadPic = async function(user, file) {
 
 export const getUserImage = async function(user) {
   try {
+    if (user.profilePic === '') return
+
     const profilePicRef = ref(storage, `images/${user.uid}/${user.profilePic}`);
 
     const imgUrl = await getDownloadURL(profilePicRef);

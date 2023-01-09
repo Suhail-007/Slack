@@ -22,6 +22,9 @@ class loginView extends View {
           </div>
           
           <div class="input__label">
+            <svg data-show-password class='sm-svg input__label__password'>
+              <use href="./static/src/images/icons.svg#icon-eye"></use>
+            </svg>
             <input class="input__label__input" type='text' name='password' id='password'>
             <label class="input__label__label" for="password">Password</label>
           </div>
@@ -77,7 +80,7 @@ class loginView extends View {
     try {
       const { email, password } = userObj;
       const user = await loginUser(email, password);
-      
+
       //if users exist update url and call router to redirect users to login page
       //else firebase will throw an error 
       updateURL('/dashboard');
@@ -96,6 +99,13 @@ class loginView extends View {
       e.preventDefault();
       updateURL(e.target.href);
       model.renderTab();
+    })
+  }
+
+  togglePasswordInputType() {
+    const svgElem = document.querySelector('[data-show-password]');
+
+    svgElem.addEventListener('click', e => {
     })
   }
 }

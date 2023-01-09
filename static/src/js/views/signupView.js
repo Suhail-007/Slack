@@ -82,14 +82,8 @@ class SignUpView extends View {
 
         const user = await createUserSendEmailVerif(userInfoObj.email, userInfoObj.password);
 
-        //create important properties on user obj of firebase
-        user.displayName = userInfoObj.fullname;
-        user.photoURL = userInfoObj.profile;
-        user.email = userInfoObj.email;
-        user.phoneNumber = userInfoObj.countryCode + userInfoObj.phone;
-
         //create user data in firebase database
-        await createUserData(user);
+        await createUserData(user, userInfoObj);
         updateURL('/');
         router();
       } catch (err) {
@@ -118,7 +112,7 @@ class SignUpView extends View {
     inputImgElem.addEventListener('change', () => {
       const img = document.querySelector('[data-img-preview]');
       const file = inputImgElem.files[0];
-      
+
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
       fileReader.addEventListener('load', () => img.src = fileReader.result);

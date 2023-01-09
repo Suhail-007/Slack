@@ -31,6 +31,7 @@ const router = {
         await loginView.Delay(500);
         loginView.renderData(user);
         loginView.initFormFunctions(renderTab, loginUser);
+        loginView.togglePasswordInputType();
         homeView.removeHeaderFooter();
       } catch (err) {
         loginView.renderError(err, 'login')

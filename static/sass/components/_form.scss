@@ -85,6 +85,13 @@
     top: -30%;
     transform: translateX(1rem) scale(.9);
   }
+
+  &__password {
+    position: absolute;
+    transform: translateY(.5rem);
+    right: 5%;
+    fill: var(--grey-light);
+  }
 }
 
 .form__btn {

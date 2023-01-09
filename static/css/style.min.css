@@ -295,6 +295,21 @@ li:hover .nav__item--name {
   margin-bottom: 1rem !important;
 }
 
+.sm-svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.md-svg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.lg-svg {
+  width: 4rem;
+  height: 4rem;
+}
+
 .btn-purple {
   display: flex;
   align-items: center;
@@ -510,6 +525,12 @@ li:hover .nav__item--name {
   background: var(--white-bg);
   top: -30%;
   transform: translateX(1rem) scale(0.9);
+}
+.input__label__password {
+  position: absolute;
+  transform: translateY(0.6rem);
+  right: 5%;
+  fill: var(--grey-light);
 }
 
 .form__btn {
@@ -791,6 +812,7 @@ li:hover .nav__item--name {
   border-radius: 1rem;
   transition: 300ms ease-in;
   transition-delay: 100ms;
+  
   opacity: 0;
 }
 .navbar > ul > li:hover::before {
