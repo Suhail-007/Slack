@@ -31,8 +31,5 @@
     "url": "https://github.com/Suhail-007/dashboard-ui/issues"
   },
   "homepage": "https://github.com/Suhail-007/dashboard-ui#readme",
-  "keywords": [],
-  "dependencies": {
-    "express": "^4.18.2"
-  }
+  "keywords": []
 }

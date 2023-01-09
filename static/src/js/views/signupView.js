@@ -82,12 +82,14 @@ class SignUpView extends View {
 
         const user = await createUserSendEmailVerif(userInfoObj.email, userInfoObj.password);
 
+        if(user) this.renderError('Account created', 'success');
+
         //create user data in firebase database
         await createUserData(user, userInfoObj);
         updateURL('/');
         router();
       } catch (err) {
-        this.renderError(err, 'login');
+        this.renderError(err, 'error');
       }
     })
   }

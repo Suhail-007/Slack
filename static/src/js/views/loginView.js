@@ -81,12 +81,14 @@ class loginView extends View {
       const { email, password } = userObj;
       const user = await loginUser(email, password);
 
+      if (user) this.renderError('Logging User', 'success');
+
       //if users exist update url and call router to redirect users to login page
       //else firebase will throw an error 
       updateURL('/dashboard');
       router()
     } catch (err) {
-      this.renderError(err.code, 'login');
+      this.renderError(err.code, 'error');
     }
   }
 
@@ -105,8 +107,7 @@ class loginView extends View {
   togglePasswordInputType() {
     const svgElem = document.querySelector('[data-show-password]');
 
-    svgElem.addEventListener('click', e => {
-    })
+    svgElem.addEventListener('click', e => {})
   }
 }
 

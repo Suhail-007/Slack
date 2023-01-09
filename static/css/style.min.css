@@ -55,6 +55,7 @@
   --font-primary: #000;
   --grey-light: #999;
   --error: hsla(0, 100%, 78%, .6);
+  --success: hsla(134, 45%, 84%, 1);
 }
 
 /*Values for calc function*/
@@ -371,7 +372,7 @@ li:hover .nav__item--name {
   pointer-events: auto;
   visibility: visible;
 }
-.section__error.login {
+.section__error.error {
   text-align: center;
   border-radius: 3px;
   background: var(--error);
@@ -380,8 +381,20 @@ li:hover .nav__item--name {
   pointer-events: auto;
   visibility: visible;
 }
-.section__error.login > p {
+.section__error.error > p {
   color: red;
+}
+.section__error.success {
+  text-align: center;
+  border-radius: 3px;
+  background: var(--success);
+  width: 100%;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+.section__error.success > p {
+  color: hsl(109deg, 87%, 28%);
 }
 .section__error__msg {
   font-size: 1.5rem;
@@ -528,7 +541,7 @@ li:hover .nav__item--name {
 }
 .input__label__password {
   position: absolute;
-  transform: translateY(0.6rem);
+  transform: translateY(0.5rem);
   right: 5%;
   fill: var(--grey-light);
 }
@@ -812,7 +825,6 @@ li:hover .nav__item--name {
   border-radius: 1rem;
   transition: 300ms ease-in;
   transition-delay: 100ms;
-  
   opacity: 0;
 }
 .navbar > ul > li:hover::before {
