@@ -64,6 +64,10 @@ export const createUserSendEmailVerif = async function(email, password) {
   }
 }
 
+export const sendEmailVerif = async function() {
+  await sendEmailVerification(auth.currentUser);
+}
+
 export const resetUserPass = async function(email) {
   try {
     return await sendPasswordResetEmail(auth, email);
@@ -94,7 +98,6 @@ export const createUserData = async function(user, formData) {
     if (formData.profile.name === '') return
     await uploadPic(user.uid, formData.profile);
   } catch (err) {
-    console.log(err);
     throw err
   }
 }
@@ -110,10 +113,6 @@ export const getUserData = function(user) {
       reject('data not found');
     });
   });
-}
-
-export const sendEmailVerif = async function() {
-  await sendEmailVerification(auth.currentUser);
 }
 
 const imagesRef = ref(storage, 'images');

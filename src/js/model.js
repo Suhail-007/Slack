@@ -6,7 +6,7 @@ import dashboardView from './views/dashboard/dashboardView.js';
 import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { chartTypes } from './config.js';
-import { updateURL } from './helper.js';
+import { updateURL, NAV_TOGGLE_BTN } from './helper.js';
 import { loginUser, createUserSendEmailVerif, createUserData, getUserData, getUserImage, resetUserPass } from './firebase-app.js';
 import chartView from './views/dashboard/chartView.js';
 
@@ -50,13 +50,13 @@ const router = {
       }
     }
   },
-  
+
   'reset password': {
-    view: async function () {
+    view: async function() {
       await resetPassView.loader();
       await resetPassView.Delay(1000);
       resetPassView.renderData('_');
-      resetPassView.init(resetUserPass, renderTab);
+      resetPassView.init(resetUserPass, render);
     }
   },
 
@@ -64,7 +64,7 @@ const router = {
     view: async function() {
       try {
         await getUserData(user);
-        await getUserImage(user.data)
+        await getUserImage(user.data);
         homeView.generateHomeMarkup(user);
         scrollToTop();
 
@@ -75,6 +75,8 @@ const router = {
 
         fundTransferView.addHandlerCopyRef(copyRefLink);
         fundTransferView.activeBtn();
+        NAV_TOGGLE_BTN();
+
       } catch (err) {
 
       }

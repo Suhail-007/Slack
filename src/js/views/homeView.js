@@ -16,8 +16,8 @@ class homeView extends View {
     const footer = document.querySelector('footer');
 
     if (!header && !footer) return
-    header.style.display = 'none'
-    footer.style.display = 'none'
+    header.innerHTML = ''
+    footer.innerHTML = ''
   }
 
   generateHeaderMarkup() {
