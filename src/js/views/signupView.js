@@ -43,6 +43,9 @@ class SignUpView extends View {
           <input type='tel' size='3' maxlength='3' name='countryCode' placeholder='+91'>
             <input class="input__label__input" placeholder="99999-99999" type="tel" pattern="[0-9]{5}-[0-9]{5}" size='11' maxlength='11' id="phone" name='phone' />
           </div>
+          
+          <label for="gender">Gender</label>
+          <input class="input__label__input" placeholder="Male/Female/Others" required id="gender" name="gender" type="text">
 
           <label for="dob">DOB</label>
           <input name="dob" required id="dob" type="date" value="">
@@ -76,17 +79,18 @@ class SignUpView extends View {
         const isSame = this.#isPasswordsSame(userInfoObj);
         const isInputsCorrect = this.isInputsCorrect(userInfoObj);
 
-        if (!isSame) throw Error('Passwords do not match');
+        this.btnPressEffect(form);
 
+        if (!isSame) throw Error('Passwords do not match');
         if (!isInputsCorrect) throw Error('Please enter full name');
 
         const user = await createUserSendEmailVerif(userInfoObj.email, userInfoObj.password);
 
-        if(user) this.renderError('Account created', 'success', 3000);
+        if (user) this.renderError('Account created', 'success', 3000);
 
         //create user data in firebase database
         await createUserData(user, userInfoObj);
-        location.href = new URL('/', location.href)
+        updateURL('_', true);
         router();
       } catch (err) {
         this.renderError(err, 'error', 3000);

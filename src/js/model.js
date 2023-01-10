@@ -1,12 +1,13 @@
 import loginView from './views/loginView.js';
 import signUpView from './views/signupView.js';
+import resetPassView from './views/resetPassView.js';
 import homeView from './views/homeView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
 import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { chartTypes } from './config.js';
 import { updateURL } from './helper.js';
-import { loginUser, createUserSendEmailVerif, createUserData, getUserData, getUserImage } from './firebase-app.js';
+import { loginUser, createUserSendEmailVerif, createUserData, getUserData, getUserImage, resetUserPass } from './firebase-app.js';
 import chartView from './views/dashboard/chartView.js';
 
 export const theme = {
@@ -30,8 +31,7 @@ const router = {
         await loginView.loader();
         await loginView.Delay(500);
         loginView.renderData(user);
-        loginView.initFormFunctions(renderTab, loginUser);
-        loginView.preventAnchorDefault(renderTab);
+        loginView.init(renderTab, loginUser);
         homeView.removeHeaderFooter();
       } catch (err) {
         loginView.renderError(err, 'login')
@@ -48,6 +48,15 @@ const router = {
       } catch (err) {
         signUpView.renderError(err, 'login')
       }
+    }
+  },
+  
+  'reset password': {
+    view: async function () {
+      await resetPassView.loader();
+      await resetPassView.Delay(1000);
+      resetPassView.renderData('_');
+      resetPassView.init(resetUserPass, renderTab);
     }
   },
 

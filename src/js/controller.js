@@ -12,11 +12,6 @@ class App {
     model.windowLoad();
 
     NAV_TOGGLE_BTN();
-    this.#controllerLogin();
-  }
-
-  #controllerLogin() {
-    loginView.preventAnchorDefault(model);
   }
 }
 

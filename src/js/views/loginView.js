@@ -3,6 +3,7 @@ import { updateURL } from '../helper.js'
 
 class loginView extends View {
   _parentElem = document.querySelector('main');
+  _form;
 
   _generateMarkup() {
     return `
@@ -23,9 +24,9 @@ class loginView extends View {
           
           <div class="input__label">
             <svg data-show-password class='sm-svg input__label__password'>
-              <use href="../src/images/icons.svg#icon-eye"></use>
+              <use href="../src/images/icons.svg#icon-eye-slash"></use>
             </svg>
-            <input class="input__label__input" type='text' name='password' id='password'>
+            <input class="input__label__input" type='password' name='password' id='password'>
             <label class="input__label__label" for="password">Password</label>
           </div>
           
@@ -33,51 +34,38 @@ class loginView extends View {
             <p class="section__error__msg"></p>
           </section>
           
+          <a class='form-link reset-password' href='/'>Forget your password?</a>
+          
           <button class="form__btn login-btn" type="submit">Log in</button>
 
-          <p class="signup--login">Don't have account yet?<a data-signup href="/signup">Sign up</a></p>
+          <p class="form-link signup--login">Don't have account yet?<a data-signup='signup' href="/signup">Sign up</a></p>
         </form>
       </div>
     </section>`
   }
 
-  initFormFunctions(router, loginUser) {
-    this.isFocus();
-    this.getLoginCredentials(router, loginUser);
+  init(router, loginUser) {
+    this._form = document.querySelector('form');
     this.setTitle('Log In || Slack');
+    this.renderTab = router;
+    this.isFocus(this._form);
+    this.getLoginCredentials(loginUser);
+    this.formLinkRedirects();
     this.togglePasswordInputType();
   }
 
-  isFocus() {
-    const form = document.querySelector('form');
-
-    form.addEventListener('input', e => {
-
-      if (e.target.id === 'email' || e.target.id === 'password') {
-        const inputId = e.target.id;
-        const input = form.querySelector(`#${inputId}`);
-
-        input.addEventListener('blur', e => {
-          const label = document.querySelector(`label[for="${inputId}"]`);
-
-          e.target.value !== '' ? label.classList.add('not-empty') : label.classList.remove('not-empty');
-        })
-      }
-    })
-  }
-
-  getLoginCredentials(router, loginUser) {
-    const form = document.querySelector('form');
-
-    form.addEventListener('submit', e => {
+  getLoginCredentials(loginUser) {
+    this._form.addEventListener('submit', e => {
       e.preventDefault();
-      const fd = [...new FormData(form)];
+      const fd = [...new FormData(this._form)];
       const userObj = Object.fromEntries(fd);
-      this.#getUserFromFirebase(userObj, router, loginUser);
+
+      this.btnPressEffect(this._form);
+      this.#getUserFromFirebase(userObj, loginUser);
     })
   }
 
-  async #getUserFromFirebase(userObj, router, loginUser) {
+  async #getUserFromFirebase(userObj, loginUser) {
     try {
       const { email, password } = userObj;
       const user = await loginUser(email, password);
@@ -87,31 +75,63 @@ class loginView extends View {
       //if users exist update url and call router to redirect users to login page
       //else firebase will throw an error 
       updateURL('dashboard');
-      router()
+      await this.renderTab()
     } catch (err) {
       this.renderError(err.code, 'error', 2000);
     }
   }
 
-  preventAnchorDefault(renderTab) {
-    const signupElem = document.querySelector('[data-signup]');
+  formLinkRedirects(forgetPassword) {
+    this._form.addEventListener('click', e => {
+      if (e.target.matches('.form-link') || e.target.closest('.form-link')) {
+        e.preventDefault();
 
-    if (!signupElem) return
+        if (e.target.closest('.signup--login')) this.redirectToSignUp('signup');
+        if (e.target.matches('.reset-password')) this.redirectToResetPass('reset password');
+      }
+    })
+  }
 
-    signupElem.addEventListener('click', async e => {
-      e.preventDefault();
-
-      updateURL('signup');
+  async redirectToSignUp(redirectTo) {
+    try {
+      updateURL(redirectTo);
       await this.loader();
       await this.Delay(2000);
-      renderTab();
-    })
+      await this.renderTab();
+    } catch (err) {
+      this.renderError('refresh the page and retry', 'error')
+    }
+  }
+
+  async redirectToResetPass(redirectTo) {
+    try {
+      updateURL(redirectTo);
+      await this.renderTab();
+    } catch (err) {
+      this.renderError(err.message, 'error', 2000);
+    }
   }
 
   togglePasswordInputType() {
     const svgElem = document.querySelector('[data-show-password]');
+    const useElem = svgElem.querySelector('use');
 
-    svgElem.addEventListener('click', e => {})
+    svgElem.addEventListener('click', e => {
+      const inputPassElem = document.querySelector('#password');
+
+      switch (inputPassElem.type) {
+        case 'password':
+          inputPassElem.setAttribute('type', 'text');
+          useElem.setAttribute('href', '../src/images/icons.svg#icon-eye');
+          break;
+        case 'text':
+          inputPassElem.setAttribute('type', 'password');
+          useElem.setAttribute('href', '../src/images/icons.svg#icon-eye-slash');
+          break
+        default:
+          return
+      }
+    })
   }
 }
 

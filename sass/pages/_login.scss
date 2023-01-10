@@ -17,8 +17,13 @@
   margin-top: 1rem;
   row-gap: 2rem;
 
-
   & button {
     justify-self: center;
   }
+}
+
+.reset-password {
+  color: var(--blue-primary);
+  font-size: 1.3rem;
+  margin-inline: auto;
 }

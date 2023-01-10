@@ -1,7 +1,26 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js'
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
-import { getFirestore, collection, addDoc, getDocs, getDoc, doc, deleteDoc, updateDoc, deleteField, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  sendEmailVerification,
+  sendPasswordResetEmail
+} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  doc,
+  deleteDoc,
+  updateDoc,
+  deleteField,
+  setDoc,
+  onSnapshot
+} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -20,7 +39,7 @@ export const firebaseApp = initializeApp(firebaseConfig);
 
 //init services
 const storage = getStorage();
-export const db = getFirestore(firebaseApp);
+export const db = getFirestore();
 const auth = getAuth();
 
 // const analytics = getAnalytics(firebaseApp);
@@ -45,7 +64,15 @@ export const createUserSendEmailVerif = async function(email, password) {
   }
 }
 
-const signoutUser = async function() {
+export const resetUserPass = async function(email) {
+  try {
+    return await sendPasswordResetEmail(auth, email);
+  } catch (err) {
+    throw err
+  }
+}
+
+export const signoutUser = async function() {
   const signout = await signOut(auth);
   console.log(signout, 'signout');
 }

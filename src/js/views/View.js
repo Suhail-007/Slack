@@ -2,12 +2,12 @@ export default class View {
   _data;
   _parentElem;
 
-  renderData(data, render = true,clearParent = true) {
+  renderData(data, render = true, clearParent = true) {
     this._data = data;
 
     const markup = this._generateMarkup();
-    
-    if(!render) return markup;
+
+    // if (!render) return markup;
     if (clearParent) this.clear();
 
     this._parentElem.insertAdjacentHTML('beforeend', markup);
@@ -51,10 +51,35 @@ export default class View {
 
     if (className === 'default') this.clear();
 
-    //remove a 2 secssecs
+    //remove class & message after 2 secs
     setTimeout(() => {
       sectionError.classList.remove(className);
       errorMsgElem.textContent = '';
     }, ms);
+  }
+
+  btnPressEffect(parentElem) {
+    const btn = parentElem.querySelector('button');
+    btn.classList.add('press-btn');
+
+    setTimeout(() => {
+      btn.classList.remove('press-btn');
+    }, 100)
+  }
+
+  isFocus(parentElem) {
+    parentElem.addEventListener('change', e => {
+
+      if (e.target.id === 'email' || e.target.id === 'password') {
+        const inputId = e.target.id;
+        const input = parentElem.querySelector(`#${inputId}`);
+
+        input.addEventListener('blur', e => {
+          const label = document.querySelector(`label[for="${inputId}"]`);
+
+          e.target.value !== '' ? label.classList.add('not-empty') : label.classList.remove('not-empty');
+        })
+      }
+    })
   }
 }

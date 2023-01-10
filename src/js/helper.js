@@ -13,6 +13,10 @@ export const NAV_TOGGLE_BTN = function() {
   });
 };
 
-export const updateURL = function(page) {
+export const updateURL = function(page, reset = false) {
+  if (reset) {
+    location.href = new URL('/', location.href);
+    return
+  };
   history.pushState('', '', `?page=${page}`);
 }
