@@ -45,12 +45,12 @@ class resetPassword extends View {
         e.preventDefault();
         this.btnPressEffect(form);
         await resetUserPass(form.email.value);
-        this.renderError('Password reset mail has been sent to your mail', 'success', 1000);
+        this.renderMessage('Password reset mail has been sent to your mail', 'success', 1000);
         await this.Delay(2000);
         updateURL('_', true);
         renderTab();
       } catch (err) {
-        this.renderError(err, 'error', 2000);
+        this.renderMessage(err, 'error', 2000);
       }
     })
   }

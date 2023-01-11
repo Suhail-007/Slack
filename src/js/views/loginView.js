@@ -44,28 +44,28 @@ class loginView extends View {
     </section>`
   }
 
-  init(router, loginUser, sendEmailVerif, signoutUser) {
+  init(router, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic) {
     this._form = document.querySelector('form');
     this.setTitle('Log In || Slack');
     this.renderTab = router;
     this.isFocus(this._form);
-    this.getLoginCredentials(loginUser, sendEmailVerif, signoutUser);
+    this.getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic);
     this.formLinkRedirects();
     this.togglePasswordInputType();
   }
 
-  getLoginCredentials(loginUser, sendEmailVerif, signoutUser) {
+  getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic) {
     this._form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(this._form)];
       const userObj = Object.fromEntries(fd);
 
       this.btnPressEffect(this._form);
-      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser);
+      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic);
     })
   }
 
-  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser) {
+  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic) {
     try {
       const { email, password } = userObj;
       const user = await loginUser(email, password);
@@ -74,16 +74,29 @@ class loginView extends View {
         sendEmailVerif();
         //signout the user 
         signoutUser();
-        return this.renderError(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`, 'error', 10000);
+        return this.renderMessage(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`, 'error', '_', true);
       }
-      if (user) this.renderError('Logging User', 'success', 2000);
+
+      //get user data from firebase & update user obj 
+      //get user pic from firebase & update user profile
+      this.renderMessage('Getting user data', 'success', '_', true);
+      await this.Delay(1000);
+
+      const res = await getUserDataAndUserPic(this._data);
+
+      if (res) this.renderMessage('Fetch data successfully', 'success', '_', true);
+      if (!res) this.renderMessage('data not found', 'error', 3000);
+      await this.Delay(1000);
+
+      if (user) this.renderMessage('Logging User', 'success', 2000);
+      await this.Delay(1000);
 
       //if users exist update url and call router to redirect users to login page
       //else firebase will throw an error 
       updateURL('dashboard');
-      await this.renderTab()
+      await this.renderTab();
     } catch (err) {
-      this.renderError(err.code, 'error', 2000);
+      this.renderMessage(err.code, 'error', 2000);
     }
   }
 
@@ -105,7 +118,7 @@ class loginView extends View {
       await this.Delay(2000);
       await this.renderTab();
     } catch (err) {
-      this.renderError('refresh the page and retry', 'error')
+      this.renderMessage('refresh the page and retry', 'error')
     }
   }
 
@@ -115,7 +128,7 @@ class loginView extends View {
       await this.renderTab();
     } catch (err) {
       console.log(err);
-      this.renderError(err.message, 'error', 2000);
+      this.renderMessage(err.message, 'error', 2000);
     }
   }
 

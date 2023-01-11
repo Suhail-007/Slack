@@ -7,7 +7,7 @@ import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { chartTypes } from './config.js';
 import { updateURL, NAV_TOGGLE_BTN } from './helper.js';
-import { loginUser, createUserSendEmailVerif, createUserData, getUserData, getUserImage, resetUserPass, sendEmailVerif, signoutUser } from './firebase-app.js';
+import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, signoutUser, authChanged } from './firebase-app.js';
 import chartView from './views/dashboard/chartView.js';
 
 export const theme = {
@@ -31,10 +31,10 @@ const router = {
         await loginView.loader();
         await loginView.Delay(500);
         loginView.renderData(user);
-        loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser);
+        loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic);
         homeView.removeHeaderFooter();
       } catch (err) {
-        loginView.renderError(err, 'login')
+        loginView.renderMessage(err, 'success')
       }
     }
   },
@@ -46,7 +46,7 @@ const router = {
         signUpView.getSignInDetails(renderTab, createUserSendEmailVerif, createUserData);
         signUpView.previewUserProfile();
       } catch (err) {
-        signUpView.renderError(err, 'login')
+        signUpView.renderMessage(err, 'success')
       }
     }
   },
@@ -63,8 +63,6 @@ const router = {
   'dashboard': {
     view: async function() {
       try {
-        await getUserData(user);
-        await getUserImage(user.data);
         homeView.generateHomeMarkup(user);
         scrollToTop();
 
@@ -78,7 +76,8 @@ const router = {
         NAV_TOGGLE_BTN();
 
       } catch (err) {
-
+        console.log(err);
+        // dashboardView.renderMessage('Failed to load dashboard, try reloading ' + err, 'default', 10000);
       }
     }
   },
@@ -86,11 +85,21 @@ const router = {
   'profile': {
     view: async function() {
       try {
+        /*********Temporary*********/
+        homeView.generateHomeMarkup(user);
+        scrollToTop();
+        NAV_TOGGLE_BTN();
+        /******************/
+
         await profileView.loader();
         await profileView.Delay(1000);
         profileView.renderProfileView();
         profileView.addHandlerSettings(settings);
-      } catch (e) {}
+
+      } catch (err) {
+        console.log(err);
+        // profileView.renderMessage('Failed to load profile, try reloading ' + err, 'default', 10000);
+      }
     }
   }
 }
@@ -108,7 +117,16 @@ export const renderFromHistory = function() {
 }
 
 export const windowLoad = function() {
-  window.addEventListener('load', () => {
+  window.addEventListener('load', async () => {
+    const url = new URL(location.href);
+    const page = url.searchParams.get('page');
+
+    //get the user if user is not sign out and page refreshes/reload
+    const res = await authChanged(user);
+    
+    //redirect user to login page if page reload and user not login in
+    if (!res && page != null) return updateURL('/', true);
+
     renderTab();
   });
 }

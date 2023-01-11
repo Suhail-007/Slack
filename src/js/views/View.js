@@ -43,13 +43,20 @@ export default class View {
     this._parentElem.innerHTML = '';
   }
 
-  renderError(msg, className, ms) {
+  renderMessage(msg, className, ms, multipleMsg = false) {
     const sectionError = document.querySelector('.section__error');
     const errorMsgElem = sectionError.querySelector('p');
+
+    //if there's continuing process 
+    if (multipleMsg) {
+      errorMsgElem.textContent = msg;
+      sectionError.classList.add(className);
+      return
+    }
+    if (className === 'default') this.clear();
+
     errorMsgElem.textContent = msg;
     sectionError.classList.add(className);
-
-    if (className === 'default') this.clear();
 
     //remove class & message after 2 secs
     setTimeout(() => {

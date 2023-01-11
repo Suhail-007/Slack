@@ -6,6 +6,8 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   sendEmailVerification,
+  browserSessionPersistence,
+  setPersistence,
   sendPasswordResetEmail,
   signOut
 } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
@@ -40,17 +42,30 @@ export const firebaseApp = initializeApp(firebaseConfig);
 
 //init services
 const storage = getStorage();
-export const db = getFirestore();
+export const db = getFirestore(firebaseApp);
 const auth = getAuth();
 
 // const analytics = getAnalytics(firebaseApp);
 export const loginUser = async function(email, password) {
   try {
+    await setPersistence(auth, browserSessionPersistence);
     const userCreadentials = await signInWithEmailAndPassword(auth, email, password);
     return auth.currentUser;
   } catch (err) {
     throw err
   }
+}
+
+export const authChanged = function(user) {
+  return new Promise((resolve, reject) => {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          return resolve(user);
+        } else reject('no user is currently log in');
+      })
+    })
+    .then(res => getUserDataAndUserPic(user))
+    .catch(err => console.log(err))
 }
 
 //create user & send user email verification
@@ -98,28 +113,29 @@ export const createUserData = async function(user, formData) {
       state: formData.state,
       country: formData.country,
       gender: formData.gender,
-      isEmailVerified: user.emailVerified,
     });
     //if theres no profile don't upload it to servers
     if (formData.profile.name === '') return
     await uploadPic(user.uid, formData.profile);
   } catch (err) {
-    console.log(err);
     throw err
   }
 }
 
-export const getUserData = function(user) {
+export const getUserDataAndUserPic = function(user) {
   const currUser = auth.currentUser;
   return new Promise(function(resolve, reject) {
     onSnapshot(doc(db, "users", currUser.uid), doc => {
       if (doc.exists()) {
         user.data = doc.data();
-        resolve();
+        getUserImage(user.data);
+        resolve(true);
       }
-      reject('data not found');
+      reject(false);
     });
-  });
+  }).catch(err => {
+    throw err
+  })
 }
 
 const imagesRef = ref(storage, 'images');
