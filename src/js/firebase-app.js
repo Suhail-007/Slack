@@ -92,7 +92,9 @@ export const createUserData = async function(user, formData) {
       phone: formData.countryCode + formData.phone,
       dob: formData.dob,
       state: formData.state,
-      country: formData.country
+      country: formData.country,
+      gender: formData.gender,
+      isEmailVerified: user.isEmailVerified,
     });
     //if theres no profile don't upload it to servers
     if (formData.profile.name === '') return

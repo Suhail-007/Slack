@@ -44,32 +44,36 @@ class loginView extends View {
     </section>`
   }
 
-  init(router, loginUser) {
+  init(router, loginUser, sendEmailVerif) {
     this._form = document.querySelector('form');
     this.setTitle('Log In || Slack');
     this.renderTab = router;
     this.isFocus(this._form);
-    this.getLoginCredentials(loginUser);
+    this.getLoginCredentials(loginUser, sendEmailVerif);
     this.formLinkRedirects();
     this.togglePasswordInputType();
   }
 
-  getLoginCredentials(loginUser) {
+  getLoginCredentials(loginUser, sendEmailVerif) {
     this._form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(this._form)];
       const userObj = Object.fromEntries(fd);
 
       this.btnPressEffect(this._form);
-      this.#getUserFromFirebase(userObj, loginUser);
+      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif);
     })
   }
 
-  async #getUserFromFirebase(userObj, loginUser) {
+  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif) {
     try {
       const { email, password } = userObj;
       const user = await loginUser(email, password);
 
+      if (!user.isEmailVerified) {
+        sendEmailVerif()
+        return this.renderError(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`, 'error', 10000);
+      }
       if (user) this.renderError('Logging User', 'success', 2000);
 
       //if users exist update url and call router to redirect users to login page
