@@ -114,9 +114,10 @@ export const createUserData = async function(user, formData) {
       country: formData.country,
       gender: formData.gender,
     });
+
     //if theres no profile don't upload it to servers
-    if (formData.profile.name === '') return
-    await uploadPic(user.uid, formData.profile);
+    if (formData.profile.name !== '') await uploadPic(user.uid, formData.profile);
+    return true;
   } catch (err) {
     throw err
   }

@@ -69,7 +69,7 @@ class SignUpView extends View {
     </section>`
   }
 
-  getSignInDetails(router, createUserSendEmailVerif, createUserData) {
+  getSignInDetails(createUserSendEmailVerif, createUserData) {
     const form = document.querySelector('form');
     form.addEventListener('submit', async e => {
       try {
@@ -84,15 +84,21 @@ class SignUpView extends View {
         if (!isSame) throw Error('Passwords do not match');
         if (!isInputsCorrect) throw Error('Please enter full name');
 
+        this.renderMessage('Creating your account', 'success',2000);
+        await this.Delay(3000);
+
         const user = await createUserSendEmailVerif(userInfoObj.email, userInfoObj.password);
 
-        if (user) this.renderMessage('Account created. Check your mail inbox/spam tab to verify your account', 'success', 4000);
+        if (user) this.renderMessage('Account created. Check your mail inbox/spam tab to verify your account', 'success', '_', true);
+        await this.Delay(1000);
 
         //create user data in firebase database
-        await createUserData(user, userInfoObj);
-        this.Delay(1000);
+        const userData = await createUserData(user, userInfoObj);
+
+        if (userData) this.renderMessage('User data created', 'success', '_', true);
+        await this.Delay(1000);
+
         updateURL('_', true);
-        router();
       } catch (err) {
         this.renderMessage(err, 'error', 3000);
       }

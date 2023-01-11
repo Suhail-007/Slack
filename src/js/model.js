@@ -43,7 +43,7 @@ const router = {
     view: async function() {
       try {
         signUpView.renderData(user);
-        signUpView.getSignInDetails(renderTab, createUserSendEmailVerif, createUserData);
+        signUpView.getSignInDetails(createUserSendEmailVerif, createUserData);
         signUpView.previewUserProfile();
       } catch (err) {
         signUpView.renderMessage(err, 'success')
