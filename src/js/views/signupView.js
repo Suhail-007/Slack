@@ -90,6 +90,7 @@ class SignUpView extends View {
 
         //create user data in firebase database
         await createUserData(user, userInfoObj);
+        this.Delay(1000);
         updateURL('_', true);
         router();
       } catch (err) {

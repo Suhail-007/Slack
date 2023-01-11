@@ -37,16 +37,21 @@ class resetPassword extends View {
     this.isFocus(form);
   }
 
-  resetUserPassword(resetUserPass,  renderTab) {
+  resetUserPassword(resetUserPass, renderTab) {
     const form = document.querySelector('form');
+
     form.addEventListener('submit', async e => {
-      e.preventDefault();
-      this.btnPressEffect(form);
-      await resetUserPass(form.email.value);
-      this.renderError('Password reset mail has been sent to your mail', 'success', 1000);
-      await this.Delay(2000);
-      updateURL('_', true);
-      renderTab();
+      try {
+        e.preventDefault();
+        this.btnPressEffect(form);
+        await resetUserPass(form.email.value);
+        this.renderError('Password reset mail has been sent to your mail', 'success', 1000);
+        await this.Delay(2000);
+        updateURL('_', true);
+        renderTab();
+      } catch (err) {
+        this.renderError(err, 'error', 2000);
+      }
     })
   }
 }

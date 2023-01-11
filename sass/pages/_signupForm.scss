@@ -20,10 +20,13 @@
       grid-row: span 2;
       background: #F0F0F0;
       padding: .5rem;
-
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
 
       &>img {
         width: 100%;
+        border-radius: 100px;
       }
     }
 

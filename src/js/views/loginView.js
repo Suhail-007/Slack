@@ -44,34 +44,36 @@ class loginView extends View {
     </section>`
   }
 
-  init(router, loginUser, sendEmailVerif) {
+  init(router, loginUser, sendEmailVerif, signoutUser) {
     this._form = document.querySelector('form');
     this.setTitle('Log In || Slack');
     this.renderTab = router;
     this.isFocus(this._form);
-    this.getLoginCredentials(loginUser, sendEmailVerif);
+    this.getLoginCredentials(loginUser, sendEmailVerif, signoutUser);
     this.formLinkRedirects();
     this.togglePasswordInputType();
   }
 
-  getLoginCredentials(loginUser, sendEmailVerif) {
+  getLoginCredentials(loginUser, sendEmailVerif, signoutUser) {
     this._form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(this._form)];
       const userObj = Object.fromEntries(fd);
 
       this.btnPressEffect(this._form);
-      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif);
+      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser);
     })
   }
 
-  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif) {
+  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser) {
     try {
       const { email, password } = userObj;
       const user = await loginUser(email, password);
 
-      if (!user.isEmailVerified) {
-        sendEmailVerif()
+      if (!user.emailVerified) {
+        sendEmailVerif();
+        //signout the user 
+        signoutUser();
         return this.renderError(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`, 'error', 10000);
       }
       if (user) this.renderError('Logging User', 'success', 2000);
@@ -112,6 +114,7 @@ class loginView extends View {
       updateURL(redirectTo);
       await this.renderTab();
     } catch (err) {
+      console.log(err);
       this.renderError(err.message, 'error', 2000);
     }
   }

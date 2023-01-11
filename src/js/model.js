@@ -7,7 +7,7 @@ import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/profileView.js';
 import { chartTypes } from './config.js';
 import { updateURL, NAV_TOGGLE_BTN } from './helper.js';
-import { loginUser, createUserSendEmailVerif, createUserData, getUserData, getUserImage, resetUserPass, sendEmailVerif } from './firebase-app.js';
+import { loginUser, createUserSendEmailVerif, createUserData, getUserData, getUserImage, resetUserPass, sendEmailVerif, signoutUser } from './firebase-app.js';
 import chartView from './views/dashboard/chartView.js';
 
 export const theme = {
@@ -31,7 +31,7 @@ const router = {
         await loginView.loader();
         await loginView.Delay(500);
         loginView.renderData(user);
-        loginView.init(renderTab, loginUser, sendEmailVerif);
+        loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser);
         homeView.removeHeaderFooter();
       } catch (err) {
         loginView.renderError(err, 'login')
@@ -56,7 +56,7 @@ const router = {
       await resetPassView.loader();
       await resetPassView.Delay(1000);
       resetPassView.renderData('_');
-      resetPassView.init(resetUserPass, render);
+      resetPassView.init(resetUserPass, renderTab);
     }
   },
 

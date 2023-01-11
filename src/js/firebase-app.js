@@ -6,7 +6,8 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   sendEmailVerification,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  signOut
 } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
 import {
   getFirestore,
@@ -77,8 +78,11 @@ export const resetUserPass = async function(email) {
 }
 
 export const signoutUser = async function() {
-  const signout = await signOut(auth);
-  console.log(signout, 'signout');
+  try {
+    await signOut(auth);
+  } catch (err) {
+    throw err
+  }
 }
 
 //when user sign up create user data in firebase database
@@ -94,12 +98,13 @@ export const createUserData = async function(user, formData) {
       state: formData.state,
       country: formData.country,
       gender: formData.gender,
-      isEmailVerified: user.isEmailVerified,
+      isEmailVerified: user.emailVerified,
     });
     //if theres no profile don't upload it to servers
     if (formData.profile.name === '') return
     await uploadPic(user.uid, formData.profile);
   } catch (err) {
+    console.log(err);
     throw err
   }
 }
