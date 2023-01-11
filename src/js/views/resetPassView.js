@@ -48,7 +48,7 @@ class resetPassword extends View {
         await this.Delay(2000);
         updateURL('_', true);
       } catch (err) {
-        this.renderMessage(err, 'error', 2000);
+        this.renderMessage(err, 2000);
       }
     })
   }

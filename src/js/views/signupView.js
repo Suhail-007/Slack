@@ -100,7 +100,7 @@ class SignUpView extends View {
 
         updateURL('_', true);
       } catch (err) {
-        this.renderMessage(err, 'error', 3000);
+        this.renderMessage(err, 3000);
       }
     })
   }
