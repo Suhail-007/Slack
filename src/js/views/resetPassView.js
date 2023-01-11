@@ -3,6 +3,7 @@ import { updateURL } from '../helper.js';
 
 class resetPassword extends View {
   _parentElem = document.querySelector('main');
+  _form;
 
   _generateMarkup() {
     return `
@@ -31,24 +32,21 @@ class resetPassword extends View {
       </section>`
   }
 
-  init(resetUserPass, renderTab) {
-    const form = document.querySelector('form');
+  init(resetUserPass) {
+    this._form = document.querySelector('form');
     this.resetUserPassword(resetUserPass);
-    this.isFocus(form);
+    this.isFocus(this._form);
   }
 
-  resetUserPassword(resetUserPass, renderTab) {
-    const form = document.querySelector('form');
-
-    form.addEventListener('submit', async e => {
+  resetUserPassword(resetUserPass) {
+    this._form.addEventListener('submit', async e => {
       try {
         e.preventDefault();
-        this.btnPressEffect(form);
-        await resetUserPass(form.email.value);
-        this.renderMessage('Password reset mail has been sent to your mail', 'success', 1000);
+        this.btnPressEffect(this._form);
+        await resetUserPass(this._form.email.value);
+        this.renderMessage('Password reset mail has been sent to your mail', 'success', 3000);
         await this.Delay(2000);
         updateURL('_', true);
-        renderTab();
       } catch (err) {
         this.renderMessage(err, 'error', 2000);
       }

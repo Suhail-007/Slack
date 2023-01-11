@@ -56,7 +56,7 @@ const router = {
       await resetPassView.loader();
       await resetPassView.Delay(1000);
       resetPassView.renderData('_');
-      resetPassView.init(resetUserPass, renderTab);
+      resetPassView.init(resetUserPass);
     }
   },
 
@@ -76,7 +76,6 @@ const router = {
         NAV_TOGGLE_BTN();
 
       } catch (err) {
-        console.log(err);
         // dashboardView.renderMessage('Failed to load dashboard, try reloading ' + err, 'default', 10000);
       }
     }
