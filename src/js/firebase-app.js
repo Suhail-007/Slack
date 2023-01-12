@@ -126,17 +126,18 @@ export const createUserData = async function(user, formData) {
 export const getUserDataAndUserPic = function(user) {
   const currUser = auth.currentUser;
   return new Promise(function(resolve, reject) {
-    onSnapshot(doc(db, "users", currUser.uid), doc => {
-      if (doc.exists()) {
-        user.data = doc.data();
-        getUserImage(user.data);
-        resolve(true);
-      }
-      reject(false);
-    });
-  }).catch(err => {
-    throw err
-  })
+      onSnapshot(doc(db, "users", currUser.uid), async doc => {
+        if (doc.exists()) {
+          user.data = doc.data();
+          await getUserImage(user.data);
+          resolve(true);
+        }
+        reject(false);
+      });
+    })
+    .catch(err => {
+      throw err
+    })
 }
 
 const imagesRef = ref(storage, 'images');

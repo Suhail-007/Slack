@@ -44,11 +44,11 @@ class resetPassword extends View {
         e.preventDefault();
         this.btnPressEffect(this._form);
         await resetUserPass(this._form.email.value);
-        this.renderMessage('Password reset mail has been sent to your mail', 'success', 3000);
+        await this.renderMessage('Password reset mail has been sent to your mail', 'success', 3000);
         await this.Delay(2000);
         updateURL('_', true);
       } catch (err) {
-        this.renderMessage(err, 'error', 2000);
+        await this.renderMessage(err, 'error', 2000);
       }
     })
   }

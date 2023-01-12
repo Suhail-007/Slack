@@ -73,8 +73,7 @@ const router = {
         fundTransferView.addHandlerCopyRef(copyRefLink);
         fundTransferView.activeBtn();
         NAV_TOGGLE_BTN();
-        homeView.navTab(renderTab, updateURL);
-
+        // homeView.navTab(renderTab, updateURL);
       } catch (err) {
         // dashboardView.renderMessage('Failed to load dashboard, try reloading ' + err, 'default', 10000);
       }
@@ -90,9 +89,8 @@ const router = {
 
         await profileView.loader();
         await profileView.Delay(1000);
-        profileView.renderProfileView();
-        profileView.addHandlerSettings(settings);
-
+        profileView.renderData(user);
+        profileView.init(settings);
       } catch (err) {
         console.log(err);
         // profileView.renderMessage('Failed to load profile, try reloading ' + err, 'default', 10000);

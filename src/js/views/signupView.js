@@ -57,9 +57,9 @@ class SignUpView extends View {
           <input class="input__label__input" placeholder="country you're currently living in" required id="country" type="text" name="country">
 
 
-          <section class="section__error">
+          <div class="section__error">
             <p class="section__error__msg"></p>
-          </section>
+          </div>
 
           <button class="form__btn signup-btn" type="submit">Sign up</button>
 
@@ -84,23 +84,20 @@ class SignUpView extends View {
         if (!isSame) throw Error('Passwords do not match');
         if (!isInputsCorrect) throw Error('Please enter full name');
 
-        this.renderMessage('Creating your account', 'success', '_', true);
-        await this.Delay(1000);
+        await this.renderMessage('Creating your account', 'success', 1500);
 
         const user = await createUserSendEmailVerif(userInfoObj.email, userInfoObj.password);
 
-        if (user) this.renderMessage('Account created. Check your mail inbox/spam tab to verify your account', 'success', '_', true);
-        await this.Delay(1000);
+        if (user) await this.renderMessage('Account created. Check your mail inbox/spam tab to verify your account', 'success', 1000);
 
         //create user data in firebase database
         const userData = await createUserData(user, userInfoObj);
 
-        if (userData) this.renderMessage('User data created', 'success', '_', true);
-        await this.Delay(1000);
+        if (userData) await this.renderMessage('User data created', 'success', 1500);
 
         updateURL('_', true);
       } catch (err) {
-        this.renderMessage(err, 'error', 3000);
+        await this.renderMessage(err, 'error', 3000);
       }
     })
   }

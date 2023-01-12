@@ -30,9 +30,9 @@ class loginView extends View {
             <label class="input__label__label" for="password">Password</label>
           </div>
           
-          <section class="section__error">
+          <div class="section__error">
             <p class="section__error__msg"></p>
-          </section>
+          </div>
           
           <a class='form-link reset-password' href='/'>Forget your password?</a>
           
@@ -69,8 +69,7 @@ class loginView extends View {
     try {
       const { email, password } = userObj;
 
-      if (email) this.renderMessage('Checking information', 'success', 1000);
-      await this.Delay(1000);
+      if (email) await this.renderMessage('Checking information', 'success', 1000);
 
       const user = await loginUser(email, password);
 
@@ -83,28 +82,24 @@ class loginView extends View {
         throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
       }
 
-      this.renderMessage('Getting user data', 'success', '_', true);
-      await this.Delay(1000);
+      await this.renderMessage('Getting user data', 'success', 2000);
 
       //get user data && image from firebase & update user obj
       const res = await getUserDataAndUserPic(this._data);
 
-      if (res) this.renderMessage('Fetched data successfully', 'success', '_', true);
-      await this.Delay(1000);
+      if (res) await this.renderMessage('Fetched data successfully', 'success', 1500);
 
-      if (user) this.renderMessage('Logging User', 'success', 2000);
-      await this.Delay(1000);
+      if (user) await this.renderMessage('Logging User', 'success', 2000);
 
-      //if users exist update url and call router to redirect users to login page
-      //else firebase will throw an error 
+      //if users exist update url and call router to redirect users to login page else firebase will throw an error 
 
       //render nav & footer
       homeView.generateHomeMarkup(this._data);
-
+      homeView.navTab(this.renderTab, updateURL);
       updateURL('dashboard');
       await this.renderTab();
     } catch (err) {
-      this.renderMessage(err, 'error', 4000);
+      await this.renderMessage(err, 'error', 2000);
     }
   }
 

@@ -4,7 +4,7 @@ import { defaultUserPic } from '../config.js';
 class homeView extends View {
   _parentElem = document.body;
 
-  generateHomeMarkup(data) {
+  async generateHomeMarkup(data) {
     this._data = data.data;
     this._parentElem.insertAdjacentHTML('beforebegin', this.generateHeaderMarkup());
     this._parentElem.insertAdjacentHTML('beforeend', this.generateFooterMarkup());
@@ -16,6 +16,8 @@ class homeView extends View {
     const footer = document.querySelector('footer');
 
     if (!header && !footer) return
+    // document.body.remove(header)
+    // document.body.remove(footer)
     header.innerHTML = ''
     footer.innerHTML = ''
   }
@@ -35,7 +37,7 @@ class homeView extends View {
           <div class=" user_profile_container user_profile_container_desktop hidden">
             <p class="username"><a href='/profile'>${this._data.fullname}</a></p>
             <div class="user_profile">
-              <img src="${this._data.profilePic}" alt="user profile">
+              <img loading="lazy" src="${this._data.profilePic}" alt="user profile">
             </div>
           </div>
         </div>
@@ -51,7 +53,7 @@ class homeView extends View {
             <div data-nav='profile' class="user-profile-container user-profile-container_mob nav-link">
               <p class="user-profile-container_username">${this._data.fullname}</p>
               <div class="user-profile-container_profile">
-                <img src="${this.#setUserPic(this._data)}" alt="user profile mobile">
+                <img loading="lazy" src="${this.#setUserPic(this._data)}" alt="user profile">
               </div>
             </div>
     
@@ -150,8 +152,10 @@ class homeView extends View {
 
   navTab(renderTab, updateURL) {
     const nav = document.querySelector('[data-nav]');
+
     nav.addEventListener('click', e => {
       const navLink = e.target.closest('.nav-link').dataset.nav;
+      console.log(navLink);
       if (!navLink) return
       updateURL(navLink);
       renderTab();

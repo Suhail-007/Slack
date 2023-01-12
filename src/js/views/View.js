@@ -43,26 +43,22 @@ export default class View {
     this._parentElem.innerHTML = '';
   }
 
-  renderMessage(msg, className, ms, multipleMsg = false) {
+  renderMessage(msg, className, ms) {
     const sectionError = document.querySelector('.section__error');
     const errorMsgElem = sectionError.querySelector('p');
 
-    //if there's continuing process 
-    if (multipleMsg) {
-      errorMsgElem.textContent = msg;
-      sectionError.classList.add(className);
-      return
-    }
     if (className === 'default') this.clear();
 
     errorMsgElem.textContent = msg;
     sectionError.classList.add(className);
 
-    //remove class & message after 2 secs
-    setTimeout(() => {
-      sectionError.classList.remove(className);
-      errorMsgElem.textContent = '';
-    }, ms);
+    //remove class & message after x secs
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        sectionError.classList.remove(className);
+        resolve()
+      }, ms);
+    })
   }
 
   btnPressEffect(parentElem) {
