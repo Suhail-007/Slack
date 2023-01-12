@@ -44,28 +44,28 @@ class loginView extends View {
     </section>`
   }
 
-  init(router, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, homeView) {
+  init(router, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome) {
     this._form = document.querySelector('form');
     this.setTitle('Log In || Slack');
     this.renderTab = router;
     this.isFocus(this._form);
-    this.getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, homeView);
+    this.getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome);
     this.formLinkRedirects();
     this.togglePasswordInputType();
   }
 
-  getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, homeView) {
+  getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome,wasLogIn) {
     this._form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(this._form)];
       const userObj = Object.fromEntries(fd);
 
       this.btnPressEffect(this._form);
-      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, homeView);
+      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogIn);
     })
   }
 
-  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, homeView) {
+  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogIn) {
     try {
       const { email, password } = userObj;
 
@@ -96,8 +96,13 @@ class loginView extends View {
       //if users exist update url and call router to redirect users to login page else firebase will throw an error 
 
       //render nav & footer
-      homeView.generateHomeMarkup(this._data);
+      initHome();
+
       updateURL('dashboard');
+      
+      wasLogIn = true;
+      localStorage.setItem('wasLogIn', wasLogIn);
+      
       await this.renderTab();
     } catch (err) {
       await this.renderMessage(err, 'error', 2000);

@@ -367,7 +367,7 @@ li:hover .nav__item--name {
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
-  transition: opacity 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .section__error.default {
   text-align: center;
@@ -805,9 +805,6 @@ li:hover .nav__item--name {
   position: relative;
   margin-top: 1rem;
 }
-.navbar > ul > li a {
-  text-decoration: none;
-}
 .navbar > ul > li svg {
   width: 0px;
   height: 0px;
@@ -1149,6 +1146,7 @@ header .nav_container_btn svg {
   --shadow: rgba(200, 200, 200, 1);
   /*Font Colors*/
   --font-primary: #fff;
+  --error: hsla(0, 81%, 79%, .9);
 }
 
 /*# sourceMappingURL=style.min.css.map */

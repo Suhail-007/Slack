@@ -18,6 +18,8 @@ export const copyRefLink = async function(element) {
   await navigator.clipboard.writeText(element.innerText);
 }
 
+let wasLogIn = false;
+
 const user = {
   //it will be created only when user log in
   // data: {},
@@ -31,10 +33,11 @@ const router = {
         await loginView.loader();
         await loginView.Delay(500);
         loginView.renderData(user);
-        loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, homeView);
+        if (wasLogIn) loginView.renderMessage('Login again to access your account', 'error', 4000);
+        loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogIn);
         homeView.removeHeaderFooter();
       } catch (err) {
-        loginView.renderMessage(err, 'success')
+        loginView.renderMessage(err, 'error', 4000)
       }
     }
   },
@@ -72,7 +75,6 @@ const router = {
 
         fundTransferView.addHandlerCopyRef(copyRefLink);
         fundTransferView.activeBtn();
-        NAV_TOGGLE_BTN();
       } catch (err) {
         // dashboardView.renderMessage('Failed to load dashboard, try reloading ' + err, 'default', 10000);
       }
@@ -107,15 +109,14 @@ export const renderTab = async function() {
 }
 
 export const renderFromHistory = function() {
-  window.addEventListener('popstate', () => {
+  window.addEventListener('popstate', async () => {
     const url = new URL(location.href);
     const page = url.searchParams.get('page');
-    
-    //re-render the footer & header
-    if (page === 'dashboard') {
-      homeView.generateHomeMarkup(user);
-      homeView.navTab(renderTab, updateURL);
-    }
+    const res = await authChanged(user);
+
+    //re-render the footer & header if user go back to dashboard from login page
+    if (!res) updateURL('_', true);
+
     renderTab();
   });
 }
@@ -133,11 +134,15 @@ export const windowLoad = function() {
     if (page === null) return renderTab();
 
     renderTab();
-    homeView.generateHomeMarkup(user);
     scrollToTop();
-    NAV_TOGGLE_BTN();
-    homeView.navTab(renderTab, updateURL);
+    initHome();
   });
+}
+
+const initHome = function() {
+  homeView.generateHomeMarkup(user);
+  NAV_TOGGLE_BTN();
+  homeView.navTab(renderTab, updateURL);
 }
 
 const scrollToTop = function() {
@@ -235,4 +240,5 @@ export const getLocalStorage = function() {
 
   chartTypes.chartOne = chartOne ? chartOne : 'doughnut';
   chartTypes.chartTwo = chartTwo ? chartTwo : 'line';
+  wasLogIn = localStorage.getItem('wasLogIn', wasLogIn);
 }
