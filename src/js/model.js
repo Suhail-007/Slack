@@ -4,7 +4,7 @@ import resetPassView from './views/resetPassView.js';
 import homeView from './views/homeView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
 import fundTransferView from './views/dashboard/renderReferralTransferView.js';
-import profileView from './views/profileView.js';
+import profileView from './views/navComponents/profileView.js';
 import { chartTypes } from './config.js';
 import { updateURL, NAV_TOGGLE_BTN } from './helper.js';
 import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, signoutUser, authChanged } from './firebase-app.js';

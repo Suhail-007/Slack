@@ -1,6 +1,6 @@
-import View from './View.js'
-import { chartTypes } from '../config.js'
-import { theme } from '../model.js';
+import View from '../View.js'
+import { chartTypes } from '../../config.js'
+import { theme } from '../../model.js';
 
 class ProfileView extends View {
   _parentElem = document.querySelector('main');
