@@ -89,13 +89,14 @@ class loginView extends View {
 
       if (res) await this.renderMessage('Fetched data successfully', 'success', 1500);
 
-      if (user) await this.renderMessage('Logging User', 'success', 2000);
+      if (!user) throw Error('You need to login again');
+
+      await this.renderMessage('Logging User', 'success', 2000);
 
       //if users exist update url and call router to redirect users to login page else firebase will throw an error 
 
       //render nav & footer
       homeView.generateHomeMarkup(this._data);
-      homeView.navTab(this.renderTab, updateURL);
       updateURL('dashboard');
       await this.renderTab();
     } catch (err) {

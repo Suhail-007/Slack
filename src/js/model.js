@@ -73,7 +73,6 @@ const router = {
         fundTransferView.addHandlerCopyRef(copyRefLink);
         fundTransferView.activeBtn();
         NAV_TOGGLE_BTN();
-        // homeView.navTab(renderTab, updateURL);
       } catch (err) {
         // dashboardView.renderMessage('Failed to load dashboard, try reloading ' + err, 'default', 10000);
       }
@@ -108,7 +107,17 @@ export const renderTab = async function() {
 }
 
 export const renderFromHistory = function() {
-  window.addEventListener('popstate', renderTab);
+  window.addEventListener('popstate', () => {
+    const url = new URL(location.href);
+    const page = url.searchParams.get('page');
+    
+    //re-render the footer & header
+    if (page === 'dashboard') {
+      homeView.generateHomeMarkup(user);
+      homeView.navTab(renderTab, updateURL);
+    }
+    renderTab();
+  });
 }
 
 export const windowLoad = function() {

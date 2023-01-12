@@ -8,6 +8,7 @@ class homeView extends View {
     this._data = data.data;
     this._parentElem.insertAdjacentHTML('beforebegin', this.generateHeaderMarkup());
     this._parentElem.insertAdjacentHTML('beforeend', this.generateFooterMarkup());
+    console.log(this._parentElem);
   }
 
   removeHeaderFooter() {
@@ -16,10 +17,8 @@ class homeView extends View {
     const footer = document.querySelector('footer');
 
     if (!header && !footer) return
-    // document.body.remove(header)
-    // document.body.remove(footer)
-    header.innerHTML = ''
-    footer.innerHTML = ''
+    header.remove();
+    footer.remove();
   }
 
   generateHeaderMarkup() {
@@ -155,7 +154,6 @@ class homeView extends View {
 
     nav.addEventListener('click', e => {
       const navLink = e.target.closest('.nav-link').dataset.nav;
-      console.log(navLink);
       if (!navLink) return
       updateURL(navLink);
       renderTab();
