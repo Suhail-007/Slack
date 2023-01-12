@@ -44,48 +44,52 @@ class loginView extends View {
     </section>`
   }
 
-  init(router, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic) {
+  init(router, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, homeView) {
     this._form = document.querySelector('form');
     this.setTitle('Log In || Slack');
     this.renderTab = router;
     this.isFocus(this._form);
-    this.getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic);
+    this.getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, homeView);
     this.formLinkRedirects();
     this.togglePasswordInputType();
   }
 
-  getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic) {
+  getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, homeView) {
     this._form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(this._form)];
       const userObj = Object.fromEntries(fd);
 
       this.btnPressEffect(this._form);
-      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic);
+      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, homeView);
     })
   }
 
-  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic) {
+  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, homeView) {
     try {
       const { email, password } = userObj;
+
+      if (email) this.renderMessage('Checking information', 'success', 1000);
+      await this.Delay(1000);
+
       const user = await loginUser(email, password);
 
+      //send verification if email not verified
       if (!user.emailVerified) {
         sendEmailVerif();
+
         //signout the user 
         signoutUser();
-        return this.renderMessage(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`, '_', true);
+        throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
       }
 
-      //get user data from firebase & update user obj 
-      //get user pic from firebase & update user profile
       this.renderMessage('Getting user data', 'success', '_', true);
       await this.Delay(1000);
 
+      //get user data && image from firebase & update user obj
       const res = await getUserDataAndUserPic(this._data);
 
-      if (res) this.renderMessage('Fetch data successfully', 'success', '_', true);
-      if (!res) this.renderMessage('data not found', 3000);
+      if (res) this.renderMessage('Fetched data successfully', 'success', '_', true);
       await this.Delay(1000);
 
       if (user) this.renderMessage('Logging User', 'success', 2000);
@@ -93,10 +97,14 @@ class loginView extends View {
 
       //if users exist update url and call router to redirect users to login page
       //else firebase will throw an error 
+
+      //render nav & footer
+      homeView.generateHomeMarkup(this._data);
+
       updateURL('dashboard');
       await this.renderTab();
     } catch (err) {
-      this.renderMessage(err.code, 2000);
+      this.renderMessage(err, 'error', 4000);
     }
   }
 
@@ -118,7 +126,7 @@ class loginView extends View {
       await this.Delay(2000);
       await this.renderTab();
     } catch (err) {
-      this.renderMessage('refresh the page and retry ' + err,2000)
+      this.renderMessage('refresh the page and retry ' + err, 'error', 2000)
     }
   }
 
@@ -127,7 +135,7 @@ class loginView extends View {
       updateURL(redirectTo);
       await this.renderTab();
     } catch (err) {
-      this.renderMessage(err.message, 2000);
+      this.renderMessage(err.message, 'error', 2000);
     }
   }
 

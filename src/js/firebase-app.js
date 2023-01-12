@@ -49,10 +49,10 @@ const auth = getAuth();
 export const loginUser = async function(email, password) {
   try {
     await setPersistence(auth, browserSessionPersistence);
-    const userCreadentials = await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth, email, password);
     return auth.currentUser;
   } catch (err) {
-    throw err
+    throw err.message
   }
 }
 

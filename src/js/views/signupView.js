@@ -84,8 +84,8 @@ class SignUpView extends View {
         if (!isSame) throw Error('Passwords do not match');
         if (!isInputsCorrect) throw Error('Please enter full name');
 
-        this.renderMessage('Creating your account', 'success',2000);
-        await this.Delay(3000);
+        this.renderMessage('Creating your account', 'success', '_', true);
+        await this.Delay(1000);
 
         const user = await createUserSendEmailVerif(userInfoObj.email, userInfoObj.password);
 
@@ -100,7 +100,7 @@ class SignUpView extends View {
 
         updateURL('_', true);
       } catch (err) {
-        this.renderMessage(err, 3000);
+        this.renderMessage(err, 'error', 3000);
       }
     })
   }

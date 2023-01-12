@@ -43,7 +43,7 @@ export default class View {
     this._parentElem.innerHTML = '';
   }
 
-  renderMessage(msg, className='error', ms, multipleMsg = false) {
+  renderMessage(msg, className, ms, multipleMsg = false) {
     const sectionError = document.querySelector('.section__error');
     const errorMsgElem = sectionError.querySelector('p');
 

@@ -31,7 +31,7 @@ const router = {
         await loginView.loader();
         await loginView.Delay(500);
         loginView.renderData(user);
-        loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic);
+        loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, homeView);
         homeView.removeHeaderFooter();
       } catch (err) {
         loginView.renderMessage(err, 'success')
@@ -63,7 +63,6 @@ const router = {
   'dashboard': {
     view: async function() {
       try {
-        homeView.generateHomeMarkup(user);
         scrollToTop();
 
         await dashboardView.loader();
@@ -74,6 +73,7 @@ const router = {
         fundTransferView.addHandlerCopyRef(copyRefLink);
         fundTransferView.activeBtn();
         NAV_TOGGLE_BTN();
+        homeView.navTab(renderTab, updateURL);
 
       } catch (err) {
         // dashboardView.renderMessage('Failed to load dashboard, try reloading ' + err, 'default', 10000);
@@ -85,9 +85,7 @@ const router = {
     view: async function() {
       try {
         /*********Temporary*********/
-        homeView.generateHomeMarkup(user);
         scrollToTop();
-        NAV_TOGGLE_BTN();
         /******************/
 
         await profileView.loader();
@@ -106,9 +104,9 @@ const router = {
 export const renderTab = async function() {
   const url = new URL(location.href);
   const page = url.searchParams.get('page');
-  if (router[page]) {
-    await router[page].view();
-  }
+
+  if (page === null) signoutUser();
+  if (router[page]) await router[page].view();
 }
 
 export const renderFromHistory = function() {
@@ -122,11 +120,16 @@ export const windowLoad = function() {
 
     //get the user if user is not sign out and page refreshes/reload
     const res = await authChanged(user);
-    
+
     //redirect user to login page if page reload and user not login in
-    if (!res && page != null) return updateURL('/', true);
+    if (!res && page != null) return updateURL('_', true);
+    if (page === null) return renderTab();
 
     renderTab();
+    homeView.generateHomeMarkup(user);
+    scrollToTop();
+    NAV_TOGGLE_BTN();
+    homeView.navTab(renderTab, updateURL);
   });
 }
 
