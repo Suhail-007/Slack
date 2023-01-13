@@ -36,7 +36,7 @@ class loginView extends View {
           
           <a class='form-link reset-password' href='/'>Forget your password?</a>
           
-          <button class="form__btn login-btn" type="submit">Log in</button>
+          <button class="btn form__btn" type="submit">Log in</button>
 
           <p class="form-link signup--login">Don't have account yet?<a data-signup='signup' href="/signup">Sign up</a></p>
         </form>
@@ -54,13 +54,12 @@ class loginView extends View {
     this.togglePasswordInputType();
   }
 
-  getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome,wasLogIn) {
+  getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogIn) {
     this._form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(this._form)];
       const userObj = Object.fromEntries(fd);
 
-      this.btnPressEffect(this._form);
       this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogIn);
     })
   }
@@ -99,10 +98,10 @@ class loginView extends View {
       initHome();
 
       updateURL('dashboard');
-      
+
       wasLogIn = true;
       localStorage.setItem('wasLogIn', wasLogIn);
-      
+
       await this.renderTab();
     } catch (err) {
       await this.renderMessage(err, 'error', 2000);

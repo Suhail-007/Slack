@@ -3,7 +3,8 @@
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
-  transition: all .3s ease-in-out;
+  font-size: 1.3rem;
+  transition: all .2s ease-in-out;
 
   &.default {
     text-align: center;
@@ -39,10 +40,5 @@
     &>p {
       color: hsla(109, 87%, 28%, 1);
     }
-  }
-
-  &__msg {
-    font-size: 1.5rem;
-    color: red;
   }
 }

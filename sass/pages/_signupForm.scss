@@ -66,8 +66,7 @@
     }
   }
 
-  .signup-btn,
   &>.signup--login {
-    margin-inline: auto;
+    margin-inline: auto !important;
   }
 }

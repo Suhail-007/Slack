@@ -14,10 +14,10 @@ class ProfileView extends View {
         </div>
     
         <div class="profile__cont">
-          <div class="profile__cont-photo">
+          <figure class="profile__cont-photo">
             <img loading="lazy" src="${this._data.data.profilePic}" alt="user profile">
-          </div>
-          <div>
+          </figure>
+          <div class='profile__bio'>
             <p class="profile__user-name">${this._data.data.fullname}</p>
             <p class="profile__bio">To never give up...</p>
           </div>
@@ -94,6 +94,11 @@ class ProfileView extends View {
         
         <div class="section__error">
           <p class="section__error__msg"></p>
+        </div>
+        
+        <div class='section__profile__buttons'>
+          <button type='button' data-delete class='btn btn-edit section__profile__buttons--edit'>Edit Profile</button>
+          <button type='button' data-delete class='btn btn-delete section__profile__buttons--delete'>Delete Profile</button>
         </div>
       </section>`
   }
