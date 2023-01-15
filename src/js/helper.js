@@ -13,6 +13,11 @@ export const NAV_TOGGLE_BTN = function() {
   });
 };
 
+//set Local Storage
+export const setLocalStorage = function(key, value) {
+  localStorage.setItem(`${key}`, JSON.stringify(`${value}`));
+}
+
 export const updateURL = function(page, reset = false) {
   if (reset) {
     location.href = new URL('/', location.href);

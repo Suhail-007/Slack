@@ -8,7 +8,6 @@ class homeView extends View {
     this._data = data.data;
     this._parentElem.insertAdjacentHTML('beforebegin', this.generateHeaderMarkup());
     this._parentElem.insertAdjacentHTML('beforeend', this.generateFooterMarkup());
-    console.log(this._parentElem);
   }
 
   removeHeaderFooter() {

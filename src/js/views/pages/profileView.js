@@ -1,5 +1,6 @@
 import View from '../View.js'
 import { chartTypes } from '../../config.js'
+import { setLocalStorage } from '../../helper.js'
 import { theme } from '../../model.js';
 
 class ProfileView extends View {
@@ -103,9 +104,9 @@ class ProfileView extends View {
       </section>`
   }
 
-  init(handler, deleteUser) {
+  init(handler, deleteUserAndData) {
     this.#addHandlerSettings(handler);
-    this.#callToActionBtns(deleteUser);
+    this.#callToActionBtns(deleteUserAndData);
   }
 
   #addHandlerSettings(handler) {
@@ -132,22 +133,30 @@ class ProfileView extends View {
     }
   }
 
-  #callToActionBtns(deleteUser) {
+  #callToActionBtns(deleteUserAndData) {
     const btnsCont = document.querySelector('[data-btns-cont]');
 
     btnsCont.addEventListener('click', async e => {
       try {
         const btn = e.target.dataset.cta;
-        if (btn === 'edit') await deleteAccount(deleteUser);
+        if (btn === 'edit') console.log('dj');
+        if (btn === 'delete') await this.#deleteAccount(deleteUserAndData);
       } catch (err) {
+        console.log(err);
         this.renderMessage(err.message, 'error', 2000);
       }
     });
   }
 
-  async deleteAccount(deleteUser) {
+  async #deleteAccount(deleteUserAndData) {
     try {
-      await deleteUser();
+      const userConfirmation = confirm('Are you sure you want to delete your account? once done this operation can\'t be reversed');
+
+      if (!userConfirmation) return this.renderMessage('Great decision!', 'success', 3000);
+
+      await deleteUserAndData(this._data.data);
+      //set wasLogin to false 
+      setLocalStorage('wasLogin', false);
     } catch (err) {
       throw err
     }

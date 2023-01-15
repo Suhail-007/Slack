@@ -54,17 +54,17 @@ class loginView extends View {
     this.togglePasswordInputType();
   }
 
-  getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogIn) {
+  getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogin) {
     this._form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(this._form)];
       const userObj = Object.fromEntries(fd);
 
-      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogIn);
+      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogin);
     })
   }
 
-  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogIn) {
+  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogin) {
     try {
       const { email, password } = userObj;
 
@@ -99,8 +99,8 @@ class loginView extends View {
 
       updateURL('dashboard');
 
-      wasLogIn = true;
-      localStorage.setItem('wasLogIn', wasLogIn);
+      wasLogin = true;
+      localStorage.setItem('wasLogin', wasLogin);
 
       await this.renderTab();
     } catch (err) {

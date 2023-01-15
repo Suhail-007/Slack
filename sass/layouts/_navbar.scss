@@ -108,6 +108,7 @@
       backdrop-filter: blur(5px);
       border-radius: 100%;
       box-shadow: 0 0 1.6rem .5rem var(--shadow-alpha-three);
+      object-fit: cover;
     }
   }
 }

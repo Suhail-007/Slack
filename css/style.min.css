@@ -393,6 +393,8 @@ li:hover .nav__item--name {
   pointer-events: none;
   visibility: hidden;
   font-size: 1.3rem;
+  padding: 0.5rem 1rem;
+  display: none;
   transition: all 0.2s ease-in-out;
 }
 .section__error.default {
@@ -401,6 +403,7 @@ li:hover .nav__item--name {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
+  display: block;
 }
 .section__error.error {
   text-align: center;
@@ -410,6 +413,7 @@ li:hover .nav__item--name {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
+  display: block;
 }
 .section__error.error > p {
   color: red;
@@ -422,6 +426,7 @@ li:hover .nav__item--name {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
+  display: block;
 }
 .section__error.success > p {
   color: hsl(109deg, 87%, 28%);
@@ -877,6 +882,7 @@ li:hover .nav__item--name {
   backdrop-filter: blur(5px);
   border-radius: 100%;
   box-shadow: 0 0 1.6rem 0.5rem var(--shadow-alpha-three);
+  object-fit: cover;
 }
 
 header {
@@ -1010,13 +1016,14 @@ header .nav_container_btn svg {
 }
 .section__profile .profile__cont-photo {
   margin: 0;
-  width: 10rem;
-  overflow: hidden;
+  backdrop-filter: blur(5px);
+  filter: drop-shadow(5px 5px 10px var(--light-shadow-white));
 }
 .section__profile .profile__cont-photo img {
-  width: 100%;
-  display: block;
-  clip-path: circle(50% at 50% 50%);
+  width: 10rem;
+  height: 10rem;
+  border-radius: 100%;
+  object-fit: cover;
 }
 .section__profile hr {
   border: none;

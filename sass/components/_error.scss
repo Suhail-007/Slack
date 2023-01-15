@@ -4,6 +4,8 @@
   pointer-events: none;
   visibility: hidden;
   font-size: 1.3rem;
+  padding: .5rem 1rem;
+  display: none;
   transition: all .2s ease-in-out;
 
   &.default {
@@ -12,6 +14,7 @@
     opacity: 1;
     pointer-events: auto;
     visibility: visible;
+    display: block;
   }
 
   &.error {
@@ -22,6 +25,7 @@
     opacity: 1;
     pointer-events: auto;
     visibility: visible;
+    display: block;
 
     &>p {
       color: red;
@@ -36,6 +40,7 @@
     opacity: 1;
     pointer-events: auto;
     visibility: visible;
+    display: block;
 
     &>p {
       color: hsla(109, 87%, 28%, 1);
