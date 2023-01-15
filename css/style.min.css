@@ -331,6 +331,7 @@ li:hover .nav__item--name {
 }
 .btn:focus, .btn:hover {
   box-shadow: 0 0.4rem 0.6rem 0 var(--shadow-alpha-six);
+  transform: translateY(-0.1rem);
 }
 .btn:active {
   box-shadow: 0 0.4rem 0.6rem 0 var(--shadow-alpha-six);
@@ -436,7 +437,8 @@ li:hover .nav__item--name {
 }
 .investWallet__btns button.active {
   color: white;
-  box-shadow: inset 20rem 0 0 0 var(--purple-primary-alpha-nine);
+  box-shadow: inset 100rem 0 0 0 var(--purple-primary-alpha-nine);
+  overflow: hidden;
 }
 .investWallet__deposit-income {
   background-color: var(--blue-primary-alpha-five);
@@ -871,6 +873,8 @@ li:hover .nav__item--name {
 .user-profile-container_profile > img {
   width: 7rem;
   height: 7rem;
+  filter: drop-shadow(5px 5px 10px var(--light-shadow-white));
+  backdrop-filter: blur(5px);
   border-radius: 100%;
   box-shadow: 0 0 1.6rem 0.5rem var(--shadow-alpha-three);
 }
@@ -1007,13 +1011,12 @@ header .nav_container_btn svg {
 .section__profile .profile__cont-photo {
   margin: 0;
   width: 10rem;
-  backdrop-filter: blur(5px);
-  filter: drop-shadow(5px 5px 10px var(--light-shadow-white));
-  clip-path: circle(50% at 50% 50%);
+  overflow: hidden;
 }
 .section__profile .profile__cont-photo img {
   width: 100%;
   display: block;
+  clip-path: circle(50% at 50% 50%);
 }
 .section__profile hr {
   border: none;
@@ -1054,7 +1057,7 @@ header .nav_container_btn svg {
 .section__profile .section__profile__buttons {
   display: flex;
   flex-direction: column;
-  gap: 1rem 0;
+  gap: 2rem 0;
   align-items: center;
   margin-top: 4rem;
 }

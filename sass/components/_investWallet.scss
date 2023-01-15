@@ -9,7 +9,8 @@
 
   &__btns button.active {
     color: white;
-    box-shadow: inset 20rem 0 0 0 var(--purple-primary-alpha-nine);
+    box-shadow: inset 100rem 0 0 0 var(--purple-primary-alpha-nine);
+    overflow: hidden;
   }
 
   &__deposit-income {
