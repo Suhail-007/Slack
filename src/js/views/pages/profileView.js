@@ -96,15 +96,16 @@ class ProfileView extends View {
           <p class="section__error__msg"></p>
         </div>
         
-        <div class='section__profile__buttons'>
-          <button type='button' data-delete class='btn btn-edit section__profile__buttons--edit'>Edit Profile</button>
-          <button type='button' data-delete class='btn btn-delete section__profile__buttons--delete'>Delete Profile</button>
+        <div data-btns-cont class='section__profile__buttons'>
+          <button type='button' data-cta='edit' class='btn btn-edit section__profile__buttons--edit'>Edit Profile</button>
+          <button type='button' data-cta='delete' class='btn btn-delete section__profile__buttons--delete'>Delete Profile</button>
         </div>
       </section>`
   }
 
-  init(handler) {
-    this.#addHandlerSettings(handler)
+  init(handler, deleteUser) {
+    this.#addHandlerSettings(handler);
+    this.#callToActionBtns(deleteUser);
   }
 
   #addHandlerSettings(handler) {
@@ -128,6 +129,27 @@ class ProfileView extends View {
     if (selectOption === 'chartTwo') {
       const selectedTheme = chartTypes.chartTwo;
       if (selectedTheme === value) return 'selected'
+    }
+  }
+
+  #callToActionBtns(deleteUser) {
+    const btnsCont = document.querySelector('[data-btns-cont]');
+
+    btnsCont.addEventListener('click', async e => {
+      try {
+        const btn = e.target.dataset.cta;
+        if (btn === 'edit') await deleteAccount(deleteUser);
+      } catch (err) {
+        this.renderMessage(err.message, 'error', 2000);
+      }
+    });
+  }
+
+  async deleteAccount(deleteUser) {
+    try {
+      await deleteUser();
+    } catch (err) {
+      throw err
     }
   }
 }

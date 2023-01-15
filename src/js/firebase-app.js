@@ -9,7 +9,8 @@ import {
   browserSessionPersistence,
   setPersistence,
   sendPasswordResetEmail,
-  signOut
+  signOut,
+  deleteUser
 } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
 import {
   getFirestore,
@@ -24,7 +25,13 @@ import {
   setDoc,
   onSnapshot
 } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject
+} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB0YK0OmBjg6AFeqa-Kl3sm0_b1FWZfQV4",
@@ -162,7 +169,27 @@ export const getUserImage = async function(user) {
     const profilePicRef = ref(storage, `images/${user.uid}/${user.profilePic}`);
 
     const imgUrl = await getDownloadURL(profilePicRef);
+    //user obj model.js
     user.profilePic = imgUrl;
+  } catch (err) {
+    throw err
+  }
+}
+
+export const deleteUserAndData = async function(user) {
+  try {
+    const currUser = auth.currentUser;
+    await deleteUser(currUser);
+    await deleteUserPic(user);
+  } catch (err) {
+    throw err
+  }
+}
+
+const deleteUserPic = async function(user) {
+  try {
+    const profilePicRef = ref(storage, `images/${user.uid}/${user.profilePic}`);
+    await deleteObject(profilePicRef);
   } catch (err) {
     throw err
   }

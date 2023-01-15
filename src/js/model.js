@@ -7,7 +7,7 @@ import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/pages/profileView.js';
 import { chartTypes } from './config.js';
 import { updateURL, NAV_TOGGLE_BTN } from './helper.js';
-import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, signoutUser, authChanged } from './firebase-app.js';
+import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, signoutUser, authChanged, deleteUserAndData } from './firebase-app.js';
 import chartView from './views/dashboard/chartView.js';
 
 export const theme = {
@@ -59,7 +59,7 @@ const router = {
       await resetPassView.loader();
       await resetPassView.Delay(1000);
       resetPassView.renderData('_');
-      resetPassView.init(resetUserPass);
+      resetPassView.init(deleteUserAndData);
     }
   },
 
@@ -91,7 +91,7 @@ const router = {
         await profileView.loader();
         await profileView.Delay(1000);
         profileView.renderData(user);
-        profileView.init(settings);
+        profileView.init(settings, deleteUser);
       } catch (err) {
         console.log(err);
         // profileView.renderMessage('Failed to load profile, try reloading ' + err, 'default', 10000);
