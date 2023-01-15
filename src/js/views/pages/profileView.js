@@ -104,9 +104,9 @@ class ProfileView extends View {
       </section>`
   }
 
-  init(handler, deleteUserAndData) {
+  init(handler, deleteUserAndData, wasLogin) {
     this.#addHandlerSettings(handler);
-    this.#callToActionBtns(deleteUserAndData);
+    this.#callToActionBtns(deleteUserAndData, wasLogin);
   }
 
   #addHandlerSettings(handler) {
@@ -133,14 +133,14 @@ class ProfileView extends View {
     }
   }
 
-  #callToActionBtns(deleteUserAndData) {
+  #callToActionBtns(deleteUserAndData,  wasLogin) {
     const btnsCont = document.querySelector('[data-btns-cont]');
 
     btnsCont.addEventListener('click', async e => {
       try {
         const btn = e.target.dataset.cta;
         if (btn === 'edit') console.log('dj');
-        if (btn === 'delete') await this.#deleteAccount(deleteUserAndData);
+        if (btn === 'delete') await this.#deleteAccount(deleteUserAndData, wasLogin);
       } catch (err) {
         console.log(err);
         this.renderMessage(err.message, 'error', 2000);
@@ -148,7 +148,7 @@ class ProfileView extends View {
     });
   }
 
-  async #deleteAccount(deleteUserAndData) {
+  async #deleteAccount(deleteUserAndData, wasLogin) {
     try {
       const userConfirmation = confirm('Are you sure you want to delete your account? once done this operation can\'t be reversed');
 
@@ -156,7 +156,8 @@ class ProfileView extends View {
 
       await deleteUserAndData(this._data.data);
       //set wasLogin to false 
-      setLocalStorage('wasLogin', false);
+      wasLogin = false
+      setLocalStorage('wasLogin', wasLogin);
     } catch (err) {
       throw err
     }

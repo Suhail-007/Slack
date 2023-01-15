@@ -91,7 +91,7 @@ const router = {
         await profileView.loader();
         await profileView.Delay(1000);
         profileView.renderData(user);
-        profileView.init(settings, deleteUserAndData);
+        profileView.init(settings, deleteUserAndData,wasLogin);
       } catch (err) {
         console.log(err);
         // profileView.renderMessage('Failed to load profile, try reloading ' + err, 'default', 10000);
