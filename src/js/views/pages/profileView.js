@@ -1,13 +1,16 @@
 import View from '../View.js'
-import { chartTypes } from '../../config.js'
-import { setLocalStorage } from '../../helper.js'
+import reAuthUser from '../reAuthUser.js'
+import { chartTypes, defaultUserPic } from '../../config.js';
+import { updateURL } from '../../helper.js'
 import { theme } from '../../model.js';
 
 class ProfileView extends View {
   _parentElem = document.querySelector('main');
   _settingsElem;
+  _reAuthPass;
 
   _generateMarkup() {
+    const data = this._data.data;
     return `
       <section class="section section__profile">
         <div class="section__heading tab-heading u-letter-spacing-small">
@@ -16,10 +19,10 @@ class ProfileView extends View {
     
         <div class="profile__cont">
           <figure class="profile__cont-photo">
-            <img loading="lazy" src="${this._data.data.profilePic}" alt="user profile">
+            <img class='dp' loading="lazy" src="${this.#setUserPic(data)}" alt="user profile">
           </figure>
           <div class='profile__bio'>
-            <p class="profile__user-name">${this._data.data.fullname}</p>
+            <p class="profile__user-name">${data.fullname}</p>
             <p class="profile__bio">To never give up...</p>
           </div>
         </div>
@@ -28,27 +31,27 @@ class ProfileView extends View {
           <h3 class="tab-heading u-letter-spacing-small">User Info</h3>
           <div>
             <p>Gender</p>
-            <p>${this._data.data.gender}</p>
+            <p>${data.gender}</p>
           </div>
           <div>
             <p>Birthday</p>
-            <p>${this._data.data.dob}</p>
+            <p>${data.dob}</p>
           </div>
           <div>
             <p>City</p>
-            <p>${this._data.data.state}</p>
+            <p>${data.state}</p>
           </div>
           <div>
             <p>Country</p>
-            <p>${this._data.data.country}</p>
+            <p>${data.country}</p>
           </div>
           <div>
             <p>Phone Number</p>
-            <p>${this._data.data.phone}</p>
+            <p>${data.phone}</p>
           </div>
           <div>
             <p>Email</p>
-            <p class="email">${this._data.data.userEmail}</p>
+            <p class="email">${data.userEmail}</p>
           </div>
         </div>
     
@@ -101,17 +104,18 @@ class ProfileView extends View {
           <button type='button' data-cta='edit' class='btn btn-edit section__profile__buttons--edit'>Edit Profile</button>
           <button type='button' data-cta='delete' class='btn btn-delete section__profile__buttons--delete'>Delete Profile</button>
         </div>
-      </section>`
+        ${reAuthUser.generateMarkup()}
+      </section>
+      `
   }
 
-  init(handler, deleteUserAndData, wasLogin) {
-    this.#addHandlerSettings(handler);
-    this.#callToActionBtns(deleteUserAndData, wasLogin);
+  init(settings, deleteUserAndData, loginUser) {
+    this.#callToActionBtns(deleteUserAndData, loginUser);
   }
 
-  #addHandlerSettings(handler) {
+  #addHandlerSettings(settings) {
     this._settingsElem = document.querySelector('[data-settings]');
-    this._settingsElem.addEventListener('click', handler);
+    this._settingsElem.addEventListener('click', settings);
   }
 
   #isSelectedValue(value, selectOption = 'theme') {
@@ -133,34 +137,48 @@ class ProfileView extends View {
     }
   }
 
-  #callToActionBtns(deleteUserAndData,  wasLogin) {
+  #callToActionBtns(deleteUserAndData, loginUser) {
     const btnsCont = document.querySelector('[data-btns-cont]');
 
     btnsCont.addEventListener('click', async e => {
       try {
         const btn = e.target.dataset.cta;
         if (btn === 'edit') console.log('dj');
-        if (btn === 'delete') await this.#deleteAccount(deleteUserAndData, wasLogin);
+        if (btn === 'delete') await this.#deleteAccount(deleteUserAndData, loginUser);
       } catch (err) {
-        console.log(err);
         this.renderMessage(err.message, 'error', 2000);
       }
     });
   }
 
-  async #deleteAccount(deleteUserAndData, wasLogin) {
+  async #deleteAccount(deleteUserAndData, loginUser) {
     try {
+      reAuthUser.showForm();
+      this._reAuthPass = await reAuthUser.getReAuthPass();
+      reAuthUser.hideForm();
+
+      await this.Delay(2000);
+
       const userConfirmation = confirm('Are you sure you want to delete your account? once done this operation can\'t be reversed');
 
-      if (!userConfirmation) return this.renderMessage('Great decision!', 'success', 3000);
+      if (!userConfirmation) return this.renderMessage('Great You decided to stay :)', 'success', 3000);
 
-      await deleteUserAndData(this._data.data);
+      //login user again
+      const currUser = await loginUser(this._reAuthPass.reAuthEmail, this._reAuthPass.reAuthPass);
+      
+      await deleteUserAndData(this._data.data, currUser);
+
       //set wasLogin to false 
-      wasLogin = false
-      setLocalStorage('wasLogin', wasLogin);
+      localStorage.setItem('wasLogin', false);
+      updateURL('_', true);
     } catch (err) {
+      console.log(err);
       throw err
     }
+  }
+
+  #setUserPic(user) {
+    return user.profilePic ? user.profilePic : defaultUserPic;
   }
 }
 

@@ -52,6 +52,9 @@ const storage = getStorage();
 export const db = getFirestore(firebaseApp);
 const auth = getAuth();
 
+let unSubSnapShot;
+export let unSubAuth;
+
 // const analytics = getAnalytics(firebaseApp);
 export const loginUser = async function(email, password) {
   try {
@@ -65,14 +68,10 @@ export const loginUser = async function(email, password) {
 
 export const authChanged = function(user) {
   return new Promise((resolve, reject) => {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          return resolve(user);
-        } else reject('no user is currently log in');
-      })
+      unSubAuth = onAuthStateChanged(auth, user => user ? resolve(user) : reject('no user is currently log in'))
     })
     .then(res => getUserDataAndUserPic(user))
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
 }
 
 //create user & send user email verification
@@ -120,6 +119,7 @@ export const createUserData = async function(user, formData) {
       state: formData.state,
       country: formData.country,
       gender: formData.gender,
+      profilePic: '',
     });
 
     //if theres no profile don't upload it to servers
@@ -133,17 +133,17 @@ export const createUserData = async function(user, formData) {
 export const getUserDataAndUserPic = function(user) {
   const currUser = auth.currentUser;
   return new Promise(function(resolve, reject) {
-      onSnapshot(doc(db, "users", currUser.uid), async doc => {
+      unSubSnapShot = onSnapshot(doc(db, "users", currUser.uid), async doc => {
         if (doc.exists()) {
           user.data = doc.data();
-          // await getUserImage(user.data);
+          await getUserImage(user.data);
           resolve(true);
         }
         reject(false);
       });
     })
     .catch(err => {
-      throw Error(`User dat not found, ${err}`)
+      throw Error(`User data not found, ${err}`)
     })
 }
 
@@ -164,23 +164,24 @@ const uploadPic = async function(user, file) {
 
 export const getUserImage = async function(user) {
   try {
-    if (user.profilePic === '') return
+    //if there's no profie pic name ref in user return & use default profile
+    if (user.profilePicName === '') return
 
     const profilePicRef = ref(storage, `images/${user.uid}/${user.profilePicName}`);
 
-    const imgUrl = await getDownloadURL(profilePicRef);
     //user obj model.js
-    user.profilePic = imgUrl;
+    user.profilePic = await getDownloadURL(profilePicRef);
+
   } catch (err) {
+    console.log(err);
     throw err
   }
 }
 
-export const deleteUserAndData = async function(user) {
+export const deleteUserAndData = async function(user, currUser) {
   try {
-    const currUser = auth.currentUser;
     await deleteUserPic(user);
-    await deleteUserDoc(currUser);
+    await deleteUserDoc();
     await deleteUser(currUser);
   } catch (err) {
     throw err
@@ -189,17 +190,20 @@ export const deleteUserAndData = async function(user) {
 
 const deleteUserPic = async function(user) {
   try {
+    if (!user.profilePic && !user.profilePicName) return;
+
     const profilePicRef = ref(storage, `images/${user.uid}/${user.profilePicName}`);
-    console.log(user);
     await deleteObject(profilePicRef);
   } catch (err) {
     throw err
   }
 }
 
-const deleteUserDoc = async function(user) {
+const deleteUserDoc = async function() {
   try {
-    await deleteDoc(doc(db, 'users', user.uid))
+    const currUser = auth.currentUser;
+    await deleteDoc(doc(db, 'users', currUser.uid));
+    unSubSnapShot();
   } catch (err) {
     throw err
   }

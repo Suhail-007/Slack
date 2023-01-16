@@ -54,17 +54,17 @@ class loginView extends View {
     this.togglePasswordInputType();
   }
 
-  getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogin) {
+  getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome) {
     this._form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(this._form)];
       const userObj = Object.fromEntries(fd);
 
-      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogin);
+      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome);
     })
   }
 
-  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogin) {
+  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome) {
     try {
       const { email, password } = userObj;
 
@@ -73,13 +73,13 @@ class loginView extends View {
       const user = await loginUser(email, password);
 
       //send verification if email not verified
-      if (!user.emailVerified) {
-        sendEmailVerif();
+      // if (!user.emailVerified) {
+      //   sendEmailVerif();
 
-        //signout the user 
-        signoutUser();
-        throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
-      }
+      //   //signout the user 
+      //   signoutUser();
+      //   throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
+      // }
 
       await this.renderMessage('Getting user data', 'success', 2000);
 
@@ -98,12 +98,11 @@ class loginView extends View {
       initHome();
 
       updateURL('dashboard');
-
-      wasLogin = true;
-      localStorage.setItem('wasLogin', wasLogin);
+      localStorage.setItem('wasLogin', true);
 
       await this.renderTab();
     } catch (err) {
+      console.log(err);
       await this.renderMessage(err, 'error', 2000);
     }
   }
