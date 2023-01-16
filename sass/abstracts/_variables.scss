@@ -6,6 +6,9 @@
   --blue-primary: hsla(215, 98%, 55%, 1);
   --cyan-primary: hsla(191, 91%, 48%, 1);
   --bg-footer: rgba(0, 0, 0, .1);
+  //Have to change for dark mode
+  --btn-green: hsla(133, 100%, 85%, 1);
+  --btn-green-font: hsla(133, 90%, 24%, 1);
 
   /*Secondary Values*/
   --bg-secondary: #fff;
@@ -69,7 +72,6 @@
   /*Font Color*/
   --font-primary: #000;
   --grey-light: #999;
-  //Have to change for dark mode
   --error: hsla(0, 100%, 78%, .6);
   --success: hsla(134, 45%, 84%, 1);
 }
@@ -82,5 +84,4 @@ $border-top-left-radius: 4rem;
 $BR-logo: 100px;
 
 $default-font-size: 1.6rem;
-
 $section-min-height: 100vh;

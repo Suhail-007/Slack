@@ -1,47 +1,80 @@
-.btn-purple {
-  display: flex;
-  align-items: center;
-  gap: 0 0.2rem;
-  color: #fff;
+.btn {
+  border: none;
+  border-radius: .5rem;
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  letter-spacing: 1;
   font-weight: 500;
-  font-size: 1.3rem;
-  letter-spacing: 1;
-  margin: 2rem 0;
-  padding: 1.3rem;
-  border: none;
-  background: none;
-  border-radius: 0.6rem;
-  background: linear-gradient(360deg, var(--purple-primary), var(--purple-primary-alpha-four));
-  box-shadow: .5rem 0 1rem 0 var(--purple-primary-alpha-four), 0 .5rem 1rem .1rem var(--purple-primary-alpha-four);
-}
-
-.btn-grey-animated {
-  border: none;
-  background: none;
-  padding: 1.6rem;
-  background-color: hsla(269, 55%, 96%, 1);
-  color: #000;
-  font-weight: 400;
-  letter-spacing: 1;
-  font-size: 1.6rem;
+  transform: translateY(0);
   cursor: pointer;
-  overflow: hidden;
-  transition: 0.5s ease-in-out;
-  box-shadow: inset 0 0 0 0 var(--purple-primary-alpha-nine);
-}
+  box-shadow: 0 .2rem .3rem 0 var(--shadow-alpha-six);
+  transition: box-shadow .2s ease-in-out,
+    transform .2s ease-in-out;
 
-.btn-light-blue {
-  background: none;
-  border: none;
-  background-color: var(--blue-primary-alpha-five);
-  color: #fff;
-  padding: 1.8rem 1.6rem;
-  border-radius: 10rem;
-  font-size: 1.7rem;
-  margin-block: 3.2rem;
-  cursor: pointer;
-  pointer-events: none;
-  transition: 500ms ease;
-  opacity: 0;
-  display: none;
+  &:focus,
+  &:hover {
+    box-shadow: 0 .4rem .6rem 0 var(--shadow-alpha-six);
+    transform: translateY(-.1rem);
+  }
+
+  &:active {
+    box-shadow: 0 .4rem .6rem 0 var(--shadow-alpha-six);
+    transform: translateY(.5rem);
+  }
+
+  &-purple {
+    display: flex;
+    align-items: center;
+    gap: 0 0.2rem;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.3rem;
+    letter-spacing: 1;
+    margin: 2rem 0;
+    background: linear-gradient(360deg, var(--purple-primary), var(--purple-primary-alpha-four));
+    box-shadow: .5rem 0 1rem 0 var(--purple-primary-alpha-four), 0 .5rem 1rem .1rem var(--purple-primary-alpha-four) !important;
+
+    &:hover,
+    &:focus {
+      box-shadow: .5rem 0 1rem 0 var(--purple-primary-alpha-four), 0 .5rem 1rem .1rem var(--purple-primary-alpha-four) !important;
+    }
+  }
+
+  &-grey-animated {
+    padding: 1.6rem;
+    border: none;
+    background-color: hsla(269, 55%, 96%, 1);
+    color: #000;
+    font-weight: 400;
+    letter-spacing: 1;
+    font-size: 1.6rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.5s ease-in-out;
+    box-shadow: inset 0 0 0 0 var(--purple-primary-alpha-nine);
+  }
+
+  &-light-blue {
+    background: none;
+    border: none;
+    background-color: var(--blue-primary-alpha-five);
+    color: #fff;
+    padding: 1.5rem 2rem !important;
+    border-radius: 100px;
+    font-size: 1.5rem !important;
+    margin-block: 3.2rem;
+    transition: 500ms ease !important;
+    opacity: 0;
+    display: none;
+  }
+
+  &-edit {
+    background: var(--btn-green);
+    color: var(--btn-green-font);
+  }
+
+  &-delete {
+    background: var(--error);
+    color: red;
+  }
 }

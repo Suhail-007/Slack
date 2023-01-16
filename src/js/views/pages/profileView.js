@@ -1,5 +1,6 @@
 import View from '../View.js'
 import { chartTypes } from '../../config.js'
+import { setLocalStorage } from '../../helper.js'
 import { theme } from '../../model.js';
 
 class ProfileView extends View {
@@ -14,10 +15,10 @@ class ProfileView extends View {
         </div>
     
         <div class="profile__cont">
-          <div class="profile__cont-photo">
+          <figure class="profile__cont-photo">
             <img loading="lazy" src="${this._data.data.profilePic}" alt="user profile">
-          </div>
-          <div>
+          </figure>
+          <div class='profile__bio'>
             <p class="profile__user-name">${this._data.data.fullname}</p>
             <p class="profile__bio">To never give up...</p>
           </div>
@@ -95,11 +96,17 @@ class ProfileView extends View {
         <div class="section__error">
           <p class="section__error__msg"></p>
         </div>
+        
+        <div data-btns-cont class='section__profile__buttons'>
+          <button type='button' data-cta='edit' class='btn btn-edit section__profile__buttons--edit'>Edit Profile</button>
+          <button type='button' data-cta='delete' class='btn btn-delete section__profile__buttons--delete'>Delete Profile</button>
+        </div>
       </section>`
   }
 
-  init(handler) {
-    this.#addHandlerSettings(handler)
+  init(handler, deleteUserAndData, wasLogin) {
+    this.#addHandlerSettings(handler);
+    this.#callToActionBtns(deleteUserAndData, wasLogin);
   }
 
   #addHandlerSettings(handler) {
@@ -123,6 +130,36 @@ class ProfileView extends View {
     if (selectOption === 'chartTwo') {
       const selectedTheme = chartTypes.chartTwo;
       if (selectedTheme === value) return 'selected'
+    }
+  }
+
+  #callToActionBtns(deleteUserAndData,  wasLogin) {
+    const btnsCont = document.querySelector('[data-btns-cont]');
+
+    btnsCont.addEventListener('click', async e => {
+      try {
+        const btn = e.target.dataset.cta;
+        if (btn === 'edit') console.log('dj');
+        if (btn === 'delete') await this.#deleteAccount(deleteUserAndData, wasLogin);
+      } catch (err) {
+        console.log(err);
+        this.renderMessage(err.message, 'error', 2000);
+      }
+    });
+  }
+
+  async #deleteAccount(deleteUserAndData, wasLogin) {
+    try {
+      const userConfirmation = confirm('Are you sure you want to delete your account? once done this operation can\'t be reversed');
+
+      if (!userConfirmation) return this.renderMessage('Great decision!', 'success', 3000);
+
+      await deleteUserAndData(this._data.data);
+      //set wasLogin to false 
+      wasLogin = false
+      setLocalStorage('wasLogin', wasLogin);
+    } catch (err) {
+      throw err
     }
   }
 }

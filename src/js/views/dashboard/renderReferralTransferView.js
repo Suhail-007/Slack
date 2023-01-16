@@ -16,7 +16,7 @@ class FundTransferView extends View {
 
         <h4 class="section__bottom-ref__sub-head">Referral Link</h4>
         <a href="#" data-ref-link class="ref_link">https://github.com/Suhail-007/dashboard-ui</a>
-        <button data-copy-btn class="copy_ref_link btn-purple">
+        <button data-copy-btn class="copy_ref_link btn btn-purple">
           <svg>
           <use href="./src/images/icons.svg#icon_copy"></use>
           </svg>
@@ -40,8 +40,8 @@ class FundTransferView extends View {
 
           <div data-addWithdraw-btns class="investWallet__input-cont__input__btns">
             <input id="amount" type="text">
-            <button class="btn-light-blue active" data-add-fund>Add Fund</button>
-            <button class="btn-light-blue" data-withdraw-fund>Withdraw Fund</button>
+            <button class="btn btn-light-blue active" data-add-fund>Add Fund</button>
+            <button class="btn btn-light-blue" data-withdraw-fund>Withdraw Fund</button>
           </div>
         </div>
       </div>

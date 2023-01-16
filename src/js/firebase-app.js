@@ -9,7 +9,8 @@ import {
   browserSessionPersistence,
   setPersistence,
   sendPasswordResetEmail,
-  signOut
+  signOut,
+  deleteUser
 } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
 import {
   getFirestore,
@@ -24,7 +25,13 @@ import {
   setDoc,
   onSnapshot
 } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject
+} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB0YK0OmBjg6AFeqa-Kl3sm0_b1FWZfQV4",
@@ -105,7 +112,7 @@ export const createUserData = async function(user, formData) {
   try {
     await setDoc(doc(db, 'users', user.uid), {
       fullname: formData.fullname,
-      profilePic: formData.profile.name,
+      profilePicName: formData.profile.name,
       userEmail: formData.email,
       uid: user.uid,
       phone: formData.countryCode + formData.phone,
@@ -129,14 +136,14 @@ export const getUserDataAndUserPic = function(user) {
       onSnapshot(doc(db, "users", currUser.uid), async doc => {
         if (doc.exists()) {
           user.data = doc.data();
-          await getUserImage(user.data);
+          // await getUserImage(user.data);
           resolve(true);
         }
         reject(false);
       });
     })
     .catch(err => {
-      throw err
+      throw Error(`User dat not found, ${err}`)
     })
 }
 
@@ -159,10 +166,40 @@ export const getUserImage = async function(user) {
   try {
     if (user.profilePic === '') return
 
-    const profilePicRef = ref(storage, `images/${user.uid}/${user.profilePic}`);
+    const profilePicRef = ref(storage, `images/${user.uid}/${user.profilePicName}`);
 
     const imgUrl = await getDownloadURL(profilePicRef);
+    //user obj model.js
     user.profilePic = imgUrl;
+  } catch (err) {
+    throw err
+  }
+}
+
+export const deleteUserAndData = async function(user) {
+  try {
+    const currUser = auth.currentUser;
+    await deleteUserPic(user);
+    await deleteUserDoc(currUser);
+    await deleteUser(currUser);
+  } catch (err) {
+    throw err
+  }
+}
+
+const deleteUserPic = async function(user) {
+  try {
+    const profilePicRef = ref(storage, `images/${user.uid}/${user.profilePicName}`);
+    console.log(user);
+    await deleteObject(profilePicRef);
+  } catch (err) {
+    throw err
+  }
+}
+
+const deleteUserDoc = async function(user) {
+  try {
+    await deleteDoc(doc(db, 'users', user.uid))
   } catch (err) {
     throw err
   }

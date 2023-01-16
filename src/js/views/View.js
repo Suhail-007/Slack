@@ -61,15 +61,6 @@ export default class View {
     })
   }
 
-  btnPressEffect(parentElem) {
-    const btn = parentElem.querySelector('button');
-    btn.classList.add('press-btn');
-
-    setTimeout(() => {
-      btn.classList.remove('press-btn');
-    }, 100)
-  }
-
   isFocus(parentElem) {
     parentElem.addEventListener('change', e => {
 

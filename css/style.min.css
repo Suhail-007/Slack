@@ -6,6 +6,8 @@
   --blue-primary: hsla(215, 98%, 55%, 1);
   --cyan-primary: hsla(191, 91%, 48%, 1);
   --bg-footer: rgba(0, 0, 0, .1);
+  --btn-green: hsla(133, 100%, 85%, 1);
+  --btn-green-font: hsla(133, 90%, 24%, 1);
   /*Secondary Values*/
   --bg-secondary: #fff;
   --blue-secondary: hsla(215, 98%, 55%, 1);
@@ -315,6 +317,26 @@ li:hover .nav__item--name {
   transform: translateY(0.5rem) !important;
 }
 
+.btn {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  letter-spacing: 1;
+  font-weight: 500;
+  transform: translateY(0);
+  cursor: pointer;
+  box-shadow: 0 0.2rem 0.3rem 0 var(--shadow-alpha-six);
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+.btn:focus, .btn:hover {
+  box-shadow: 0 0.4rem 0.6rem 0 var(--shadow-alpha-six);
+  transform: translateY(-0.1rem);
+}
+.btn:active {
+  box-shadow: 0 0.4rem 0.6rem 0 var(--shadow-alpha-six);
+  transform: translateY(0.5rem);
+}
 .btn-purple {
   display: flex;
   align-items: center;
@@ -324,18 +346,15 @@ li:hover .nav__item--name {
   font-size: 1.3rem;
   letter-spacing: 1;
   margin: 2rem 0;
-  padding: 1.3rem;
-  border: none;
-  background: none;
-  border-radius: 0.6rem;
   background: linear-gradient(360deg, var(--purple-primary), var(--purple-primary-alpha-four));
-  box-shadow: 0.5rem 0 1rem 0 var(--purple-primary-alpha-four), 0 0.5rem 1rem 0.1rem var(--purple-primary-alpha-four);
+  box-shadow: 0.5rem 0 1rem 0 var(--purple-primary-alpha-four), 0 0.5rem 1rem 0.1rem var(--purple-primary-alpha-four) !important;
 }
-
+.btn-purple:hover, .btn-purple:focus {
+  box-shadow: 0.5rem 0 1rem 0 var(--purple-primary-alpha-four), 0 0.5rem 1rem 0.1rem var(--purple-primary-alpha-four) !important;
+}
 .btn-grey-animated {
-  border: none;
-  background: none;
   padding: 1.6rem;
+  border: none;
   background-color: hsl(269deg, 55%, 96%);
   color: #000;
   font-weight: 400;
@@ -346,28 +365,37 @@ li:hover .nav__item--name {
   transition: 0.5s ease-in-out;
   box-shadow: inset 0 0 0 0 var(--purple-primary-alpha-nine);
 }
-
 .btn-light-blue {
   background: none;
   border: none;
   background-color: var(--blue-primary-alpha-five);
   color: #fff;
-  padding: 1.8rem 1.6rem;
-  border-radius: 10rem;
-  font-size: 1.7rem;
+  padding: 1.5rem 2rem !important;
+  border-radius: 100px;
+  font-size: 1.5rem !important;
   margin-block: 3.2rem;
-  cursor: pointer;
-  pointer-events: none;
-  transition: 500ms ease;
+  transition: 500ms ease !important;
   opacity: 0;
   display: none;
 }
+.btn-edit {
+  background: var(--btn-green);
+  color: var(--btn-green-font);
+}
+.btn-delete {
+  background: var(--error);
+  color: red;
+}
 
 .section__error {
+  text-align: center;
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
-  transition: all 0.3s ease-in-out;
+  font-size: 1.3rem;
+  padding: 0.5rem 1rem;
+  display: none;
+  transition: all 0.2s ease-in-out;
 }
 .section__error.default {
   text-align: center;
@@ -375,6 +403,7 @@ li:hover .nav__item--name {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
+  display: block;
 }
 .section__error.error {
   text-align: center;
@@ -384,6 +413,7 @@ li:hover .nav__item--name {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
+  display: block;
 }
 .section__error.error > p {
   color: red;
@@ -396,13 +426,10 @@ li:hover .nav__item--name {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
+  display: block;
 }
 .section__error.success > p {
   color: hsl(109deg, 87%, 28%);
-}
-.section__error__msg {
-  font-size: 1.5rem;
-  color: red;
 }
 
 .investWallet {
@@ -415,7 +442,8 @@ li:hover .nav__item--name {
 }
 .investWallet__btns button.active {
   color: white;
-  box-shadow: inset 20rem 0 0 0 var(--purple-primary-alpha-nine);
+  box-shadow: inset 100rem 0 0 0 var(--purple-primary-alpha-nine);
+  overflow: hidden;
 }
 .investWallet__deposit-income {
   background-color: var(--blue-primary-alpha-five);
@@ -555,17 +583,10 @@ li:hover .nav__item--name {
 
 .form__btn {
   width: 50%;
-  border: none;
-  padding: 1rem 1.5rem;
+  border-radius: 100px;
+  margin-inline: auto !important;
   color: var(--font-primary);
-  transform: translateY(0);
-  border-radius: 4rem;
   background: var(--blue-primary-alpha-three);
-  box-shadow: 0 0.2rem 0.3rem 0 var(--shadow-alpha-six);
-  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-}
-.form__btn:focus, .form__btn:hover {
-  box-shadow: 0 0.4rem 0.6rem 0 var(--shadow-alpha-six);
 }
 
 .signup--login {
@@ -857,8 +878,11 @@ li:hover .nav__item--name {
 .user-profile-container_profile > img {
   width: 7rem;
   height: 7rem;
+  filter: drop-shadow(5px 5px 10px var(--light-shadow-white));
+  backdrop-filter: blur(5px);
   border-radius: 100%;
   box-shadow: 0 0 1.6rem 0.5rem var(--shadow-alpha-three);
+  object-fit: cover;
 }
 
 header {
@@ -991,13 +1015,15 @@ header .nav_container_btn svg {
   gap: 0 2rem;
 }
 .section__profile .profile__cont-photo {
-  width: 10rem;
+  margin: 0;
   backdrop-filter: blur(5px);
   filter: drop-shadow(5px 5px 10px var(--light-shadow-white));
-  clip-path: circle(5rem at 50% 50%);
 }
 .section__profile .profile__cont-photo img {
-  width: 100%;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 100%;
+  object-fit: cover;
 }
 .section__profile hr {
   border: none;
@@ -1034,6 +1060,16 @@ header .nav_container_btn svg {
   padding: 0.5rem;
   border-radius: 0.3rem;
   outline: none;
+}
+.section__profile .section__profile__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem 0;
+  align-items: center;
+  margin-top: 4rem;
+}
+.section__profile .section__profile__buttons--delete, .section__profile .section__profile__buttons--edit {
+  width: 80%;
 }
 
 .signup__form {
@@ -1095,8 +1131,8 @@ header .nav_container_btn svg {
   border: none;
   border-radius: 2px;
 }
-.signup__form .signup-btn, .signup__form > .signup--login {
-  margin-inline: auto;
+.signup__form > .signup--login {
+  margin-inline: auto !important;
 }
 
 .dark {

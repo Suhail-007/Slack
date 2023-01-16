@@ -61,7 +61,7 @@ class SignUpView extends View {
             <p class="section__error__msg"></p>
           </div>
 
-          <button class="form__btn signup-btn" type="submit">Sign up</button>
+          <button class="btn form__btn" type="submit">Sign up</button>
 
           <p class="signup--login">Already have a account?<a href="/">Log In</a></p>
         </form>
@@ -78,8 +78,6 @@ class SignUpView extends View {
         const userInfoObj = Object.fromEntries(fd);
         const isSame = this.#isPasswordsSame(userInfoObj);
         const isInputsCorrect = this.isInputsCorrect(userInfoObj);
-
-        this.btnPressEffect(form);
 
         if (!isSame) throw Error('Passwords do not match');
         if (!isInputsCorrect) throw Error('Please enter full name');

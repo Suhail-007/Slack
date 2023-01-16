@@ -99,20 +99,10 @@
 
 .form__btn {
   width: 50%;
-  border: none;
-  padding: 1rem 1.5rem;
+  border-radius: 100px;
+  margin-inline: auto !important;
   color: var(--font-primary);
-  transform: translateY(0);
-  border-radius: $border-top-left-radius;
   background: var(--blue-primary-alpha-three);
-  box-shadow: 0 .2rem .3rem 0 var(--shadow-alpha-six);
-  transition: box-shadow .2s ease-in-out,
-    transform .2s ease-in-out;
-
-  &:focus,
-  &:hover {
-    box-shadow: 0 .4rem .6rem 0 var(--shadow-alpha-six);
-  }
 }
 
 .signup--login {

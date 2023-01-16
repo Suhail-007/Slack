@@ -4,10 +4,10 @@ import resetPassView from './views/resetPassView.js';
 import homeView from './views/homeView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
 import fundTransferView from './views/dashboard/renderReferralTransferView.js';
-import profileView from './views/navComponents/profileView.js';
+import profileView from './views/pages/profileView.js';
 import { chartTypes } from './config.js';
-import { updateURL, NAV_TOGGLE_BTN } from './helper.js';
-import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, signoutUser, authChanged } from './firebase-app.js';
+import { updateURL, NAV_TOGGLE_BTN, setLocalStorage } from './helper.js';
+import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, signoutUser, authChanged, deleteUserAndData } from './firebase-app.js';
 import chartView from './views/dashboard/chartView.js';
 
 export const theme = {
@@ -18,7 +18,7 @@ export const copyRefLink = async function(element) {
   await navigator.clipboard.writeText(element.innerText);
 }
 
-let wasLogIn = false;
+let wasLogin = false;
 
 const user = {
   //it will be created only when user log in
@@ -33,8 +33,8 @@ const router = {
         await loginView.loader();
         await loginView.Delay(500);
         loginView.renderData(user);
-        if (wasLogIn) loginView.renderMessage('Login again to access your account', 'error', 4000);
-        loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogIn);
+        if (wasLogin) loginView.renderMessage('Login again to access your account', 'error', 4000);
+        loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogin);
         homeView.removeHeaderFooter();
       } catch (err) {
         loginView.renderMessage(err, 'error', 4000)
@@ -59,7 +59,7 @@ const router = {
       await resetPassView.loader();
       await resetPassView.Delay(1000);
       resetPassView.renderData('_');
-      resetPassView.init(resetUserPass);
+      resetPassView.init(deleteUserAndData);
     }
   },
 
@@ -91,7 +91,7 @@ const router = {
         await profileView.loader();
         await profileView.Delay(1000);
         profileView.renderData(user);
-        profileView.init(settings);
+        profileView.init(settings, deleteUserAndData,wasLogin);
       } catch (err) {
         console.log(err);
         // profileView.renderMessage('Failed to load profile, try reloading ' + err, 'default', 10000);
@@ -225,11 +225,6 @@ export const initThemeLocalStorage = function() {
   theme.mode === 'system default' ? systemDefaultTheme() : theme.mode === 'light' ? '' : theme.mode === 'dark' ? document.body.classList.add('dark') : '';
 }
 
-//set Local Storage
-export const setLocalStorage = function(key, value) {
-  localStorage.setItem(`${key}`, JSON.stringify(`${value}`));
-}
-
 //get saved value from Local Storage
 export const getLocalStorage = function() {
   const selectedTheme = JSON.parse(localStorage.getItem('selectedTheme'));
@@ -240,5 +235,5 @@ export const getLocalStorage = function() {
 
   chartTypes.chartOne = chartOne ? chartOne : 'doughnut';
   chartTypes.chartTwo = chartTwo ? chartTwo : 'line';
-  wasLogIn = localStorage.getItem('wasLogIn', wasLogIn);
+  wasLogin = localStorage.getItem('wasLogin', wasLogin);
 }
