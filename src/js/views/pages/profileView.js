@@ -1,4 +1,5 @@
 import View from '../View.js'
+import reAuthUser from '../reAuthUser.js'
 import { chartTypes, defaultUserPic } from '../../config.js';
 import { updateURL } from '../../helper.js'
 import { theme } from '../../model.js';
@@ -6,6 +7,7 @@ import { theme } from '../../model.js';
 class ProfileView extends View {
   _parentElem = document.querySelector('main');
   _settingsElem;
+  _reAuthPass;
 
   _generateMarkup() {
     const data = this._data.data;
@@ -102,16 +104,18 @@ class ProfileView extends View {
           <button type='button' data-cta='edit' class='btn btn-edit section__profile__buttons--edit'>Edit Profile</button>
           <button type='button' data-cta='delete' class='btn btn-delete section__profile__buttons--delete'>Delete Profile</button>
         </div>
-      </section>`
+        ${reAuthUser.generateMarkup()}
+      </section>
+      `
   }
 
-  init(handler, deleteUserAndData) {
-    this.#callToActionBtns(deleteUserAndData);
+  init(settings, deleteUserAndData, loginUser) {
+    this.#callToActionBtns(deleteUserAndData, loginUser);
   }
 
-  #addHandlerSettings(handler) {
+  #addHandlerSettings(settings) {
     this._settingsElem = document.querySelector('[data-settings]');
-    this._settingsElem.addEventListener('click', handler);
+    this._settingsElem.addEventListener('click', settings);
   }
 
   #isSelectedValue(value, selectOption = 'theme') {
@@ -133,28 +137,37 @@ class ProfileView extends View {
     }
   }
 
-  #callToActionBtns(deleteUserAndData) {
+  #callToActionBtns(deleteUserAndData, loginUser) {
     const btnsCont = document.querySelector('[data-btns-cont]');
 
     btnsCont.addEventListener('click', async e => {
       try {
         const btn = e.target.dataset.cta;
         if (btn === 'edit') console.log('dj');
-        if (btn === 'delete') await this.#deleteAccount(deleteUserAndData);
+        if (btn === 'delete') await this.#deleteAccount(deleteUserAndData, loginUser);
       } catch (err) {
         this.renderMessage(err.message, 'error', 2000);
       }
     });
   }
 
-  async #deleteAccount(deleteUserAndData) {
+  async #deleteAccount(deleteUserAndData, loginUser) {
     try {
+      reAuthUser.showForm();
+      this._reAuthPass = await reAuthUser.getReAuthPass();
+      reAuthUser.hideForm();
+
+      await this.Delay(2000);
+
       const userConfirmation = confirm('Are you sure you want to delete your account? once done this operation can\'t be reversed');
 
-      if (!userConfirmation) return this.renderMessage('Great decision!', 'success', 3000);
+      if (!userConfirmation) return this.renderMessage('Great You decided to stay :)', 'success', 3000);
 
-      await deleteUserAndData(this._data.data);
+      //login user again
+      const currUser = await loginUser(this._reAuthPass.reAuthEmail, this._reAuthPass.reAuthPass);
       
+      await deleteUserAndData(this._data.data, currUser);
+
       //set wasLogin to false 
       localStorage.setItem('wasLogin', false);
       updateURL('_', true);

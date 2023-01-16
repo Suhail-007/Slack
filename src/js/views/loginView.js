@@ -44,12 +44,12 @@ class loginView extends View {
     </section>`
   }
 
-  init(router, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic) {
+  init(router, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome) {
     this._form = document.querySelector('form');
     this.setTitle('Log In || Slack');
     this.renderTab = router;
     this.isFocus(this._form);
-    this.getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic);
+    this.getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome);
     this.formLinkRedirects();
     this.togglePasswordInputType();
   }
@@ -102,6 +102,7 @@ class loginView extends View {
 
       await this.renderTab();
     } catch (err) {
+      console.log(err);
       await this.renderMessage(err, 'error', 2000);
     }
   }

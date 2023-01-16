@@ -7,7 +7,7 @@ import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/pages/profileView.js';
 import { chartTypes } from './config.js';
 import { updateURL, NAV_TOGGLE_BTN, setLocalStorage } from './helper.js';
-import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, signoutUser, authChanged, deleteUserAndData } from './firebase-app.js';
+import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, signoutUser, authChanged, deleteUserAndData, unSubAuth } from './firebase-app.js';
 import chartView from './views/dashboard/chartView.js';
 
 export const theme = {
@@ -33,7 +33,7 @@ const router = {
         await loginView.loader();
         await loginView.Delay(500);
         loginView.renderData(user);
-        if (wasLogin) loginView.renderMessage('Login again to access your account', 'error', 4000);
+        if (wasLogin === true) loginView.renderMessage('Login again to access your account', 'error', 4000);
         loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome);
         homeView.removeHeaderFooter();
       } catch (err) {
@@ -91,7 +91,7 @@ const router = {
         await profileView.loader();
         await profileView.Delay(1000);
         profileView.renderData(user);
-        profileView.init(settings, deleteUserAndData);
+        profileView.init(settings, deleteUserAndData, loginUser);
       } catch (err) {
         console.log(err);
         // profileView.renderMessage('Failed to load profile, try reloading ' + err, 'default', 10000);
@@ -103,33 +103,26 @@ const router = {
 export const renderTab = async function() {
   const url = new URL(location.href);
   const page = url.searchParams.get('page');
+  const res = await authChanged(user);
 
-  if (page === null) signoutUser();
+  //redirect user to login page if page reload and user not login in
+  if (page === null && res) signoutUser();
+
+  //get the user if user is not sign out and page refreshes/reload
+  if (!res && page != null && page !== 'signup') return updateURL('_', true);
   if (router[page]) await router[page].view();
 }
 
 export const renderFromHistory = function() {
-  window.addEventListener('popstate', async () => {
-    const url = new URL(location.href);
-    const page = url.searchParams.get('page');
-    const res = await authChanged(user);
-
-    if (!res) updateURL('_', true);
-
-    renderTab();
-  });
+  window.addEventListener('popstate', renderTab);
 }
 
 export const windowLoad = function() {
   window.addEventListener('load', async () => {
     const url = new URL(location.href);
     const page = url.searchParams.get('page');
-
-    //get the user if user is not sign out and page refreshes/reload
     const res = await authChanged(user);
 
-    //redirect user to login page if page reload and user not login in
-    if (!res && page != null && page !== 'signup') return updateURL('_', true);
     if (page === null) return renderTab();
 
     renderTab();

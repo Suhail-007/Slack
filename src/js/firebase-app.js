@@ -53,7 +53,7 @@ export const db = getFirestore(firebaseApp);
 const auth = getAuth();
 
 let unSubSnapShot;
-
+export let unSubAuth;
 
 // const analytics = getAnalytics(firebaseApp);
 export const loginUser = async function(email, password) {
@@ -68,14 +68,10 @@ export const loginUser = async function(email, password) {
 
 export const authChanged = function(user) {
   return new Promise((resolve, reject) => {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          return resolve(user);
-        } else reject('no user is currently log in');
-      })
+      unSubAuth = onAuthStateChanged(auth, user => user ? resolve(user) : reject('no user is currently log in'))
     })
     .then(res => getUserDataAndUserPic(user))
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
 }
 
 //create user & send user email verification
@@ -182,11 +178,10 @@ export const getUserImage = async function(user) {
   }
 }
 
-export const deleteUserAndData = async function(user) {
+export const deleteUserAndData = async function(user, currUser) {
   try {
-    const currUser = auth.currentUser;
     await deleteUserPic(user);
-    await deleteUserDoc(currUser);
+    await deleteUserDoc();
     await deleteUser(currUser);
   } catch (err) {
     throw err
@@ -196,7 +191,7 @@ export const deleteUserAndData = async function(user) {
 const deleteUserPic = async function(user) {
   try {
     if (!user.profilePic && !user.profilePicName) return;
-    
+
     const profilePicRef = ref(storage, `images/${user.uid}/${user.profilePicName}`);
     await deleteObject(profilePicRef);
   } catch (err) {
@@ -204,9 +199,10 @@ const deleteUserPic = async function(user) {
   }
 }
 
-const deleteUserDoc = async function(user) {
+const deleteUserDoc = async function() {
   try {
-    await deleteDoc(doc(db, 'users', user.uid));
+    const currUser = auth.currentUser;
+    await deleteDoc(doc(db, 'users', currUser.uid));
     unSubSnapShot();
   } catch (err) {
     throw err

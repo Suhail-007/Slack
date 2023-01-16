@@ -775,6 +775,70 @@ li:hover .nav__item--name {
   fill: #fff;
 }
 
+.reAuth__cont {
+  display: grid;
+  place-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: scale(0.5);
+  pointer-events: none;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+  z-index: 3;
+}
+.reAuth__cont.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  visibility: visible;
+}
+.reAuth__reAuthForm {
+  display: grid;
+  grid-template-rows: repeat(3, min-content);
+  row-gap: 1rem;
+  align-items: center;
+  justify-items: center;
+  padding: 1.5rem 3rem;
+  background: var(--white-bg);
+  margin-inline: 1.5rem;
+}
+.reAuth__reAuthForm__heading {
+  margin: 0;
+  grid-row: 1/2;
+  grid-column: 1/1;
+  color: var(--font-primary);
+  font-size: 2rem;
+  font-weight: 350;
+}
+.reAuth__reAuthForm__heading + div {
+  grid-row: 2/3;
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  row-gap: 1rem;
+}
+.reAuth__reAuthForm__Pass {
+  justify-self: start;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--font-primary);
+}
+.reAuth__reAuthForm__input {
+  width: 80%;
+}
+.reAuth__reAuthForm__btn {
+  grid-row: 5/6;
+  grid-column: 1/1;
+  display: block !important;
+  opacity: 1 !important;
+  margin: 0;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
