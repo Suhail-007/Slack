@@ -1,6 +1,6 @@
 import View from '../View.js'
-import { chartTypes } from '../../config.js'
-import { setLocalStorage } from '../../helper.js'
+import { chartTypes, defaultUserPic } from '../../config.js';
+import { updateURL } from '../../helper.js'
 import { theme } from '../../model.js';
 
 class ProfileView extends View {
@@ -8,6 +8,7 @@ class ProfileView extends View {
   _settingsElem;
 
   _generateMarkup() {
+    const data = this._data.data;
     return `
       <section class="section section__profile">
         <div class="section__heading tab-heading u-letter-spacing-small">
@@ -16,10 +17,10 @@ class ProfileView extends View {
     
         <div class="profile__cont">
           <figure class="profile__cont-photo">
-            <img loading="lazy" src="${this._data.data.profilePic}" alt="user profile">
+            <img class='dp' loading="lazy" src="${this.#setUserPic(data)}" alt="user profile">
           </figure>
           <div class='profile__bio'>
-            <p class="profile__user-name">${this._data.data.fullname}</p>
+            <p class="profile__user-name">${data.fullname}</p>
             <p class="profile__bio">To never give up...</p>
           </div>
         </div>
@@ -28,27 +29,27 @@ class ProfileView extends View {
           <h3 class="tab-heading u-letter-spacing-small">User Info</h3>
           <div>
             <p>Gender</p>
-            <p>${this._data.data.gender}</p>
+            <p>${data.gender}</p>
           </div>
           <div>
             <p>Birthday</p>
-            <p>${this._data.data.dob}</p>
+            <p>${data.dob}</p>
           </div>
           <div>
             <p>City</p>
-            <p>${this._data.data.state}</p>
+            <p>${data.state}</p>
           </div>
           <div>
             <p>Country</p>
-            <p>${this._data.data.country}</p>
+            <p>${data.country}</p>
           </div>
           <div>
             <p>Phone Number</p>
-            <p>${this._data.data.phone}</p>
+            <p>${data.phone}</p>
           </div>
           <div>
             <p>Email</p>
-            <p class="email">${this._data.data.userEmail}</p>
+            <p class="email">${data.userEmail}</p>
           </div>
         </div>
     
@@ -104,9 +105,8 @@ class ProfileView extends View {
       </section>`
   }
 
-  init(handler, deleteUserAndData, wasLogin) {
-    this.#addHandlerSettings(handler);
-    this.#callToActionBtns(deleteUserAndData, wasLogin);
+  init(handler, deleteUserAndData) {
+    this.#callToActionBtns(deleteUserAndData);
   }
 
   #addHandlerSettings(handler) {
@@ -133,34 +133,39 @@ class ProfileView extends View {
     }
   }
 
-  #callToActionBtns(deleteUserAndData,  wasLogin) {
+  #callToActionBtns(deleteUserAndData) {
     const btnsCont = document.querySelector('[data-btns-cont]');
 
     btnsCont.addEventListener('click', async e => {
       try {
         const btn = e.target.dataset.cta;
         if (btn === 'edit') console.log('dj');
-        if (btn === 'delete') await this.#deleteAccount(deleteUserAndData, wasLogin);
+        if (btn === 'delete') await this.#deleteAccount(deleteUserAndData);
       } catch (err) {
-        console.log(err);
         this.renderMessage(err.message, 'error', 2000);
       }
     });
   }
 
-  async #deleteAccount(deleteUserAndData, wasLogin) {
+  async #deleteAccount(deleteUserAndData) {
     try {
       const userConfirmation = confirm('Are you sure you want to delete your account? once done this operation can\'t be reversed');
 
       if (!userConfirmation) return this.renderMessage('Great decision!', 'success', 3000);
 
       await deleteUserAndData(this._data.data);
+      
       //set wasLogin to false 
-      wasLogin = false
-      setLocalStorage('wasLogin', wasLogin);
+      localStorage.setItem('wasLogin', false);
+      updateURL('_', true);
     } catch (err) {
+      console.log(err);
       throw err
     }
+  }
+
+  #setUserPic(user) {
+    return user.profilePic ? user.profilePic : defaultUserPic;
   }
 }
 

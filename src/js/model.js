@@ -34,7 +34,7 @@ const router = {
         await loginView.Delay(500);
         loginView.renderData(user);
         if (wasLogin) loginView.renderMessage('Login again to access your account', 'error', 4000);
-        loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome, wasLogin);
+        loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome);
         homeView.removeHeaderFooter();
       } catch (err) {
         loginView.renderMessage(err, 'error', 4000)
@@ -91,7 +91,7 @@ const router = {
         await profileView.loader();
         await profileView.Delay(1000);
         profileView.renderData(user);
-        profileView.init(settings, deleteUserAndData,wasLogin);
+        profileView.init(settings, deleteUserAndData);
       } catch (err) {
         console.log(err);
         // profileView.renderMessage('Failed to load profile, try reloading ' + err, 'default', 10000);
@@ -114,7 +114,6 @@ export const renderFromHistory = function() {
     const page = url.searchParams.get('page');
     const res = await authChanged(user);
 
-    //re-render the footer & header if user go back to dashboard from login page
     if (!res) updateURL('_', true);
 
     renderTab();
@@ -130,7 +129,7 @@ export const windowLoad = function() {
     const res = await authChanged(user);
 
     //redirect user to login page if page reload and user not login in
-    if (!res && page != null) return updateURL('_', true);
+    if (!res && page != null && page !== 'signup') return updateURL('_', true);
     if (page === null) return renderTab();
 
     renderTab();
@@ -236,4 +235,5 @@ export const getLocalStorage = function() {
   chartTypes.chartOne = chartOne ? chartOne : 'doughnut';
   chartTypes.chartTwo = chartTwo ? chartTwo : 'line';
   wasLogin = localStorage.getItem('wasLogin', wasLogin);
+  console.log(wasLogin);
 }

@@ -20,7 +20,7 @@ class SignUpView extends View {
         
         <div class="signup__form__profile">
           <div class="signup__form__profile__fake">
-          <img data-img-preview loading='lazy' src="${defaultUserPic}"/>
+          <img class='dp' data-img-preview loading='lazy' src="${defaultUserPic}"/>
           </div>
           <label for="profile">Choose a profile pic</label>
           <input accept="image/png image/jpg image/jpeg" id="profile" type="file" name="profile">
