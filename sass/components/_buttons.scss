@@ -61,20 +61,34 @@
     border: 2px solid var(--blue-primary-alpha-five);
     color: var(--blue-primary);
     font-size: 1.5rem !important;
-    /* transition: 200ms ease-in-out; */
     opacity: 0;
     display: none;
+
+    &:hover,
+    &:focus {
+      background: var(--blue-primary-alpha-three);
+    }
   }
 
   &-edit {
     background: none;
     border: 2px solid var(--btn-green);
     color: var(--btn-green-font);
+
+    &:hover,
+    &:focus {
+      background: var(--btn-green-alpha-five);
+    }
   }
 
   &-delete {
     background: none;
     border: 2px solid var(--error);
     color: red;
+
+    &:hover,
+    &:focus {
+      background: var(--error);
+    }
   }
 }

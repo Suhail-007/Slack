@@ -16,6 +16,7 @@
   --bg-primary-alpha-six: hsla(221, 93%, 89%, 0.6);
   --bg-primary-alpha-seven: hsla(221, 93%, 89%, 0.7);
   --bg-primary-alpha-eight: hsla(221, 93%, 89%, 0.8);
+  --btn-green-alpha-five: hsla(133, 80%, 90%, .5);
   --purple-primary-alpha-two: hsla(258, 91%, 63%, 0.2);
   --purple-primary-alpha-three: hsla(258, 91%, 63%, 0.3);
   --purple-primary-alpha-four: hsla(258, 91%, 63%, 0.4);
@@ -380,19 +381,27 @@ li:hover .nav__item--name {
   border: 2px solid var(--blue-primary-alpha-five);
   color: var(--blue-primary);
   font-size: 1.5rem !important;
-  /* transition: 200ms ease-in-out; */
   opacity: 0;
   display: none;
+}
+.btn-light-blue:hover, .btn-light-blue:focus {
+  background: var(--blue-primary-alpha-three);
 }
 .btn-edit {
   background: none;
   border: 2px solid var(--btn-green);
   color: var(--btn-green-font);
 }
+.btn-edit:hover, .btn-edit:focus {
+  background: var(--btn-green-alpha-five);
+}
 .btn-delete {
   background: none;
   border: 2px solid var(--error);
   color: red;
+}
+.btn-delete:hover, .btn-delete:focus {
+  background: var(--error);
 }
 
 .section__error {
@@ -822,6 +831,7 @@ li:hover .nav__item--name {
   align-items: center;
   justify-items: center;
   padding: 1.5rem 3rem;
+  border-radius: 0.5rem;
   background: var(--white-bg);
   margin-inline: 1.5rem;
   position: relative;
