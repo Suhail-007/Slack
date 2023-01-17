@@ -61,7 +61,7 @@ class SignUpView extends View {
             <p class="section__error__msg"></p>
           </div>
 
-          <button class="btn form__btn" type="submit">Sign up</button>
+          <button class="btn btn-light-blue form__btn" type="submit">Sign up</button>
 
           <p class="signup--login">Already have a account?<a href="/">Log In</a></p>
         </form>

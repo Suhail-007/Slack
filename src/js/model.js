@@ -94,7 +94,7 @@ const router = {
         profileView.init(settings, deleteUserAndData, loginUser);
       } catch (err) {
         console.log(err);
-        // profileView.renderMessage('Failed to load profile, try reloading ' + err, 'default', 10000);
+        profileView.renderMessage('Failed to load profile, try reloading ' + err, 'error', 3000);
       }
     }
   }

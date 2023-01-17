@@ -3,7 +3,7 @@ class reAuthUser {
 
   generateMarkup() {
     return `
-      <div data-reAuthForm class='reAuth reAuth__cont'>
+      <div data-reAuthForm class='reAuth reAuth__cont closeForm'>
         <form class='reAuth__reAuthForm' data-reAuthPass>
           <h4 class='u-margin-bottom-small .u-letter-spacing-small reAuth__reAuthForm__heading'>Re Authenticate your account to proceed further!</h4>
           
@@ -15,22 +15,38 @@ class reAuthUser {
             <input id='reAuthPass' type='password' required name='reAuthPass' class='input__label__input reAuth__reAuthForm__input reAuth__reAuthForm__pass'>
           </div>
           
-          <button class='btn btn-light-blue reAuth__reAuthForm__btn' type='submit'>Submit</button>
+          <button class='btn btn-light-blue reAuth__reAuthForm__btn submitBtn' type='submit'>Submit</button>
+          <button class='btn btn-delete  cancel-btn' type='button'>Cancel</button>
         </form>
       </div>`
   }
 
-  getReAuthPass() {
-    return new Promise(resolve => {
+  getReAuthInfo() {
+    return new Promise((resolve, reject) => {
       const form = document.querySelector('[data-reAuthPass]');
 
-      form.addEventListener('submit', e => {
+      form.addEventListener('click', e => {
         e.preventDefault();
-        const fd = [...new FormData(form)];
-        const fdObj = Object.fromEntries(fd);
-        return resolve(fdObj);
+
+        if (e.target === 'input') return
+
+        if (e.target.classList.contains('submitBtn')) {
+          const fd = [...new FormData(form)];
+          const fdObj = Object.fromEntries(fd);
+          return resolve(fdObj);
+        }
+
+        if (e.target.classList.contains('cancel-btn')) {
+          this.hideForm();
+          return reject();
+        }
       })
-    })
+    }).catch(err => console.log(err))
+  }
+
+  resetForm() {
+    const form = document.querySelector('[data-reAuthPass]');
+    form.reset();
   }
 
   showForm() {
@@ -40,6 +56,7 @@ class reAuthUser {
 
   hideForm() {
     this._reAuthFormElem.classList.remove('active');
+    this.resetForm();
   }
 }
 

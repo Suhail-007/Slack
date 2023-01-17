@@ -183,6 +183,7 @@ export const deleteUserAndData = async function(user, currUser) {
     await deleteUserPic(user);
     await deleteUserDoc();
     await deleteUser(currUser);
+    return true;
   } catch (err) {
     throw err
   }

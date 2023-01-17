@@ -36,7 +36,7 @@ class loginView extends View {
           
           <a class='form-link reset-password' href='/'>Forget your password?</a>
           
-          <button class="btn form__btn" type="submit">Log in</button>
+          <button class="btn btn-light-blue form__btn" type="submit">Log in</button>
 
           <p class="form-link signup--login">Don't have account yet?<a data-signup='signup' href="/signup">Sign up</a></p>
         </form>

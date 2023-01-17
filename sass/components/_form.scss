@@ -98,11 +98,16 @@
 }
 
 .form__btn {
-  width: 50%;
+  opacity: 1;
+  display: block;
+  padding-block: 1rem !important;
   border-radius: 100px;
-  margin-inline: auto !important;
-  color: var(--font-primary);
-  background: var(--blue-primary-alpha-three);
+  transition: 300ms ease-in-out;
+
+  &:hover,
+  &:focus {
+    background: var(--blue-primary-alpha-three);
+  }
 }
 
 .signup--login {

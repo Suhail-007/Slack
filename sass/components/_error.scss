@@ -8,13 +8,27 @@
   display: none;
   transition: all .2s ease-in-out;
 
-  &.default {
+  &.def {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
-    padding-top: 10rem;
     opacity: 1;
     pointer-events: auto;
     visibility: visible;
     display: block;
+    z-index: 3;
+    padding: 1rem 3rem;
+    border: 1px solid var(--font-primary);
+    border-radius: .5rem;
+    background: var(--white-bg);
+    box-shadow: 0 1rem 1rem 1rem var(--shadow-alpha-three);
+
+    &>p {
+      font-size: 1.3rem;
+      color: var(--font-primary);
+    }
   }
 
   &.error {
