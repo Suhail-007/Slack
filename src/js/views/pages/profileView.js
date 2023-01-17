@@ -168,7 +168,7 @@ class ProfileView extends View {
 
       const userConfirmation = confirm('Are you sure you want to delete your account? once done this operation can\'t be reversed');
 
-      if (!userConfirmation) return this.renderMessage('Great You decided to stay :)', 'def', 5000);
+      if (!userConfirmation) return this.renderMessage('Great! You decided to stay :)', 'def', 5000);
 
       //login user again
       const currUser = await loginUser(email, password);

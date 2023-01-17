@@ -8,19 +8,16 @@
   font-family: inherit;
   transform: translateY(0);
   cursor: pointer;
-  box-shadow: 0 .2rem .3rem 0 var(--shadow-alpha-six);
-  /* transition: box-shadow .2s ease-in-out,
-    transform .2s ease-in-out; */
+  box-shadow: 0 .2rem .8rem 0 var(--shadow-alpha-six);
   transition: all .2s ease-in-out;
 
   &:focus,
   &:hover {
-    box-shadow: 0 .4rem .6rem 0 var(--shadow-alpha-six);
     transform: translateY(-.1rem);
   }
 
   &:active {
-    box-shadow: 0 .4rem .6rem 0 var(--shadow-alpha-six);
+    box-shadow: 0 .4rem .3rem 0 var(--shadow-alpha-six);
     transform: translateY(.5rem);
   }
 

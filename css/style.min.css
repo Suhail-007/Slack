@@ -335,17 +335,14 @@ li:hover .nav__item--name {
   font-family: inherit;
   transform: translateY(0);
   cursor: pointer;
-  box-shadow: 0 0.2rem 0.3rem 0 var(--shadow-alpha-six);
-  /* transition: box-shadow .2s ease-in-out,
-    transform .2s ease-in-out; */
+  box-shadow: 0 0.2rem 0.8rem 0 var(--shadow-alpha-six);
   transition: all 0.2s ease-in-out;
 }
 .btn:focus, .btn:hover {
-  box-shadow: 0 0.4rem 0.6rem 0 var(--shadow-alpha-six);
   transform: translateY(-0.1rem);
 }
 .btn:active {
-  box-shadow: 0 0.4rem 0.6rem 0 var(--shadow-alpha-six);
+  box-shadow: 0 0.4rem 0.3rem 0 var(--shadow-alpha-six);
   transform: translateY(0.5rem);
 }
 .btn-purple {
@@ -425,7 +422,7 @@ li:hover .nav__item--name {
   visibility: visible;
   display: block;
   z-index: 3;
-  padding: 1rem 3rem;
+  padding: 1rem 4rem;
   border: 1px solid var(--font-primary);
   border-radius: 0.5rem;
   background: var(--white-bg);
