@@ -94,6 +94,7 @@ export const resetUserPass = async function(email) {
   try {
     return await sendPasswordResetEmail(auth, email);
   } catch (err) {
+    console.log(err);
     throw err
   }
 }
@@ -205,6 +206,7 @@ const deleteUserDoc = async function() {
     const currUser = auth.currentUser;
     await deleteDoc(doc(db, 'users', currUser.uid));
     unSubSnapShot();
+    unSubAuth();
   } catch (err) {
     throw err
   }

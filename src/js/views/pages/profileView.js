@@ -111,7 +111,6 @@ class ProfileView extends View {
 
   init(settings, deleteUserAndData, loginUser) {
     this.#callToActionBtns(deleteUserAndData, loginUser);
-    // reAuthUser.formCloseBtn();
   }
 
   #addHandlerSettings(settings) {

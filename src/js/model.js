@@ -59,7 +59,7 @@ const router = {
       await resetPassView.loader();
       await resetPassView.Delay(1000);
       resetPassView.renderData('_');
-      resetPassView.init(deleteUserAndData);
+      resetPassView.init(resetUserPass);
     }
   },
 
@@ -109,7 +109,7 @@ export const renderTab = async function() {
   if (page === null && res) signoutUser();
 
   //get the user if user is not sign out and page refreshes/reload
-  if (!res && page != null && page !== 'signup') return updateURL('_', true);
+  if (!res && page != null && page !== 'signup' && page !== 'reset password') return updateURL('_', true);
   if (router[page]) await router[page].view();
 }
 
@@ -123,7 +123,7 @@ export const windowLoad = function() {
     const page = url.searchParams.get('page');
     const res = await authChanged(user);
 
-    if (page === null) return renderTab();
+    if (page === null || page === 'reset password') return renderTab();
 
     renderTab();
     scrollToTop();
