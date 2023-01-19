@@ -24,7 +24,7 @@ class loginView extends View {
           
           <div class="input__label">
             <svg data-show-password class='sm-svg input__label__password'>
-              <use href="../src/images/icons.svg#icon-eye-slash"></use>
+              <use href="./src/images/icons.svg#icon-eye-slash"></use>
             </svg>
             <input class="input__label__input" type='password' name='password' id='password'>
             <label class="input__label__label" for="password">Password</label>
@@ -146,11 +146,11 @@ class loginView extends View {
       switch (inputPassElem.type) {
         case 'password':
           inputPassElem.setAttribute('type', 'text');
-          useElem.setAttribute('href', '../src/images/icons.svg#icon-eye');
+          useElem.setAttribute('href', './src/images/icons.svg#icon-eye');
           break;
         case 'text':
           inputPassElem.setAttribute('type', 'password');
-          useElem.setAttribute('href', '../src/images/icons.svg#icon-eye-slash');
+          useElem.setAttribute('href', './src/images/icons.svg#icon-eye-slash');
           break
         default:
           return
