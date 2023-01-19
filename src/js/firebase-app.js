@@ -83,8 +83,14 @@ export const createUserSendEmailVerif = async function(email, password) {
   }
 }
 
-export const updateUserData = function() {
-  
+export const updateUserData = async function(field) {
+  try {
+    const user = doc(db, 'users', auth.currentUser.uid);
+    await updateDoc(user, field);
+  } catch (err) {
+    console.log(err);
+    throw err
+  }
 }
 
 export const sendEmailVerif = async function() {
@@ -95,7 +101,6 @@ export const resetUserPass = async function(email) {
   try {
     return await sendPasswordResetEmail(auth, email);
   } catch (err) {
-    console.log(err);
     throw err
   }
 }
@@ -142,7 +147,7 @@ export const getUserDataAndUserPic = function(user) {
           resolve(true);
         }
         reject(false);
-      });
+      })
     })
     .catch(err => {
       throw Error(`User data not found, ${err}`)
@@ -151,7 +156,7 @@ export const getUserDataAndUserPic = function(user) {
 
 const imagesRef = ref(storage, 'images');
 
-const uploadPic = async function(user, file) {
+export const uploadPic = async function(user, file) {
   //it's like this inside of images folder create user(user.id) folder there create a file name(file param) and upload that file to server. i.e images/user/file(same name as user have saved)
   try {
     const profilePicRef = ref(storage, `images/${user}/${file.name}`);

@@ -15,14 +15,14 @@ class EditProfileView extends View {
     </section>`
   }
 
-  async init() {
+  async init(updateUserData, renderTab, uploadPic) {
     this.previewUserProfile();
     // await this.Delay(1000)
     // await this.renderMessage('Leave the fields empty which you do not wish to update.', 'def', 4000);
-    this.getEditDetails();
+    this.getEditDetails(updateUserData, renderTab, uploadPic);
   }
 
-  getEditDetails() {
+  getEditDetails(updateUserData, renderTab, uploadPic) {
     const form = document.querySelector('form');
     form.addEventListener('submit', async e => {
       try {
@@ -34,22 +34,45 @@ class EditProfileView extends View {
 
         if (!isSame) throw Error('Passwords do not match');
         if (!isInputsCorrect) throw Error('Please enter full name');
-        this.updateUserInfo(fdObj);
 
-        // updateURL('profile');
-        //renderTab();
+        await this.renderMessage('Updating user data', 'success', 2000);
+
+        const { filteredData, profilePic } = this.filteredUserData(fdObj);
+
+        await updateUserData(filteredData);
+        await uploadPic(this._data.data.uid, profilePic);
+
+        await this.renderMessage('Data updated!', 'success', 2000);
+
+        updateURL('profile');
+        renderTab();
       } catch (err) {
         await this.renderMessage(err, 'error', 3000);
       }
     })
   }
 
-  updateUserInfo(user) {
-    let updateUserInfo = {};
+  filteredUserData(user) {
+    let filteredData = {};
+    let profilePic = {};
     for (let key in user) {
-      if (user[key] !== '') updateUserInfo[key] = user[key];
+      if (user[key] !== '') {
+
+        if (key === 'profile' && !user[key].name) continue
+
+        if (key === 'profile' && user[key].name) {
+          filteredData.profilePicName = user[key].name;
+          profilePic = user[key];
+          continue
+        }
+
+        filteredData[key] = user[key];
+      }
     }
-    console.log(updateUserInfo);
+    return {
+      filteredData,
+      profilePic
+    };
   }
 
   isInputsCorrect(fdObj) {

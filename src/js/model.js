@@ -8,7 +8,7 @@ import profileView from './views/pages/profileView.js';
 import EditProfileView from './views/pages/editProfile.js';
 import { chartTypes } from './config.js';
 import { updateURL, NAV_TOGGLE_BTN, setLocalStorage } from './helper.js';
-import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, signoutUser, authChanged, deleteUserAndData, unSubAuth } from './firebase-app.js';
+import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, signoutUser, authChanged, deleteUserAndData, unSubAuth, updateUserData, uploadPic } from './firebase-app.js';
 import chartView from './views/dashboard/chartView.js';
 
 export const theme = {
@@ -99,10 +99,11 @@ const router = {
   'profileEdit': {
     view: async function() {
       try {
+        scrollToTop();
         await EditProfileView.loader();
         await EditProfileView.Delay(1000);
         EditProfileView.renderData(user);
-        EditProfileView.init();
+        EditProfileView.init(updateUserData, renderTab, uploadPic);
       } catch (err) {
         console.log(err);
       }
