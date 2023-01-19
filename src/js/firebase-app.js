@@ -10,7 +10,8 @@ import {
   setPersistence,
   sendPasswordResetEmail,
   signOut,
-  deleteUser
+  deleteUser,
+  updatePassword
 } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
 import {
   getFirestore,
@@ -100,6 +101,15 @@ export const sendEmailVerif = async function() {
 export const resetUserPass = async function(email) {
   try {
     return await sendPasswordResetEmail(auth, email);
+  } catch (err) {
+    throw err
+  }
+}
+
+export const updateUserPassword = async function(user, password) {
+  try {
+    await updatePassword(user, password);
+    return true
   } catch (err) {
     throw err
   }

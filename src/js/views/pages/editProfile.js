@@ -1,6 +1,7 @@
 import View from '../View.js'
 import { updateURL } from '../../helper.js';
-import FORM from '../Form.js';
+import FORM from '../components/Form.js';
+import reAuthUser from '../components/reAuthUser.js';
 
 class EditProfileView extends View {
   _parentElem = document.querySelector('main');
@@ -12,17 +13,18 @@ class EditProfileView extends View {
       Edit Your Profile
     </h2>
       ${FORM('Done', this._data.data.profilePic, 'none', 'value=""')}
+      
+      ${reAuthUser.renderData(false)}
     </section>`
   }
 
-  async init(updateUserData, renderTab, uploadPic) {
-    this.previewUserProfile();
-    // await this.Delay(1000)
+  async init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
     // await this.renderMessage('Leave the fields empty which you do not wish to update.', 'def', 4000);
-    this.getEditDetails(updateUserData, renderTab, uploadPic);
+    this.getEditDetails(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
+    this.previewUserProfile();
   }
 
-  getEditDetails(updateUserData, renderTab, uploadPic) {
+  getEditDetails(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
     const form = document.querySelector('form');
     form.addEventListener('submit', async e => {
       try {
@@ -40,7 +42,15 @@ class EditProfileView extends View {
         const { filteredData, profilePic } = this.filteredUserData(fdObj);
 
         await updateUserData(filteredData);
-        await uploadPic(this._data.data.uid, profilePic);
+
+        if (profilePic.name) await uploadPic(this._data.data.uid, profilePic);
+
+        //checks if password fields aren't empty
+        if (filteredData.password) await this.updatePassword(loginUser, filteredData.password, updateUserPassword);
+
+        //remove & re render nav & footer
+        homeView.removeHeaderFooter();
+        initHome();
 
         await this.renderMessage('Data updated!', 'success', 2000);
 
@@ -101,6 +111,36 @@ class EditProfileView extends View {
       fileReader.readAsDataURL(file);
       fileReader.addEventListener('load', () => img.src = fileReader.result);
     })
+  }
+
+  async updatePassword(loginUser, password, updateUserPassword) {
+    try {
+      reAuthUser.showForm();
+      const emailPass = await reAuthUser.getReAuthInfo();
+      //hide form
+      reAuthUser.hideForm();
+
+      if (!emailPass) return
+
+      const { reAuthEmail: email, reAuthPass: pass } = emailPass;
+      
+      //if user cancel the process exit from fn
+      if (!email || !pass) return;
+
+      //login user again
+      console.log(email, pass);
+      const currUser = await loginUser(email, pass);
+
+      await this.renderMessage('Updating your password', 'success', 1500);
+
+      const isPassUpdated = await updateUserPassword(currUser, password);
+
+      console.log('sps');
+      if (isPassUpdated) await this.renderMessage('Password updated, you can now use your new password to login', 'success', 2000);
+
+    } catch (err) {
+      throw err
+    }
   }
 }
 

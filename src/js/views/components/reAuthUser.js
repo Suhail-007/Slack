@@ -1,7 +1,11 @@
 class reAuthUser {
   reAuthFormElem;
 
-  generateMarkup() {
+  renderData(render = true) {
+    if (!render) return this._generateMarkup();
+  }
+
+  _generateMarkup() {
     return `
       <div data-reAuthForm class='reAuth reAuth__cont closeForm'>
         <form class='reAuth__reAuthForm' data-reAuthPass>
@@ -38,10 +42,12 @@ class reAuthUser {
 
         if (e.target.classList.contains('cancel-btn')) {
           this.hideForm();
-          return reject();
+          return reject('Proccess canceled');
         }
       })
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      throw Error(`${err}`);
+    })
   }
 
   resetForm() {

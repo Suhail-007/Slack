@@ -1,5 +1,5 @@
 import View from './View.js';
-import FORM from './Form.js';
+import FORM from './components/Form.js';
 import { updateURL } from '../helper.js'
 import { defaultUserPic } from '../config.js'
 

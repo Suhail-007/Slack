@@ -1,5 +1,5 @@
 import View from '../View.js'
-import reAuthUser from '../reAuthUser.js'
+import reAuthUser from '../components/reAuthUser.js'
 import { chartTypes, defaultUserPic } from '../../config.js';
 import { updateURL } from '../../helper.js'
 import { theme } from '../../model.js';
@@ -105,7 +105,7 @@ class ProfileView extends View {
           <button type='button' data-cta='edit' class='btn btn-edit section__profile__buttons--edit'>Edit Profile</button>
           <button type='button' data-cta='delete' class='btn btn-delete section__profile__buttons--delete'>Delete Profile</button>
         </div>
-        ${reAuthUser.generateMarkup()}
+        ${reAuthUser.renderData(false)}
       </section>
       `
   }
@@ -168,7 +168,8 @@ class ProfileView extends View {
       const password = this._reAuthUserEmailPass?.reAuthPass;
 
       //if user cancel the process exit from fn
-      if (!this._reAuthUserEmailPass || !email || !password) return;
+      // if (!this._reAuthUserEmailPass || !email || !password) return;
+      if (!email || !password) return;
 
       await this.Delay(1000);
 
