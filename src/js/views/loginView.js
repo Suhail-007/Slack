@@ -102,7 +102,6 @@ class loginView extends View {
 
       await this.renderTab();
     } catch (err) {
-      console.log(err);
       await this.renderMessage(err, 'error', 2000);
     }
   }

@@ -111,11 +111,12 @@
 }
 
 .signup--login {
+  margin-inline: auto;
   font-size: 1.4rem;
 
   &>a {
     margin-left: .5rem;
-    color: var(--blue-primary);
+    color: var(--blue-primary); 
   }
 }
 

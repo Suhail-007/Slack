@@ -8,6 +8,7 @@ class ProfileView extends View {
   _parentElem = document.querySelector('main');
   _settingsElem;
   _reAuthUserEmailPass;
+  _edit = false;
 
   _generateMarkup() {
     const data = this._data.data;
@@ -109,8 +110,9 @@ class ProfileView extends View {
       `
   }
 
-  init(settings, deleteUserAndData, loginUser) {
-    this.#callToActionBtns(deleteUserAndData, loginUser);
+  init(settings, deleteUserAndData, loginUser, renderTab) {
+    this.#addHandlerSettings(settings);
+    this.#callToActionBtns(deleteUserAndData, loginUser, renderTab);
   }
 
   #addHandlerSettings(settings) {
@@ -137,13 +139,17 @@ class ProfileView extends View {
     }
   }
 
-  #callToActionBtns(deleteUserAndData, loginUser) {
+  #callToActionBtns(deleteUserAndData, loginUser, renderTab) {
     const btnsCont = document.querySelector('[data-btns-cont]');
 
     btnsCont.addEventListener('click', async e => {
       try {
         const btn = e.target.dataset.cta;
-        if (btn === 'edit') console.log('dj');
+        if (btn === 'edit') {
+          this._edit = true;
+          updateURL(`profileEdit&edit=${this._edit}`);
+          renderTab();
+        }
         if (btn === 'delete') await this.#deleteAccount(deleteUserAndData, loginUser);
       } catch (err) {
         throw err;

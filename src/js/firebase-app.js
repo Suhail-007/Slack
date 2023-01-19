@@ -15,9 +15,6 @@ import {
 import {
   getFirestore,
   collection,
-  addDoc,
-  getDocs,
-  getDoc,
   doc,
   deleteDoc,
   updateDoc,
@@ -84,6 +81,10 @@ export const createUserSendEmailVerif = async function(email, password) {
   } catch (err) {
     throw err
   }
+}
+
+export const updateUserData = function() {
+  
 }
 
 export const sendEmailVerif = async function() {

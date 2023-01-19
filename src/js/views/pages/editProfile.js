@@ -1,27 +1,28 @@
-import View from './View.js';
-import FORM from './Form.js';
-import { updateURL } from '../helper.js'
-import { defaultUserPic } from '../config.js'
+import View from '../View.js'
+import { updateURL } from '../../helper.js';
+import FORM from '../Form.js';
 
-class SignUpView extends View {
+class EditProfileView extends View {
   _parentElem = document.querySelector('main');
 
   _generateMarkup() {
     return `
-    <section class="form__section">
-      <div class="form__section__logo--lg">
-        <img class="form__section__img" loading='lazy' src="/src/images/m_logo.jpg" alt="Slack (website logo)">
-      </div>
-
-      <div class="form__container form__container--blur">
-
-        <h2 class="form__container__heading login__heading">Create Account</h2>
-        ${FORM('Sign up', defaultUserPic, 'block', 'required')}
-      </div>
+    <section class='section section__edit'>
+    <h2 class='u-letter-spacing-small u-margin-bottom-big section__edit__heading'>
+      Edit Your Profile
+    </h2>
+      ${FORM('Done', this._data.data.profilePic, 'none', 'value=""')}
     </section>`
   }
 
-  getSignInDetails(createUserSendEmailVerif, createUserData) {
+  async init() {
+    this.previewUserProfile();
+    // await this.Delay(1000)
+    // await this.renderMessage('Leave the fields empty which you do not wish to update.', 'def', 4000);
+    this.getEditDetails();
+  }
+
+  getEditDetails() {
     const form = document.querySelector('form');
     form.addEventListener('submit', async e => {
       try {
@@ -33,27 +34,27 @@ class SignUpView extends View {
 
         if (!isSame) throw Error('Passwords do not match');
         if (!isInputsCorrect) throw Error('Please enter full name');
+        this.updateUserInfo(fdObj);
 
-        await this.renderMessage('Creating your account', 'success', 1500);
-
-        const user = await createUserSendEmailVerif(fdObj.email, fdObj.password);
-
-        if (user) await this.renderMessage('Account created. Check your mail inbox/spam tab to verify your account', 'success', 1000);
-
-        //create user data in firebase database
-        const userData = await createUserData(user, fdObj);
-
-        if (userData) await this.renderMessage('User data created', 'success', 1500);
-
-        updateURL('_', true);
+        // updateURL('profile');
+        //renderTab();
       } catch (err) {
         await this.renderMessage(err, 'error', 3000);
       }
     })
   }
 
+  updateUserInfo(user) {
+    let updateUserInfo = {};
+    for (let key in user) {
+      if (user[key] !== '') updateUserInfo[key] = user[key];
+    }
+    console.log(updateUserInfo);
+  }
+
   isInputsCorrect(fdObj) {
     let { fullname } = fdObj;
+    if (!fullname) return true
     fullname = fullname.includes(' ');
     return fullname
   }
@@ -80,4 +81,4 @@ class SignUpView extends View {
   }
 }
 
-export default new SignUpView();
+export default new EditProfileView();
