@@ -26,7 +26,7 @@ class homeView extends View {
         <div class="header">
           <div class="website-logo-container">
             <div class="website-logo">
-              <img src="/src/images/m_logo.jpg" alt="Slack (website logo)">
+              <img src="./src/images/m_logo.jpg" alt="Slack (website logo)">
             </div>
             <p class="website_name">Slack</p>
           </div>
