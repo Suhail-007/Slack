@@ -47,7 +47,7 @@ export default class View {
     const sectionError = document.querySelector('.section__error');
     const errorMsgElem = sectionError.querySelector('p');
 
-    if (className === 'default') this.clear();
+    // if (className === 'default') this.clear();
 
     errorMsgElem.textContent = msg;
     sectionError.classList.add(className);

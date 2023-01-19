@@ -1,25 +1,23 @@
 .btn {
   border: none;
   border-radius: .5rem;
-  padding: 1rem 2rem;
+  padding: 1.5rem 4rem;
   font-size: 1.4rem;
   letter-spacing: 1;
   font-weight: 450;
   font-family: inherit;
   transform: translateY(0);
   cursor: pointer;
-  box-shadow: 0 .2rem .3rem 0 var(--shadow-alpha-six);
-  transition: box-shadow .2s ease-in-out,
-    transform .2s ease-in-out;
+  box-shadow: 0 .2rem .8rem 0 var(--shadow-alpha-six);
+  transition: all .2s ease-in-out;
 
   &:focus,
   &:hover {
-    box-shadow: 0 .4rem .6rem 0 var(--shadow-alpha-six);
     transform: translateY(-.1rem);
   }
 
   &:active {
-    box-shadow: 0 .4rem .6rem 0 var(--shadow-alpha-six);
+    box-shadow: 0 .4rem .3rem 0 var(--shadow-alpha-six);
     transform: translateY(.5rem);
   }
 
@@ -57,25 +55,37 @@
 
   &-light-blue {
     background: none;
-    border: none;
-    background-color: var(--blue-primary-alpha-five);
-    color: #fff;
-    padding: 1.5rem 2rem !important;
-    border-radius: 100px;
+    border: 2px solid var(--blue-primary-alpha-five);
+    color: var(--blue-primary);
     font-size: 1.5rem !important;
-    margin-block: 3.2rem;
-    transition: 500ms ease !important;
     opacity: 0;
     display: none;
+
+    &:hover,
+    &:focus {
+      background: var(--blue-primary-alpha-three);
+    }
   }
 
   &-edit {
-    background: var(--btn-green);
+    background: none;
+    border: 2px solid var(--btn-green);
     color: var(--btn-green-font);
+
+    &:hover,
+    &:focus {
+      background: var(--btn-green-alpha-five);
+    }
   }
 
   &-delete {
-    background: var(--error);
+    background: none;
+    border: 2px solid var(--error);
     color: red;
+
+    &:hover,
+    &:focus {
+      background: var(--error);
+    }
   }
 }

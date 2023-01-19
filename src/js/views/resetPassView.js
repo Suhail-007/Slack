@@ -26,7 +26,7 @@ class resetPassword extends View {
               <p class="section__error__msg"></p>
             </section>
             
-            <button class="form__btn login-btn" type="submit">Reset Password</button>
+            <button class="btn btn-light-blue form__btn" type="submit">Reset Password</button>
           </form>
         </div>
       </section>`
@@ -42,12 +42,16 @@ class resetPassword extends View {
     this._form.addEventListener('submit', async e => {
       try {
         e.preventDefault();
-        this.btnPressEffect(this._form);
-        await resetUserPass(this._form.email.value);
+        const email = this._form.email.value;
+        
+        if(!email) return await this.renderMessage('Yea, reset password mail has been sent to johndoe@mail.com xD', 'success', 3000);
+        
+        await resetUserPass(email);
         await this.renderMessage('Password reset mail has been sent to your mail', 'success', 3000);
         await this.Delay(2000);
         updateURL('_', true);
       } catch (err) {
+        console.log(err);
         await this.renderMessage(err, 'error', 2000);
       }
     })

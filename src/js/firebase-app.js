@@ -15,9 +15,6 @@ import {
 import {
   getFirestore,
   collection,
-  addDoc,
-  getDocs,
-  getDoc,
   doc,
   deleteDoc,
   updateDoc,
@@ -86,6 +83,16 @@ export const createUserSendEmailVerif = async function(email, password) {
   }
 }
 
+export const updateUserData = async function(field) {
+  try {
+    const user = doc(db, 'users', auth.currentUser.uid);
+    await updateDoc(user, field);
+  } catch (err) {
+    console.log(err);
+    throw err
+  }
+}
+
 export const sendEmailVerif = async function() {
   await sendEmailVerification(auth.currentUser);
 }
@@ -140,7 +147,7 @@ export const getUserDataAndUserPic = function(user) {
           resolve(true);
         }
         reject(false);
-      });
+      })
     })
     .catch(err => {
       throw Error(`User data not found, ${err}`)
@@ -149,7 +156,7 @@ export const getUserDataAndUserPic = function(user) {
 
 const imagesRef = ref(storage, 'images');
 
-const uploadPic = async function(user, file) {
+export const uploadPic = async function(user, file) {
   //it's like this inside of images folder create user(user.id) folder there create a file name(file param) and upload that file to server. i.e images/user/file(same name as user have saved)
   try {
     const profilePicRef = ref(storage, `images/${user}/${file.name}`);
@@ -183,6 +190,7 @@ export const deleteUserAndData = async function(user, currUser) {
     await deleteUserPic(user);
     await deleteUserDoc();
     await deleteUser(currUser);
+    return true;
   } catch (err) {
     throw err
   }
@@ -204,6 +212,7 @@ const deleteUserDoc = async function() {
     const currUser = auth.currentUser;
     await deleteDoc(doc(db, 'users', currUser.uid));
     unSubSnapShot();
+    unSubAuth();
   } catch (err) {
     throw err
   }

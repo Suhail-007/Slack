@@ -36,7 +36,7 @@ class loginView extends View {
           
           <a class='form-link reset-password' href='/'>Forget your password?</a>
           
-          <button class="btn form__btn" type="submit">Log in</button>
+          <button class="btn btn-light-blue form__btn" type="submit">Log in</button>
 
           <p class="form-link signup--login">Don't have account yet?<a data-signup='signup' href="/signup">Sign up</a></p>
         </form>
@@ -72,14 +72,13 @@ class loginView extends View {
 
       const user = await loginUser(email, password);
 
-      //send verification if email not verified
-      // if (!user.emailVerified) {
-      //   sendEmailVerif();
-
-      //   //signout the user 
-      //   signoutUser();
-      //   throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
-      // }
+      // send verification if email not verified
+      if (!user.emailVerified) {
+        sendEmailVerif();
+        //signout the user 
+        signoutUser();
+        throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
+      }
 
       await this.renderMessage('Getting user data', 'success', 2000);
 
@@ -102,7 +101,6 @@ class loginView extends View {
 
       await this.renderTab();
     } catch (err) {
-      console.log(err);
       await this.renderMessage(err, 'error', 2000);
     }
   }

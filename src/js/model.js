@@ -5,15 +5,15 @@ import homeView from './views/homeView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
 import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/pages/profileView.js';
+import EditProfileView from './views/pages/editProfile.js';
 import { chartTypes } from './config.js';
 import { updateURL, NAV_TOGGLE_BTN, setLocalStorage } from './helper.js';
-import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, signoutUser, authChanged, deleteUserAndData, unSubAuth } from './firebase-app.js';
+import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, signoutUser, authChanged, deleteUserAndData, unSubAuth, updateUserData, uploadPic } from './firebase-app.js';
 import chartView from './views/dashboard/chartView.js';
 
 export const theme = {
   mode: 'system default',
 }
-
 export const copyRefLink = async function(element) {
   await navigator.clipboard.writeText(element.innerText);
 }
@@ -33,7 +33,7 @@ const router = {
         await loginView.loader();
         await loginView.Delay(500);
         loginView.renderData(user);
-        if (wasLogin === true) loginView.renderMessage('Login again to access your account', 'error', 4000);
+        if (wasLogin) loginView.renderMessage('Login again to access your account', 'error', 4000);
         loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome);
         homeView.removeHeaderFooter();
       } catch (err) {
@@ -59,7 +59,7 @@ const router = {
       await resetPassView.loader();
       await resetPassView.Delay(1000);
       resetPassView.renderData('_');
-      resetPassView.init(deleteUserAndData);
+      resetPassView.init(resetUserPass);
     }
   },
 
@@ -84,32 +84,43 @@ const router = {
   'profile': {
     view: async function() {
       try {
-        /*********Temporary*********/
         scrollToTop();
-        /******************/
-
         await profileView.loader();
         await profileView.Delay(1000);
         profileView.renderData(user);
-        profileView.init(settings, deleteUserAndData, loginUser);
+        profileView.init(settings, deleteUserAndData, loginUser, renderTab);
       } catch (err) {
         console.log(err);
-        // profileView.renderMessage('Failed to load profile, try reloading ' + err, 'default', 10000);
+        profileView.renderMessage('Failed to load profile, try reloading ' + err, 'error', 3000);
+      }
+    }
+  },
+
+  'profileEdit': {
+    view: async function() {
+      try {
+        scrollToTop();
+        await EditProfileView.loader();
+        await EditProfileView.Delay(1000);
+        EditProfileView.renderData(user);
+        EditProfileView.init(updateUserData, renderTab, uploadPic);
+      } catch (err) {
+        console.log(err);
       }
     }
   }
 }
 
 export const renderTab = async function() {
-  const url = new URL(location.href);
-  const page = url.searchParams.get('page');
+  const { page } = getPage();
   const res = await authChanged(user);
 
-  //redirect user to login page if page reload and user not login in
+  //signout the user if user go back to login page
   if (page === null && res) signoutUser();
 
-  //get the user if user is not sign out and page refreshes/reload
-  if (!res && page != null && page !== 'signup') return updateURL('_', true);
+  //if user is signout and go back to dashboard redirect user to login page
+  if (!res && page != null && page !== 'signup' && page !== 'reset password') return updateURL('_', true);
+
   if (router[page]) await router[page].view();
 }
 
@@ -119,15 +130,16 @@ export const renderFromHistory = function() {
 
 export const windowLoad = function() {
   window.addEventListener('load', async () => {
-    const url = new URL(location.href);
-    const page = url.searchParams.get('page');
+    const { page } = getPage();
     const res = await authChanged(user);
 
-    if (page === null) return renderTab();
-
-    renderTab();
-    scrollToTop();
-    initHome();
+    if (page != null && res) {
+      renderTab();
+      scrollToTop();
+      initHome();
+      return
+    }
+    return renderTab();
   });
 }
 
@@ -142,6 +154,12 @@ const scrollToTop = function() {
     top: 0,
     behavior: 'smooth'
   });
+}
+
+const getPage = function() {
+  const url = new URL(location.href);
+  const page = url.searchParams.get('page');
+  return { page }
 }
 
 export const settings = function(e) {

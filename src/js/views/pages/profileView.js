@@ -7,7 +7,8 @@ import { theme } from '../../model.js';
 class ProfileView extends View {
   _parentElem = document.querySelector('main');
   _settingsElem;
-  _reAuthPass;
+  _reAuthUserEmailPass;
+  _edit = false;
 
   _generateMarkup() {
     const data = this._data.data;
@@ -109,8 +110,9 @@ class ProfileView extends View {
       `
   }
 
-  init(settings, deleteUserAndData, loginUser) {
-    this.#callToActionBtns(deleteUserAndData, loginUser);
+  init(settings, deleteUserAndData, loginUser, renderTab) {
+    this.#addHandlerSettings(settings);
+    this.#callToActionBtns(deleteUserAndData, loginUser, renderTab);
   }
 
   #addHandlerSettings(settings) {
@@ -137,16 +139,20 @@ class ProfileView extends View {
     }
   }
 
-  #callToActionBtns(deleteUserAndData, loginUser) {
+  #callToActionBtns(deleteUserAndData, loginUser, renderTab) {
     const btnsCont = document.querySelector('[data-btns-cont]');
 
     btnsCont.addEventListener('click', async e => {
       try {
         const btn = e.target.dataset.cta;
-        if (btn === 'edit') console.log('dj');
+        if (btn === 'edit') {
+          this._edit = true;
+          updateURL(`profileEdit&edit=${this._edit}`);
+          renderTab();
+        }
         if (btn === 'delete') await this.#deleteAccount(deleteUserAndData, loginUser);
       } catch (err) {
-        this.renderMessage(err.message, 'error', 2000);
+        throw err;
       }
     });
   }
@@ -154,25 +160,35 @@ class ProfileView extends View {
   async #deleteAccount(deleteUserAndData, loginUser) {
     try {
       reAuthUser.showForm();
-      this._reAuthPass = await reAuthUser.getReAuthPass();
+      this._reAuthUserEmailPass = await reAuthUser.getReAuthInfo();
+      //hide form
       reAuthUser.hideForm();
 
-      await this.Delay(2000);
+      const email = this._reAuthUserEmailPass?.reAuthEmail;
+      const password = this._reAuthUserEmailPass?.reAuthPass;
+
+      //if user cancel the process exit from fn
+      if (!this._reAuthUserEmailPass || !email || !password) return;
+
+      await this.Delay(1000);
 
       const userConfirmation = confirm('Are you sure you want to delete your account? once done this operation can\'t be reversed');
 
-      if (!userConfirmation) return this.renderMessage('Great You decided to stay :)', 'success', 3000);
+      if (!userConfirmation) return this.renderMessage('Great! You decided to stay :)', 'def', 5000);
 
       //login user again
-      const currUser = await loginUser(this._reAuthPass.reAuthEmail, this._reAuthPass.reAuthPass);
-      
-      await deleteUserAndData(this._data.data, currUser);
+      const currUser = await loginUser(email, password);
+
+      await this.renderMessage('Deleting your account', 'success', 1500);
+
+      const isDeleted = await deleteUserAndData(this._data.data, currUser);
+
+      if (isDeleted) await this.renderMessage('Account deleted, Redirecting to login page', 'success', 2000);
 
       //set wasLogin to false 
       localStorage.setItem('wasLogin', false);
       updateURL('_', true);
     } catch (err) {
-      console.log(err);
       throw err
     }
   }

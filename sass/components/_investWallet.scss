@@ -62,6 +62,8 @@
       & button.active {
         display: block;
         pointer-events: auto;
+        border-radius: 100px;
+        margin-block: 2rem;
         animation: showBtn 500ms linear forwards;
 
         &:hover,
