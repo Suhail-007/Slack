@@ -16,7 +16,7 @@ class SignUpView extends View {
       <div class="form__container form__container--blur">
 
         <h2 class="form__container__heading login__heading">Create Account</h2>
-        ${FORM('Sign up', defaultUserPic, 'block', 'required')}
+        ${FORM('Sign up', defaultUserPic, 'block', 'required', 'Password')}
       </div>
     </section>`
   }

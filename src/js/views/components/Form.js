@@ -1,4 +1,4 @@
-export default function FORM(buttonText, formPic, showLoginBtn, required) {
+export default function FORM(buttonText, formPic, showLoginBtn, required, passwordText) {
   return `
     <form class="signup__form">
     
@@ -16,10 +16,10 @@ export default function FORM(buttonText, formPic, showLoginBtn, required) {
       <label style='display:${showLoginBtn}' for="email">Email</label>
       <input style='display:${showLoginBtn}' class="input__label__input" placeholder="Email" ${required} type="email" id="email" name='email' />
 
-      <label for="password">Password</label>
+      <label for="password">${passwordText}</label>
       <input class="input__label__input" placeholder="Password@0" ${required} pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$' title='Password should contain a number, a capital letter, a small letter and a symbol' type="text" name="password" id="password">
 
-      <label for="Repassword">Retype Password (re-type your password)</label>
+      <label for="Repassword">re-Type ${passwordText} (re-type your password)</label>
       <input class="input__label__input" placeholder="Password@0" ${required} pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$' title='Password should contain a number, a capital letter, a small letter and a symbol' type="text" name="Repassword" id="Repassword">
       
       <label for="phone">Phone Number</label>

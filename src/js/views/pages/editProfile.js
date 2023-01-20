@@ -1,5 +1,6 @@
 import View from '../View.js'
 import { updateURL } from '../../helper.js';
+import { defaultUserPic } from '../../config.js';
 import FORM from '../components/Form.js';
 import reAuthUser from '../components/reAuthUser.js';
 
@@ -12,7 +13,7 @@ class EditProfileView extends View {
     <h2 class='u-letter-spacing-small u-margin-bottom-big section__edit__heading'>
       Edit Your Profile
     </h2>
-      ${FORM('Done', this._data.data.profilePic, 'none', 'value=""')}
+      ${FORM('Done', this.#setUserPic(this._data.data), 'none', 'value=""', 'New Password')}
       
       ${reAuthUser.renderData(false)}
     </section>`
@@ -46,7 +47,10 @@ class EditProfileView extends View {
         if (profilePic.name) await uploadPic(this._data.data.uid, profilePic);
 
         //checks if password fields aren't empty
-        if (filteredData.password) await this.updatePassword(loginUser, filteredData.password, updateUserPassword);
+        if (filteredData.password) {
+          const isUpdated = await this.updatePassword(loginUser, filteredData.password, updateUserPassword);
+          if (!isUpdated) return
+        }
 
         //remove & re render nav & footer
         homeView.removeHeaderFooter();
@@ -119,28 +123,32 @@ class EditProfileView extends View {
       const emailPass = await reAuthUser.getReAuthInfo();
       //hide form
       reAuthUser.hideForm();
-
-      if (!emailPass) return
+      //if user cancel the process exit from fn
+      if (!emailPass.reAuthEmail || !emailPass.reAuthPass) {
+        await this.renderMessage('we can\'t create something from nothing, can we? :)', 'error', 3000);
+        return false
+      }
 
       const { reAuthEmail: email, reAuthPass: pass } = emailPass;
-      
-      //if user cancel the process exit from fn
-      if (!email || !pass) return;
 
       //login user again
-      console.log(email, pass);
-      const currUser = await loginUser(email, pass);
 
       await this.renderMessage('Updating your password', 'success', 1500);
 
       const isPassUpdated = await updateUserPassword(currUser, password);
 
-      console.log('sps');
-      if (isPassUpdated) await this.renderMessage('Password updated, you can now use your new password to login', 'success', 2000);
+      if (isPassUpdated) {
+        await this.renderMessage('Password updated, you can now use your new password to login', 'success', 2000);
+        return true
+      }
 
     } catch (err) {
       throw err
     }
+  }
+
+  #setUserPic(user) {
+    return user.profilePic ? user.profilePic : defaultUserPic;
   }
 }
 

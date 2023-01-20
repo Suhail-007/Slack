@@ -2,7 +2,6 @@ import View from '../View.js'
 import reAuthUser from '../components/reAuthUser.js'
 import { chartTypes, defaultUserPic } from '../../config.js';
 import { updateURL } from '../../helper.js'
-import { theme } from '../../model.js';
 
 class ProfileView extends View {
   _parentElem = document.querySelector('main');
@@ -124,7 +123,7 @@ class ProfileView extends View {
     value = value.toLowerCase();
 
     if (selectOption === 'theme') {
-      const selectedTheme = theme.mode;
+      const selectedTheme = this._data.themeMode;
       if (selectedTheme === value) return 'selected';
     }
 
@@ -164,11 +163,10 @@ class ProfileView extends View {
       //hide form
       reAuthUser.hideForm();
 
-      const email = this._reAuthUserEmailPass?.reAuthEmail;
-      const password = this._reAuthUserEmailPass?.reAuthPass;
+      const email = this._reAuthUserEmailPass.reAuthEmail;
+      const password = this._reAuthUserEmailPass.reAuthPass;
 
       //if user cancel the process exit from fn
-      // if (!this._reAuthUserEmailPass || !email || !password) return;
       if (!email || !password) return;
 
       await this.Delay(1000);

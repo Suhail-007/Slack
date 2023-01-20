@@ -50,7 +50,7 @@ const storage = getStorage();
 export const db = getFirestore(firebaseApp);
 const auth = getAuth();
 
-let unSubSnapShot;
+export let unSubSnapShot;
 export let unSubAuth;
 
 // const analytics = getAnalytics(firebaseApp);
@@ -115,9 +115,11 @@ export const updateUserPassword = async function(user, password) {
   }
 }
 
-export const signoutUser = async function() {
+export const logoutUser = async function() {
   try {
     await signOut(auth);
+    unSubAuth();
+    unSubSnapShot();
   } catch (err) {
     throw err
   }

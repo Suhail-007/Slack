@@ -44,27 +44,27 @@ class loginView extends View {
     </section>`
   }
 
-  init(router, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome) {
+  init(router, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome) {
     this._form = document.querySelector('form');
     this.setTitle('Log In || Slack');
     this.renderTab = router;
     this.isFocus(this._form);
-    this.getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome);
+    this.getLoginCredentials(loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
     this.formLinkRedirects();
     this.togglePasswordInputType();
   }
 
-  getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome) {
+  getLoginCredentials(loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome) {
     this._form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(this._form)];
       const userObj = Object.fromEntries(fd);
 
-      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome);
+      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
     })
   }
 
-  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome) {
+  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome) {
     try {
       const { email, password } = userObj;
 
@@ -76,7 +76,7 @@ class loginView extends View {
       if (!user.emailVerified) {
         sendEmailVerif();
         //signout the user 
-        signoutUser();
+        logoutUser();
         throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
       }
 
