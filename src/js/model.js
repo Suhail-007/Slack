@@ -47,8 +47,7 @@ const router = {
     view: async function() {
       try {
         signUpView.renderData(user);
-        signUpView.getSignInDetails(createUserSendEmailVerif, createUserData);
-        signUpView.previewUserProfile();
+        signUpView.init(createUserSendEmailVerif, createUserData);
       } catch (err) {
         signUpView.renderMessage(err, 'success')
       }
@@ -71,6 +70,7 @@ const router = {
 
         await dashboardView.loader();
         await dashboardView.Delay(1000);
+        dashboardView.setTitle('Dashboard || Slack');
         dashboardView.renderData(user);
         chartView.createChart();
 

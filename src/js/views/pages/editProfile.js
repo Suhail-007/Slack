@@ -20,7 +20,8 @@ class EditProfileView extends View {
   }
 
   async init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
-    // await this.renderMessage('Leave the fields empty which you do not wish to update.', 'def', 4000);
+    this.setTitle('Edit User Information || Slack')
+    await this.renderMessage('Leave the fields empty which you do not wish to update.', 'def', 4000);
     this.getEditDetails(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
     this.previewUserProfile();
   }

@@ -20,6 +20,12 @@ class SignUpView extends View {
       </div>
     </section>`
   }
+  
+  init(createUserSendEmailVerif, createUserData) {
+    this.setTitle('Sign up || Slack');
+    this.getSignInDetails(createUserSendEmailVerif, createUserData);
+    this.previewUserProfile();
+  }
 
   getSignInDetails(createUserSendEmailVerif, createUserData) {
     const form = document.querySelector('form');

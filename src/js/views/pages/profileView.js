@@ -110,6 +110,7 @@ class ProfileView extends View {
   }
 
   init(settings, deleteUserAndData, loginUser, renderTab) {
+    this.setTitle('Profile || Slack');
     this.#addHandlerSettings(settings);
     this.#callToActionBtns(deleteUserAndData, loginUser, renderTab);
   }
