@@ -149,7 +149,7 @@ class EditProfileView extends View {
   }
 
   #setUserPic(user) {
-    return user.profilePic ? user.profilePic : defaultUserPic;
+    return user.extraInfo.profilePic ? user.extraInfo.profilePic : defaultUserPic;
   }
 }
 

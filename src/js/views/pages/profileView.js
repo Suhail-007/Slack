@@ -29,30 +29,7 @@ class ProfileView extends View {
     
         <div class="profile__info">
           <h3 class="tab-heading u-letter-spacing-small">User Info</h3>
-          <div>
-            <p>Gender</p>
-            <p>${data.gender}</p>
-          </div>
-          <div>
-            <p>Birthday</p>
-            <p>${data.dob}</p>
-          </div>
-          <div>
-            <p>City</p>
-            <p>${data.state}</p>
-          </div>
-          <div>
-            <p>Country</p>
-            <p>${data.country}</p>
-          </div>
-          <div>
-            <p>Phone Number</p>
-            <p>${data.phone}</p>
-          </div>
-          <div>
-            <p>Email</p>
-            <p class="email">${data.userEmail}</p>
-          </div>
+          ${this.userInfo(data)}
         </div>
     
         <hr>
@@ -62,7 +39,7 @@ class ProfileView extends View {
             
           <div>
             <h4>Theme Mode</h4>
-            <div>
+            <div class='u-LineBar'>
               <label for="theme">Theme</label>
               <select data-select='theme' name="theme" id="theme">
                 <option ${this.#isSelectedValue('system default')} value="system default">system default</option>
@@ -74,7 +51,7 @@ class ProfileView extends View {
     
           <div>
             <h4 class="u-letter-spacing-small">Chart Settings</h4>
-            <div>
+            <div class='u-LineBar'>
               <label for="chartOne">Chart 1</label>
               <select data-select='chartOne' name="chartOne" id="chartOne">
                 <option ${this.#isSelectedValue('doughtnut', 'chartOne')} value="doughnut">Doughnut</option>
@@ -84,7 +61,7 @@ class ProfileView extends View {
               </select>
             </div>
               
-            <div>
+            <div class='u-LineBar'>
               <label for="chartTwo">Chart 2</label>
               <select data-select='chartTwo' name="chartTwo" id="chartTwo">
                 <option ${this.#isSelectedValue('line', 'chartTwo')} value="line">Line</option>
@@ -107,6 +84,24 @@ class ProfileView extends View {
         ${reAuthUser.renderData(false)}
       </section>
       `
+  }
+
+  userInfo(user) {
+    const arr = [];
+     for (let key in user) {
+       if(typeof user[key] === 'object' && !Array.isArray(user[key]) || key === 'fullname') continue
+      arr.push(this.LineBar(key, user[key]));
+    }
+    return arr.sort().join('');
+  }
+
+  LineBar(catNam, category) {
+    return `
+      <div class='u-LineBar'>
+        <p>${catNam}</p>
+        <p>${category}</p>
+      </div>
+    `
   }
 
   init(settings, deleteUserAndData, loginUser, renderTab) {
@@ -194,7 +189,7 @@ class ProfileView extends View {
   }
 
   #setUserPic(user) {
-    return user.profilePic ? user.profilePic : defaultUserPic;
+    return user.extraInfo.profilePic ? user.extraInfo.profilePic : defaultUserPic;
   }
 }
 

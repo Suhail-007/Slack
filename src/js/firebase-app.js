@@ -130,15 +130,18 @@ export const createUserData = async function(user, formData) {
   try {
     await setDoc(doc(db, 'users', user.uid), {
       fullname: formData.fullname,
-      profilePicName: formData.profile.name,
-      userEmail: formData.email,
-      uid: user.uid,
-      phone: formData.countryCode + formData.phone,
+      email: formData.email,
+      contact: formData.countryCode + formData.phone,
       dob: formData.dob,
       state: formData.state,
       country: formData.country,
       gender: formData.gender,
-      profilePic: '',
+
+      extraInfo: {
+        profilePicName: formData.profile.name,
+        profilePic: '',
+        uid: user.uid,
+      }
     });
 
     //if theres no profile don't upload it to servers
@@ -183,13 +186,13 @@ export const uploadPic = async function(user, file) {
 
 export const getUserImage = async function(user) {
   try {
+    const { uid, profilePicName : name } = user.extraInfo;
     //if there's no profie pic name ref in user return & use default profile
-    if (user.profilePicName === '') return
+    if (name === '') return
 
-    const profilePicRef = ref(storage, `images/${user.uid}/${user.profilePicName}`);
-
+    const profilePicRef = ref(storage, `images/${uid}/${name}`);
     //user obj model.js
-    user.profilePic = await getDownloadURL(profilePicRef);
+    user.extraInfo.profilePic = await getDownloadURL(profilePicRef);
 
   } catch (err) {
     console.log(err);
@@ -210,9 +213,11 @@ export const deleteUserAndData = async function(user, currUser) {
 
 const deleteUserPic = async function(user) {
   try {
-    if (!user.profilePic && !user.profilePicName) return;
+    const { uid, profilePic, profilePicName : name } = user.extraInfo;
+    
+    if (!profilePic && !name) return;
 
-    const profilePicRef = ref(storage, `images/${user.uid}/${user.profilePicName}`);
+    const profilePicRef = ref(storage, `images/${uid}/${name}`);
     await deleteObject(profilePicRef);
   } catch (err) {
     throw err
