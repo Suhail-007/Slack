@@ -46,7 +46,7 @@ class FundTransferView extends View {
         </div>
       </div>
     </section>`;
-    }
+  }
 
   _toastCopy() {
     const body = document.body;
@@ -101,7 +101,8 @@ class FundTransferView extends View {
     const fundActionBtns = document.querySelectorAll('[data-addWithdraw-btns] button');
 
     this._btnsCont.addEventListener('click', e => {
-      if (e.target.closest('[data-investWallet-btns]')) {
+      if (e.target.closest('[data-investWallet-btns]') && !e.target.classList.contains('active')) {
+        
         //add withdraw funds and add withdraw tabs
         this._toggleClass(Array.from(btns), 'active');
 

@@ -186,11 +186,12 @@ export const uploadPic = async function(user, file) {
 
 export const getUserImage = async function(user) {
   try {
-    const { uid, profilePicName : name } = user.extraInfo;
+    const { uid, profilePicName: name } = user.extraInfo;
     //if there's no profie pic name ref in user return & use default profile
     if (name === '') return
 
     const profilePicRef = ref(storage, `images/${uid}/${name}`);
+
     //user obj model.js
     user.extraInfo.profilePic = await getDownloadURL(profilePicRef);
 
@@ -213,8 +214,8 @@ export const deleteUserAndData = async function(user, currUser) {
 
 const deleteUserPic = async function(user) {
   try {
-    const { uid, profilePic, profilePicName : name } = user.extraInfo;
-    
+    const { uid, profilePic, profilePicName: name } = user.extraInfo;
+
     if (!profilePic && !name) return;
 
     const profilePicRef = ref(storage, `images/${uid}/${name}`);

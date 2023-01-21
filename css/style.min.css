@@ -83,6 +83,12 @@
 html {
   /* 1REM === 10PX */
   font-size: 62.5%;
+  /* 1REM === 5px*/
+}
+@media only screen and (max-width: 21.9em) {
+  html {
+    font-size: 45%;
+  }
 }
 
 body {
