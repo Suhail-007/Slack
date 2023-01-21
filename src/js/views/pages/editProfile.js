@@ -13,7 +13,7 @@ class EditProfileView extends View {
     <h2 class='u-letter-spacing-small u-margin-bottom-big section__edit__heading'>
       Edit Your Profile
     </h2>
-      ${FORM('Done', this.#setUserPic(this._data.data), 'none', 'value=""', 'New Password')}
+      ${FORM.render('Done', this.#setUserPic(this._data.data), 'none', 'value=""', 'New Password')}
       
       ${reAuthUser.renderData(false)}
     </section>`

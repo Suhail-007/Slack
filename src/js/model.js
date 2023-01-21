@@ -66,7 +66,7 @@ const router = {
   'dashboard': {
     view: async function() {
       try {
-        scrollToTop();
+        // scrollToTop();
 
         await dashboardView.loader();
         await dashboardView.Delay(1000);
@@ -85,7 +85,7 @@ const router = {
   'profile': {
     view: async function() {
       try {
-        scrollToTop();
+        // scrollToTop();
         await profileView.loader();
         await profileView.Delay(1000);
         profileView.renderData(user);
@@ -100,7 +100,7 @@ const router = {
   'profileEdit': {
     view: async function() {
       try {
-        scrollToTop();
+        // scrollToTop();
         await editProfileView.loader();
         await editProfileView.Delay(1000);
         editProfileView.renderData(user);
@@ -126,6 +126,8 @@ export const renderTab = async function() {
   const { page } = getPage();
   const res = await authChanged(user);
 
+  //scroll to top of every section
+  scrollToTop();
   //signout the user if user go back to login page
   if (page === null && res) logoutUser();
 

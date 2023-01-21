@@ -38,7 +38,7 @@ class loginView extends View {
           
           <button class="btn btn-light-blue form__btn" type="submit">Log in</button>
 
-          <p class="form-link signup--login">Don't have account yet?<a data-signup='signup' href="/signup">Sign up</a></p>
+          <p class="form-link signup--login">Don't have account yet?<a data-signup='signup' href=''>Sign up</a></p>
         </form>
       </div>
     </section>`
@@ -73,12 +73,12 @@ class loginView extends View {
       const user = await loginUser(email, password);
 
       // send verification if email not verified
-      // if (!user.emailVerified) {
-      //   sendEmailVerif();
-      //   //signout the user 
-      //   logoutUser();
-      //   throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
-      // }
+      if (!user.emailVerified) {
+        sendEmailVerif();
+        //signout the user 
+        logoutUser();
+        throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
+      }
 
       await this.renderMessage('Getting user data', 'success', 2000);
 
