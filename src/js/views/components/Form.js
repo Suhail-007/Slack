@@ -7,7 +7,7 @@ class FORM {
       
         <div class="signup__form__profile">
           <div class="signup__form__profile__fake">
-            <img class='dp' data-img-preview loading='lazy' src="${formPic}"/>
+            <img class='dp' data-img-preview loading='lazy' src="./${formPic}"/>
           </div>
           <label for="profile">Choose a profile pic</label>
           <input accept="image/png image/jpg image/jpeg" id="profile" type="file" name="profile">
