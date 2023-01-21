@@ -58,7 +58,7 @@ class FORM {
     const formLink = document.querySelector('[data-link]');
     formLink.addEventListener('click', e => {
       e.preventDefault();
-      updateURL(toWhere, login);
+      updateURL(toWhere, home);
     })
   }
 }
