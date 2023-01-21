@@ -20,7 +20,7 @@ class SignUpView extends View {
       </div>
     </section>`
   }
-  
+
   init(createUserSendEmailVerif, createUserData) {
     this.setTitle('Sign up || Slack');
     this.getSignInDetails(createUserSendEmailVerif, createUserData);
@@ -35,11 +35,10 @@ class SignUpView extends View {
         e.preventDefault();
         const fd = new FormData(form);
         const fdObj = Object.fromEntries(fd);
-        const isSame = this.#isPasswordsSame(fdObj);
-        const isInputsCorrect = this.isInputsCorrect(fdObj);
+        const { fullname, isPassSame } = this.isInputsCorrect(fdObj);
 
-        if (!isSame) throw Error('Passwords do not match');
-        if (!isInputsCorrect) throw Error('Please enter full name');
+        if (!fullname) throw Error('Please enter full name');
+        if (!isPassSame) throw Error('Passwords do not match');
 
         await this.renderMessage('Creating your account', 'success', 1500);
 
@@ -60,17 +59,17 @@ class SignUpView extends View {
   }
 
   isInputsCorrect(fdObj) {
-    let { fullname } = fdObj;
-    fullname = fullname.includes(' ');
-    return fullname
-  }
+    let { fullname, password, Repassword: rePassword } = fdObj;
 
-  #isPasswordsSame(fdObj) {
-    let { password, Repassword: rePassword } = fdObj;
+    //check if user enter fullname
+    fullname = fullname.includes(' ');
+
+    //check if passwords is same
     password = password.split('');
     rePassword = rePassword.split('');
-    const isSame = password.every((l, i) => rePassword[i] === l);
-    return isSame
+    const isPassSame = password.every((l, i) => rePassword[i] === l);
+    console.log(fullname, isPassSame);
+    return { fullname, isPassSame }
   }
 
   previewUserProfile() {

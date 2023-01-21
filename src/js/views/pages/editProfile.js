@@ -13,7 +13,7 @@ class EditProfileView extends View {
     <h2 class='u-letter-spacing-small u-margin-bottom-big section__edit__heading'>
       Edit Your Profile
     </h2>
-      ${FORM.render('Done', this.#setUserPic(this._data.data), 'none', 'value=""', 'New Password')}
+      ${FORM.render('Done', `./${this.#setUserPic(this._data.data)}`, 'none', 'value=""', 'New Password')}
       
       ${reAuthUser.renderData(false)}
     </section>`
@@ -33,11 +33,10 @@ class EditProfileView extends View {
         e.preventDefault();
         const fd = new FormData(form);
         const fdObj = Object.fromEntries(fd);
-        const isSame = this.#isPasswordsSame(fdObj);
-        const isInputsCorrect = this.isInputsCorrect(fdObj);
+        const { fullname, isPassSame } = this.isInputsCorrect(fdObj);
 
-        if (!isSame) throw Error('Passwords do not match');
-        if (!isInputsCorrect) throw Error('Please enter full name');
+        if (!fullname) throw Error('Please enter full name');
+        if (!isPassSame) throw Error('Passwords do not match');
 
         await this.renderMessage('Updating user data', 'success', 2000);
 
@@ -91,18 +90,16 @@ class EditProfileView extends View {
   }
 
   isInputsCorrect(fdObj) {
-    let { fullname } = fdObj;
-    if (!fullname) return true
-    fullname = fullname.includes(' ');
-    return fullname
-  }
+    let { fullname, password, Repassword: rePassword } = fdObj;
 
-  #isPasswordsSame(fdObj) {
-    let { password, Repassword: rePassword } = fdObj;
+    //check if user enter fullname
+    fullname = fullname.includes(' ');
+
+    //check if passwords is same
     password = password.split('');
     rePassword = rePassword.split('');
-    const isSame = password.every((l, i) => rePassword[i] === l);
-    return isSame
+    const isPassSame = password.every((l, i) => rePassword[i] === l);
+    return { fullname, isPassSame }
   }
 
   previewUserProfile() {
