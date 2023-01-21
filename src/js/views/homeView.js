@@ -6,7 +6,7 @@ class homeView extends View {
 
   async generateHomeMarkup(data) {
     this._data = data.data;
-    this._parentElem.insertAdjacentHTML('beforebegin', this.generateHeaderMarkup());
+    this._parentElem.insertAdjacentHTML('afterbegin', this.generateHeaderMarkup());
     this._parentElem.insertAdjacentHTML('beforeend', this.generateFooterMarkup());
   }
 

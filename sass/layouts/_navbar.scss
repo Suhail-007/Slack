@@ -25,6 +25,8 @@
     opacity: 1;
     pointer-events: auto;
   }
+  
+  
 
   &>ul {
     list-style: none;
@@ -93,9 +95,11 @@
   }
 
   &_username {
-    font-weight: bold;
+    font-weight: 300;
     color: var(--font-primary);
     margin-right: 1rem;
+    font-size: 1.2rem;
+    align-self: end;
   }
 
   &_profile {

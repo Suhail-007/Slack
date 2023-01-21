@@ -38,7 +38,7 @@
 
   &-1 {
     background: var(--purple-primary-alpha-five);
-    box-shadow: .2rem .2rem 1.4rem 0 var(--purple-primary-alpha-seven), .1rem .1rem 1.5rem 0 var(--shadow-alpha-three);
+    box-shadow: .5rem .5rem 1rem 0 var(--purple-primary-alpha-seven), .1rem .1rem 1.5rem 0 var(--shadow-alpha-three);
 
     &::before {
       background: linear-gradient(var(--purple-primary), rgba(255, 255, 255, 0.3));
@@ -56,7 +56,7 @@
 
   &-2 {
     background: var(--bg-primary-alpha-six);
-    box-shadow: .2rem .2rem 1.4rem 0 var(--bg-primary), .1rem .1rem 1.5rem 0 var(--shadow-alpha-five);
+    box-shadow: .5rem .5rem 1rem 0  var(--bg-primary);
 
     &::before {
       background: linear-gradient(var(--dark-bg-primary-alpha-eight), rgba(255, 255, 255, 0.3));
@@ -73,7 +73,7 @@
 
   &-3 {
     background: var(--cyan-primary-alpha-three);
-    box-shadow: .2rem .2rem 1.4rem 0px var(--cyan-primary-alpha-seven), .1rem .1rem 1.5rem 0 var(--shadow-alpha-three);
+    box-shadow: .5rem .5rem 1rem 0 var(--cyan-primary-alpha-seven), .1rem .1rem 1.5rem 0 var(--shadow-alpha-three);
 
     &::before {
       top: 50%;
@@ -88,7 +88,7 @@
 
   &-4 {
     background: var(--silver-primary);
-    box-shadow: .2rem .2rem 1rem 0 var(--dark-silver-primary);
+    box-shadow: .5rem .5rem 1rem 0 var(--dark-silver-primary);
 
     &::before {
       top: 70%;

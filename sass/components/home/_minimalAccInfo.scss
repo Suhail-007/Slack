@@ -14,7 +14,7 @@
 
 .total_cont {
   background: linear-gradient(360deg, var(--purple-primary), var(--purple-primary-alpha-four));
-  box-shadow: 0px 5px 1.5rem 0px var(--purple-primary-alpha-seven), 5px 0px 1.5rem 0px var(--purple-primary-alpha-seven);
+  box-shadow: .5rem .5rem 1rem 0 var(--purple-primary-alpha-seven);
 
   & div:first-child>svg {
     fill: var(--purple-primary);
@@ -23,7 +23,7 @@
 
 .wallet_cont {
   background: linear-gradient(360deg, var(--blue-secondary), var(--blue-secondary-alpha-four));
-  box-shadow: 0px 5px 1.5rem 0px var(--blue-secondary-alpha-seven), 5px 0px 1.5rem 0px var(--blue-secondary-alpha-seven);
+  box-shadow: .5rem .5rem 1rem 0 var(--blue-secondary-alpha-seven);
 
   & div:first-child {}
 
@@ -34,7 +34,7 @@
 
 .withdrawal_cont {
   background: linear-gradient(360deg, var(--cyan-primary), var(--cyan-primary-alpha-four));
-  box-shadow: 0px 5px 1.5rem 0px var(--cyan-primary-alpha-seven), 5px 0px 1.5rem 0px var(--cyan-primary-alpha-seven);
+  box-shadow: .5rem .5rem 1rem 0 var(--cyan-primary-alpha-seven);
 
   & div:first-child>svg {
     fill: var(--cyan-primary);

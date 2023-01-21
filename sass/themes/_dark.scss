@@ -1,6 +1,6 @@
 .dark {
   /*Primary Values*/
-  --bg-primary: black;
+  --bg-primary: hsla(222, 61%, 6%, 1) !important;
   --bg-footer: #232323;
 
   /*Secondary Values*/
@@ -56,6 +56,6 @@
 
   /*Font Colors*/
   --font-primary: #fff;
-  
+
   --error: hsla(0, 81%, 79%, .9);
 }
