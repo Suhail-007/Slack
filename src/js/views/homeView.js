@@ -6,7 +6,7 @@ class homeView extends View {
 
   async generateHomeMarkup(data) {
     this._data = data.data;
-    this._parentElem.insertAdjacentHTML('beforebegin', this.generateHeaderMarkup());
+    this._parentElem.insertAdjacentHTML('afterbegin', this.generateHeaderMarkup());
     this._parentElem.insertAdjacentHTML('beforeend', this.generateFooterMarkup());
   }
 
@@ -26,16 +26,16 @@ class homeView extends View {
         <div class="header">
           <div class="website-logo-container">
             <div class="website-logo">
-              <img src="/src/images/m_logo.jpg" alt="Slack (website logo)">
+              <img src="./src/images/m_logo.jpg" alt="Slack (website logo)">
             </div>
             <p class="website_name">Slack</p>
           </div>
     
           <!----this is for desktop version---->
           <div class=" user_profile_container user_profile_container_desktop hidden">
-            <p class="username"><a href='/profile'>${this._data.fullname}</a></p>
+            <p data-username class="username"><a href='/profile'>${this._data.fullname}</a></p>
             <div class="user_profile">
-              <img class='dp' loading="lazy" src="${this.#setUserPic(this._data.profilePic)}" alt="user profile">
+              <img data-profile-img class='dp' loading="lazy" src="${this.#setUserPic(this._data.extraInfo)}" alt="user profile">
             </div>
           </div>
         </div>
@@ -49,9 +49,9 @@ class homeView extends View {
     
           <nav class="navbar" data-nav>
             <div data-nav='profile' class="user-profile-container user-profile-container_mob nav-link">
-              <p class="user-profile-container_username">${this._data.fullname}</p>
+              <p data-username class="user-profile-container_username">${this._data.fullname}</p>
               <div class="user-profile-container_profile">
-                <img class='dp' loading="lazy" src="${this.#setUserPic(this._data)}" alt="user profile">
+                <img data-profile-img class='dp' loading="lazy" src="${this.#setUserPic(this._data.extraInfo)}" alt="user profile">
               </div>
             </div>
     

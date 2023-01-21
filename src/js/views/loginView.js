@@ -24,7 +24,7 @@ class loginView extends View {
           
           <div class="input__label">
             <svg data-show-password class='sm-svg input__label__password'>
-              <use href="../src/images/icons.svg#icon-eye-slash"></use>
+              <use href="./src/images/icons.svg#icon-eye-slash"></use>
             </svg>
             <input class="input__label__input" type='password' name='password' id='password'>
             <label class="input__label__label" for="password">Password</label>
@@ -38,33 +38,33 @@ class loginView extends View {
           
           <button class="btn btn-light-blue form__btn" type="submit">Log in</button>
 
-          <p class="form-link signup--login">Don't have account yet?<a data-signup='signup' href="/signup">Sign up</a></p>
+          <p class="form-link signup--login">Don't have account yet?<a data-signup='signup' href=''>Sign up</a></p>
         </form>
       </div>
     </section>`
   }
 
-  init(router, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome) {
+  init(router, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome) {
     this._form = document.querySelector('form');
     this.setTitle('Log In || Slack');
     this.renderTab = router;
     this.isFocus(this._form);
-    this.getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome);
+    this.getLoginCredentials(loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
     this.formLinkRedirects();
     this.togglePasswordInputType();
   }
 
-  getLoginCredentials(loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome) {
+  getLoginCredentials(loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome) {
     this._form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(this._form)];
       const userObj = Object.fromEntries(fd);
 
-      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome);
+      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
     })
   }
 
-  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome) {
+  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome) {
     try {
       const { email, password } = userObj;
 
@@ -76,7 +76,7 @@ class loginView extends View {
       if (!user.emailVerified) {
         sendEmailVerif();
         //signout the user 
-        signoutUser();
+        logoutUser();
         throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
       }
 
@@ -146,11 +146,11 @@ class loginView extends View {
       switch (inputPassElem.type) {
         case 'password':
           inputPassElem.setAttribute('type', 'text');
-          useElem.setAttribute('href', '../src/images/icons.svg#icon-eye');
+          useElem.setAttribute('href', './src/images/icons.svg#icon-eye');
           break;
         case 'text':
           inputPassElem.setAttribute('type', 'password');
-          useElem.setAttribute('href', '../src/images/icons.svg#icon-eye-slash');
+          useElem.setAttribute('href', './src/images/icons.svg#icon-eye-slash');
           break
         default:
           return

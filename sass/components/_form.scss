@@ -29,8 +29,8 @@
   width: 100%;
   display: grid;
   transform: translateY(-4rem);
-  border-radius: 2rem 2rem 0 0;
-  border-top: 1px solid #CACACA;
+  border-radius: 3.5rem 3.5rem 0 0;
+  border-top: .5px solid #CACACA;
 
   //blur effecr for form 
   &--blur {
@@ -51,7 +51,7 @@
     width: 100%;
     font-family: inherit;
     font-size: 1.3rem;
-    padding: .8rem .8rem .8rem 1.3rem;
+    padding: 1rem 1rem 1rem 1.3rem;
     border: none;
     border-radius: 2px;
     outline: .5px solid var(--font-primary);
@@ -72,12 +72,12 @@
     position: absolute;
     top: 0;
     font-size: 1.3rem;
-    margin-left: 1.3rem;
+    margin-left: 1.4rem;
     letter-spacing: 1px;
     transition: all .3s;
     padding-inline: .5rem;
     color: var(--grey-light);
-    transform: translateY(.8rem) scale(1);
+    transform: translateY(1rem) scale(1);
   }
 
   &__input:focus+&__label {

@@ -3,17 +3,18 @@ import signUpView from './views/signupView.js';
 import resetPassView from './views/resetPassView.js';
 import homeView from './views/homeView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
+import { chartTypes } from './config.js';
+import chartView from './views/dashboard/chartView.js';
 import fundTransferView from './views/dashboard/renderReferralTransferView.js';
 import profileView from './views/pages/profileView.js';
-import EditProfileView from './views/pages/editProfile.js';
-import { chartTypes } from './config.js';
-import { updateURL, NAV_TOGGLE_BTN, setLocalStorage } from './helper.js';
-import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, signoutUser, authChanged, deleteUserAndData, unSubAuth, updateUserData, uploadPic } from './firebase-app.js';
-import chartView from './views/dashboard/chartView.js';
+import editProfileView from './views/pages/editProfile.js';
+import logoutUserView from './views/pages/logout.js';
 
-export const theme = {
-  mode: 'system default',
-}
+
+import { updateURL, NAV_TOGGLE_BTN, setLocalStorage } from './helper.js';
+import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, logoutUser, authChanged, deleteUserAndData, unSubAuth, unSubSnapShot, updateUserData, uploadPic, updateUserPassword } from './firebase-app.js';
+
+
 export const copyRefLink = async function(element) {
   await navigator.clipboard.writeText(element.innerText);
 }
@@ -33,8 +34,8 @@ const router = {
         await loginView.loader();
         await loginView.Delay(500);
         loginView.renderData(user);
-        if (wasLogin) loginView.renderMessage('Login again to access your account', 'error', 4000);
-        loginView.init(renderTab, loginUser, sendEmailVerif, signoutUser, getUserDataAndUserPic, initHome);
+        loginAgainMessage();
+        loginView.init(renderTab, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
         homeView.removeHeaderFooter();
       } catch (err) {
         loginView.renderMessage(err, 'error', 4000)
@@ -46,8 +47,7 @@ const router = {
     view: async function() {
       try {
         signUpView.renderData(user);
-        signUpView.getSignInDetails(createUserSendEmailVerif, createUserData);
-        signUpView.previewUserProfile();
+        signUpView.init(createUserSendEmailVerif, createUserData);
       } catch (err) {
         signUpView.renderMessage(err, 'success')
       }
@@ -66,10 +66,11 @@ const router = {
   'dashboard': {
     view: async function() {
       try {
-        scrollToTop();
+        // scrollToTop();
 
         await dashboardView.loader();
         await dashboardView.Delay(1000);
+        dashboardView.setTitle('Dashboard || Slack');
         dashboardView.renderData(user);
         chartView.createChart();
 
@@ -84,7 +85,7 @@ const router = {
   'profile': {
     view: async function() {
       try {
-        scrollToTop();
+        // scrollToTop();
         await profileView.loader();
         await profileView.Delay(1000);
         profileView.renderData(user);
@@ -99,11 +100,21 @@ const router = {
   'profileEdit': {
     view: async function() {
       try {
-        scrollToTop();
-        await EditProfileView.loader();
-        await EditProfileView.Delay(1000);
-        EditProfileView.renderData(user);
-        EditProfileView.init(updateUserData, renderTab, uploadPic);
+        // scrollToTop();
+        await editProfileView.loader();
+        await editProfileView.Delay(1000);
+        editProfileView.renderData(user);
+        editProfileView.init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  },
+
+  'logout': {
+    view: async function() {
+      try {
+        await logoutUserView.init(logoutUser, unSubAuth, unSubSnapShot);
       } catch (err) {
         console.log(err);
       }
@@ -115,8 +126,10 @@ export const renderTab = async function() {
   const { page } = getPage();
   const res = await authChanged(user);
 
+  //scroll to top of every section
+  scrollToTop();
   //signout the user if user go back to login page
-  if (page === null && res) signoutUser();
+  if (page === null && res) logoutUser();
 
   //if user is signout and go back to dashboard redirect user to login page
   if (!res && page != null && page !== 'signup' && page !== 'reset password') return updateURL('_', true);
@@ -154,6 +167,14 @@ const scrollToTop = function() {
     top: 0,
     behavior: 'smooth'
   });
+}
+
+const loginAgainMessage = function() {
+  if (wasLogin === true) {
+    loginView.renderMessage('Login again to access your account', 'error', 4000);
+    localStorage.setItem('wasLogin',
+      false);
+  }
 }
 
 const getPage = function() {
@@ -216,8 +237,8 @@ const applyTheme = function(elem) {
         return
     }
 
-    theme.mode = selectedValue;
-    setLocalStorage('selectedTheme', theme.mode);
+    user.themeMode = selectedValue;
+    setLocalStorage('selectedTheme', user.themeMode);
   }, { once: true })
 }
 
@@ -232,7 +253,7 @@ const systemDefaultTheme = function() {
 //initialize the theme on pahe load
 export const initThemeLocalStorage = function() {
   //apply the theme
-  theme.mode === 'system default' ? systemDefaultTheme() : theme.mode === 'light' ? '' : theme.mode === 'dark' ? document.body.classList.add('dark') : '';
+  user.themeMode === 'system default' ? systemDefaultTheme() : user.themeMode === 'light' ? '' : user.themeMode === 'dark' ? document.body.classList.add('dark') : '';
 }
 
 //get saved value from Local Storage
@@ -241,10 +262,9 @@ export const getLocalStorage = function() {
   const chartOne = JSON.parse(localStorage.getItem('chartTypeOne'));
   const chartTwo = JSON.parse(localStorage.getItem('chartTypeTwo'));
 
-  theme.mode = selectedTheme ? selectedTheme : theme.mode;
+  user.themeMode = selectedTheme ? selectedTheme : user.themeMode;
 
   chartTypes.chartOne = chartOne ? chartOne : 'doughnut';
   chartTypes.chartTwo = chartTwo ? chartTwo : 'line';
   wasLogin = localStorage.getItem('wasLogin', wasLogin);
-  console.log(wasLogin);
 }

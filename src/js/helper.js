@@ -20,7 +20,8 @@ export const setLocalStorage = function(key, value) {
 
 export const updateURL = function(page, reset = false) {
   if (reset) {
-    location.href = new URL('/', location.href);
+    console.log(location);
+    location.href = new URL(location.origin+location.pathname, location.href);
     return
   };
   history.pushState('', '', `?page=${page}`);

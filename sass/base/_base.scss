@@ -8,6 +8,11 @@
 html {
   /* 1REM === 10PX */
   font-size: 62.5%;
+  
+  /* 1REM === 5px*/
+  @include respon(sm-phone) {
+    font-size: 45%;
+  }
 }
 
 body {
@@ -17,6 +22,13 @@ body {
   min-height: 100vh;
   position: relative;
   background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)) no-repeat;
+}
+
+body input,
+body button {
+  font-family: inherit !important;
+  letter-spacing: 1px;
+  line-height: 110%;
 }
 
 .website-logo>img {
