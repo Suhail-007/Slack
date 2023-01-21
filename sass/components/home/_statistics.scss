@@ -6,7 +6,7 @@
   width: 12rem;
   height: 18rem;
   padding: 1rem 1rem 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 1.2rem;
   overflow: hidden;
   position: relative;
 
@@ -56,7 +56,7 @@
 
   &-2 {
     background: var(--bg-primary-alpha-six);
-    box-shadow: .5rem .5rem 1rem 0  var(--bg-primary);
+    box-shadow: .5rem .5rem 1rem 0  var(--bg-primary-second);
 
     &::before {
       background: linear-gradient(var(--dark-bg-primary-alpha-eight), rgba(255, 255, 255, 0.3));
@@ -73,7 +73,7 @@
 
   &-3 {
     background: var(--cyan-primary-alpha-three);
-    box-shadow: .5rem .5rem 1rem 0 var(--cyan-primary-alpha-seven), .1rem .1rem 1.5rem 0 var(--shadow-alpha-three);
+    box-shadow: .5rem .5rem 1rem 0 var(--cyan-primary-alpha-seven);
 
     &::before {
       top: 50%;

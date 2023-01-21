@@ -1,6 +1,7 @@
 :root {
   /*Primary Values*/
   --bg-primary: hsla(221, 93%, 89%, 1);
+  --bg-primary-second: var(--bg-primary);
   --purple-primary: hsla(258, 91%, 63%, 1);
   --silver-primary: hsla(202, 5%, 95%, 1);
   --blue-primary: hsla(215, 98%, 55%, 1);
@@ -91,6 +92,13 @@ body {
   min-height: 100vh;
   position: relative;
   background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)) no-repeat;
+}
+
+body input,
+body button {
+  font-family: inherit !important;
+  letter-spacing: 1px;
+  line-height: 110%;
 }
 
 .website-logo > img {
@@ -727,7 +735,7 @@ li:hover .nav__item--name {
   width: 12rem;
   height: 18rem;
   padding: 1rem 1rem 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 1.2rem;
   overflow: hidden;
   position: relative;
 }
@@ -770,7 +778,7 @@ li:hover .nav__item--name {
 }
 .box-2 {
   background: var(--bg-primary-alpha-six);
-  box-shadow: 0.5rem 0.5rem 1rem 0 var(--bg-primary);
+  box-shadow: 0.5rem 0.5rem 1rem 0 var(--bg-primary-second);
 }
 .box-2::before {
   background: linear-gradient(var(--dark-bg-primary-alpha-eight), rgba(255, 255, 255, 0.3));
@@ -784,7 +792,7 @@ li:hover .nav__item--name {
 }
 .box-3 {
   background: var(--cyan-primary-alpha-three);
-  box-shadow: 0.5rem 0.5rem 1rem 0 var(--cyan-primary-alpha-seven), 0.1rem 0.1rem 1.5rem 0 var(--shadow-alpha-three);
+  box-shadow: 0.5rem 0.5rem 1rem 0 var(--cyan-primary-alpha-seven);
 }
 .box-3::before {
   top: 50%;
@@ -992,7 +1000,7 @@ li:hover .nav__item--name {
   padding: 0.8rem 1.6rem;
 }
 .user-profile-container_username {
-  font-weight: 300;
+  font-weight: 600;
   color: var(--font-primary);
   margin-right: 1rem;
   font-size: 1.2rem;
@@ -1262,7 +1270,8 @@ header .nav_container_btn svg {
 
 .dark {
   /*Primary Values*/
-  --bg-primary: hsla(222, 61%, 6%, 1) !important;
+  --bg-primary: hsla(222, 61%, 6%, 1);
+  --bg-primary-second: hsla(235, 72%, 92%, 1);
   --bg-footer: #232323;
   /*Secondary Values*/
   --bg-secondary: black;

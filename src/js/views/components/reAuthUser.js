@@ -13,10 +13,10 @@ class reAuthUser {
           
           <div>
             <label for='reAuthEmail' class='reAuth__reAuthForm__Pass'>Email (Enter your account Email)</label>
-            <input id='reAuthEmail' type='email' required name='reAuthEmail' class='input__label__input reAuth__reAuthForm__input reAuth__reAuthForm__email'>
+            <input id='reAuthEmail' type='email' required name='reAuthEmail' class='input__label__input reAuth__reAuthForm__input reAuth__reAuthForm__email' placeholder='Current Email'>
             
             <label for='reAuthPass' class='reAuth__reAuthForm__Pass'>Password (Enter your account password)</label>
-            <input id='reAuthPass' type='text' required name='reAuthPass' class='input__label__input reAuth__reAuthForm__input reAuth__reAuthForm__pass'>
+            <input id='reAuthPass' type='text' required name='reAuthPass' class='input__label__input reAuth__reAuthForm__input reAuth__reAuthForm__pass' placeholder='Current Password'>
           </div>
           
           <button class='btn btn-light-blue reAuth__reAuthForm__btn submitBtn' type='submit'>Submit</button>
