@@ -73,12 +73,12 @@ class loginView extends View {
       const user = await loginUser(email, password);
 
       // send verification if email not verified
-      if (!user.emailVerified) {
-        sendEmailVerif();
-        //signout the user 
-        logoutUser();
-        throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
-      }
+      // if (!user.emailVerified) {
+      //   sendEmailVerif();
+      //   //signout the user 
+      //   logoutUser();
+      //   throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
+      // }
 
       await this.renderMessage('Getting user data', 'success', 2000);
 
