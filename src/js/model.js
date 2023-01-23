@@ -5,7 +5,7 @@ import homeView from './views/homeView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
 import { chartTypes } from './config.js';
 import chartView from './views/dashboard/chartView.js';
-import fundTransferView from './views/dashboard/renderReferralTransferView.js';
+import fundAndReferralView from './views/dashboard/fundAndReferralView.js';
 import profileView from './views/pages/profileView.js';
 import editProfileView from './views/pages/editProfile.js';
 import logoutUserView from './views/pages/logout.js';
@@ -74,8 +74,8 @@ const router = {
         dashboardView.renderData(user);
         chartView.createChart();
 
-        fundTransferView.addHandlerCopyRef(copyRefLink);
-        fundTransferView.activeBtn();
+        fundAndReferralView.addHandlerCopyRef(copyRefLink);
+        fundAndReferralView.activeBtn();
       } catch (err) {
         // dashboardView.renderMessage('Failed to load dashboard, try reloading ' + err, 'default', 10000);
       }

@@ -39,8 +39,6 @@ body button {
 .section-loader {
   height: 100%;
   width: 100%;
-  display: grid;
-  place-items: center;
   row-gap: 1rem;
   padding: 8rem 2rem 2rem;
   color: var(--purple-primary);
@@ -98,8 +96,6 @@ main {
   border-radius: 2rem 2rem 0 0;
 
   &__links-cont {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     justify-items: center;
     gap: 1.6rem 0;
   }

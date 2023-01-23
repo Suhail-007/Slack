@@ -1,6 +1,7 @@
 import View from '../View.js'
+import {investWallet} from '../components/investWallet.js'
 
-class FundTransferView extends View {
+class FundAndReferralView extends View {
   _parentElem = document.querySelector('main');
   _copyButton;
   _btnsCont;
@@ -16,7 +17,7 @@ class FundTransferView extends View {
 
         <h4 class="section__bottom-ref__sub-head">Referral Link</h4>
         <a href="#" data-ref-link class="ref_link">https://github.com/Suhail-007/dashboard-ui</a>
-        <button data-copy-btn class="copy_ref_link btn btn-purple">
+        <button data-copy-btn class="copy_ref_link btn btn-purple flex-row-AI-center">
           <svg>
           <use href="./src/images/icons.svg#icon_copy"></use>
           </svg>
@@ -25,26 +26,7 @@ class FundTransferView extends View {
           </span>
         </button>
       </div>
-      <div class="investWallet">
-        <div data-investWallet-btns class="investWallet__btns">
-          <button class="btn-grey-animated active">Add Fund</button>
-          <button class="btn-grey-animated">Withdrawal</button>
-        </div>
-        <div class="investWallet__deposit-income">
-          <p>Total Deposit Income</p>
-          <p>$1000</p>
-        </div>
-
-        <div class="investWallet__input-cont">
-          <label for="amount">Enter amount (in USD)</label>
-
-          <div data-addWithdraw-btns class="investWallet__input-cont__input__btns">
-            <input id="amount" type="text">
-            <button class="btn btn-light-blue active" data-add-fund>Add Fund</button>
-            <button class="btn btn-light-blue" data-withdraw-fund>Withdraw Fund</button>
-          </div>
-        </div>
-      </div>
+      ${investWallet(1000)}
     </section>`;
   }
 
@@ -102,7 +84,7 @@ class FundTransferView extends View {
 
     this._btnsCont.addEventListener('click', e => {
       if (e.target.closest('[data-investWallet-btns]') && !e.target.classList.contains('active')) {
-        
+
         //add withdraw funds and add withdraw tabs
         this._toggleClass(Array.from(btns), 'active');
 
@@ -112,4 +94,4 @@ class FundTransferView extends View {
   }
 }
 
-export default new FundTransferView()
+export default new FundAndReferralView()

@@ -11,4 +11,11 @@
     overflow: hidden;
     position: relative;
   }
+
+  .card-vertical {
+    display: flex;
+    position: relative;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 .5rem .5rem var(--shadow);
+  }
 }
