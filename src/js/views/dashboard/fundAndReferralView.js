@@ -1,5 +1,5 @@
 import View from '../View.js'
-import {investWallet} from '../components/investWallet.js'
+import {investWallet} from '../components/Wallet.js'
 
 class FundAndReferralView extends View {
   _parentElem = document.querySelector('main');

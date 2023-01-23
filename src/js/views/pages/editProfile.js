@@ -10,7 +10,7 @@ class EditProfileView extends View {
   _generateMarkup() {
     return `
     <section class='section section__edit'>
-    <h2 class='u-letter-spacing-small u-margin-bottom-big section__edit__heading'>
+    <h2 class='u-letter-spacing-sm u-margin-bottom-big section__edit__heading'>
       Edit Your Profile
     </h2>
       ${FORM.render('Done', `./${this.#setUserPic(this._data.data)}`, 'none', 'value=""', 'New Password')}

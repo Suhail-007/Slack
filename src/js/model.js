@@ -7,8 +7,11 @@ import { chartTypes } from './config.js';
 import chartView from './views/dashboard/chartView.js';
 import fundAndReferralView from './views/dashboard/fundAndReferralView.js';
 import profileView from './views/pages/profileView.js';
-import editProfileView from './views/pages/editProfile.js';
+import investWalletView from './views/pages/investWallet.js';
+
 import logoutUserView from './views/pages/logout.js';
+
+import editProfileView from './views/pages/editProfile.js';
 
 
 import { updateURL, NAV_TOGGLE_BTN, setLocalStorage } from './helper.js';
@@ -110,6 +113,21 @@ const router = {
       }
     }
   },
+
+  'invest wallet': {
+    view: async function() {
+      try {
+        // scrollToTop();
+        await investWalletView.loader();
+        await investWalletView.Delay(1000);
+        investWalletView.renderData(user);
+        // investWalletView.init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  },
+
 
   'logout': {
     view: async function() {

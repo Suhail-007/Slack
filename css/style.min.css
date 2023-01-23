@@ -301,15 +301,15 @@ li:hover .nav__item--name {
   text-transform: capitalize;
 }
 
-.u-letter-spacing-small {
+.u-letter-spacing-sm {
   letter-spacing: 0.1rem !important;
 }
 
-.u-margin-bottom-small {
+.u-margin-bottom-sm {
   margin-bottom: 1rem !important;
 }
 
-.u-margin-bottom-medium {
+.u-margin-bottom-md {
   margin-bottom: 2rem !important;
 }
 
@@ -430,7 +430,7 @@ li:hover .nav__item--name {
   background: var(--error);
 }
 
-.card__horizontal {
+.card--horizontal {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -442,11 +442,11 @@ li:hover .nav__item--name {
   overflow: hidden;
   position: relative;
 }
-.card .card-vertical {
+.card--vertical {
   display: flex;
   position: relative;
   padding: 1rem 1.5rem;
-  box-shadow: 0 0.5rem 0.5rem var(--shadow);
+  box-shadow: 0.3rem 0.3rem 0.5rem 0 var(--shadow);
 }
 
 .section__error {
@@ -1216,7 +1216,33 @@ header .nav_container_btn svg {
 }
 .invest-wallet__cards-cont {
   margin-top: 3rem;
-  border: 2px solid red;
+}
+.invest-wallet .invest-card {
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+}
+.invest-wallet .invest-card > p {
+  margin-left: auto;
+  font-size: 1.5rem;
+}
+.invest-wallet .invest-card > span {
+  align-self: end;
+  text-decoration: underline;
+  font-size: 1rem;
+}
+.invest-wallet .invest-card-bitcoin {
+  background: hsla(43deg, 74%, 70%, 0.3);
+  box-shadow: 0.3rem 0.5rem 0.5rem 0 hsla(48deg, 83%, 80%, 0.2);
+  color: hsl(43deg, 74%, 50%);
+}
+.invest-wallet__heading {
+  gap: 0 1rem;
+}
+.invest-wallet__heading > h4 {
+  font-size: 1.5rem;
+}
+.invest-wallet__heading > svg {
+  fill: currentColor;
 }
 
 .login__heading {

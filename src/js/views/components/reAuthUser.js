@@ -9,7 +9,7 @@ class reAuthUser {
     return `
       <div data-reAuthForm class='reAuth reAuth__cont closeForm'>
         <form class='reAuth__reAuthForm' data-reAuthPass>
-          <h4 class='u-margin-bottom-small .u-letter-spacing-small reAuth__reAuthForm__heading'>Re Authenticate your account to proceed further!</h4>
+          <h4 class='u-margin-bottom-sm .u-letter-spacing-sm reAuth__reAuthForm__heading'>Re Authenticate your account to proceed further!</h4>
           
           <div>
             <label for='reAuthEmail' class='reAuth__reAuthForm__Pass'>Email (Enter your account Email)</label>

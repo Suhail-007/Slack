@@ -21,6 +21,40 @@
 
   &__cards-cont {
     margin-top: 3rem;
-    border: 2px solid red;
+  }
+
+  .invest-card {
+    border-radius: .5rem;
+    padding: 1rem 1.5rem;
+
+    &>p {
+      margin-left: auto;
+      font-size: 1.5rem;
+    }
+
+    &>span {
+      align-self: end;
+      text-decoration: underline;
+      font-size: 1rem;
+    }
+  }
+
+  .invest-card-bitcoin {
+    //goldenrod
+    background: hsla(43, 74%, 70%, .3);
+    box-shadow: .3rem .5rem .5rem 0 hsla(48, 83%, 80%, .2);
+    color: hsla(43, 74%, 50%, 1);
+  }
+
+  &__heading {
+    gap: 0 1rem;
+
+    &>h4 {
+      font-size: 1.5rem;
+    }
+
+    &>svg {
+      fill: currentColor;
+    }
   }
 }

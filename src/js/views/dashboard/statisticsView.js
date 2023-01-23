@@ -6,7 +6,7 @@ class StatisticsView extends View {
   _generateMarkup() {
     return `
     <section data-statistics-boxes class="statistics_boxes">
-      <div class="box card__horizontal box-1">
+      <div class="box card--horizontal box-1">
         <div class="icon_heading">
           <div>
           <svg>
@@ -24,7 +24,7 @@ class StatisticsView extends View {
         </div>
       </div>
 
-      <div class="box card__horizontal box-2">
+      <div class="box card--horizontal box-2">
         <div class="icon_heading">
           <div>
           <svg>
@@ -43,7 +43,7 @@ class StatisticsView extends View {
         </div>
       </div>
 
-      <div class="box card__horizontal box-3">
+      <div class="box card--horizontal box-3">
         <div class="icon_heading">
           <div>
           <svg>
@@ -62,7 +62,7 @@ class StatisticsView extends View {
         </div>
       </div>
 
-      <div class="box card__horizontal box-4">
+      <div class="box card--horizontal box-4">
         <div class="icon_heading">
           <div>
           <svg>
