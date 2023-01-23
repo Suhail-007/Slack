@@ -2,7 +2,7 @@ import { updateURL } from '../../helper.js';
 import { defaultUserPic as formPic } from '../../config.js';
 
 class FORM {
-   render(buttonText, formPic, showLoginBtn, required, passwordText) {
+  render(buttonText, formPic, showLoginBtn, required, passwordText) {
     return `
       <form class="signup__form">
       
@@ -36,7 +36,7 @@ class FORM {
         <input class="input__label__input" placeholder="Male/Female/Others" ${required} id="gender" name="gender" type="text">
   
         <label for="dob">DOB</label>
-        <input name="dob" ${required} id="dob" type="date">
+        <input name="dob" ${required} id="dob" type="date" min="1960-01-31" max=${this.maxDate()}>
   
         <label for="state">State</label>
         <input class="input__label__input" placeholder="state you're currently living in" ${required} id="state"name="state" type="text">
@@ -55,12 +55,23 @@ class FORM {
       </form>`
   }
 
-   redirectTo(toWhere, home) {
+  redirectTo(toWhere, home) {
     const formLink = document.querySelector('[data-link]');
     formLink.addEventListener('click', e => {
       e.preventDefault();
       updateURL(toWhere, home);
     })
+  }
+
+  maxDate() {
+    const date = new Date()
+    const year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    const days = new Date(year, date.getMonth() + 1, 0).getDate();
+
+    month = month < 10 ? '0' + month : month;
+
+    return `${year}-${month}-${days}`
   }
 }
 
