@@ -444,9 +444,11 @@ li:hover .nav__item--name {
 }
 .card--vertical {
   display: flex;
+  padding: 1.5rem;
   position: relative;
-  padding: 1rem 1.5rem;
-  box-shadow: 0.3rem 0.3rem 0.5rem 0 var(--shadow);
+  border-radius: 0.5rem;
+  color: var(--font-primary);
+  box-shadow: 0.3rem 0.3rem 0.5rem 0 var();
 }
 
 .section__error {
@@ -507,20 +509,20 @@ li:hover .nav__item--name {
   color: hsl(109deg, 87%, 28%);
 }
 
-.investWallet {
+.wallet {
   background: var(--bg-primary-alpha-five);
 }
-.investWallet__btns {
+.wallet__btns {
   display: grid;
   grid-template-columns: 1fr 1fr;
   border-radius: 2rem;
 }
-.investWallet__btns button.active {
+.wallet__btns button.active {
   color: white;
   box-shadow: inset 100rem 0 0 0 var(--purple-primary-alpha-nine);
   overflow: hidden;
 }
-.investWallet__deposit-income {
+.wallet__deposit-income {
   background-color: var(--blue-primary-alpha-five);
   border-radius: 1.6rem;
   width: 90%;
@@ -531,22 +533,22 @@ li:hover .nav__item--name {
   font-size: 1.7rem;
   box-shadow: 0.5rem 0.5rem 1rem 0.1rem var(--blue-primary-alpha-three);
 }
-.investWallet__input-cont {
+.wallet__input-cont {
   padding: 0 1rem;
   font-size: 1.8rem;
 }
-.investWallet__input-cont > label {
+.wallet__input-cont > label {
   color: var(--font-primary);
   font-size: 1.6rem;
 }
-.investWallet__input-cont__input__btns {
+.wallet__input-cont__input__btns {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem 0;
   padding: 1rem;
 }
-.investWallet__input-cont__input__btns > input {
+.wallet__input-cont__input__btns > input {
   border-radius: 1.1rem;
   border: none;
   padding: 1.6rem;
@@ -556,18 +558,18 @@ li:hover .nav__item--name {
   background: var(--bg-primary-alpha-eight);
   color: var(--font-primary);
 }
-.investWallet__input-cont__input__btns > input:focus, .investWallet__input-cont__input__btns > input:hover {
+.wallet__input-cont__input__btns > input:focus, .wallet__input-cont__input__btns > input:hover {
   outline: 3px solid var(--blue-primary-alpha-three);
   outline-offset: 0.1rem;
 }
-.investWallet__input-cont__input__btns button.active {
+.wallet__input-cont__input__btns button.active {
   display: block;
   pointer-events: auto;
   border-radius: 100px;
   margin-block: 2rem;
   animation: showBtn 500ms linear forwards;
 }
-.investWallet__input-cont__input__btns button.active:hover, .investWallet__input-cont__input__btns button.active:focus {
+.wallet__input-cont__input__btns button.active:hover, .wallet__input-cont__input__btns button.active:focus {
   background-color: var(--blue-primary-alpha-three);
 }
 
@@ -979,11 +981,11 @@ li:hover .nav__item--name {
   align-items: center;
 }
 
-.grid__absCenter {
+.grid--absCenter {
   display: grid;
   place-items: center;
 }
-.grid__two-col {
+.grid--two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -1201,14 +1203,16 @@ header .nav_container_btn svg {
   letter-spacing: 1px;
 }
 .invest-wallet__details {
-  row-gap: 0.5rem;
+  row-gap: 1rem;
   font-size: 1.4rem;
 }
 .invest-wallet__details > * {
   background: var(--bg-primary-alpha-five);
-  width: 100%;
-  /* opacity: 0; */
-  transition: width 1500ms cubic-bezier(0.02, 0.18, 0.42, 1.36), opacity 2s ease-in-out;
+  box-shadow: 0.5rem 0.5rem 0.8rem 0 var(--shadow-alpha-three);
+  width: 0;
+  padding-block: 1rem;
+  opacity: 0;
+  transition: width 1300ms cubic-bezier(0.02, 0.18, 0.42, 1.36), opacity 200ms ease-in-out;
 }
 .invest-wallet__details > div.active {
   width: 100%;
@@ -1216,14 +1220,20 @@ header .nav_container_btn svg {
 }
 .invest-wallet__cards-cont {
   margin-top: 3rem;
+  row-gap: 1rem;
 }
 .invest-wallet .invest-card {
-  border-radius: 0.5rem;
   padding: 1rem 1.5rem;
 }
-.invest-wallet .invest-card > p {
+.invest-wallet .invest-card .openat {
+  font-size: 1rem;
+  letter-spacing: 0;
   margin-left: auto;
+}
+.invest-wallet .invest-card .price {
   font-size: 1.5rem;
+  margin-left: 0.5rem;
+  font-weight: 600;
 }
 .invest-wallet .invest-card > span {
   align-self: end;
@@ -1234,6 +1244,10 @@ header .nav_container_btn svg {
   background: hsla(43deg, 74%, 70%, 0.3);
   box-shadow: 0.3rem 0.5rem 0.5rem 0 hsla(48deg, 83%, 80%, 0.2);
   color: hsl(43deg, 74%, 50%);
+}
+.invest-wallet .invest-card-SM {
+  background: hsl(203deg, 100%, 97%);
+  box-shadow: 0.3rem 0.5rem 0.5rem 0 var(--shadow-alpha-three);
 }
 .invest-wallet__heading {
   gap: 0 1rem;

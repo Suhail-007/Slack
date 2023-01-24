@@ -3,18 +3,16 @@ import signUpView from './views/signupView.js';
 import resetPassView from './views/resetPassView.js';
 import homeView from './views/homeView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
-import { chartTypes } from './config.js';
 import chartView from './views/dashboard/chartView.js';
 import fundAndReferralView from './views/dashboard/fundAndReferralView.js';
 import profileView from './views/pages/profileView.js';
 import investWalletView from './views/pages/investWallet.js';
-
-import logoutUserView from './views/pages/logout.js';
-
 import editProfileView from './views/pages/editProfile.js';
 
+import { chartTypes, cryptoConfig } from './config.js';
+import logoutUserView from './views/pages/logout.js';
+import { updateURL, NAV_TOGGLE_BTN, setLocalStorage, getCryptoData } from './helper.js';
 
-import { updateURL, NAV_TOGGLE_BTN, setLocalStorage } from './helper.js';
 import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, logoutUser, authChanged, deleteUserAndData, unSubAuth, unSubSnapShot, updateUserData, uploadPic, updateUserPassword } from './firebase-app.js';
 
 
@@ -121,13 +119,12 @@ const router = {
         await investWalletView.loader();
         await investWalletView.Delay(1000);
         investWalletView.renderData(user);
-        // investWalletView.init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
+        await investWalletView.init(bitcoinDetails);
       } catch (err) {
         console.log(err);
       }
     }
   },
-
 
   'logout': {
     view: async function() {
@@ -146,6 +143,7 @@ export const renderTab = async function() {
 
   //scroll to top of every section
   scrollToTop();
+
   //signout the user if user go back to login page
   if (page === null && res) logoutUser();
 
@@ -199,6 +197,16 @@ const getPage = function() {
   const url = new URL(location.href);
   const page = url.searchParams.get('page');
   return { page }
+}
+
+const bitcoinDetails = async function() {
+  try {
+    const url = `${cryptoConfig.url}&apiKey=${cryptoConfig.API_KEY}`;
+    const data = await getCryptoData(url);
+    return { data }
+  } catch (err) {
+    throw err
+  }
 }
 
 export const settings = function(e) {

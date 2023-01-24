@@ -1,5 +1,5 @@
 import View from '../View.js'
-import {investWallet} from '../components/Wallet.js'
+import { miniWallet } from '../components/Wallet.js'
 
 class FundAndReferralView extends View {
   _parentElem = document.querySelector('main');
@@ -26,7 +26,7 @@ class FundAndReferralView extends View {
           </span>
         </button>
       </div>
-      ${investWallet(1000)}
+      ${miniWallet(1000)}
     </section>`;
   }
 

@@ -126,8 +126,8 @@ class homeView extends View {
 
   generateFooterMarkup() {
     return `
-    <footer class="footer grid-two-col">
-      <div class="footer__links-cont">
+    <footer class="footer">
+      <div class="footer__links-cont grid--two-col">
         <a href="#">Contact us</a>
         <a href="#">Link</a>
         <a href="#">Write to us</a>

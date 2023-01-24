@@ -14,8 +14,10 @@
 
   &--vertical {
     display: flex;
+    padding: 1.5rem;
     position: relative;
-    padding: 1rem 1.5rem;
-    box-shadow: .3rem .3rem .5rem 0 var(--shadow);
+    border-radius: .5rem;
+    color: var(--font-primary);
+    box-shadow: .3rem .3rem .5rem 0 var();
   }
 }
