@@ -3,15 +3,16 @@ import signUpView from './views/signupView.js';
 import resetPassView from './views/resetPassView.js';
 import homeView from './views/homeView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
-import { chartTypes } from './config.js';
 import chartView from './views/dashboard/chartView.js';
-import fundTransferView from './views/dashboard/renderReferralTransferView.js';
+import fundAndReferralView from './views/dashboard/fundAndReferralView.js';
 import profileView from './views/pages/profileView.js';
+import investWalletView from './views/pages/investWallet.js';
 import editProfileView from './views/pages/editProfile.js';
+
+import { chartTypes, cryptoConfig } from './config.js';
 import logoutUserView from './views/pages/logout.js';
+import { updateURL, NAV_TOGGLE_BTN, setLocalStorage, getCryptoData } from './helper.js';
 
-
-import { updateURL, NAV_TOGGLE_BTN, setLocalStorage } from './helper.js';
 import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, logoutUser, authChanged, deleteUserAndData, unSubAuth, unSubSnapShot, updateUserData, uploadPic, updateUserPassword } from './firebase-app.js';
 
 
@@ -66,16 +67,12 @@ const router = {
   'dashboard': {
     view: async function() {
       try {
-        // scrollToTop();
-
         await dashboardView.loader();
         await dashboardView.Delay(1000);
-        dashboardView.setTitle('Dashboard || Slack');
         dashboardView.renderData(user);
         chartView.createChart();
 
-        fundTransferView.addHandlerCopyRef(copyRefLink);
-        fundTransferView.activeBtn();
+        dashboardView.init(updateUserData, copyRefLink);
       } catch (err) {
         // dashboardView.renderMessage('Failed to load dashboard, try reloading ' + err, 'default', 10000);
       }
@@ -85,7 +82,6 @@ const router = {
   'profile': {
     view: async function() {
       try {
-        // scrollToTop();
         await profileView.loader();
         await profileView.Delay(1000);
         profileView.renderData(user);
@@ -100,11 +96,24 @@ const router = {
   'profileEdit': {
     view: async function() {
       try {
-        // scrollToTop();
         await editProfileView.loader();
         await editProfileView.Delay(1000);
         editProfileView.renderData(user);
         editProfileView.init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  },
+
+  'invest wallet': {
+    view: async function() {
+      try {
+        await investWalletView.loader();
+        await investWalletView.Delay(1000);
+        investWalletView.renderData(user);
+        await investWalletView.init(bitcoinDetails, updateUserData);
+
       } catch (err) {
         console.log(err);
       }
@@ -128,6 +137,7 @@ export const renderTab = async function() {
 
   //scroll to top of every section
   scrollToTop();
+
   //signout the user if user go back to login page
   if (page === null && res) logoutUser();
 
@@ -183,6 +193,16 @@ const getPage = function() {
   return { page }
 }
 
+const bitcoinDetails = async function() {
+  try {
+    const url = `${cryptoConfig.url}&apiKey=${cryptoConfig.API_KEY}`;
+    const data = await getCryptoData(url);
+    return { data }
+  } catch (err) {
+    throw err
+  }
+}
+
 export const settings = function(e) {
   const elem = e.target.closest('[data-settings]');
   let selectElem;
@@ -198,9 +218,9 @@ export const settings = function(e) {
 
     selectElem.addEventListener('change', (e) => {
       const selectedValue = e.target.value;
-      chartTypes.chartOne = selectedValue;
+      chartTypes.roi = selectedValue;
 
-      setLocalStorage('chartTypeOne', chartTypes.chartOne);
+      setLocalStorage('chartTypeOne', chartTypes.roi);
     }, { once: true });
   }
 
@@ -209,9 +229,9 @@ export const settings = function(e) {
 
     selectElem.addEventListener('change', (e) => {
       const selectedValue = e.target.value;
-      chartTypes.chartTwo = selectedValue;
+      chartTypes.binaryIncome = selectedValue;
 
-      setLocalStorage('chartTypeTwo', chartTypes.chartTwo);
+      setLocalStorage('chartTypeTwo', chartTypes.binaryIncome);
     }, { once: true });
   }
 }
@@ -259,12 +279,12 @@ export const initThemeLocalStorage = function() {
 //get saved value from Local Storage
 export const getLocalStorage = function() {
   const selectedTheme = JSON.parse(localStorage.getItem('selectedTheme'));
-  const chartOne = JSON.parse(localStorage.getItem('chartTypeOne'));
-  const chartTwo = JSON.parse(localStorage.getItem('chartTypeTwo'));
+  const roi = JSON.parse(localStorage.getItem('chartTypeOne'));
+  const binaryIncome = JSON.parse(localStorage.getItem('chartTypeTwo'));
 
   user.themeMode = selectedTheme ? selectedTheme : user.themeMode;
 
-  chartTypes.chartOne = chartOne ? chartOne : 'doughnut';
-  chartTypes.chartTwo = chartTwo ? chartTwo : 'line';
+  chartTypes.chartOne = roi ? roi : 'doughnut';
+  chartTypes.chartTwo = binaryIncome ? binaryIncome : 'line';
   wasLogin = localStorage.getItem('wasLogin', wasLogin);
 }

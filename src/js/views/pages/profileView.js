@@ -13,7 +13,7 @@ class ProfileView extends View {
     const data = this._data.data;
     return `
       <section class="section section__profile">
-        <div class="section__heading tab-heading u-letter-spacing-small">
+        <div class="section__heading tab-heading u-letter-spacing-sm">
           <h2>Profile</h2>
         </div>
     
@@ -28,14 +28,14 @@ class ProfileView extends View {
         </div>
     
         <div class="profile__info">
-          <h3 class="tab-heading u-letter-spacing-small">User Info</h3>
+          <h3 class="tab-heading u-letter-spacing-sm">User Info</h3>
           ${this.userInfo(data)}
         </div>
     
         <hr>
     
         <div data-settings class="section__settings">
-          <h3 class="tab-heading u-letter-spacing-small">Settings</h3>
+          <h3 class="tab-heading u-letter-spacing-sm">Settings</h3>
             
           <div>
             <h4>Theme Mode</h4>
@@ -50,7 +50,7 @@ class ProfileView extends View {
           </div>
     
           <div>
-            <h4 class="u-letter-spacing-small">Chart Settings</h4>
+            <h4 class="u-letter-spacing-sm">Chart Settings</h4>
             <div class='u-LineBar'>
               <label for="chartOne">Chart 1</label>
               <select data-select='chartOne' name="chartOne" id="chartOne">
@@ -73,8 +73,8 @@ class ProfileView extends View {
           </div>
         </div>
         
-        <div class="section__error">
-          <p class="section__error__msg"></p>
+        <div class="message-cont">
+          <p class="message"></p>
         </div>
         
         <div data-btns-cont class='section__profile__buttons'>

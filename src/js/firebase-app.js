@@ -86,8 +86,8 @@ export const createUserSendEmailVerif = async function(email, password) {
 
 export const updateUserData = async function(field) {
   try {
-    const user = doc(db, 'users', auth.currentUser.uid);
-    await updateDoc(user, field);
+    const userRef = doc(db, 'users', auth.currentUser.uid);
+    await updateDoc(userRef, field);
   } catch (err) {
     console.log(err);
     throw err
@@ -136,11 +136,13 @@ export const createUserData = async function(user, formData) {
       state: formData.state,
       country: formData.country,
       gender: formData.gender,
+      wallet: 0,
 
       extraInfo: {
         profilePicName: formData.profile.name,
         profilePic: '',
         uid: user.uid,
+        bio: 'Write something about yourself'
       }
     });
 

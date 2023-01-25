@@ -1,8 +1,8 @@
-import { updateURL } from '../../helper.js';
+import { updateURL, getCurrentDate } from '../../helper.js';
 import { defaultUserPic as formPic } from '../../config.js';
 
 class FORM {
-   render(buttonText, formPic, showLoginBtn, required, passwordText) {
+  render(buttonText, formPic, showLoginBtn, required, passwordText) {
     return `
       <form class="signup__form">
       
@@ -36,7 +36,7 @@ class FORM {
         <input class="input__label__input" placeholder="Male/Female/Others" ${required} id="gender" name="gender" type="text">
   
         <label for="dob">DOB</label>
-        <input name="dob" ${required} id="dob" type="date">
+        <input name="dob" ${required} id="dob" type="date" min="1960-01-31" max=${getCurrentDate().date}>
   
         <label for="state">State</label>
         <input class="input__label__input" placeholder="state you're currently living in" ${required} id="state"name="state" type="text">
@@ -45,8 +45,8 @@ class FORM {
         <input class="input__label__input" placeholder="country you're currently living in" ${required} id="country" type="text" name="country">
   
   
-        <div class="section__error">
-          <p class="section__error__msg"></p>
+        <div class="message-cont">
+          <p class="message"></p>
         </div>
   
         <button class="btn btn-light-blue form__btn" type="submit">${buttonText}</button>
@@ -55,7 +55,7 @@ class FORM {
       </form>`
   }
 
-   redirectTo(toWhere, home) {
+  redirectTo(toWhere, home) {
     const formLink = document.querySelector('[data-link]');
     formLink.addEventListener('click', e => {
       e.preventDefault();

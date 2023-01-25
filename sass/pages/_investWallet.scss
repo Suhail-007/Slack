@@ -1,0 +1,76 @@
+.invest-wallet {
+  line-height: 110%;
+  letter-spacing: 1px;
+
+  &__details {
+    row-gap: 1rem;
+    font-size: 1.4rem;
+
+    &>* {
+      background: var(--bg-primary-alpha-five);
+      box-shadow: .5rem .5rem .8rem 0 var(--shadow-alpha-three);
+      width: 0;
+      padding-block: 1rem;
+      opacity: 0;
+      transition: width 1300ms cubic-bezier(.02, .18, .42, 1.36), opacity 200ms ease-in-out;
+    }
+
+    &>div.active {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+
+  &__cards-cont {
+    margin-top: 3rem;
+    row-gap: 1rem;
+  }
+
+  .invest-card {
+    padding: 1rem 1.5rem;
+
+    .openat {
+      font-size: 1rem;
+      letter-spacing: 0;
+      margin-left: auto;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      margin-left: .5rem;
+      font-weight: 600;
+    }
+
+    &>span {
+      align-self: end;
+      text-decoration: underline;
+      font-size: 1rem;
+    }
+  }
+
+  .invest-card-bitcoin {
+    //goldenrod
+    background: hsla(43, 74%, 70%, .3);
+    box-shadow: .3rem .5rem .5rem 0 hsla(48, 83%, 80%, .2);
+    color: hsla(43, 74%, 50%, 1);
+  }
+
+  //stock market
+  .invest-card-SM {
+    //goldenrod
+    background: hsla(203, 100%, 97%, 1);
+    box-shadow: .3rem .5rem .5rem 0 var(--shadow-alpha-three);
+  }
+
+  &__heading {
+    gap: 0 1rem;
+
+    &>h4 {
+      font-size: 1.5rem;
+    }
+
+    &>svg {
+      fill: currentColor;
+    }
+  }
+}

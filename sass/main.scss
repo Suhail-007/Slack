@@ -10,14 +10,17 @@
 @import 'components/buttons';
 @import 'components/cards';
 @import 'components/error';
-@import 'components/investWallet';
+@import 'components/Wallet';
 @import 'components/form';
+@import 'components/headings';
 @import 'components/section';
 @import 'components/home/minimalAccInfo';
 @import 'components/home/statistics';
 @import 'components/home/referralSection';
 @import 'components/reAuthForm';
 
+@import 'layouts/flex';
+@import 'layouts/grid';
 @import 'layouts/header';
 @import 'layouts/navbar';
 

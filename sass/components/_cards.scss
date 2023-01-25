@@ -1,5 +1,5 @@
 .card {
-  &__horizontal {
+  &--horizontal {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -10,5 +10,14 @@
     border-radius: 1.2rem;
     overflow: hidden;
     position: relative;
+  }
+
+  &--vertical {
+    display: flex;
+    padding: 1.5rem;
+    position: relative;
+    border-radius: .5rem;
+    color: var(--font-primary);
+    box-shadow: .3rem .3rem .5rem 0 var();
   }
 }

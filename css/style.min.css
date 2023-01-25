@@ -68,11 +68,6 @@
     transform: rotate(360deg);
   }
 }
-@keyframes showBtn {
-  100% {
-    opacity: 1;
-  }
-}
 *,
 *::before,
 *::after {
@@ -115,8 +110,6 @@ body button {
 .section-loader {
   height: 100%;
   width: 100%;
-  display: grid;
-  place-items: center;
   row-gap: 1rem;
   padding: 8rem 2rem 2rem;
   color: var(--purple-primary);
@@ -167,8 +160,6 @@ main::after {
   border-radius: 2rem 2rem 0 0;
 }
 .footer__links-cont {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   justify-items: center;
   gap: 1.6rem 0;
 }
@@ -305,15 +296,15 @@ li:hover .nav__item--name {
   text-transform: capitalize;
 }
 
-.u-letter-spacing-small {
+.u-letter-spacing-sm {
   letter-spacing: 0.1rem !important;
 }
 
-.u-margin-bottom-small {
+.u-margin-bottom-sm {
   margin-bottom: 1rem !important;
 }
 
-.u-margin-bottom-medium {
+.u-margin-bottom-md {
   margin-bottom: 2rem !important;
 }
 
@@ -381,8 +372,6 @@ li:hover .nav__item--name {
   transform: translateY(0.5rem);
 }
 .btn-purple {
-  display: flex;
-  align-items: center;
   gap: 0 0.2rem;
   color: #fff;
   font-weight: 500;
@@ -413,8 +402,6 @@ li:hover .nav__item--name {
   border: 2px solid var(--blue-primary-alpha-five);
   color: var(--blue-primary);
   font-size: 1.5rem !important;
-  opacity: 0;
-  display: none;
 }
 .btn-light-blue:hover, .btn-light-blue:focus {
   background: var(--blue-primary-alpha-three);
@@ -436,7 +423,7 @@ li:hover .nav__item--name {
   background: var(--error);
 }
 
-.card__horizontal {
+.card--horizontal {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -448,26 +435,27 @@ li:hover .nav__item--name {
   overflow: hidden;
   position: relative;
 }
+.card--vertical {
+  display: flex;
+  padding: 1.5rem;
+  position: relative;
+  border-radius: 0.5rem;
+  color: var(--font-primary);
+  box-shadow: 0.3rem 0.3rem 0.5rem 0 var();
+}
 
-.section__error {
+.message-cont {
   text-align: center;
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
   font-size: 1.3rem;
   padding: 0.5rem 1rem;
   display: none;
   transition: all 0.2s ease-in-out;
 }
-.section__error.def {
+.message-cont.def {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center;
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
   display: block;
   z-index: 3;
   padding: 1rem 4rem;
@@ -476,51 +464,45 @@ li:hover .nav__item--name {
   background: var(--white-bg);
   box-shadow: 0 1rem 1rem 1rem var(--shadow-alpha-three);
 }
-.section__error.def > p {
+.message-cont.def > p {
   font-size: 1.3rem;
   color: var(--font-primary);
 }
-.section__error.error {
+.message-cont.error {
   text-align: center;
   border-radius: 3px;
   background: var(--error);
   width: 100%;
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
   display: block;
 }
-.section__error.error > p {
+.message-cont.error > p {
   color: red;
 }
-.section__error.success {
+.message-cont.success {
   text-align: center;
   border-radius: 3px;
   background: var(--success);
   width: 100%;
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
   display: block;
 }
-.section__error.success > p {
+.message-cont.success > p {
   color: hsl(109deg, 87%, 28%);
 }
 
-.investWallet {
+.wallet {
   background: var(--bg-primary-alpha-five);
 }
-.investWallet__btns {
+.wallet__btns {
   display: grid;
   grid-template-columns: 1fr 1fr;
   border-radius: 2rem;
 }
-.investWallet__btns button.active {
+.wallet__btns button.active {
   color: white;
   box-shadow: inset 100rem 0 0 0 var(--purple-primary-alpha-nine);
   overflow: hidden;
 }
-.investWallet__deposit-income {
+.wallet__deposit-income {
   background-color: var(--blue-primary-alpha-five);
   border-radius: 1.6rem;
   width: 90%;
@@ -531,22 +513,24 @@ li:hover .nav__item--name {
   font-size: 1.7rem;
   box-shadow: 0.5rem 0.5rem 1rem 0.1rem var(--blue-primary-alpha-three);
 }
-.investWallet__input-cont {
+.wallet__input-cont {
   padding: 0 1rem;
   font-size: 1.8rem;
 }
-.investWallet__input-cont > label {
-  color: var(--font-primary);
-  font-size: 1.6rem;
-}
-.investWallet__input-cont__input__btns {
+.wallet__input-cont__input-btns {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem 0;
+  row-gap: 1rem;
   padding: 1rem;
 }
-.investWallet__input-cont__input__btns > input {
+.wallet__input-cont__input-btns > label {
+  color: var(--font-primary);
+  font-size: 1.6rem;
+  align-self: start;
+  transform: translateX(-1rem);
+}
+.wallet__input-cont__input-btns > input {
   border-radius: 1.1rem;
   border: none;
   padding: 1.6rem;
@@ -556,18 +540,15 @@ li:hover .nav__item--name {
   background: var(--bg-primary-alpha-eight);
   color: var(--font-primary);
 }
-.investWallet__input-cont__input__btns > input:focus, .investWallet__input-cont__input__btns > input:hover {
+.wallet__input-cont__input-btns > input:focus, .wallet__input-cont__input-btns > input:hover {
   outline: 3px solid var(--blue-primary-alpha-three);
   outline-offset: 0.1rem;
 }
-.investWallet__input-cont__input__btns button.active {
-  display: block;
-  pointer-events: auto;
+.wallet__input-cont__input-btns button {
   border-radius: 100px;
   margin-block: 2rem;
-  animation: showBtn 500ms linear forwards;
 }
-.investWallet__input-cont__input__btns button.active:hover, .investWallet__input-cont__input__btns button.active:focus {
+.wallet__input-cont__input-btns button:hover, .wallet__input-cont__input-btns button bocus {
   background-color: var(--blue-primary-alpha-three);
 }
 
@@ -687,6 +668,18 @@ li:hover .nav__item--name {
   transform: translateY(0) scale(0.9);
 }
 
+.heading {
+  line-height: 110%;
+  letter-spacing: 1px;
+}
+.heading__h3 {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+.heading__h4 {
+  font-size: 1.5rem;
+}
+
 .section {
   border-top-left-radius: 4rem;
   padding: 1rem 1rem 3rem 2rem;
@@ -701,12 +694,6 @@ li:hover .nav__item--name {
   border-radius: 0.3rem;
   box-shadow: 0.1rem 0.1rem 5px 0 var(--shadow-alpha-three);
   padding-inline: 0.5rem;
-}
-.section h3 {
-  font-size: 1.8rem;
-}
-.section h4 {
-  font-size: 1.5rem;
 }
 
 .acc_div {
@@ -912,14 +899,73 @@ li:hover .nav__item--name {
 .reAuth__reAuthForm__btn {
   grid-row: 3/4;
   align-content: start;
-  display: block !important;
-  opacity: 1 !important;
   margin: 0;
+  margin-top: 1rem;
   border-radius: 100px;
 }
 .reAuth__reAuthForm .cancel-btn {
   grid-row: 5/6;
   border-radius: 100px;
+}
+
+.flex {
+  display: flex;
+}
+.flex-row-Jsb {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-row-AI-center {
+  display: flex;
+  align-items: center;
+}
+.flex-row-AI-cntr-Jsb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-row-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+.flex-row-Jend-AI-center {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-col-AI-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.flex-col-Jspace-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.flex-col-abs-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.flex-abs-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid--absCenter {
+  display: grid;
+  place-items: center;
+}
+.grid--two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .header {
@@ -1032,7 +1078,7 @@ li:hover .nav__item--name {
 .user-profile-container_profile {
   padding: 0.5rem;
   border-radius: 100px;
-  background: var(--white-bg);
+  background: #fff;
   display: grid;
   place-items: center;
   filter: drop-shadow(0px 0px 10px var(--light-shadow-white));
@@ -1130,6 +1176,67 @@ header .nav_container_btn svg {
   display: none;
 }
 
+.invest-wallet {
+  line-height: 110%;
+  letter-spacing: 1px;
+}
+.invest-wallet__details {
+  row-gap: 1rem;
+  font-size: 1.4rem;
+}
+.invest-wallet__details > * {
+  background: var(--bg-primary-alpha-five);
+  box-shadow: 0.5rem 0.5rem 0.8rem 0 var(--shadow-alpha-three);
+  width: 0;
+  padding-block: 1rem;
+  opacity: 0;
+  transition: width 1300ms cubic-bezier(0.02, 0.18, 0.42, 1.36), opacity 200ms ease-in-out;
+}
+.invest-wallet__details > div.active {
+  width: 100%;
+  opacity: 1;
+}
+.invest-wallet__cards-cont {
+  margin-top: 3rem;
+  row-gap: 1rem;
+}
+.invest-wallet .invest-card {
+  padding: 1rem 1.5rem;
+}
+.invest-wallet .invest-card .openat {
+  font-size: 1rem;
+  letter-spacing: 0;
+  margin-left: auto;
+}
+.invest-wallet .invest-card .price {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+  font-weight: 600;
+}
+.invest-wallet .invest-card > span {
+  align-self: end;
+  text-decoration: underline;
+  font-size: 1rem;
+}
+.invest-wallet .invest-card-bitcoin {
+  background: hsla(43deg, 74%, 70%, 0.3);
+  box-shadow: 0.3rem 0.5rem 0.5rem 0 hsla(48deg, 83%, 80%, 0.2);
+  color: hsl(43deg, 74%, 50%);
+}
+.invest-wallet .invest-card-SM {
+  background: hsl(203deg, 100%, 97%);
+  box-shadow: 0.3rem 0.5rem 0.5rem 0 var(--shadow-alpha-three);
+}
+.invest-wallet__heading {
+  gap: 0 1rem;
+}
+.invest-wallet__heading > h4 {
+  font-size: 1.5rem;
+}
+.invest-wallet__heading > svg {
+  fill: currentColor;
+}
+
 .login__heading {
   justify-self: center !important;
 }
@@ -1214,7 +1321,7 @@ header .nav_container_btn svg {
 .section__profile .section__profile__buttons--delete, .section__profile .section__profile__buttons--edit {
   width: 80%;
 }
-.section__profile > .section__error {
+.section__profile > .message-cont {
   margin-top: 2rem;
 }
 

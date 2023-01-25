@@ -22,8 +22,6 @@
   }
 
   &-purple {
-    display: flex;
-    align-items: center;
     gap: 0 0.2rem;
     color: #fff;
     font-weight: 500;
@@ -58,8 +56,6 @@
     border: 2px solid var(--blue-primary-alpha-five);
     color: var(--blue-primary);
     font-size: 1.5rem !important;
-    opacity: 0;
-    display: none;
 
     &:hover,
     &:focus {
