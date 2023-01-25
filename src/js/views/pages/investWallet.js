@@ -1,5 +1,5 @@
 import View from '../View.js';
-import * as Wallet from '../components/Wallet.js';
+import Wallet from '../components/Wallet.js';
 import { investCard } from '../components/Cards.js'
 
 class InvestWallet extends View {
@@ -27,25 +27,37 @@ class InvestWallet extends View {
         ${investCard({price: 0, iconName:'SM', heading: 'Stock Market'})}
       </div> 
       
-      ${Wallet.addFundInput('$2000')}
+      <div data-wallet>
+        ${Wallet.addFundInputMarkup(this._data.data.wallet)}
+      </div>
     </section>
     `
   }
 
-  async init(bitcoinDetails) {
+  async init(bitcoinDetails, updateUserData) {
+    this.setTitle('Invest wallet || Slack');
     this.#coin = await bitcoinDetails();
+    this.updateData = updateUserData;
     this.setCoinPrice();
-    this.isPageLoad()
+    this.addActiveClass();
+    Wallet.addInputAmount(this._data.data, 'investWallet');
+  }
+
+  async updateAndRender(value) {
+    const totalDepositElem = document.querySelector('[data-deposit-income]');
+
+    await this.updateData({ 'wallet': value });
+    totalDepositElem.innerHTML = '';
+    totalDepositElem.innerHTML = `$ ${this._data.data.wallet}`;
   }
 
   setCoinPrice() {
     const price = document.querySelector('[data-price]');
     price.textContent = `$${this.#coin.data.open}`;
   }
-  
-  isPageLoad() {
+
+  addActiveClass() {
     const details = document.querySelectorAll('[data-invest-details]');
-    
     details.forEach(item => {
       item.classList.add('active');
     })

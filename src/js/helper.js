@@ -42,8 +42,9 @@ export const getCryptoData = async function(url) {
   try {
     const res = await Promise.race([fetch(url), Timeout(TIMEOUT_SEC)]);
     
+    if (!res) throw Error('Data not found, reload page');
+    
     const data = await res.json();
-    if (!data) throw Error('Data not found, reload page');
 
     return data;
   } catch (err) {

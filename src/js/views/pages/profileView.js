@@ -73,8 +73,8 @@ class ProfileView extends View {
           </div>
         </div>
         
-        <div class="section__error">
-          <p class="section__error__msg"></p>
+        <div class="message-cont">
+          <p class="message"></p>
         </div>
         
         <div data-btns-cont class='section__profile__buttons'>

@@ -5,8 +5,8 @@ export const defaultUserPic = 'https://i.ibb.co/7rJ6Ddn/avatar.png';
 export const TIMEOUT_SEC = 2000;
 
 export const chartTypes = {
-  ROI: 'doughnut',
-  chartTwo: 'line',
+  roi: 'doughnut',
+  binaryIncome: 'line',
 }
 
 export const cryptoConfig = {

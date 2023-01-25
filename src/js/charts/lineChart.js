@@ -17,7 +17,7 @@ const months = [
 const data = [0.30, 0.45, 0.35, 0.55, 0.35, 0.5, 0.80, 0.60, 0.2];
 
 const config = {
-  type: chartTypes.chartTwo,
+  type: chartTypes.binaryIncome,
   data: {
     labels: months,
     datasets: [{

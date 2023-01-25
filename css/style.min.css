@@ -451,25 +451,18 @@ li:hover .nav__item--name {
   box-shadow: 0.3rem 0.3rem 0.5rem 0 var();
 }
 
-.section__error {
+.message-cont {
   text-align: center;
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
   font-size: 1.3rem;
   padding: 0.5rem 1rem;
   display: none;
   transition: all 0.2s ease-in-out;
 }
-.section__error.def {
+.message-cont.def {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center;
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
   display: block;
   z-index: 3;
   padding: 1rem 4rem;
@@ -478,34 +471,28 @@ li:hover .nav__item--name {
   background: var(--white-bg);
   box-shadow: 0 1rem 1rem 1rem var(--shadow-alpha-three);
 }
-.section__error.def > p {
+.message-cont.def > p {
   font-size: 1.3rem;
   color: var(--font-primary);
 }
-.section__error.error {
+.message-cont.error {
   text-align: center;
   border-radius: 3px;
   background: var(--error);
   width: 100%;
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
   display: block;
 }
-.section__error.error > p {
+.message-cont.error > p {
   color: red;
 }
-.section__error.success {
+.message-cont.success {
   text-align: center;
   border-radius: 3px;
   background: var(--success);
   width: 100%;
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
   display: block;
 }
-.section__error.success > p {
+.message-cont.success > p {
   color: hsl(109deg, 87%, 28%);
 }
 
@@ -537,18 +524,20 @@ li:hover .nav__item--name {
   padding: 0 1rem;
   font-size: 1.8rem;
 }
-.wallet__input-cont > label {
-  color: var(--font-primary);
-  font-size: 1.6rem;
-}
-.wallet__input-cont__input__btns {
+.wallet__input-cont__input-btns {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem 0;
+  row-gap: 1rem;
   padding: 1rem;
 }
-.wallet__input-cont__input__btns > input {
+.wallet__input-cont__input-btns > label {
+  color: var(--font-primary);
+  font-size: 1.6rem;
+  align-self: start;
+  transform: translateX(-1rem);
+}
+.wallet__input-cont__input-btns > input {
   border-radius: 1.1rem;
   border: none;
   padding: 1.6rem;
@@ -558,18 +547,18 @@ li:hover .nav__item--name {
   background: var(--bg-primary-alpha-eight);
   color: var(--font-primary);
 }
-.wallet__input-cont__input__btns > input:focus, .wallet__input-cont__input__btns > input:hover {
+.wallet__input-cont__input-btns > input:focus, .wallet__input-cont__input-btns > input:hover {
   outline: 3px solid var(--blue-primary-alpha-three);
   outline-offset: 0.1rem;
 }
-.wallet__input-cont__input__btns button.active {
+.wallet__input-cont__input-btns button.active {
   display: block;
   pointer-events: auto;
   border-radius: 100px;
   margin-block: 2rem;
   animation: showBtn 500ms linear forwards;
 }
-.wallet__input-cont__input__btns button.active:hover, .wallet__input-cont__input__btns button.active:focus {
+.wallet__input-cont__input-btns button.active:hover, .wallet__input-cont__input-btns button.active:focus {
   background-color: var(--blue-primary-alpha-three);
 }
 
@@ -1343,7 +1332,7 @@ header .nav_container_btn svg {
 .section__profile .section__profile__buttons--delete, .section__profile .section__profile__buttons--edit {
   width: 80%;
 }
-.section__profile > .section__error {
+.section__profile > .message-cont {
   margin-top: 2rem;
 }
 

@@ -40,18 +40,18 @@ class ChartView {
 
     switch (chartName) {
       case 'doughnutChart':
-        chart.config.type = chartTypes.chartOne;
-        if (chartTypes.chartOne === 'line') chart.config.data.datasets[0].borderColor = 'rgba(142, 74, 237, 0.8)';
+        chart.config.type = chartTypes.roi;
+        if (chartTypes.roi === 'line') chart.config.data.datasets[0].borderColor = 'rgba(142, 74, 237, 0.8)';
         break;
       case 'lineChart':
-        if (chartTypes.chartTwo !== 'line') {
+        if (chartTypes.binaryIncome !== 'line') {
 
-          chart.config.type = chartTypes.chartTwo;
+          chart.config.type = chartTypes.binaryIncome;
           chart.config.data.datasets[0].backgroundColor = [...bgColorArr];
 
           chart.config.data.datasets[0].borderColor = '#fff';
 
-          if (chartTypes.chartTwo === 'line') {
+          if (chartTypes.binaryIncome === 'line') {
             chart.config.data.datasets[0].backgroundColor = '#fff';
 
             chart.config.data.datasets[0].borderColor = 'rgba(142, 74, 237, 0.8)';

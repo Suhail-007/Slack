@@ -29,18 +29,20 @@
     padding: 0 1rem;
     font-size: 1.8rem;
 
-    &>label {
-      color: var(--font-primary);
-      font-size: 1.6rem;
-    }
 
-    &__input__btns {
+    &__input-btns {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.5rem 0;
+      row-gap: 1rem;
       padding: 1rem;
 
+      &>label {
+        color: var(--font-primary);
+        font-size: 1.6rem;
+        align-self: start;
+        transform: translateX(-1rem);
+      }
 
       &>input {
         border-radius: 1.1rem;
@@ -73,4 +75,5 @@
       }
     }
   }
+
 }

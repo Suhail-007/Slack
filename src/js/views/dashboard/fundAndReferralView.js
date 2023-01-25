@@ -1,5 +1,5 @@
 import View from '../View.js'
-import { miniWallet } from '../components/Wallet.js'
+import Wallet from '../components/Wallet.js'
 
 class FundAndReferralView extends View {
   _parentElem = document.querySelector('main');
@@ -26,8 +26,21 @@ class FundAndReferralView extends View {
           </span>
         </button>
       </div>
-      ${miniWallet(1000)}
+      ${Wallet.miniWallet(this._data.data.wallet)}
     </section>`;
+  }
+
+  init(updateUserData) {
+    this.updateUserData = updateUserData;
+    Wallet.addInputAmount(this._data.data, 'dashboard');
+  }
+
+  async updateAndRender(value) {
+    const totalDepositElem = document.querySelector('[data-deposit-income]');
+
+    await this.updateUserData({ 'wallet': value });
+    totalDepositElem.innerHTML = '';
+    totalDepositElem.innerHTML = `$ ${this._data.data.wallet}`;
   }
 
   _toastCopy() {

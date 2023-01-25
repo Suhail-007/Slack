@@ -13,13 +13,12 @@ class DashboardView extends View {
       ${chartView.renderChart()}
       ${statisticsView.renderData(this._data, false, false)}
       ${fundAndReferralView.renderData(this._data, false, false)}`;
-
     return sections;
   }
 
-  addHandlerNavTabs(handler) {
-    const tabContainer = document.querySelector('[data-nav]');
-    tabContainer.addEventListener('click', handler);
+  init(updateUserData) {
+    this.setTitle('Dashboard || Slack');
+    fundAndReferralView.init(updateUserData);
   }
 }
 

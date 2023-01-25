@@ -44,18 +44,18 @@ export default class View {
   }
 
   renderMessage(msg, className, ms) {
-    const sectionError = document.querySelector('.section__error');
-    const errorMsgElem = sectionError.querySelector('p');
+    const messageCont = document.querySelector('.message-cont');
+    const messageElem = messageCont.querySelector('p');
 
     // if (className === 'default') this.clear();
 
-    errorMsgElem.textContent = msg;
-    sectionError.classList.add(className);
+    messageElem.textContent = msg;
+    messageCont.classList.add(className);
 
     //remove class & message after x secs
     return new Promise((resolve) => {
       setTimeout(() => {
-        sectionError.classList.remove(className);
+        messageCont.classList.remove(className);
         resolve()
       }, ms);
     })

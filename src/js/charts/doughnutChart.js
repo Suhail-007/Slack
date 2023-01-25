@@ -23,7 +23,7 @@ const months = [
 const data = [0.30, 0.45, 0.35, 0.55, 0.35, 0.5];
 
 const config = {
-  type: chartTypes.chartOne,
+  type: chartTypes.roi,
   data: {
     labels: months,
     datasets: [{

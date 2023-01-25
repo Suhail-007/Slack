@@ -67,13 +67,12 @@ const router = {
   'dashboard': {
     view: async function() {
       try {
-        // scrollToTop();
-
         await dashboardView.loader();
         await dashboardView.Delay(1000);
-        dashboardView.setTitle('Dashboard || Slack');
+        // dashboardView.setTitle('Dashboard || Slack');
         dashboardView.renderData(user);
         chartView.createChart();
+        dashboardView.init(updateUserData);
 
         fundAndReferralView.addHandlerCopyRef(copyRefLink);
         fundAndReferralView.activeBtn();
@@ -86,7 +85,6 @@ const router = {
   'profile': {
     view: async function() {
       try {
-        // scrollToTop();
         await profileView.loader();
         await profileView.Delay(1000);
         profileView.renderData(user);
@@ -101,7 +99,6 @@ const router = {
   'profileEdit': {
     view: async function() {
       try {
-        // scrollToTop();
         await editProfileView.loader();
         await editProfileView.Delay(1000);
         editProfileView.renderData(user);
@@ -115,11 +112,11 @@ const router = {
   'invest wallet': {
     view: async function() {
       try {
-        // scrollToTop();
         await investWalletView.loader();
         await investWalletView.Delay(1000);
         investWalletView.renderData(user);
-        await investWalletView.init(bitcoinDetails);
+        await investWalletView.init(bitcoinDetails, updateUserData);
+
       } catch (err) {
         console.log(err);
       }
@@ -224,9 +221,9 @@ export const settings = function(e) {
 
     selectElem.addEventListener('change', (e) => {
       const selectedValue = e.target.value;
-      chartTypes.chartOne = selectedValue;
+      chartTypes.roi = selectedValue;
 
-      setLocalStorage('chartTypeOne', chartTypes.chartOne);
+      setLocalStorage('chartTypeOne', chartTypes.roi);
     }, { once: true });
   }
 
@@ -235,9 +232,9 @@ export const settings = function(e) {
 
     selectElem.addEventListener('change', (e) => {
       const selectedValue = e.target.value;
-      chartTypes.chartTwo = selectedValue;
+      chartTypes.binaryIncome = selectedValue;
 
-      setLocalStorage('chartTypeTwo', chartTypes.chartTwo);
+      setLocalStorage('chartTypeTwo', chartTypes.binaryIncome);
     }, { once: true });
   }
 }
@@ -285,12 +282,12 @@ export const initThemeLocalStorage = function() {
 //get saved value from Local Storage
 export const getLocalStorage = function() {
   const selectedTheme = JSON.parse(localStorage.getItem('selectedTheme'));
-  const chartOne = JSON.parse(localStorage.getItem('chartTypeOne'));
-  const chartTwo = JSON.parse(localStorage.getItem('chartTypeTwo'));
+  const roi = JSON.parse(localStorage.getItem('chartTypeOne'));
+  const binaryIncome = JSON.parse(localStorage.getItem('chartTypeTwo'));
 
   user.themeMode = selectedTheme ? selectedTheme : user.themeMode;
 
-  chartTypes.chartOne = chartOne ? chartOne : 'doughnut';
-  chartTypes.chartTwo = chartTwo ? chartTwo : 'line';
+  chartTypes.chartOne = roi ? roi : 'doughnut';
+  chartTypes.chartTwo = binaryIncome ? binaryIncome : 'line';
   wasLogin = localStorage.getItem('wasLogin', wasLogin);
 }

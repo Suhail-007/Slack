@@ -1,8 +1,5 @@
-.section__error {
+.message-cont {
   text-align: center;
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
   font-size: 1.3rem;
   padding: .5rem 1rem;
   display: none;
@@ -13,10 +10,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: center;
-    opacity: 1;
-    pointer-events: auto;
-    visibility: visible;
     display: block;
     z-index: 3;
     padding: 1rem 4rem;
@@ -36,9 +29,6 @@
     border-radius: 3px;
     background: var(--error);
     width: 100%;
-    opacity: 1;
-    pointer-events: auto;
-    visibility: visible;
     display: block;
 
     &>p {
@@ -51,9 +41,6 @@
     border-radius: 3px;
     background: var(--success);
     width: 100%;
-    opacity: 1;
-    pointer-events: auto;
-    visibility: visible;
     display: block;
 
     &>p {

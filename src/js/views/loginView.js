@@ -30,8 +30,8 @@ class loginView extends View {
             <label class="input__label__label" for="password">Password</label>
           </div>
           
-          <div class="section__error">
-            <p class="section__error__msg"></p>
+          <div class="message-cont">
+            <p class="message"></p>
           </div>
           
           <a class='form-link reset-password' href='/'>Forget your password?</a>
