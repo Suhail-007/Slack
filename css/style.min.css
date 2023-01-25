@@ -68,11 +68,6 @@
     transform: rotate(360deg);
   }
 }
-@keyframes showBtn {
-  100% {
-    opacity: 1;
-  }
-}
 *,
 *::before,
 *::after {
@@ -407,8 +402,6 @@ li:hover .nav__item--name {
   border: 2px solid var(--blue-primary-alpha-five);
   color: var(--blue-primary);
   font-size: 1.5rem !important;
-  opacity: 0;
-  display: none;
 }
 .btn-light-blue:hover, .btn-light-blue:focus {
   background: var(--blue-primary-alpha-three);
@@ -551,14 +544,11 @@ li:hover .nav__item--name {
   outline: 3px solid var(--blue-primary-alpha-three);
   outline-offset: 0.1rem;
 }
-.wallet__input-cont__input-btns button.active {
-  display: block;
-  pointer-events: auto;
+.wallet__input-cont__input-btns button {
   border-radius: 100px;
   margin-block: 2rem;
-  animation: showBtn 500ms linear forwards;
 }
-.wallet__input-cont__input-btns button.active:hover, .wallet__input-cont__input-btns button.active:focus {
+.wallet__input-cont__input-btns button:hover, .wallet__input-cont__input-btns button bocus {
   background-color: var(--blue-primary-alpha-three);
 }
 

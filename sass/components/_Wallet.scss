@@ -61,17 +61,14 @@
         }
       }
 
-      & button.active {
-        display: block;
-        pointer-events: auto;
+      & button {
         border-radius: 100px;
         margin-block: 2rem;
-        animation: showBtn 500ms linear forwards;
 
         &:hover,
-        &:focus {
-          background-color: var(--blue-primary-alpha-three);
-        }
+      & bocus {
+        background-color: var(--blue-primary-alpha-three);
+      }
       }
     }
   }

@@ -40,15 +40,7 @@ class InvestWallet extends View {
     this.updateData = updateUserData;
     this.setCoinPrice();
     this.addActiveClass();
-    Wallet.addInputAmount(this._data.data, 'investWallet');
-  }
-
-  async updateAndRender(value) {
-    const totalDepositElem = document.querySelector('[data-deposit-income]');
-
-    await this.updateData({ 'wallet': value });
-    totalDepositElem.innerHTML = '';
-    totalDepositElem.innerHTML = `$ ${this._data.data.wallet}`;
+    Wallet.addInputAmount(this._data.data);
   }
 
   setCoinPrice() {

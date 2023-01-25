@@ -69,13 +69,10 @@ const router = {
       try {
         await dashboardView.loader();
         await dashboardView.Delay(1000);
-        // dashboardView.setTitle('Dashboard || Slack');
         dashboardView.renderData(user);
         chartView.createChart();
-        dashboardView.init(updateUserData);
 
-        fundAndReferralView.addHandlerCopyRef(copyRefLink);
-        fundAndReferralView.activeBtn();
+        dashboardView.init(updateUserData, copyRefLink);
       } catch (err) {
         // dashboardView.renderMessage('Failed to load dashboard, try reloading ' + err, 'default', 10000);
       }

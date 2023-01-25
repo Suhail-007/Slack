@@ -16,9 +16,9 @@ class DashboardView extends View {
     return sections;
   }
 
-  init(updateUserData) {
+  init(updateUserData, handler) {
     this.setTitle('Dashboard || Slack');
-    fundAndReferralView.init(updateUserData);
+    fundAndReferralView.init(updateUserData, handler);
   }
 }
 

@@ -4,7 +4,6 @@ import Wallet from '../components/Wallet.js'
 class FundAndReferralView extends View {
   _parentElem = document.querySelector('main');
   _copyButton;
-  _btnsCont;
 
   _generateMarkup() {
     return `
@@ -30,17 +29,11 @@ class FundAndReferralView extends View {
     </section>`;
   }
 
-  init(updateUserData) {
+  init(updateUserData, handler) {
     this.updateUserData = updateUserData;
-    Wallet.addInputAmount(this._data.data, 'dashboard');
-  }
-
-  async updateAndRender(value) {
-    const totalDepositElem = document.querySelector('[data-deposit-income]');
-
-    await this.updateUserData({ 'wallet': value });
-    totalDepositElem.innerHTML = '';
-    totalDepositElem.innerHTML = `$ ${this._data.data.wallet}`;
+    Wallet.addInputAmount(this._data.data);
+    this.addHandlerCopyRef(handler);
+    Wallet.toggleFundBtns();
   }
 
   _toastCopy() {
@@ -65,8 +58,8 @@ class FundAndReferralView extends View {
 
   addHandlerCopyRef(handler) {
     this._copyButton = document.querySelector('[data-copy-btn]');
-    this._btnsCont = document.querySelector('[data-investWallet-btns]');
     const refLink = document.querySelector('[data-ref-link]');
+
     this._copyButton.addEventListener('click', e => {
       const btn = e.target.closest('[data-copy-btn]');
 
@@ -81,28 +74,6 @@ class FundAndReferralView extends View {
       setTimeout(() => {
         btnSpanElem.innerText = 'Copy Referral Link';
       }, 1000);
-    })
-  }
-
-  _toggleClass(parentElem, className) {
-    parentElem.forEach(btn => {
-      btn.classList.toggle(className);
-    });
-  }
-
-  activeBtn() {
-    const btns = document.querySelectorAll('[data-investWallet-btns] button');
-
-    const fundActionBtns = document.querySelectorAll('[data-addWithdraw-btns] button');
-
-    this._btnsCont.addEventListener('click', e => {
-      if (e.target.closest('[data-investWallet-btns]') && !e.target.classList.contains('active')) {
-
-        //add withdraw funds and add withdraw tabs
-        this._toggleClass(Array.from(btns), 'active');
-
-        this._toggleClass(Array.from(fundActionBtns), 'active');
-      }
     })
   }
 }
