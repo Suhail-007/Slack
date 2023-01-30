@@ -9,9 +9,9 @@ import profileView from './views/pages/profileView.js';
 import investWalletView from './views/pages/investWallet.js';
 import editProfileView from './views/pages/editProfile.js';
 
-import { chartTypes, cryptoConfig } from './config.js';
+import { chartTypes, cryptoConfig, stockMarketConfig, API_KEY } from './config.js';
 import logoutUserView from './views/pages/logout.js';
-import { updateURL, NAV_TOGGLE_BTN, setLocalStorage, getCryptoData } from './helper.js';
+import { updateURL, NAV_TOGGLE_BTN, setLocalStorage, fetchURL } from './helper.js';
 
 import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, logoutUser, authChanged, deleteUserAndData, unSubAuth, unSubSnapShot, updateUserData, uploadPic, updateUserPassword } from './firebase-app.js';
 
@@ -112,7 +112,7 @@ const router = {
         await investWalletView.loader();
         await investWalletView.Delay(1000);
         investWalletView.renderData(user);
-        await investWalletView.init(bitcoinDetails, updateUserData);
+        await investWalletView.init(getBitcoinDetails, updateUserData, getStockOpenPrice);
 
       } catch (err) {
         console.log(err);
@@ -193,11 +193,20 @@ const getPage = function() {
   return { page }
 }
 
-const bitcoinDetails = async function() {
+const getBitcoinDetails = async function() {
   try {
-    const url = `${cryptoConfig.url}&apiKey=${cryptoConfig.API_KEY}`;
-    const data = await getCryptoData(url);
+    const url = `${cryptoConfig.url}&apiKey=${API_KEY}`;
+    const data = await fetchURL(url);
     return { data }
+  } catch (err) {
+    throw err
+  }
+}
+const getStockOpenPrice = async function() {
+  try {
+    // const url = `${stockMarketConfig.url}&apiKey=${API_KEY}`;
+    // const data = await fetchURL(url);
+    // return { data }
   } catch (err) {
     throw err
   }

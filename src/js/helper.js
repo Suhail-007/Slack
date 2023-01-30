@@ -38,7 +38,7 @@ const Timeout = function(ms) {
   })
 }
 
-export const getCryptoData = async function(url) {
+export const fetchURL = async function(url) {
   try {
     const res = await Promise.race([fetch(url), Timeout(TIMEOUT_SEC)]);
     

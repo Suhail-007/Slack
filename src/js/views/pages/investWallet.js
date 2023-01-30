@@ -4,6 +4,7 @@ import { investCard } from '../components/Cards.js'
 
 class InvestWallet extends View {
   #coin;
+  #openPrice
   _parentElem = document.querySelector('main');
 
   _generateMarkup() {
@@ -34,18 +35,33 @@ class InvestWallet extends View {
     `
   }
 
-  async init(bitcoinDetails, updateUserData) {
+  async init(getBitcoinDetails, updateUserData, getStockOpenPrice) {
     this.setTitle('Invest wallet || Slack');
-    this.#coin = await bitcoinDetails();
     this.updateData = updateUserData;
-    this.setCoinPrice();
+    this.setBitcoinPrice(getBitcoinDetails);
+    this.setStockPrice(getStockOpenPrice);
     this.addActiveClass();
     Wallet.addInputAmount(this._data.data);
   }
 
-  setCoinPrice() {
-    const price = document.querySelector('[data-price]');
+  setBitcoinPrice(getBitcoinDetails) {
+    const res = await getBitcoinDetails();
+    const price = document.querySelector('[data-price="bitcoin"]');
+    this.#coin =  this.#coin.data.open;
+    
+    if(!this.#coin) return price.textContent = 'Closed';
     price.textContent = `$${this.#coin.data.open}`;
+  }
+  
+  setStockPrice(getStockOpenPrice) {
+    const res = await getStockOpenPrice()
+    const price = document.querySelector('[data-price="SM"]');
+   
+   //Couldn't find stock market api 
+    this.#openPrice = res;
+    if (!this.#openPrice) return price.textContent = 'Closed';
+    
+    price.textContent = `$ ${this.#openPrice}`;
   }
 
   addActiveClass() {
