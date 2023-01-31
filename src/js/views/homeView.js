@@ -94,7 +94,7 @@ class homeView extends View {
                 <span class="nav__item--name">withdrawal wallet</span>
               </li>
               <li data-nav="deposit funds transfer" class="nav_item nav-link">
-                <svg class="i">
+                <svg>
                   <use href="./src/images/icons.svg#icon-wallet"></use>
                 </svg>
                 <span class="nav__item--name">deposit funds transfer</span>

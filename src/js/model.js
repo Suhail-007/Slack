@@ -7,6 +7,9 @@ import chartView from './views/dashboard/chartView.js';
 import fundAndReferralView from './views/dashboard/fundAndReferralView.js';
 import profileView from './views/pages/profileView.js';
 import investWalletView from './views/pages/investWallet.js';
+import teamSummary from './views/pages/team-summary.js';
+import incomeView from './views/pages/income.js';
+import pageNotFoundView from './views/pages/404.js';
 import editProfileView from './views/pages/editProfile.js';
 
 import { chartTypes, cryptoConfig, stockMarketConfig, API_KEY } from './config.js';
@@ -120,6 +123,34 @@ const router = {
     }
   },
 
+  'team summary': {
+    view: async function() {
+      try {
+        await teamSummary.loader();
+        await teamSummary.Delay(1000);
+        teamSummary.renderData(user);
+        teamSummary.init();
+      } catch (err) {
+        console.log(err);
+        teamSummary.renderMessage(err, 'error', 4000);
+      }
+    }
+  },
+
+  'income': {
+    view: async function() {
+      try {
+        await incomeView.loader();
+        await incomeView.Delay(1000);
+        incomeView.renderData(user);
+        incomeView.init();
+      } catch (err) {
+        console.log(err);
+        incomeView.renderMessage(err, 'error', 4000);
+      }
+    }
+  },
+
   'logout': {
     view: async function() {
       try {
@@ -127,6 +158,12 @@ const router = {
       } catch (err) {
         console.log(err);
       }
+    }
+  },
+
+  '404': {
+    view: function() {
+      pageNotFoundView.init();
     }
   }
 }
@@ -143,6 +180,9 @@ export const renderTab = async function() {
 
   //if user is signout and go back to dashboard redirect user to login page
   if (!res && page != null && page !== 'signup' && page !== 'reset password') return updateURL('_', true);
+
+  //if page not found
+  if (router[page] === undefined) await router['404'].view();
 
   if (router[page]) await router[page].view();
 }
@@ -197,7 +237,7 @@ const getBitcoinDetails = async function() {
   try {
     const url = `${cryptoConfig.url}&apiKey=${API_KEY}`;
     const data = await fetchURL(url);
-    return { data }
+    return data
   } catch (err) {
     throw err
   }

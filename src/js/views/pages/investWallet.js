@@ -44,24 +44,34 @@ class InvestWallet extends View {
     Wallet.addInputAmount(this._data.data);
   }
 
-  setBitcoinPrice(getBitcoinDetails) {
-    const res = await getBitcoinDetails();
-    const price = document.querySelector('[data-price="bitcoin"]');
-    this.#coin =  this.#coin.data.open;
-    
-    if(!this.#coin) return price.textContent = 'Closed';
-    price.textContent = `$${this.#coin.data.open}`;
+  async setBitcoinPrice(getBitcoinDetails) {
+    try {
+      const res = await getBitcoinDetails();
+      const price = document.querySelector('[data-price="bitcoin"]');
+
+      this.#coin = res;
+
+      if (!this.#coin) return price.textContent = 'Closed';
+      price.textContent = `$${this.#coin.open}`;
+    } catch (err) {
+      throw err
+    }
   }
-  
-  setStockPrice(getStockOpenPrice) {
-    const res = await getStockOpenPrice()
-    const price = document.querySelector('[data-price="SM"]');
-   
-   //Couldn't find stock market api 
-    this.#openPrice = res;
-    if (!this.#openPrice) return price.textContent = 'Closed';
-    
-    price.textContent = `$ ${this.#openPrice}`;
+
+  async setStockPrice(getStockOpenPrice) {
+    try {
+      const res = await getStockOpenPrice()
+      const price = document.querySelector('[data-price="SM"]');
+
+      //Couldn't find stock market api 
+      this.#openPrice = res;
+
+      if (!this.#openPrice) return price.textContent = 'Closed';
+
+      price.textContent = `$ ${this.#openPrice}`;
+    } catch (err) {
+      throw err
+    }
   }
 
   addActiveClass() {
