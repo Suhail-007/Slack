@@ -33,7 +33,7 @@ class ChartView {
 
   //it takes a chart which and a chart variable which user want to update
   _updateChartColor(chart, chartName, user) {
-    const { charts } = {preference} = {data} = user;
+    const { charts } = user.data.preference;
 
     const bgColorArr = ['rgba(192, 140, 236, 1)', 'rgba(95, 142, 219, 1)', 'rgba(244, 67, 115, 1)', 'rgba(224, 183, 26, 1)', 'rgba(112, 129, 243, 1)', 'rgba(233, 212, 245, 1)', 'rgba(195, 199, 244, 1)', 'rgba(255, 0, 20, 1)', 'rgba(109, 106, 255, 1)', 'rgba(231, 194, 122, 1)'];
 
