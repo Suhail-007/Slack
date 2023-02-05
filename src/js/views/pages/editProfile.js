@@ -21,7 +21,7 @@ class EditProfileView extends View {
 
   async init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
     this.setTitle('Edit User Information || Slack')
-    await this.renderMessage('Leave the fields empty which you do not wish to update.', 'def', 4000);
+    this.renderMessage('Leave the fields empty which you do not wish to update.', 'def', 4000);
     this.getEditDetails(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
     this.previewUserProfile();
   }
@@ -33,55 +33,64 @@ class EditProfileView extends View {
         e.preventDefault();
         const fd = new FormData(form);
         const fdObj = Object.fromEntries(fd);
+
+        //check if entered data is Valid
         const { fullname, isPassSame } = this.isInputsCorrect(fdObj);
 
-        if (!fullname) throw Error('Please enter full name');
+        if (fullname !== '' && !fullname) throw Error('Please enter full name');
         if (!isPassSame) throw Error('Passwords do not match');
 
         await this.renderMessage('Updating user data', 'success', 2000);
 
         const { filteredData, profilePic } = this.filteredUserData(fdObj);
 
-        await updateUserData(filteredData);
+        // await updateUserData(filteredData);
 
-        if (profilePic.name) await uploadPic(this._data.data.uid, profilePic);
+        // if (profilePic.name) await uploadPic(this._data.data, profilePic);
 
         //checks if password fields aren't empty
-        if (filteredData.password) {
-          const isUpdated = await this.updatePassword(loginUser, filteredData.password, updateUserPassword);
-          if (!isUpdated) return
-        }
+        // if (filteredData.password) {
+        //   const isUpdated = await this.updatePassword(loginUser, filteredData.password, updateUserPassword);
+        //   if (!isUpdated) return
+        // }
 
         //remove & re render nav & footer
-        homeView.removeHeaderFooter();
-        initHome();
+        // homeView.removeHeaderFooter();
+        // initHome();
 
         await this.renderMessage('Data updated!', 'success', 2000);
 
-        updateURL('profile');
-        renderTab();
+        // updateURL('profile');
+        // renderTab();
       } catch (err) {
+        console.log(err);
         await this.renderMessage(err, 'error', 3000);
       }
     })
   }
 
   filteredUserData(user) {
+    
+    //i have tk restructure my user data obj in three parts PersonalInfo, ExtraInfo, AccountInfo 
+    
     let filteredData = {};
     let profilePic = {};
+
     for (let key in user) {
-      if (user[key] !== '') {
+      console.log(key);
 
-        if (key === 'profile' && !user[key].name) continue
+      // if (user[key] !== '') {
 
-        if (key === 'profile' && user[key].name) {
-          filteredData.profilePicName = user[key].name;
-          profilePic = user[key];
-          continue
-        }
+      //   if (key === 'profile' && !user[key].name) continue
 
-        filteredData[key] = user[key];
-      }
+      //   if (key === 'profile' && user[key].name) {
+      //     filteredData.profilePicName = user[key].name;
+      //     profilePic = user[key];
+      //     continue
+      //   }
+
+      //   filteredData[key] = user[key];
+      // }
     }
     return {
       filteredData,
@@ -93,7 +102,7 @@ class EditProfileView extends View {
     let { fullname, password, Repassword: rePassword } = fdObj;
 
     //check if user enter fullname
-    fullname = fullname.includes(' ');
+    if (fullname !== '') fullname = fullname.includes(' ');
 
     //check if passwords is same
     password = password.split('');

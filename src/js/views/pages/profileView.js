@@ -10,7 +10,7 @@ class ProfileView extends View {
   _edit = false;
 
   _generateMarkup() {
-    const data = this._data.data;
+    const {personalInfo, extraInfo} = this._data.data;
     return `
       <section class="section section__profile">
         <div class="section__heading tab-heading u-letter-spacing-sm">
@@ -19,17 +19,17 @@ class ProfileView extends View {
     
         <div class="profile__cont">
           <figure class="profile__cont-photo">
-            <img class='dp' loading="lazy" src="${this.#setUserPic(data)}" alt="user profile">
+            <img class='dp' loading="lazy" src="${this.#setUserPic(extraInfo)}" alt="user profile">
           </figure>
           <div class='profile__bio'>
-            <p class="profile__user-name">${data.fullname}</p>
-            <p class="profile__bio">To never give up...</p>
+            <p class="profile__user-name">${personalInfo.fullname}</p>
+            <p class="profile__bio">${extraInfo.bio}</p>
           </div>
         </div>
     
         <div class="profile__info">
           <h3 class="tab-heading u-letter-spacing-sm">User Info</h3>
-          ${this.userInfo(data)}
+          ${this.userInfo(personalInfo)}
         </div>
     
         <hr>
@@ -81,6 +81,8 @@ class ProfileView extends View {
           <button type='button' data-cta='edit' class='btn btn-edit section__profile__buttons--edit'>Edit Profile</button>
           <button type='button' data-cta='delete' class='btn btn-delete section__profile__buttons--delete'>Delete Profile</button>
         </div>
+        
+        <!------ReAuthForm---->
         ${reAuthUser.renderData(false)}
       </section>
       `
@@ -88,14 +90,14 @@ class ProfileView extends View {
 
   userInfo(user) {
     const arr = [];
-     for (let key in user) {
-       if(typeof user[key] === 'object' && !Array.isArray(user[key]) || key === 'fullname') continue
-      arr.push(this.LineBar(key, user[key]));
+    for (let key in user) {
+      if (key === 'fullname') continue
+      arr.push(this.Bar(key, user[key]));
     }
     return arr.sort().join('');
   }
 
-  LineBar(catNam, category) {
+  Bar(catNam, category) {
     return `
       <div class='u-LineBar'>
         <p>${catNam}</p>
@@ -189,7 +191,7 @@ class ProfileView extends View {
   }
 
   #setUserPic(user) {
-    return user.extraInfo.profilePic ? user.extraInfo.profilePic : defaultUserPic;
+    return user.profilePic ? user.profilePic : defaultUserPic;
   }
 }
 

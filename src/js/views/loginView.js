@@ -68,7 +68,7 @@ class loginView extends View {
     try {
       const { email, password } = userObj;
 
-      if (email) await this.renderMessage('Checking information', 'success', 1000);
+      if (email) await this.renderMessage('Checking information', 'success', 500);
 
       const user = await loginUser(email, password);
 
@@ -80,16 +80,17 @@ class loginView extends View {
         throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
       }
 
-      await this.renderMessage('Getting user data', 'success', 2000);
+      //throw error if user not found
+      if (!user) throw Error('You need to login again');
+
+      await this.renderMessage('Getting user data', 'success', 500);
 
       //get user data && image from firebase & update user obj
       const res = await getUserDataAndUserPic(this._data);
 
-      if (res) await this.renderMessage('Fetched data successfully', 'success', 1500);
+      if (res) await this.renderMessage('Fetched data successfully', 'success', 1000);
 
-      if (!user) throw Error('You need to login again');
-
-      await this.renderMessage('Logging User', 'success', 2000);
+      await this.renderMessage('Logging User', 'success', 1000);
 
       //if users exist update url and call router to redirect users to login page else firebase will throw an error 
 

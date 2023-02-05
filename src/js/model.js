@@ -37,7 +37,7 @@ const router = {
       try {
         await loginView.loader();
         await loginView.Delay(500);
-        loginView.renderData('_');
+        loginView.renderData(user);
         loginAgainMessage();
 
         loginView.init(renderTab, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);

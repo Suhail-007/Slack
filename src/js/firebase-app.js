@@ -87,7 +87,10 @@ export const createUserSendEmailVerif = async function(email, password) {
 export const updateUserData = async function(field) {
   try {
     const userRef = doc(db, 'users', auth.currentUser.uid);
-    await updateDoc(userRef, field);
+
+    await updateDoc(userRef, {
+      'extraInfo.profilePicName': field.name
+    });
   } catch (err) {
     console.log(err);
     throw err
@@ -129,20 +132,31 @@ export const logoutUser = async function() {
 export const createUserData = async function(user, formData) {
   try {
     await setDoc(doc(db, 'users', user.uid), {
-      fullname: formData.fullname,
-      email: formData.email,
-      contact: formData.countryCode + formData.phone,
-      dob: formData.dob,
-      state: formData.state,
-      country: formData.country,
-      gender: formData.gender,
-      wallet: 0,
-
+      personalInfo: {
+        fullname: formData.fullname,
+        email: formData.email,
+        contact: formData.countryCode + formData.phone,
+        dob: formData.dob,
+        state: formData.state,
+        country: formData.country,
+        gender: formData.gender,
+      },
       extraInfo: {
         profilePicName: formData.profile.name,
         profilePic: '',
         uid: user.uid,
         bio: 'Write something about yourself'
+      },
+      accountInfo: {
+        wallet: 0,
+        movements: [],
+      },
+      preference: {
+        theme: 'system default',
+        charts: {
+          roi: 'Doughnut',
+          binaryIncome: 'Line'
+        }
       }
     });
 
@@ -176,7 +190,9 @@ const imagesRef = ref(storage, 'images');
 export const uploadPic = async function(user, file) {
   //it's like this inside of images folder create user(user.id) folder there create a file name(file param) and upload that file to server. i.e images/user/file(same name as user have saved)
   try {
-    const profilePicRef = ref(storage, `images/${user}/${file.name}`);
+    const { uid, profilePicName: name } = user.extraInfo;
+
+    const profilePicRef = ref(storage, `images/${uid}/${file.name}`);
 
     const snapshot = await uploadBytes(profilePicRef, file);
     console.log('Image uploaded to server');

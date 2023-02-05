@@ -33,7 +33,7 @@ class homeView extends View {
     
           <!----this is for desktop version---->
           <div class=" user_profile_container user_profile_container_desktop hidden">
-            <p data-username class="username"><a href='/profile'>${this._data.fullname}</a></p>
+            <p data-username class="username"><a href='/profile'>${this._data.personalInfo.fullname}</a></p>
             <div class="user_profile">
               <img data-profile-img class='dp' loading="lazy" src="${this.#setUserPic(this._data.extraInfo)}" alt="user profile">
             </div>
