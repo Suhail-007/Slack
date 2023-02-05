@@ -23,7 +23,7 @@ export const copyRefLink = async function(element) {
   await navigator.clipboard.writeText(element.innerText);
 }
 
-let wasLogin = false;
+let isLogin = false;
 
 const user = {
   //it will be created only when user log in
@@ -37,8 +37,9 @@ const router = {
       try {
         await loginView.loader();
         await loginView.Delay(500);
-        loginView.renderData(user);
+        loginView.renderData('_');
         loginAgainMessage();
+
         loginView.init(renderTab, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
         homeView.removeHeaderFooter();
       } catch (err) {
@@ -220,10 +221,9 @@ const scrollToTop = function() {
 }
 
 const loginAgainMessage = function() {
-  if (wasLogin === true) {
+  const isLogin = sessionStorage.getItem('isLogin');
+  if (isLogin) {
     loginView.renderMessage('Login again to access your account', 'error', 4000);
-    localStorage.setItem('wasLogin',
-      false);
   }
 }
 
@@ -335,5 +335,4 @@ export const getLocalStorage = function() {
 
   chartTypes.chartOne = roi ? roi : 'doughnut';
   chartTypes.chartTwo = binaryIncome ? binaryIncome : 'line';
-  wasLogin = localStorage.getItem('wasLogin', wasLogin);
 }

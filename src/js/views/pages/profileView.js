@@ -180,8 +180,8 @@ class ProfileView extends View {
 
       if (isDeleted) await this.renderMessage('Account deleted, Redirecting to login page', 'success', 2000);
 
-      //set wasLogin to false 
-      localStorage.setItem('wasLogin', false);
+      //set isLogin to false 
+      sessionStorage.removeItem('isLogin');
       updateURL('_', true);
     } catch (err) {
       throw err

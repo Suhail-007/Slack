@@ -97,7 +97,7 @@ class loginView extends View {
       initHome();
 
       updateURL('dashboard');
-      localStorage.setItem('wasLogin', true);
+      sessionStorage.setItem('isLogin', true);
 
       await this.renderTab();
     } catch (err) {
