@@ -10,7 +10,7 @@ class ProfileView extends View {
   _edit = false;
 
   _generateMarkup() {
-    const {personalInfo, extraInfo} = this._data.data;
+    const { personalInfo, extraInfo } = this._data.data;
     return `
       <section class="section section__profile">
         <div class="section__heading tab-heading u-letter-spacing-sm">
@@ -42,34 +42,17 @@ class ProfileView extends View {
             <div class='u-LineBar'>
               <label for="theme">Theme</label>
               <select data-select='theme' name="theme" id="theme">
-                <option ${this.#isSelectedValue('system default')} value="system default">system default</option>
-                <option ${this.#isSelectedValue('light')} value="light">light</option>
-                <option ${this.#isSelectedValue('dark')} value="dark">dark</option>
+                <option ${this.#isSelected('system default')} value="system default">system default</option>
+                <option ${this.#isSelected('light')} value="light">light</option>
+                <option ${this.#isSelected('dark')} value="dark">dark</option>
               </select>
             </div>
           </div>
     
           <div>
             <h4 class="u-letter-spacing-sm">Chart Settings</h4>
-            <div class='u-LineBar'>
-              <label for="chartOne">Chart 1</label>
-              <select data-select='chartOne' name="chartOne" id="chartOne">
-                <option ${this.#isSelectedValue('doughtnut', 'chartOne')} value="doughnut">Doughnut</option>
-                <option ${this.#isSelectedValue('line', 'chartOne')} value="line">Line</option>
-                <option ${this.#isSelectedValue('bar', 'chartOne')} value="bar">Bar</option>
-                <option ${this.#isSelectedValue('pie', 'chartOne')} value="pie">Pie</option>
-              </select>
-            </div>
-              
-            <div class='u-LineBar'>
-              <label for="chartTwo">Chart 2</label>
-              <select data-select='chartTwo' name="chartTwo" id="chartTwo">
-                <option ${this.#isSelectedValue('line', 'chartTwo')} value="line">Line</option>
-                <option ${this.#isSelectedValue('bar', 'chartTwo')} value="bar">Bar</option>
-                <option ${this.#isSelectedValue('pie', 'chartTwo')} value="pie">Pie</option>
-                <option ${this.#isSelectedValue('doughnut', 'chartTwo')} value="doughnut">Doughnut</option>
-              </select>
-            </div>
+            ${chartsOptionsMarkup('ROI', 'ROI')}
+            ${chartsOptionsMarkup('BI', 'Binary Income')}
           </div>
         </div>
         
@@ -88,23 +71,33 @@ class ProfileView extends View {
       `
   }
 
+  chartsOptionsMarkup(chartName, chartTitle) {
+    return `
+    <div class='u-LineBar'>
+      <label for="${chartName}">${chartTitle} Chart</label>
+      <select data-select='${chartName}' name="${chartName}" id="${chartName}">
+        <option ${this.#isSelected('doughtnut', chartName)} value="doughnut">Doughnut</option>
+        <option ${this.#isSelected('line', chartName)} value="line">Line</option>
+        <option ${this.#isSelected('bar', chartName)} value="bar">Bar</option>
+        <option ${this.#isSelected('pie', chartName)} value="pie">Pie</option>
+      </select>
+    </div>`
+  }
+
   userInfo(user) {
     const arr = [];
     for (let key in user) {
       if (key === 'fullname') continue
-      arr.push(this.Bar(key, user[key]));
+      arr.push(`
+        <div class='u-LineBar'>
+          <p>${key}</p>
+          <p>${user[key]}</p>
+        </div>
+      `);
     }
     return arr.sort().join('');
   }
 
-  Bar(catNam, category) {
-    return `
-      <div class='u-LineBar'>
-        <p>${catNam}</p>
-        <p>${category}</p>
-      </div>
-    `
-  }
 
   init(settings, deleteUserAndData, loginUser, renderTab) {
     this.setTitle('Profile || Slack');
@@ -117,22 +110,25 @@ class ProfileView extends View {
     this._settingsElem.addEventListener('click', settings);
   }
 
-  #isSelectedValue(value, selectOption = 'theme') {
+  #isSelected(value, selectOption = 'theme') {
     value = value.toLowerCase();
+    const { preference } = this._data.data;
+    const { charts } = preference;
+    let isSelected;
 
     if (selectOption === 'theme') {
-      const selectedTheme = this._data.themeMode;
-      if (selectedTheme === value) return 'selected';
+      isSelected = preference.theme;
+      if (isSelected === value) return 'selected';
     }
 
-    if (selectOption === 'chartOne') {
-      const selectedTheme = chartTypes.chartOne;
-      if (selectedTheme === value) return 'selected';
+    if (selectOption === 'ROI') {
+      isSelected = charts.roi
+      if (isSelected === value) return 'selected';
     }
 
-    if (selectOption === 'chartTwo') {
-      const selectedTheme = chartTypes.chartTwo;
-      if (selectedTheme === value) return 'selected'
+    if (selectOption === 'BI') {
+      isSelected = charts.roi
+      if (isSelected === value) return 'selected'
     }
   }
 
@@ -146,6 +142,7 @@ class ProfileView extends View {
           this._edit = true;
           updateURL(`profileEdit&edit=${this._edit}`);
           renderTab();
+          return
         }
         if (btn === 'delete') await this.#deleteAccount(deleteUserAndData, loginUser);
       } catch (err) {
@@ -157,12 +154,12 @@ class ProfileView extends View {
   async #deleteAccount(deleteUserAndData, loginUser) {
     try {
       reAuthUser.showForm();
+
       this._reAuthUserEmailPass = await reAuthUser.getReAuthInfo();
       //hide form
       reAuthUser.hideForm();
 
-      const email = this._reAuthUserEmailPass.reAuthEmail;
-      const password = this._reAuthUserEmailPass.reAuthPass;
+      const { reAuthEmail: email, reAuthPass: password } = this._reAuthUserEmailPass;
 
       //if user cancel the process exit from fn
       if (!email || !password) return;
@@ -171,7 +168,9 @@ class ProfileView extends View {
 
       const userConfirmation = confirm('Are you sure you want to delete your account? once done this operation can\'t be reversed');
 
-      if (!userConfirmation) return this.renderMessage('Great! You decided to stay :)', 'def', 5000);
+      if (!userConfirmation) return this.renderMessage('Great! You decided to stay <3', 'def', 5000);
+
+      this.renderMessage('re-authenticating', 'success', 1500);
 
       //login user again
       const currUser = await loginUser(email, password);

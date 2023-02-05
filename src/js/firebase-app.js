@@ -155,7 +155,7 @@ export const createUserData = async function(user, formData) {
         theme: 'system default',
         charts: {
           roi: 'Doughnut',
-          binaryIncome: 'Line'
+          bi: 'Line'
         }
       }
     });

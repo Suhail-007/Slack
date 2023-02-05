@@ -42,7 +42,7 @@ class reAuthUser {
 
         if (e.target.classList.contains('cancel-btn')) {
           this.hideForm();
-          return reject('Proccess canceled');
+          return reject('Process canceled');
         }
       })
     }).catch(err => {

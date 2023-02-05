@@ -74,7 +74,7 @@ const router = {
         await dashboardView.loader();
         await dashboardView.Delay(1000);
         dashboardView.renderData(user);
-        chartView.createChart();
+        chartView.createChart(user);
 
         dashboardView.init(updateUserData, copyRefLink);
       } catch (err) {
