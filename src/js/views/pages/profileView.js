@@ -9,7 +9,7 @@ class ProfileView extends View {
   _edit = false;
 
   _generateMarkup() {
-    const { personalInfo, extraInfo } = this._data.data;
+    const { personalInfo, extraInfo, preference } = this._data.data;
     return `
       <section class="section section__profile">
         <div class="section__heading tab-heading u-letter-spacing-sm">
@@ -50,8 +50,8 @@ class ProfileView extends View {
     
           <div>
             <h4 class="u-letter-spacing-sm">Chart Settings</h4>
-            ${chartsOptionsMarkup('ROI', 'ROI')}
-            ${chartsOptionsMarkup('BI', 'Binary Income')}
+            ${this.chartsOptionsMarkup(preference.charts.roi, 'ROI', 'roi')}
+            ${this.chartsOptionsMarkup(preference.charts.bi, 'Binary Income', 'bi')}
           </div>
         </div>
         
@@ -70,15 +70,15 @@ class ProfileView extends View {
       `
   }
 
-  chartsOptionsMarkup(chartName, chartTitle) {
+  chartsOptionsMarkup(chart, chartTitle, selected) {
     return `
     <div class='u-LineBar'>
-      <label for="${chartName}">${chartTitle} Chart</label>
-      <select data-select='${chartName}' name="${chartName}" id="${chartName}">
-        <option ${this.#isSelected('doughtnut', chartName)} value="doughnut">Doughnut</option>
-        <option ${this.#isSelected('line', chartName)} value="line">Line</option>
-        <option ${this.#isSelected('bar', chartName)} value="bar">Bar</option>
-        <option ${this.#isSelected('pie', chartName)} value="pie">Pie</option>
+      <label for="${chart}">${chartTitle} Chart</label>
+      <select data-select='${chart}' name="${chart}" id="${chart}">
+        <option ${this.#isSelected('doughtnut', selected)} value="doughnut">Doughnut</option>
+        <option ${this.#isSelected('line', selected)} value="line">Line</option>
+        <option ${this.#isSelected('bar', selected)} value="bar">Bar</option>
+        <option ${this.#isSelected('pie', selected)} value="pie">Pie</option>
       </select>
     </div>`
   }
@@ -111,22 +111,21 @@ class ProfileView extends View {
 
   #isSelected(value, selectOption = 'theme') {
     value = value.toLowerCase();
-    const { preference } = this._data.data;
-    const { charts } = preference;
+    const { charts } = this._data.data.preference;
     let isSelected;
 
     if (selectOption === 'theme') {
-      isSelected = preference.theme;
+      isSelected = this._data.data.preference.theme;
       if (isSelected === value) return 'selected';
     }
 
-    if (selectOption === 'ROI') {
+    if (selectOption === 'roi') {
       isSelected = charts.roi
       if (isSelected === value) return 'selected';
     }
 
-    if (selectOption === 'BI') {
-      isSelected = charts.roi
+    if (selectOption === 'bi') {
+      isSelected = charts.bi
       if (isSelected === value) return 'selected'
     }
   }
@@ -187,10 +186,6 @@ class ProfileView extends View {
       throw err
     }
   }
-
-  // #setUserPic(user) {
-  //   return user.profilePic ? user.profilePic : defaultUserPic;
-  // }
 }
 
 export default new ProfileView();

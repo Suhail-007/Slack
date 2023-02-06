@@ -28,7 +28,6 @@ let isLogin = false;
 const user = {
   //it will be created only when user log in
   // data: {},
-  themeMode: 'system default'
 };
 
 const router = {
@@ -78,6 +77,7 @@ const router = {
         chartView.createChart(user);
 
         dashboardView.init(updateUserData, copyRefLink);
+        initTheme(user)
       } catch (err) {
         console.log(err);
         toggleModal(err);
@@ -93,7 +93,8 @@ const router = {
         profileView.renderData(user);
         profileView.init(settings, deleteUserAndData, loginUser, renderTab);
       } catch (err) {
-        profileView.renderMessage('Failed to load profile, try reloading ' + err, 'error', 3000);
+        console.log(err);
+        // profileView.renderMessage('Failed to load profile, try reloading ' + err, 'error', 3000);
       }
     }
   },
@@ -202,7 +203,8 @@ export const windowLoad = function() {
       renderTab();
       scrollToTop();
       initHome();
-        modalHandler();
+      modalHandler();
+      initTheme(user)
       return
     }
     return renderTab();
@@ -289,7 +291,7 @@ export const settings = function(e) {
 
 const applyTheme = function(elem) {
   //assign event listener to select tag
-  elem.addEventListener('change', (e) => {
+  elem.addEventListener('change', async (e) => {
     //get value
     const selectedValue = e.target.value.toLowerCase();
     const body = document.body;
@@ -308,8 +310,7 @@ const applyTheme = function(elem) {
         return
     }
 
-    user.themeMode = selectedValue;
-    setLocalStorage('selectedTheme', user.themeMode);
+    await updateUserData({ 'preference.theme': selectedValue })
   }, { once: true })
 }
 
@@ -322,14 +323,9 @@ const systemDefaultTheme = function() {
 }
 
 //initialize the theme on pahe load
-export const initThemeLocalStorage = function() {
+export const initTheme = function(user) {
+  const { theme } = user.data.preference;
+
   //apply the theme
-  user.themeMode === 'system default' ? systemDefaultTheme() : user.themeMode === 'light' ? '' : user.themeMode === 'dark' ? document.body.classList.add('dark') : '';
-}
-
-//get saved value from Local Storage
-export const getLocalStorage = function() {
-  const selectedTheme = JSON.parse(localStorage.getItem('selectedTheme'));
-
-  user.themeMode = selectedTheme ? selectedTheme : user.themeMode;
+  theme === 'system default' ? systemDefaultTheme() : theme === 'light' ? '' : theme === 'dark' ? document.body.classList.add('dark') : '';
 }

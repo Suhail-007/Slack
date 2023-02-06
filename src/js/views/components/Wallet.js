@@ -70,9 +70,7 @@ class Wallet extends View {
 
         wallet += +form.walletInfo.value;
 
-        await toggleModal(`Important \n 
-                          Do not leave the page. \n
-                          Adding Money to wallet.`);
+        await toggleModal(`Important! Do not leave the page. Adding Money to wallet.`);
 
         await this.updateAndRender(wallet);
         form.reset();

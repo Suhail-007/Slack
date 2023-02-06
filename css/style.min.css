@@ -497,7 +497,7 @@ li:hover .nav__item--name {
   border-radius: 0.5rem;
   width: 80%;
   height: 13rem;
-  padding-inline: 1.5rem;
+  padding-inline: 3rem;
   background: var(--white-bg);
   transition: opacity 300ms ease-in-out;
 }
