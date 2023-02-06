@@ -497,7 +497,9 @@ li:hover .nav__item--name {
   border-radius: 0.5rem;
   width: 80%;
   height: 13rem;
+  padding-inline: 1.5rem;
   background: var(--white-bg);
+  transition: opacity 300ms ease-in-out;
 }
 .modal__message-cont__message {
   font-size: 1.3rem;

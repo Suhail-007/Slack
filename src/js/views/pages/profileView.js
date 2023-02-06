@@ -1,6 +1,5 @@
 import View from '../View.js'
 import reAuthUser from '../components/reAuthUser.js'
-import { chartTypes, defaultUserPic } from '../../config.js';
 import { updateURL } from '../../helper.js'
 
 class ProfileView extends View {
@@ -19,7 +18,7 @@ class ProfileView extends View {
     
         <div class="profile__cont">
           <figure class="profile__cont-photo">
-            <img class='dp' loading="lazy" src="${this.#setUserPic(extraInfo)}" alt="user profile">
+            <img class='dp' loading="lazy" src="${this._setUserPic(extraInfo)}" alt="user profile">
           </figure>
           <div class='profile__bio'>
             <p class="profile__user-name">${personalInfo.fullname}</p>
@@ -189,9 +188,9 @@ class ProfileView extends View {
     }
   }
 
-  #setUserPic(user) {
-    return user.profilePic ? user.profilePic : defaultUserPic;
-  }
+  // #setUserPic(user) {
+  //   return user.profilePic ? user.profilePic : defaultUserPic;
+  // }
 }
 
 export default new ProfileView();

@@ -41,9 +41,9 @@ const Timeout = function(ms) {
 export const fetchURL = async function(url) {
   try {
     const res = await Promise.race([fetch(url), Timeout(TIMEOUT_SEC)]);
-    
+
     if (!res) throw Error('Data not found, reload page');
-    
+
     const data = await res.json();
 
     return data;
@@ -67,4 +67,18 @@ export function getCurrentDate() {
     month,
     year
   }
+}
+
+export const toggleModal = function(message) {
+  const modal = document.querySelector('[data-modal]');
+  const modalMessage = document.querySelector('[data-modal-message]');
+  modalMessage.textContent = message;
+  modal.classList.add('active');
+}
+
+export const modalHandler = function() {
+  const modal = document.querySelector('[data-modal]');
+  modal.addEventListener('click', e => {
+    if (e.target.closest('.modal')) modal.classList.remove('active');
+  })
 }

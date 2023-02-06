@@ -1,3 +1,5 @@
+import { defaultUserPic } from '../config.js'
+
 export default class View {
   _data;
   _parentElem;
@@ -43,11 +45,13 @@ export default class View {
     this._parentElem.innerHTML = '';
   }
 
+  _setUserPic(user) {
+    return user.profilePic ? user.profilePic : defaultUserPic;
+  }
+
   renderMessage(msg, className, ms) {
     const messageCont = document.querySelector('.message-cont');
     const messageElem = messageCont.querySelector('p');
-
-    // if (className === 'default') this.clear();
 
     messageElem.textContent = msg;
     messageCont.classList.add(className);
@@ -61,7 +65,7 @@ export default class View {
     })
   }
 
-  isFocus(parentElem) {
+  placeholderLabelToggle(parentElem) {
     parentElem.addEventListener('change', e => {
 
       if (e.target.id === 'email' || e.target.id === 'password') {

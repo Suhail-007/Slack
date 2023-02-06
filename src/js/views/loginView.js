@@ -48,7 +48,7 @@ class loginView extends View {
     this._form = document.querySelector('form');
     this.setTitle('Log In || Slack');
     this.renderTab = router;
-    this.isFocus(this._form);
+    this.placeholderLabelToggle(this._form);
     this.getLoginCredentials(loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
     this.formLinkRedirects();
     this.togglePasswordInputType();

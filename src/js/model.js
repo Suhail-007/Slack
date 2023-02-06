@@ -12,9 +12,9 @@ import incomeView from './views/pages/income.js';
 import pageNotFoundView from './views/pages/404.js';
 import editProfileView from './views/pages/editProfile.js';
 
-import { chartTypes, cryptoConfig, stockMarketConfig, API_KEY } from './config.js';
+import { cryptoConfig, stockMarketConfig, API_KEY } from './config.js';
 import logoutUserView from './views/pages/logout.js';
-import { updateURL, NAV_TOGGLE_BTN, setLocalStorage, fetchURL } from './helper.js';
+import { updateURL, NAV_TOGGLE_BTN, setLocalStorage, fetchURL, modalHandler, toggleModal } from './helper.js';
 
 import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, logoutUser, authChanged, deleteUserAndData, unSubAuth, unSubSnapShot, updateUserData, uploadPic, updateUserPassword } from './firebase-app.js';
 
@@ -41,6 +41,7 @@ const router = {
         loginAgainMessage();
 
         loginView.init(renderTab, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
+        modalHandler();
         homeView.removeHeaderFooter();
       } catch (err) {
         loginView.renderMessage(err, 'error', 4000)
@@ -78,7 +79,8 @@ const router = {
 
         dashboardView.init(updateUserData, copyRefLink);
       } catch (err) {
-        // dashboardView.renderMessage('Failed to load dashboard, try reloading ' + err, 'default', 10000);
+        console.log(err);
+        toggleModal(err);
       }
     }
   },
@@ -91,7 +93,6 @@ const router = {
         profileView.renderData(user);
         profileView.init(settings, deleteUserAndData, loginUser, renderTab);
       } catch (err) {
-        console.log(err);
         profileView.renderMessage('Failed to load profile, try reloading ' + err, 'error', 3000);
       }
     }
@@ -201,6 +202,7 @@ export const windowLoad = function() {
       renderTab();
       scrollToTop();
       initHome();
+        modalHandler();
       return
     }
     return renderTab();
@@ -328,11 +330,6 @@ export const initThemeLocalStorage = function() {
 //get saved value from Local Storage
 export const getLocalStorage = function() {
   const selectedTheme = JSON.parse(localStorage.getItem('selectedTheme'));
-  const roi = JSON.parse(localStorage.getItem('chartTypeOne'));
-  const binaryIncome = JSON.parse(localStorage.getItem('chartTypeTwo'));
 
   user.themeMode = selectedTheme ? selectedTheme : user.themeMode;
-
-  chartTypes.chartOne = roi ? roi : 'doughnut';
-  chartTypes.chartTwo = binaryIncome ? binaryIncome : 'line';
 }

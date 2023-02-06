@@ -5,8 +5,8 @@ import doughnutConfig from '../../charts/doughnutChart.js';
 
 class ChartView {
   _parentElement = document.querySelector('main');
-  _doughnutChart;
-  _lineChart;
+  _doughnutChartElem;
+  _lineChartElem;
 
   renderChart() {
     return `
@@ -21,11 +21,15 @@ class ChartView {
   }
 
   createChart(user) {
-    this._doughnutChart = document.getElementById('roi');
-    this._lineChart = document.getElementById('lines');
+    this._doughnutChartElem = document.getElementById('roi');
+    this._lineChartElem = document.getElementById('bi');
 
-    const lineChart = new Chart(this._lineChart, lineConfig);
-    const doughnutChart = new Chart(this._doughnutChart, doughnutConfig);
+    const { charts } = user.data.preference;
+    const doughnutChartConfig = doughnutConfig(charts.roi);
+    const lineChartConfig = lineConfig(charts.bi);
+
+    const doughnutChart = new Chart(this._doughnutChartElem, doughnutChartConfig);
+    const lineChart = new Chart(this._lineChartElem, lineChartConfig);
 
     this._updateChartColor(doughnutChart, 'doughnutChart', user);
     this._updateChartColor(lineChart, 'lineChart', user);
@@ -39,18 +43,18 @@ class ChartView {
 
     switch (chartName) {
       case 'doughnutChart':
-        chart.config.type = charts.ROI;
-        if (charts.ROI === 'line') chart.config.data.datasets[0].borderColor = 'rgba(142, 74, 237, 0.8)';
+        chart.config.type = charts.roi;
+        if (charts.roi === 'line') chart.config.data.datasets[0].borderColor = 'rgba(142, 74, 237, 0.8)';
         break;
       case 'lineChart':
-        if (charts.BI !== 'line') {
+        if (charts.bi !== 'line') {
 
-          chart.config.type = charts.BI;
+          chart.config.type = charts.bi;
           chart.config.data.datasets[0].backgroundColor = [...bgColorArr];
 
           chart.config.data.datasets[0].borderColor = '#fff';
 
-          if (charts.BI === 'line') {
+          if (charts.bi === 'line') {
             chart.config.data.datasets[0].backgroundColor = '#fff';
 
             chart.config.data.datasets[0].borderColor = 'rgba(142, 74, 237, 0.8)';

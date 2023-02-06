@@ -88,9 +88,7 @@ export const updateUserData = async function(field) {
   try {
     const userRef = doc(db, 'users', auth.currentUser.uid);
 
-    await updateDoc(userRef, {
-      'extraInfo.profilePicName': field.name
-    });
+    await updateDoc(userRef, field);
   } catch (err) {
     console.log(err);
     throw err
@@ -161,7 +159,7 @@ export const createUserData = async function(user, formData) {
     });
 
     //if theres no profile don't upload it to servers
-    if (formData.profile.name !== '') await uploadPic(user.uid, formData.profile);
+    if (formData.profile.name !== '') await uploadPic(user, formData.profile);
     return true;
   } catch (err) {
     throw err
@@ -190,14 +188,15 @@ const imagesRef = ref(storage, 'images');
 export const uploadPic = async function(user, file) {
   //it's like this inside of images folder create user(user.id) folder there create a file name(file param) and upload that file to server. i.e images/user/file(same name as user have saved)
   try {
-    const { uid, profilePicName: name } = user.extraInfo;
+    const { name } = file;
 
-    const profilePicRef = ref(storage, `images/${uid}/${file.name}`);
+    const profilePicRef = ref(storage, `images/${user.uid}/${name}`);
 
     const snapshot = await uploadBytes(profilePicRef, file);
     console.log('Image uploaded to server');
     return snapshot
   } catch (err) {
+    console.log(err);
     throw err
   }
 }

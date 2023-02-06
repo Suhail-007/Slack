@@ -1,6 +1,7 @@
 import View from '../View.js';
 import investWallet from '../pages/investWallet.js';
 import { updateUserData } from '../../firebase-app.js';
+import { toggleModal } from '../../helper.js';
 import fundAndReferralView from '../dashboard/fundAndReferralView.js';
 
 class Wallet extends View {
@@ -47,7 +48,7 @@ class Wallet extends View {
   async updateAndRender(value) {
     const totalDepositElem = document.querySelector('[data-deposit-income]');
 
-    await updateUserData({ 'wallet': value });
+    await updateUserData({ 'accountInfo.wallet': value });
     totalDepositElem.innerHTML = '';
     totalDepositElem.innerHTML = `$ ${value}`;
   }
@@ -58,21 +59,23 @@ class Wallet extends View {
     form.addEventListener('submit', async e => {
       e.preventDefault();
       try {
-
         const addBtn = e.target.querySelector('[data-cta="add"]');
-        
+        let { wallet } = user.accountInfo
+
         if (!addBtn) return
 
         if (isNaN(+form.walletInfo.value) || !form.walletInfo.value) return await this.renderMessage('Add number value', 'error', 3000);
 
-        if (typeof user.wallet === 'string') user.wallet = +user.wallet;
+        if (typeof wallet === 'string') wallet = +wallet;
 
-        user.wallet += +form.walletInfo.value;
+        wallet += +form.walletInfo.value;
 
-        await this.renderMessage('Adding Money to wallet', 'def', 3000);
+        await toggleModal(`Important \n 
+                          Do not leave the page. \n
+                          Adding Money to wallet.`);
 
-        await this.updateAndRender(user.wallet);
-
+        await this.updateAndRender(wallet);
+        form.reset();
       } catch (err) {
         throw err
       }

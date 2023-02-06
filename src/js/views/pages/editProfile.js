@@ -1,5 +1,5 @@
 import View from '../View.js'
-import { updateURL } from '../../helper.js';
+import { updateURL, toggleModal, modalHandler } from '../../helper.js';
 import { defaultUserPic } from '../../config.js';
 import FORM from '../components/Form.js';
 import reAuthUser from '../components/reAuthUser.js';
@@ -21,7 +21,7 @@ class EditProfileView extends View {
 
   async init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
     this.setTitle('Edit User Information || Slack')
-    this.renderMessage('Leave the fields empty which you do not wish to update.', 'def', 4000);
+    toggleModal('Leave the fields empty which you do not wish to update');
     this.getEditDetails(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
     this.previewUserProfile();
   }

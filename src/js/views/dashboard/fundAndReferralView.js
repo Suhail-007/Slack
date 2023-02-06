@@ -25,7 +25,7 @@ class FundAndReferralView extends View {
           </span>
         </button>
       </div>
-      ${Wallet.miniWallet(this._data.data.wallet)}
+      ${Wallet.miniWallet(this._data.data.accountInfo.wallet)}
     </section>`;
   }
 
