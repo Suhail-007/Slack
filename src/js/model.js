@@ -94,7 +94,7 @@ const router = {
         profileView.init(settings, deleteUserAndData, loginUser, renderTab);
       } catch (err) {
         console.log(err);
-        // profileView.renderMessage('Failed to load profile, try reloading ' + err, 'error', 3000);
+        profileView.renderMessage('Failed to load profile, try reloading ' + err, 'error', 3000);
       }
     }
   },
@@ -256,37 +256,38 @@ const getStockOpenPrice = async function() {
   }
 }
 
-export const settings = function(e) {
-  const elem = e.target.closest('[data-settings]');
-  let selectElem;
+export const settings = async function(e) {
+  try {
+    const elem = e.target.closest('[data-settings]');
+    const option = e.target.closest(`[data-select]`);
+    let selected;
 
-  if (elem && e.target.closest(`[data-select=theme]`)) {
-    //get select tag 
-    selectElem = e.target.closest(`[data-select=theme]`);
-    applyTheme(selectElem);
-  }
+    switch (option.dataset.select) {
+      case 'theme':
+        selected = e.target.closest(`[data-select=theme]`);
+        applyTheme(selectElem);
+        break;
 
-  if (elem && e.target.closest(`[data-select=chartOne]`)) {
-    selectElem = e.target.closest(`[data-select=chartOne]`);
+      case 'chart':
+        const id = e.target.id;
+        selected = document.querySelector(`#${id}`);
 
-    selectElem.addEventListener('change', (e) => {
-      const selectedValue = e.target.value;
-      chartTypes.roi = selectedValue;
+        selected.addEventListener('change', async (e) => {
+          try {
+            id === 'roi' ? await updateUserData({ 'preference.charts.roi': e.target.value }) : await updateUserData({ 'preference.charts.bi': e.target.value });
+          } catch (err) { throw err }
+        }, { once: true });
+        break;
+    }
+  } catch (err) { throw err }
 
-      setLocalStorage('chartTypeOne', chartTypes.roi);
-    }, { once: true });
-  }
+  // if (elem && e.target.closest(`[data-select=bi]`)) {
+  //   selectElem = e.target.closest(`[data-select=bi]`);
 
-  if (elem && e.target.closest(`[data-select=chartTwo]`)) {
-    selectElem = e.target.closest(`[data-select=chartTwo]`);
-
-    selectElem.addEventListener('change', (e) => {
-      const selectedValue = e.target.value;
-      chartTypes.binaryIncome = selectedValue;
-
-      setLocalStorage('chartTypeTwo', chartTypes.binaryIncome);
-    }, { once: true });
-  }
+  //   selectElem.addEventListener('change', async (e) => {
+  //     await updateUserData({ 'preference.roi': e.target.value });
+  //   }, { once: true });
+  // }
 }
 
 const applyTheme = function(elem) {

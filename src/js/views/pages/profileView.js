@@ -50,8 +50,8 @@ class ProfileView extends View {
     
           <div>
             <h4 class="u-letter-spacing-sm">Chart Settings</h4>
-            ${this.chartsOptionsMarkup(preference.charts.roi, 'ROI', 'roi')}
-            ${this.chartsOptionsMarkup(preference.charts.bi, 'Binary Income', 'bi')}
+            ${this.chartsOptionsMarkup('roi', 'ROI')}
+            ${this.chartsOptionsMarkup('bi', 'Binary Income')}
           </div>
         </div>
         
@@ -74,11 +74,11 @@ class ProfileView extends View {
     return `
     <div class='u-LineBar'>
       <label for="${chart}">${chartTitle} Chart</label>
-      <select data-select='${chart}' name="${chart}" id="${chart}">
-        <option ${this.#isSelected('doughtnut', selected)} value="doughnut">Doughnut</option>
-        <option ${this.#isSelected('line', selected)} value="line">Line</option>
-        <option ${this.#isSelected('bar', selected)} value="bar">Bar</option>
-        <option ${this.#isSelected('pie', selected)} value="pie">Pie</option>
+      <select data-select='chart' name="${chart}" id="${chart}">
+        <option ${this.#isSelected('doughtnut', chart)} value="doughnut">Doughnut</option>
+        <option ${this.#isSelected('line', chart)} value="line">Line</option>
+        <option ${this.#isSelected('bar', chart)} value="bar">Bar</option>
+        <option ${this.#isSelected('pie', chart)} value="pie">Pie</option>
       </select>
     </div>`
   }
@@ -98,10 +98,14 @@ class ProfileView extends View {
   }
 
 
-  init(settings, deleteUserAndData, loginUser, renderTab) {
-    this.setTitle('Profile || Slack');
-    this.#addHandlerSettings(settings);
-    this.#callToActionBtns(deleteUserAndData, loginUser, renderTab);
+  async init(settings, deleteUserAndData, loginUser, renderTab) {
+    try {
+      this.setTitle('Profile || Slack');
+      this.#addHandlerSettings(settings);
+      this.#callToActionBtns(deleteUserAndData, loginUser, renderTab);
+    } catch (err) {
+      throw err
+    }
   }
 
   #addHandlerSettings(settings) {
