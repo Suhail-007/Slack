@@ -68,7 +68,7 @@ class loginView extends View {
     try {
       const { email, password } = userObj;
 
-      if (email) await this.renderMessage('Checking information', 'success', 500);
+      if (email) await this.renderMessage('Checking information', 'success', 1000);
 
       const user = await loginUser(email, password);
 
@@ -83,7 +83,7 @@ class loginView extends View {
       //throw error if user not found
       if (!user) throw Error('You need to login again');
 
-      await this.renderMessage('Getting user data', 'success', 500);
+      await this.renderMessage('Getting user data', 'success', 1000);
 
       //get user data && image from firebase & update user obj
       const res = await getUserDataAndUserPic(this._data);

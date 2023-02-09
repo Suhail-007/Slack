@@ -13,7 +13,7 @@ class EditProfileView extends View {
     <h2 class='u-letter-spacing-sm u-margin-bottom-big section__edit__heading'>
       Edit Your Profile
     </h2>
-      ${FORM.render('Done', `${this.#setUserPic(this._data.data)}`, 'none', 'value=""', 'New Password')}
+      ${FORM.render('Done', `${this._setUserPic(this._data.data.extraInfo)}`, 'none', 'value=""', 'New Password')}
       
       ${reAuthUser.renderData(false)}
     </section>`
@@ -21,7 +21,8 @@ class EditProfileView extends View {
 
   async init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
     this.setTitle('Edit User Information || Slack')
-    toggleModal('Leave the fields empty which you do not wish to update');
+    // toggleModal('Leave the fields empty which you do not wish to update.!');
+
     this.getEditDetails(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
     this.previewUserProfile();
   }
@@ -42,15 +43,30 @@ class EditProfileView extends View {
 
         await this.renderMessage('Updating user data', 'success', 2000);
 
-        const { filteredData, profilePic } = this.filteredUserData(fdObj);
+        let userData = this.filteredUserData(fdObj);
 
-        // await updateUserData(filteredData);
+        for (let k in userData) {
+          // If null or not an object, skip to the next iteration
+          if (!userData[k] || typeof userData[k] !== "object") continue
+
+          // The property is an object
+          // The object had no properties, so delete that property
+          if (Object.keys(userData[k]).length === 0) delete userData[k];
+        }
+
+        console.log(userData);
+
+        //i have to remove empty object from filtered data 
+
+        const profilePic = userData?.extraInfo?.profilePic;
+
+        // await updateUserData(userData);
 
         // if (profilePic.name) await uploadPic(this._data.data, profilePic);
 
         //checks if password fields aren't empty
-        // if (filteredData.password) {
-        //   const isUpdated = await this.updatePassword(loginUser, filteredData.password, updateUserPassword);
+        // if (fdObj.password) {
+        //   const isUpdated = await this.updatePassword(loginUser, fdObj.password, updateUserPassword);
         //   if (!isUpdated) return
         // }
 
@@ -70,32 +86,45 @@ class EditProfileView extends View {
   }
 
   filteredUserData(user) {
-    
-    //i have tk restructure my user data obj in three parts PersonalInfo, ExtraInfo, AccountInfo 
-    
+    //restructure the obj, at this point userData have empty string value 
+    const userData = this.reStructureObj(user);
     let filteredData = {};
-    let profilePic = {};
 
-    for (let key in user) {
-      console.log(key);
+    for (let key in userData) {
 
-      // if (user[key] !== '') {
+      if (typeof userData[key] === 'object' && !Array.isArray(key)) {
 
-      //   if (key === 'profile' && !user[key].name) continue
+        const nObj = userData[key];
+        filteredData[key] = {}
 
-      //   if (key === 'profile' && user[key].name) {
-      //     filteredData.profilePicName = user[key].name;
-      //     profilePic = user[key];
-      //     continue
-      //   }
+        for (let nKeys in nObj) {
 
-      //   filteredData[key] = user[key];
-      // }
+          if (nObj[nKeys] !== '') {
+            filteredData[key][nKeys] = nObj[nKeys]
+          }
+        }
+      }
     }
+    return { ...userData, ...filteredData }
+  }
+
+  reStructureObj(obj) {
     return {
-      filteredData,
-      profilePic
-    };
+      personalInfo: {
+        fullname: obj.fullname,
+        email: obj.email,
+        contact: obj.countryCode + obj.phone,
+        dob: obj.dob,
+        state: obj.state,
+        country: obj.country,
+        gender: obj.gender,
+      },
+      extraInfo: {
+        profilePicName: obj.profile.name,
+        profilePic: '',
+        bio: ''
+      },
+    }
   }
 
   isInputsCorrect(fdObj) {
@@ -152,10 +181,6 @@ class EditProfileView extends View {
     } catch (err) {
       throw err
     }
-  }
-
-  #setUserPic(user) {
-    return user.extraInfo.profilePic ? user.extraInfo.profilePic : defaultUserPic;
   }
 }
 
