@@ -129,15 +129,9 @@ class homeView extends View {
     <footer class="footer">
       <div class="footer__links-cont grid--two-col">
         <a href="#">Contact us</a>
-        <a href="#">Link</a>
         <a href="#">Write to us</a>
-        <a href="#">link</a>
-        <a href="#">Terms</a>
-        <a href="#">link</a>
-        <a href="#">Policy</a>
-        <a href="#">link</a>
+        <a href="#">Terms & Policy</a>
         <a href="#">Author</a>
-        <a href="#">link</a>
       </div>
   
       <p>&copy; Slash 2022-23</p>

@@ -3,6 +3,7 @@ import { firebaseApp } from './firebase-app.js';
 
 class App {
   async init() {
+    model.systemDefaultTheme();
     model.renderFromHistory();
     model.windowLoad();
   }

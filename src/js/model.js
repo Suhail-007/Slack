@@ -172,22 +172,26 @@ const router = {
 }
 
 export const renderTab = async function() {
-  const { page } = getPage();
-  const res = await authChanged(user);
+  try {
+    const { page } = getPage();
+    const res = await authChanged(user);
 
-  //scroll to top of every section
-  scrollToTop();
+    //scroll to top of every section
+    scrollToTop();
 
-  //signout the user if user go back to login page
-  if (page === null && res) logoutUser();
+    //signout the user if user go back to login page
+    if (page === null && res) logoutUser();
 
-  //if user is signout and go back to dashboard redirect user to login page
-  if (!res && page != null && page !== 'signup' && page !== 'reset password') return updateURL('_', true);
+    //if user is signout and go back to dashboard redirect user to login page
+    if (!res && page != null && page !== 'signup' && page !== 'reset password') return updateURL('_', true);
 
-  //if page not found
-  if (router[page] === undefined) await router['404'].view();
+    //if page not found
+    if (router[page] === undefined) await router['404'].view();
 
-  if (router[page]) await router[page].view();
+    if (router[page]) await router[page].view();
+  } catch (err) {
+    toggleModal(err);
+  }
 }
 
 export const renderFromHistory = function() {
@@ -266,7 +270,7 @@ export const settings = async function(e) {
       case 'theme':
         selected = e.target.closest(`[data-select=theme]`);
         applyTheme(selected);
-        await updateUserData({'preference.theme': selected})
+        await updateUserData({ 'preference.theme': selected })
         break;
 
       case 'chart':
@@ -316,7 +320,7 @@ const applyTheme = function(elem) {
   }, { once: true })
 }
 
-const systemDefaultTheme = function() {
+export const systemDefaultTheme = function() {
   const hours = new Date().getHours();
   const isDayTime = hours >= 18 || hours <= 6;
 

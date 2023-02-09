@@ -21,7 +21,7 @@ class EditProfileView extends View {
 
   async init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
     this.setTitle('Edit User Information || Slack')
-    // toggleModal('Leave the fields empty which you do not wish to update.!');
+    toggleModal('Leave the fields empty which you do not wish to update.!');
 
     this.updateData(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
     this.previewUserProfile();
@@ -41,6 +41,8 @@ class EditProfileView extends View {
         if (fullname !== '' && !fullname) throw Error('Please enter full name');
         if (!isPassSame) throw Error('Passwords do not match');
 
+        toggleModal('Updating user data, don\'t leave the page or press back button.');
+        
         await this.renderMessage('Updating user data', 'success', 2000);
 
         const updatedData = this.updatedData(fdObj);
@@ -49,9 +51,9 @@ class EditProfileView extends View {
         if (fdObj.password) await this.updatePassword(updateUserPassword, loginUser, fdObj.password);
 
         const profilePicName = updatedData.extraInfo.profilePicName;
-        
+
         if (!(profilePicName !== this._data.data.extraInfo.profilePicName)) {
-        await uploadPic(this._data.data.extraInfo, fdObj.profile);
+          await uploadPic(this._data.data.extraInfo, fdObj.profile);
         }
 
         //update data after user passwprd is updated
@@ -61,6 +63,7 @@ class EditProfileView extends View {
         homeView.removeHeaderFooter();
         initHome();
 
+        toggleModal('Data updated.!')
         await this.renderMessage('Data updated!', 'success', 2000);
 
         // updateURL('profile');

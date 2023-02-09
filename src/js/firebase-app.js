@@ -165,32 +165,17 @@ export const createUserData = async function(user, formData) {
   }
 }
 
-// export const getUserDataAndUserPic = async function(user) {
-//   const currUser = auth.currentUser;
-//   onSnapshot(doc(db, "users", currUser.uid), async doc => {
-//     try {
-//       if (doc.exists()) {
-//         user.data = await doc.data();
-//         await getUserImage(user.data);
-//         return true
-//       }
-//     } catch (e) {
-//       console.log(e);
-//     }
-//   })
-// }
-
 export const getUserDataAndUserPic = function(user) {
   const currUser = auth.currentUser;
   return new Promise(function(resolve, reject) {
       unSubSnapShot = onSnapshot(doc(db, "users", currUser.uid), async doc => {
         try {
-          if (doc.exists()) {
-            user.data = doc.data();
-            await getUserImage(user.data);
-            resolve(true);
-          }
-          reject(false);
+        if (doc.exists()) {
+          user.data = doc.data();
+          await getUserImage(user.data);
+          resolve(true);
+        }
+        reject(false);
         } catch (err) {
           throw err
         }
@@ -220,6 +205,7 @@ export const uploadPic = async function(user, file) {
 export const getUserImage = async function(user) {
   try {
     const { uid, profilePicName: name } = user.extraInfo;
+
     //if there's no profie pic name ref in user return & use default profile
     if (name === '') return
 
