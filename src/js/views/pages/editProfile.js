@@ -49,11 +49,9 @@ class EditProfileView extends View {
         if (fdObj.password) await this.updatePassword(updateUserPassword, loginUser, fdObj.password);
 
         const profilePicName = updatedData.extraInfo.profilePicName;
-        console.log(profilePicName);
-
-        if (profilePicName !== this._data.data.extraInfo.profilePicName) {
-          console.log(profilePicName);
-          // await uploadPic(this._data.data.extraInfo, fdObj.profile);
+        
+        if (!(profilePicName !== this._data.data.extraInfo.profilePicName)) {
+        await uploadPic(this._data.data.extraInfo, fdObj.profile);
         }
 
         //update data after user passwprd is updated
@@ -65,8 +63,8 @@ class EditProfileView extends View {
 
         await this.renderMessage('Data updated!', 'success', 2000);
 
-        updateURL('profile');
-        renderTab();
+        // updateURL('profile');
+        // renderTab();
       } catch (err) {
         console.log(err);
         await this.renderMessage(err, 'error', 3000);

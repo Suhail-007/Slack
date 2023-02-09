@@ -165,16 +165,35 @@ export const createUserData = async function(user, formData) {
   }
 }
 
+// export const getUserDataAndUserPic = async function(user) {
+//   const currUser = auth.currentUser;
+//   onSnapshot(doc(db, "users", currUser.uid), async doc => {
+//     try {
+//       if (doc.exists()) {
+//         user.data = await doc.data();
+//         await getUserImage(user.data);
+//         return true
+//       }
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   })
+// }
+
 export const getUserDataAndUserPic = function(user) {
   const currUser = auth.currentUser;
   return new Promise(function(resolve, reject) {
       unSubSnapShot = onSnapshot(doc(db, "users", currUser.uid), async doc => {
-        if (doc.exists()) {
-          user.data = doc.data();
-          await getUserImage(user.data);
-          resolve(true);
+        try {
+          if (doc.exists()) {
+            user.data = doc.data();
+            await getUserImage(user.data);
+            resolve(true);
+          }
+          reject(false);
+        } catch (err) {
+          throw err
         }
-        reject(false);
       })
     })
     .catch(err => {
@@ -188,9 +207,8 @@ export const uploadPic = async function(user, file) {
   //it's like this inside of images folder create user(user.id) folder there create a file name(file param) and upload that file to server. i.e images/user/file(same name as user have saved)
   try {
     const { name } = file;
-
     const profilePicRef = ref(storage, `images/${user.uid}/${name}`);
-
+    // // 
     const snapshot = await uploadBytes(profilePicRef, file);
     console.log('Image uploaded to server');
     return snapshot
