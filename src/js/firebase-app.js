@@ -196,7 +196,6 @@ export const uploadPic = async function(user, file) {
     console.log('Image uploaded to server');
     return snapshot
   } catch (err) {
-    console.log(err);
     throw err
   }
 }
@@ -213,7 +212,6 @@ export const getUserImage = async function(user) {
     user.extraInfo.profilePic = await getDownloadURL(profilePicRef);
 
   } catch (err) {
-    console.log(err);
     throw err
   }
 }

@@ -94,7 +94,7 @@ class ProfileView extends View {
         </div>
       `);
     }
-    return arr.sort().join('');
+    return arr.sort().join('\n');
   }
 
 

@@ -265,29 +265,30 @@ export const settings = async function(e) {
     switch (option.dataset.select) {
       case 'theme':
         selected = e.target.closest(`[data-select=theme]`);
-        applyTheme(selectElem);
+        applyTheme(selected);
+        await updateUserData({'preference.theme': selected})
         break;
 
       case 'chart':
         const id = e.target.id;
         selected = document.querySelector(`#${id}`);
 
-        selected.addEventListener('change', async (e) => {
-          try {
-            id === 'roi' ? await updateUserData({ 'preference.charts.roi': e.target.value }) : await updateUserData({ 'preference.charts.bi': e.target.value });
-          } catch (err) { throw err }
-        }, { once: true });
+        selected.addEventListener('change', (e) => {
+          updateChart(e.target.value, id);
+        })
         break;
     }
-  } catch (err) { throw err }
+  } catch (err) {
+    throw err
+  }
+}
 
-  // if (elem && e.target.closest(`[data-select=bi]`)) {
-  //   selectElem = e.target.closest(`[data-select=bi]`);
-
-  //   selectElem.addEventListener('change', async (e) => {
-  //     await updateUserData({ 'preference.roi': e.target.value });
-  //   }, { once: true });
-  // }
+const updateChart = async function(value, id) {
+  try {
+    id === 'roi' ? await updateUserData({ 'preference.charts.roi': value }) : await updateUserData({ 'preference.charts.bi': value });
+  } catch (err) {
+    throw err
+  }
 }
 
 const applyTheme = function(elem) {
