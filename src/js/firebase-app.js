@@ -107,10 +107,9 @@ export const resetUserPass = async function(email) {
   }
 }
 
-export const updateUserPassword = async function(user, password) {
+export const updateUserPassword = async function(user, newPassword) {
   try {
-    await updatePassword(user, password);
-    return true
+    await updatePassword(user, newPassword);
   } catch (err) {
     throw err
   }

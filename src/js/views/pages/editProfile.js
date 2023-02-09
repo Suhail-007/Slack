@@ -23,11 +23,11 @@ class EditProfileView extends View {
     this.setTitle('Edit User Information || Slack')
     // toggleModal('Leave the fields empty which you do not wish to update.!');
 
-    this.getEditDetails(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
+    this.updateData(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
     this.previewUserProfile();
   }
 
-  getEditDetails(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
+  updateData(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
     const form = document.querySelector('form');
     form.addEventListener('submit', async e => {
       try {
@@ -43,41 +43,30 @@ class EditProfileView extends View {
 
         await this.renderMessage('Updating user data', 'success', 2000);
 
-        let userData = this.filteredUserData(fdObj);
-
-        for (let k in userData) {
-          // If null or not an object, skip to the next iteration
-          if (!userData[k] || typeof userData[k] !== "object") continue
-
-          // The property is an object
-          // The object had no properties, so delete that property
-          if (Object.keys(userData[k]).length === 0) delete userData[k];
-        }
-
-        console.log(userData);
-
-        //i have to remove empty object from filtered data 
-
-        const profilePic = userData?.extraInfo?.profilePic;
-
-        // await updateUserData(userData);
-
-        // if (profilePic.name) await uploadPic(this._data.data, profilePic);
+        const updatedData = this.updatedData(fdObj);
 
         //checks if password fields aren't empty
-        // if (fdObj.password) {
-        //   const isUpdated = await this.updatePassword(loginUser, fdObj.password, updateUserPassword);
-        //   if (!isUpdated) return
-        // }
+        if (fdObj.password) await this.updatePassword(updateUserPassword, loginUser, fdObj.password);
+
+        const profilePicName = updatedData.extraInfo.profilePicName;
+        console.log(profilePicName);
+
+        if (profilePicName !== this._data.data.extraInfo.profilePicName) {
+          console.log(profilePicName);
+          // await uploadPic(this._data.data.extraInfo, fdObj.profile);
+        }
+
+        //update data after user passwprd is updated
+        await updateUserData(updatedData);
 
         //remove & re render nav & footer
-        // homeView.removeHeaderFooter();
-        // initHome();
+        homeView.removeHeaderFooter();
+        initHome();
 
         await this.renderMessage('Data updated!', 'success', 2000);
 
-        // updateURL('profile');
-        // renderTab();
+        updateURL('profile');
+        renderTab();
       } catch (err) {
         console.log(err);
         await this.renderMessage(err, 'error', 3000);
@@ -85,27 +74,24 @@ class EditProfileView extends View {
     })
   }
 
-  filteredUserData(user) {
+  updatedData(user) {
     //restructure the obj, at this point userData have empty string value 
     const userData = this.reStructureObj(user);
-    let filteredData = {};
+    const data = { ...this._data.data };
 
     for (let key in userData) {
 
       if (typeof userData[key] === 'object' && !Array.isArray(key)) {
 
         const nObj = userData[key];
-        filteredData[key] = {}
 
-        for (let nKeys in nObj) {
-
-          if (nObj[nKeys] !== '') {
-            filteredData[key][nKeys] = nObj[nKeys]
-          }
-        }
+        //i.e data[personalInfo][fullname]
+        for (let nKeys in nObj)
+          if (nObj[nKeys] !== '') data[key][nKeys] = nObj[nKeys];
       }
     }
-    return { ...userData, ...filteredData }
+
+    return data
   }
 
   reStructureObj(obj) {
@@ -153,7 +139,7 @@ class EditProfileView extends View {
     })
   }
 
-  async updatePassword(loginUser, password, updateUserPassword) {
+  async updatePassword(updateUserPassword, loginUser, password) {
     try {
       reAuthUser.showForm();
       const emailPass = await reAuthUser.getReAuthInfo();
@@ -168,6 +154,7 @@ class EditProfileView extends View {
       const { reAuthEmail: email, reAuthPass: pass } = emailPass;
 
       //login user again
+      const currUser = await loginUser(email, pass);
 
       await this.renderMessage('Updating your password', 'success', 1500);
 
