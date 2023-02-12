@@ -16,11 +16,11 @@ class InvestWallet extends View {
       <div class="invest-wallet__details flex-col">
         <div data-invest-details class="u-LineBar flex-row-AI-cntr-Jsb">
           <p>Total Invested Amount</p>
-          <p>$1000</p>
+          <p>$0</p>
         </div>
         <div data-invest-details class="u-LineBar flex-row-AI-cntr-Jsb">
           <p>Wallet</p>
-          <p>$1000</p>
+          <p>$${Wallet.walletBalance(this._data.data)}</p>
         </div>
       </div>
       <div class="invest-wallet__cards-cont flex-col">
@@ -29,7 +29,7 @@ class InvestWallet extends View {
       </div> 
       
       <div data-wallet>
-        ${Wallet.addFundInputMarkup(this._data.data.wallet)}
+        ${Wallet.addFundInputMarkup(this._data.data)}
       </div>
     </section>
     `
@@ -38,8 +38,8 @@ class InvestWallet extends View {
   async init(getBitcoinDetails, updateUserData, getStockOpenPrice) {
     this.setTitle('Invest wallet || Slack');
     this.updateData = updateUserData;
-    this.setBitcoinPrice(getBitcoinDetails);
-    this.setStockPrice(getStockOpenPrice);
+    await this.setBitcoinPrice(getBitcoinDetails);
+    await this.setStockPrice(getStockOpenPrice);
     this.addActiveClass();
     Wallet.addInputAmount(this._data.data);
   }

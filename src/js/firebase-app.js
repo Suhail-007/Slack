@@ -12,7 +12,7 @@ import {
   signOut,
   deleteUser,
   updatePassword
-} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
+} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
 import {
   getFirestore,
   collection,

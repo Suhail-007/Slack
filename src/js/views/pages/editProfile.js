@@ -42,7 +42,7 @@ class EditProfileView extends View {
         if (!isPassSame) throw Error('Passwords do not match');
 
         toggleModal('Updating user data, don\'t leave the page or press back button.');
-        
+
         await this.renderMessage('Updating user data', 'success', 2000);
 
         const updatedData = this.updatedData(fdObj);
@@ -52,6 +52,7 @@ class EditProfileView extends View {
 
         const profilePicName = updatedData.extraInfo.profilePicName;
 
+        //update profile pic only if uploaded profile pic is different from current profile pic
         if (!(profilePicName !== this._data.data.extraInfo.profilePicName)) {
           await uploadPic(this._data.data.extraInfo, fdObj.profile);
         }
@@ -63,13 +64,13 @@ class EditProfileView extends View {
         homeView.removeHeaderFooter();
         initHome();
 
-        toggleModal('Data updated.!')
+        toggleModal('Data updated.!');
+
         await this.renderMessage('Data updated!', 'success', 2000);
 
-        // updateURL('profile');
-        // renderTab();
+        updateURL('profile');
+        renderTab();
       } catch (err) {
-        console.log(err);
         await this.renderMessage(err, 'error', 3000);
       }
     })

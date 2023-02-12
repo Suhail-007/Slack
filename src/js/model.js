@@ -245,6 +245,7 @@ const getBitcoinDetails = async function() {
   try {
     const url = `${cryptoConfig.url}&apiKey=${API_KEY}`;
     const data = await fetchURL(url);
+    if(!data) toggleModal('Try again after a minute to see prices');
     return data
   } catch (err) {
     throw err
@@ -270,7 +271,6 @@ export const settings = async function(e) {
       case 'theme':
         selected = e.target.closest(`[data-select=theme]`);
         applyTheme(selected);
-        await updateUserData({ 'preference.theme': selected })
         break;
 
       case 'chart':
@@ -282,14 +282,17 @@ export const settings = async function(e) {
         })
         break;
     }
-  } catch (err) {
+  }
+  catch (err) {
     throw err
   }
 }
 
 const updateChart = async function(value, id) {
   try {
+    toggleModal('Please wait updating chart');
     id === 'roi' ? await updateUserData({ 'preference.charts.roi': value }) : await updateUserData({ 'preference.charts.bi': value });
+    toggleModal('Chart updated');
   } catch (err) {
     throw err
   }
@@ -301,6 +304,11 @@ const applyTheme = function(elem) {
     //get value
     const selectedValue = e.target.value.toLowerCase();
     const body = document.body;
+
+    toggleModal('Please wait updating theme');
+
+    //apply theme once database is updated
+    await updateUserData({ 'preference.theme': selectedValue });
 
     switch (selectedValue) {
       case 'system default':
@@ -315,8 +323,8 @@ const applyTheme = function(elem) {
       default:
         return
     }
+    toggleModal('Theme updated');
 
-    await updateUserData({ 'preference.theme': selectedValue })
   }, { once: true })
 }
 

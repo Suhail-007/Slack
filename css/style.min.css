@@ -7,6 +7,7 @@
   --blue-primary: hsla(215, 98%, 55%, 1);
   --cyan-primary: hsla(191, 91%, 48%, 1);
   --bg-footer: rgba(0, 0, 0, .1);
+  --font-SM: hsla(203, 100%, 97%, 1);
   --btn-green: hsla(133, 100%, 85%, 1);
   --btn-green-font: hsla(133, 90%, 24%, 1);
   /*Secondary Values*/
@@ -1208,7 +1209,7 @@ header .nav_container_btn svg {
   letter-spacing: 1px;
 }
 .invest-wallet__details {
-  row-gap: 1rem;
+  row-gap: 2rem;
   font-size: 1.4rem;
 }
 .invest-wallet__details > * {
@@ -1247,12 +1248,13 @@ header .nav_container_btn svg {
 }
 .invest-wallet .invest-card-bitcoin {
   background: hsla(43deg, 74%, 70%, 0.3);
-  box-shadow: 0.3rem 0.5rem 0.5rem 0 hsla(48deg, 83%, 80%, 0.2);
+  box-shadow: 0.2rem 0.2rem 0.5rem 0 hsla(48deg, 83%, 80%, 0.2);
   color: hsl(43deg, 74%, 50%);
 }
 .invest-wallet .invest-card-SM {
   background: hsl(203deg, 100%, 97%);
   box-shadow: 0.3rem 0.5rem 0.5rem 0 var(--shadow-alpha-three);
+  color: var(--font-SM);
 }
 .invest-wallet__heading {
   gap: 0 1rem;
@@ -1416,6 +1418,8 @@ header .nav_container_btn svg {
   --bg-primary: hsla(222, 61%, 6%, 1);
   --bg-primary-second: hsla(235, 72%, 92%, 1);
   --bg-footer: #232323;
+  --font-SM: hsla(203, 100%, 67%, 1);
+  --btn-green: hsla(133, 90%, 24%, 1);
   /*Secondary Values*/
   --bg-secondary: black;
   /* light values*/
