@@ -36,7 +36,7 @@ class resetPassword extends View {
     this.setTitle('Reset Password || Slack')
     this._form = document.querySelector('form');
     this.resetUserPassword(resetUserPass);
-    this.isFocus(this._form);
+    this.placeholderLabelToggle(this._form);
   }
 
   resetUserPassword(resetUserPass) {

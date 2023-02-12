@@ -7,6 +7,7 @@
   --blue-primary: hsla(215, 98%, 55%, 1);
   --cyan-primary: hsla(191, 91%, 48%, 1);
   --bg-footer: rgba(0, 0, 0, .1);
+  --font-SM: hsla(203, 100%, 97%, 1);
   --btn-green: hsla(133, 100%, 85%, 1);
   --btn-green-font: hsla(133, 90%, 24%, 1);
   /*Secondary Values*/
@@ -449,44 +450,64 @@ li:hover .nav__item--name {
   font-size: 1.3rem;
   padding: 0.5rem 1rem;
   display: none;
+  width: 100%;
+  border-radius: 3px;
   transition: all 0.2s ease-in-out;
-}
-.message-cont.def {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: block;
   z-index: 3;
-  padding: 1rem 4rem;
-  border: 1px solid var(--font-primary);
-  border-radius: 0.5rem;
-  background: var(--white-bg);
-  box-shadow: 0 1rem 1rem 1rem var(--shadow-alpha-three);
-}
-.message-cont.def > p {
-  font-size: 1.3rem;
-  color: var(--font-primary);
 }
 .message-cont.error {
-  text-align: center;
-  border-radius: 3px;
   background: var(--error);
-  width: 100%;
   display: block;
 }
 .message-cont.error > p {
   color: red;
 }
 .message-cont.success {
-  text-align: center;
-  border-radius: 3px;
   background: var(--success);
-  width: 100%;
   display: block;
 }
 .message-cont.success > p {
   color: hsl(109deg, 87%, 28%);
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  z-index: 10;
+}
+.modal.active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+.modal__message-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  z-index: 3;
+  border-radius: 0.5rem;
+  width: 80%;
+  height: 13rem;
+  padding-inline: 3rem;
+  background: var(--white-bg);
+  transition: opacity 300ms ease-in-out;
+}
+.modal__message-cont__message {
+  font-size: 1.3rem;
+  color: var(--font-primary);
+}
+.modal__message-cont > button {
+  padding: 0.8rem 1.4rem;
 }
 
 .wallet {
@@ -678,6 +699,13 @@ li:hover .nav__item--name {
 }
 .heading__h4 {
   font-size: 1.5rem;
+}
+
+.section-inconvence > p {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--font-primary);
+  margin-inline: auto;
 }
 
 .section {
@@ -1181,7 +1209,7 @@ header .nav_container_btn svg {
   letter-spacing: 1px;
 }
 .invest-wallet__details {
-  row-gap: 1rem;
+  row-gap: 2rem;
   font-size: 1.4rem;
 }
 .invest-wallet__details > * {
@@ -1220,12 +1248,13 @@ header .nav_container_btn svg {
 }
 .invest-wallet .invest-card-bitcoin {
   background: hsla(43deg, 74%, 70%, 0.3);
-  box-shadow: 0.3rem 0.5rem 0.5rem 0 hsla(48deg, 83%, 80%, 0.2);
+  box-shadow: 0.2rem 0.2rem 0.5rem 0 hsla(48deg, 83%, 80%, 0.2);
   color: hsl(43deg, 74%, 50%);
 }
 .invest-wallet .invest-card-SM {
   background: hsl(203deg, 100%, 97%);
   box-shadow: 0.3rem 0.5rem 0.5rem 0 var(--shadow-alpha-three);
+  color: var(--font-SM);
 }
 .invest-wallet__heading {
   gap: 0 1rem;
@@ -1389,6 +1418,8 @@ header .nav_container_btn svg {
   --bg-primary: hsla(222, 61%, 6%, 1);
   --bg-primary-second: hsla(235, 72%, 92%, 1);
   --bg-footer: #232323;
+  --font-SM: hsla(203, 100%, 67%, 1);
+  --btn-green: hsla(133, 90%, 24%, 1);
   /*Secondary Values*/
   --bg-secondary: black;
   /* light values*/

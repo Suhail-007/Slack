@@ -9,7 +9,7 @@ export function investCard(props) {
         <h4 class="heading heading__h4 bitcoin-heading">${heading}</h4>
       </div>
 
-      <p class='openat'>open <span class='price' data-price>${price}</span></p>
+      <p class='openat'>open <span class='price' data-price='${iconName}'>${price}</span></p>
 
       <span>More</span>
     </div>`

@@ -3,8 +3,7 @@ import { firebaseApp } from './firebase-app.js';
 
 class App {
   async init() {
-    model.getLocalStorage();
-    model.initThemeLocalStorage();
+    model.systemDefaultTheme();
     model.renderFromHistory();
     model.windowLoad();
   }

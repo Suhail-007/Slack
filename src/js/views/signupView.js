@@ -48,7 +48,7 @@ class SignUpView extends View {
 
         //create user data in firebase database
         const userData = await createUserData(user, fdObj);
-
+        
         if (userData) await this.renderMessage('User data created', 'success', 1500);
 
         updateURL('_', true);

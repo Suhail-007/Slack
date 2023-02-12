@@ -3,7 +3,7 @@
   letter-spacing: 1px;
 
   &__details {
-    row-gap: 1rem;
+    row-gap: 2rem;
     font-size: 1.4rem;
 
     &>* {
@@ -51,7 +51,7 @@
   .invest-card-bitcoin {
     //goldenrod
     background: hsla(43, 74%, 70%, .3);
-    box-shadow: .3rem .5rem .5rem 0 hsla(48, 83%, 80%, .2);
+    box-shadow: .2rem .2rem .5rem 0 hsla(48, 83%, 80%, .2);
     color: hsla(43, 74%, 50%, 1);
   }
 
@@ -60,6 +60,7 @@
     //goldenrod
     background: hsla(203, 100%, 97%, 1);
     box-shadow: .3rem .5rem .5rem 0 var(--shadow-alpha-three);
+    color: var(--font-SM);
   }
 
   &__heading {

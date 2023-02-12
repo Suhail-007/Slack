@@ -48,7 +48,7 @@ class loginView extends View {
     this._form = document.querySelector('form');
     this.setTitle('Log In || Slack');
     this.renderTab = router;
-    this.isFocus(this._form);
+    this.placeholderLabelToggle(this._form);
     this.getLoginCredentials(loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
     this.formLinkRedirects();
     this.togglePasswordInputType();
@@ -80,16 +80,17 @@ class loginView extends View {
         throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
       }
 
-      await this.renderMessage('Getting user data', 'success', 2000);
+      //throw error if user not found
+      if (!user) throw Error('You need to login again');
+
+      await this.renderMessage('Getting user data', 'success', 1000);
 
       //get user data && image from firebase & update user obj
       const res = await getUserDataAndUserPic(this._data);
 
-      if (res) await this.renderMessage('Fetched data successfully', 'success', 1500);
+      if (res) await this.renderMessage('Fetched data successfully', 'success', 1000);
 
-      if (!user) throw Error('You need to login again');
-
-      await this.renderMessage('Logging User', 'success', 2000);
+      await this.renderMessage('Logging User', 'success', 1000);
 
       //if users exist update url and call router to redirect users to login page else firebase will throw an error 
 
@@ -97,7 +98,7 @@ class loginView extends View {
       initHome();
 
       updateURL('dashboard');
-      localStorage.setItem('wasLogin', true);
+      sessionStorage.setItem('isLogin', true);
 
       await this.renderTab();
     } catch (err) {

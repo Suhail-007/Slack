@@ -7,11 +7,14 @@ import chartView from './views/dashboard/chartView.js';
 import fundAndReferralView from './views/dashboard/fundAndReferralView.js';
 import profileView from './views/pages/profileView.js';
 import investWalletView from './views/pages/investWallet.js';
+import teamSummary from './views/pages/team-summary.js';
+import incomeView from './views/pages/income.js';
+import pageNotFoundView from './views/pages/404.js';
 import editProfileView from './views/pages/editProfile.js';
 
-import { chartTypes, cryptoConfig } from './config.js';
+import { cryptoConfig, stockMarketConfig, API_KEY } from './config.js';
 import logoutUserView from './views/pages/logout.js';
-import { updateURL, NAV_TOGGLE_BTN, setLocalStorage, getCryptoData } from './helper.js';
+import { updateURL, NAV_TOGGLE_BTN, setLocalStorage, fetchURL, modalHandler, toggleModal } from './helper.js';
 
 import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, logoutUser, authChanged, deleteUserAndData, unSubAuth, unSubSnapShot, updateUserData, uploadPic, updateUserPassword } from './firebase-app.js';
 
@@ -20,12 +23,11 @@ export const copyRefLink = async function(element) {
   await navigator.clipboard.writeText(element.innerText);
 }
 
-let wasLogin = false;
+let isLogin = false;
 
 const user = {
   //it will be created only when user log in
   // data: {},
-  themeMode: 'system default'
 };
 
 const router = {
@@ -36,7 +38,9 @@ const router = {
         await loginView.Delay(500);
         loginView.renderData(user);
         loginAgainMessage();
+
         loginView.init(renderTab, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
+        modalHandler();
         homeView.removeHeaderFooter();
       } catch (err) {
         loginView.renderMessage(err, 'error', 4000)
@@ -70,11 +74,13 @@ const router = {
         await dashboardView.loader();
         await dashboardView.Delay(1000);
         dashboardView.renderData(user);
-        chartView.createChart();
+        chartView.createChart(user);
 
         dashboardView.init(updateUserData, copyRefLink);
+        initTheme(user)
       } catch (err) {
-        // dashboardView.renderMessage('Failed to load dashboard, try reloading ' + err, 'default', 10000);
+        console.log(err);
+        toggleModal(err);
       }
     }
   },
@@ -112,10 +118,38 @@ const router = {
         await investWalletView.loader();
         await investWalletView.Delay(1000);
         investWalletView.renderData(user);
-        await investWalletView.init(bitcoinDetails, updateUserData);
+        await investWalletView.init(getBitcoinDetails, updateUserData, getStockOpenPrice);
 
       } catch (err) {
         console.log(err);
+      }
+    }
+  },
+
+  'team summary': {
+    view: async function() {
+      try {
+        await teamSummary.loader();
+        await teamSummary.Delay(1000);
+        teamSummary.renderData(user);
+        teamSummary.init();
+      } catch (err) {
+        console.log(err);
+        teamSummary.renderMessage(err, 'error', 4000);
+      }
+    }
+  },
+
+  'income': {
+    view: async function() {
+      try {
+        await incomeView.loader();
+        await incomeView.Delay(1000);
+        incomeView.renderData(user);
+        incomeView.init();
+      } catch (err) {
+        console.log(err);
+        incomeView.renderMessage(err, 'error', 4000);
       }
     }
   },
@@ -128,23 +162,36 @@ const router = {
         console.log(err);
       }
     }
+  },
+
+  '404': {
+    view: function() {
+      pageNotFoundView.init();
+    }
   }
 }
 
 export const renderTab = async function() {
-  const { page } = getPage();
-  const res = await authChanged(user);
+  try {
+    const { page } = getPage();
+    const res = await authChanged(user);
 
-  //scroll to top of every section
-  scrollToTop();
+    //scroll to top of every section
+    scrollToTop();
 
-  //signout the user if user go back to login page
-  if (page === null && res) logoutUser();
+    //signout the user if user go back to login page
+    if (page === null && res) logoutUser();
 
-  //if user is signout and go back to dashboard redirect user to login page
-  if (!res && page != null && page !== 'signup' && page !== 'reset password') return updateURL('_', true);
+    //if user is signout and go back to dashboard redirect user to login page
+    if (!res && page != null && page !== 'signup' && page !== 'reset password') return updateURL('_', true);
 
-  if (router[page]) await router[page].view();
+    //if page not found
+    if (router[page] === undefined) await router['404'].view();
+
+    if (router[page]) await router[page].view();
+  } catch (err) {
+    toggleModal(err);
+  }
 }
 
 export const renderFromHistory = function() {
@@ -160,6 +207,8 @@ export const windowLoad = function() {
       renderTab();
       scrollToTop();
       initHome();
+      modalHandler();
+      initTheme(user)
       return
     }
     return renderTab();
@@ -180,10 +229,9 @@ const scrollToTop = function() {
 }
 
 const loginAgainMessage = function() {
-  if (wasLogin === true) {
+  const isLogin = sessionStorage.getItem('isLogin');
+  if (isLogin) {
     loginView.renderMessage('Login again to access your account', 'error', 4000);
-    localStorage.setItem('wasLogin',
-      false);
   }
 }
 
@@ -193,55 +241,74 @@ const getPage = function() {
   return { page }
 }
 
-const bitcoinDetails = async function() {
+const getBitcoinDetails = async function() {
   try {
-    const url = `${cryptoConfig.url}&apiKey=${cryptoConfig.API_KEY}`;
-    const data = await getCryptoData(url);
-    return { data }
+    const url = `${cryptoConfig.url}&apiKey=${API_KEY}`;
+    const data = await fetchURL(url);
+    if(!data) toggleModal('Try again after a minute to see prices');
+    return data
+  } catch (err) {
+    throw err
+  }
+}
+const getStockOpenPrice = async function() {
+  try {
+    // const url = `${stockMarketConfig.url}&apiKey=${API_KEY}`;
+    // const data = await fetchURL(url);
+    // return { data }
   } catch (err) {
     throw err
   }
 }
 
-export const settings = function(e) {
-  const elem = e.target.closest('[data-settings]');
-  let selectElem;
+export const settings = async function(e) {
+  try {
+    const elem = e.target.closest('[data-settings]');
+    const option = e.target.closest(`[data-select]`);
+    let selected;
 
-  if (elem && e.target.closest(`[data-select=theme]`)) {
-    //get select tag 
-    selectElem = e.target.closest(`[data-select=theme]`);
-    applyTheme(selectElem);
+    switch (option.dataset.select) {
+      case 'theme':
+        selected = e.target.closest(`[data-select=theme]`);
+        applyTheme(selected);
+        break;
+
+      case 'chart':
+        const id = e.target.id;
+        selected = document.querySelector(`#${id}`);
+
+        selected.addEventListener('change', (e) => {
+          updateChart(e.target.value, id);
+        })
+        break;
+    }
   }
-
-  if (elem && e.target.closest(`[data-select=chartOne]`)) {
-    selectElem = e.target.closest(`[data-select=chartOne]`);
-
-    selectElem.addEventListener('change', (e) => {
-      const selectedValue = e.target.value;
-      chartTypes.roi = selectedValue;
-
-      setLocalStorage('chartTypeOne', chartTypes.roi);
-    }, { once: true });
+  catch (err) {
+    throw err
   }
+}
 
-  if (elem && e.target.closest(`[data-select=chartTwo]`)) {
-    selectElem = e.target.closest(`[data-select=chartTwo]`);
-
-    selectElem.addEventListener('change', (e) => {
-      const selectedValue = e.target.value;
-      chartTypes.binaryIncome = selectedValue;
-
-      setLocalStorage('chartTypeTwo', chartTypes.binaryIncome);
-    }, { once: true });
+const updateChart = async function(value, id) {
+  try {
+    toggleModal('Please wait updating chart');
+    id === 'roi' ? await updateUserData({ 'preference.charts.roi': value }) : await updateUserData({ 'preference.charts.bi': value });
+    toggleModal('Chart updated');
+  } catch (err) {
+    throw err
   }
 }
 
 const applyTheme = function(elem) {
   //assign event listener to select tag
-  elem.addEventListener('change', (e) => {
+  elem.addEventListener('change', async (e) => {
     //get value
     const selectedValue = e.target.value.toLowerCase();
     const body = document.body;
+
+    toggleModal('Please wait updating theme');
+
+    //apply theme once database is updated
+    await updateUserData({ 'preference.theme': selectedValue });
 
     switch (selectedValue) {
       case 'system default':
@@ -256,13 +323,12 @@ const applyTheme = function(elem) {
       default:
         return
     }
+    toggleModal('Theme updated');
 
-    user.themeMode = selectedValue;
-    setLocalStorage('selectedTheme', user.themeMode);
   }, { once: true })
 }
 
-const systemDefaultTheme = function() {
+export const systemDefaultTheme = function() {
   const hours = new Date().getHours();
   const isDayTime = hours >= 18 || hours <= 6;
 
@@ -271,20 +337,9 @@ const systemDefaultTheme = function() {
 }
 
 //initialize the theme on pahe load
-export const initThemeLocalStorage = function() {
+export const initTheme = function(user) {
+  const { theme } = user.data.preference;
+
   //apply the theme
-  user.themeMode === 'system default' ? systemDefaultTheme() : user.themeMode === 'light' ? '' : user.themeMode === 'dark' ? document.body.classList.add('dark') : '';
-}
-
-//get saved value from Local Storage
-export const getLocalStorage = function() {
-  const selectedTheme = JSON.parse(localStorage.getItem('selectedTheme'));
-  const roi = JSON.parse(localStorage.getItem('chartTypeOne'));
-  const binaryIncome = JSON.parse(localStorage.getItem('chartTypeTwo'));
-
-  user.themeMode = selectedTheme ? selectedTheme : user.themeMode;
-
-  chartTypes.chartOne = roi ? roi : 'doughnut';
-  chartTypes.chartTwo = binaryIncome ? binaryIncome : 'line';
-  wasLogin = localStorage.getItem('wasLogin', wasLogin);
+  theme === 'system default' ? systemDefaultTheme() : theme === 'light' ? '' : theme === 'dark' ? document.body.classList.add('dark') : '';
 }

@@ -1,5 +1,5 @@
 import View from '../View.js'
-import { updateURL } from '../../helper.js';
+import { updateURL, toggleModal, modalHandler } from '../../helper.js';
 import { defaultUserPic } from '../../config.js';
 import FORM from '../components/Form.js';
 import reAuthUser from '../components/reAuthUser.js';
@@ -13,7 +13,7 @@ class EditProfileView extends View {
     <h2 class='u-letter-spacing-sm u-margin-bottom-big section__edit__heading'>
       Edit Your Profile
     </h2>
-      ${FORM.render('Done', `${this.#setUserPic(this._data.data)}`, 'none', 'value=""', 'New Password')}
+      ${FORM.render('Done', `${this._setUserPic(this._data.data.extraInfo)}`, 'none', 'value=""', 'New Password')}
       
       ${reAuthUser.renderData(false)}
     </section>`
@@ -21,40 +21,50 @@ class EditProfileView extends View {
 
   async init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
     this.setTitle('Edit User Information || Slack')
-    await this.renderMessage('Leave the fields empty which you do not wish to update.', 'def', 4000);
-    this.getEditDetails(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
+    toggleModal('Leave the fields empty which you do not wish to update.!');
+
+    this.updateData(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
     this.previewUserProfile();
   }
 
-  getEditDetails(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
+  updateData(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
     const form = document.querySelector('form');
     form.addEventListener('submit', async e => {
       try {
         e.preventDefault();
         const fd = new FormData(form);
         const fdObj = Object.fromEntries(fd);
+
+        //check if entered data is Valid
         const { fullname, isPassSame } = this.isInputsCorrect(fdObj);
 
-        if (!fullname) throw Error('Please enter full name');
+        if (fullname !== '' && !fullname) throw Error('Please enter full name');
         if (!isPassSame) throw Error('Passwords do not match');
+
+        toggleModal('Updating user data, don\'t leave the page or press back button.');
 
         await this.renderMessage('Updating user data', 'success', 2000);
 
-        const { filteredData, profilePic } = this.filteredUserData(fdObj);
-
-        await updateUserData(filteredData);
-
-        if (profilePic.name) await uploadPic(this._data.data.uid, profilePic);
+        const updatedData = this.updatedData(fdObj);
 
         //checks if password fields aren't empty
-        if (filteredData.password) {
-          const isUpdated = await this.updatePassword(loginUser, filteredData.password, updateUserPassword);
-          if (!isUpdated) return
+        if (fdObj.password) await this.updatePassword(updateUserPassword, loginUser, fdObj.password);
+
+        const profilePicName = updatedData.extraInfo.profilePicName;
+
+        //update profile pic only if uploaded profile pic is different from current profile pic
+        if (!(profilePicName !== this._data.data.extraInfo.profilePicName)) {
+          await uploadPic(this._data.data.extraInfo, fdObj.profile);
         }
+
+        //update data after user passwprd is updated
+        await updateUserData(updatedData);
 
         //remove & re render nav & footer
         homeView.removeHeaderFooter();
         initHome();
+
+        toggleModal('Data updated.!');
 
         await this.renderMessage('Data updated!', 'success', 2000);
 
@@ -66,34 +76,50 @@ class EditProfileView extends View {
     })
   }
 
-  filteredUserData(user) {
-    let filteredData = {};
-    let profilePic = {};
-    for (let key in user) {
-      if (user[key] !== '') {
+  updatedData(user) {
+    //restructure the obj, at this point userData have empty string value 
+    const userData = this.reStructureObj(user);
+    const data = { ...this._data.data };
 
-        if (key === 'profile' && !user[key].name) continue
+    for (let key in userData) {
 
-        if (key === 'profile' && user[key].name) {
-          filteredData.profilePicName = user[key].name;
-          profilePic = user[key];
-          continue
-        }
+      if (typeof userData[key] === 'object' && !Array.isArray(key)) {
 
-        filteredData[key] = user[key];
+        const nObj = userData[key];
+
+        //i.e data[personalInfo][fullname]
+        for (let nKeys in nObj)
+          if (nObj[nKeys] !== '') data[key][nKeys] = nObj[nKeys];
       }
     }
+
+    return data
+  }
+
+  reStructureObj(obj) {
     return {
-      filteredData,
-      profilePic
-    };
+      personalInfo: {
+        fullname: obj.fullname,
+        email: obj.email,
+        contact: obj.countryCode + obj.phone,
+        dob: obj.dob,
+        state: obj.state,
+        country: obj.country,
+        gender: obj.gender,
+      },
+      extraInfo: {
+        profilePicName: obj.profile.name,
+        profilePic: '',
+        bio: ''
+      },
+    }
   }
 
   isInputsCorrect(fdObj) {
     let { fullname, password, Repassword: rePassword } = fdObj;
 
     //check if user enter fullname
-    fullname = fullname.includes(' ');
+    if (fullname !== '') fullname = fullname.includes(' ');
 
     //check if passwords is same
     password = password.split('');
@@ -115,7 +141,7 @@ class EditProfileView extends View {
     })
   }
 
-  async updatePassword(loginUser, password, updateUserPassword) {
+  async updatePassword(updateUserPassword, loginUser, password) {
     try {
       reAuthUser.showForm();
       const emailPass = await reAuthUser.getReAuthInfo();
@@ -130,6 +156,7 @@ class EditProfileView extends View {
       const { reAuthEmail: email, reAuthPass: pass } = emailPass;
 
       //login user again
+      const currUser = await loginUser(email, pass);
 
       await this.renderMessage('Updating your password', 'success', 1500);
 
@@ -143,10 +170,6 @@ class EditProfileView extends View {
     } catch (err) {
       throw err
     }
-  }
-
-  #setUserPic(user) {
-    return user.extraInfo.profilePic ? user.extraInfo.profilePic : defaultUserPic;
   }
 }
 

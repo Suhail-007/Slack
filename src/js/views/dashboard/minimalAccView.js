@@ -1,4 +1,5 @@
-import View from '../View.js'
+import View from '../View.js';
+import Wallet from '../components/Wallet.js';
 
 class MinimalAccView extends View {
   _parentElem = document.querySelector('main');
@@ -26,7 +27,7 @@ class MinimalAccView extends View {
         </div>     
         <div class="acc_total_cont">
           <p class="total acc_total">Wallet</p>
-          <p class="total_amount acc_amount">$2000</p>
+          <p class="total_amount acc_amount">$${Wallet.walletBalance(this._data.data)}</p>
         </div>
       </div>
 

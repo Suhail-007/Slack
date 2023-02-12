@@ -15,7 +15,7 @@ class reAuthUser {
             <label for='reAuthEmail' class='reAuth__reAuthForm__Pass'>Email (Enter your account Email)</label>
             <input id='reAuthEmail' type='email' required name='reAuthEmail' class='input__label__input reAuth__reAuthForm__input reAuth__reAuthForm__email' placeholder='Current Email'>
             
-            <label for='reAuthPass' class='reAuth__reAuthForm__Pass'>Password (Enter your account password)</label>
+            <label for='reAuthPass' class='reAuth__reAuthForm__Pass'>Password (Enter your current password)</label>
             <input id='reAuthPass' type='text' required name='reAuthPass' class='input__label__input reAuth__reAuthForm__input reAuth__reAuthForm__pass' placeholder='Current Password'>
           </div>
           
@@ -42,7 +42,7 @@ class reAuthUser {
 
         if (e.target.classList.contains('cancel-btn')) {
           this.hideForm();
-          return reject('Proccess canceled');
+          return reject('Process canceled');
         }
       })
     }).catch(err => {

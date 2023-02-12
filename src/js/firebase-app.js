@@ -12,7 +12,7 @@ import {
   signOut,
   deleteUser,
   updatePassword
-} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
+} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
 import {
   getFirestore,
   collection,
@@ -87,6 +87,7 @@ export const createUserSendEmailVerif = async function(email, password) {
 export const updateUserData = async function(field) {
   try {
     const userRef = doc(db, 'users', auth.currentUser.uid);
+
     await updateDoc(userRef, field);
   } catch (err) {
     console.log(err);
@@ -106,10 +107,9 @@ export const resetUserPass = async function(email) {
   }
 }
 
-export const updateUserPassword = async function(user, password) {
+export const updateUserPassword = async function(user, newPassword) {
   try {
-    await updatePassword(user, password);
-    return true
+    await updatePassword(user, newPassword);
   } catch (err) {
     throw err
   }
@@ -129,25 +129,36 @@ export const logoutUser = async function() {
 export const createUserData = async function(user, formData) {
   try {
     await setDoc(doc(db, 'users', user.uid), {
-      fullname: formData.fullname,
-      email: formData.email,
-      contact: formData.countryCode + formData.phone,
-      dob: formData.dob,
-      state: formData.state,
-      country: formData.country,
-      gender: formData.gender,
-      wallet: 0,
-
+      personalInfo: {
+        fullname: formData.fullname,
+        email: formData.email,
+        contact: formData.countryCode + formData.phone,
+        dob: formData.dob,
+        state: formData.state,
+        country: formData.country,
+        gender: formData.gender,
+      },
       extraInfo: {
         profilePicName: formData.profile.name,
         profilePic: '',
         uid: user.uid,
         bio: 'Write something about yourself'
+      },
+      accountInfo: {
+        wallet: 0,
+        movements: [],
+      },
+      preference: {
+        theme: 'system default',
+        charts: {
+          roi: 'Doughnut',
+          bi: 'Line'
+        }
       }
     });
 
     //if theres no profile don't upload it to servers
-    if (formData.profile.name !== '') await uploadPic(user.uid, formData.profile);
+    if (formData.profile.name !== '') await uploadPic(user, formData.profile);
     return true;
   } catch (err) {
     throw err
@@ -158,12 +169,16 @@ export const getUserDataAndUserPic = function(user) {
   const currUser = auth.currentUser;
   return new Promise(function(resolve, reject) {
       unSubSnapShot = onSnapshot(doc(db, "users", currUser.uid), async doc => {
+        try {
         if (doc.exists()) {
           user.data = doc.data();
           await getUserImage(user.data);
           resolve(true);
         }
         reject(false);
+        } catch (err) {
+          throw err
+        }
       })
     })
     .catch(err => {
@@ -176,8 +191,9 @@ const imagesRef = ref(storage, 'images');
 export const uploadPic = async function(user, file) {
   //it's like this inside of images folder create user(user.id) folder there create a file name(file param) and upload that file to server. i.e images/user/file(same name as user have saved)
   try {
-    const profilePicRef = ref(storage, `images/${user}/${file.name}`);
-
+    const { name } = file;
+    const profilePicRef = ref(storage, `images/${user.uid}/${name}`);
+    // // 
     const snapshot = await uploadBytes(profilePicRef, file);
     console.log('Image uploaded to server');
     return snapshot
@@ -189,6 +205,7 @@ export const uploadPic = async function(user, file) {
 export const getUserImage = async function(user) {
   try {
     const { uid, profilePicName: name } = user.extraInfo;
+
     //if there's no profie pic name ref in user return & use default profile
     if (name === '') return
 
@@ -198,7 +215,6 @@ export const getUserImage = async function(user) {
     user.extraInfo.profilePic = await getDownloadURL(profilePicRef);
 
   } catch (err) {
-    console.log(err);
     throw err
   }
 }

@@ -33,9 +33,9 @@ class homeView extends View {
     
           <!----this is for desktop version---->
           <div class=" user_profile_container user_profile_container_desktop hidden">
-            <p data-username class="username"><a href='/profile'>${this._data.fullname}</a></p>
+            <p data-username class="username"><a href='/profile'>${this._data.personalInfo.fullname}</a></p>
             <div class="user_profile">
-              <img data-profile-img class='dp' loading="lazy" src="${this.#setUserPic(this._data.extraInfo)}" alt="user profile">
+              <img data-profile-img class='dp' loading="lazy" src="${this._setUserPic(this._data.extraInfo)}" alt="user profile">
             </div>
           </div>
         </div>
@@ -49,9 +49,9 @@ class homeView extends View {
     
           <nav class="navbar" data-nav>
             <div data-nav='profile' class="user-profile-container user-profile-container_mob nav-link">
-              <p data-username class="user-profile-container_username">${this._data.fullname}</p>
+              <p data-username class="user-profile-container_username">${this._data.personalInfo.fullname}</p>
               <div class="user-profile-container_profile">
-                <img data-profile-img class='dp' loading="lazy" src="${this.#setUserPic(this._data.extraInfo)}" alt="user profile">
+                <img data-profile-img class='dp' loading="lazy" src="${this._setUserPic(this._data.extraInfo)}" alt="user profile">
               </div>
             </div>
     
@@ -94,7 +94,7 @@ class homeView extends View {
                 <span class="nav__item--name">withdrawal wallet</span>
               </li>
               <li data-nav="deposit funds transfer" class="nav_item nav-link">
-                <svg class="i">
+                <svg>
                   <use href="./src/images/icons.svg#icon-wallet"></use>
                 </svg>
                 <span class="nav__item--name">deposit funds transfer</span>
@@ -129,23 +129,13 @@ class homeView extends View {
     <footer class="footer">
       <div class="footer__links-cont grid--two-col">
         <a href="#">Contact us</a>
-        <a href="#">Link</a>
         <a href="#">Write to us</a>
-        <a href="#">link</a>
-        <a href="#">Terms</a>
-        <a href="#">link</a>
-        <a href="#">Policy</a>
-        <a href="#">link</a>
+        <a href="#">Terms & Policy</a>
         <a href="#">Author</a>
-        <a href="#">link</a>
       </div>
   
       <p>&copy; Slash 2022-23</p>
     </footer>`
-  }
-
-  #setUserPic(user) {
-    return user.profilePic ? user.profilePic : defaultUserPic;
   }
 
   navTab(renderTab, updateURL) {

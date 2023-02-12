@@ -4,6 +4,7 @@ import { investCard } from '../components/Cards.js'
 
 class InvestWallet extends View {
   #coin;
+  #openPrice
   _parentElem = document.querySelector('main');
 
   _generateMarkup() {
@@ -15,11 +16,11 @@ class InvestWallet extends View {
       <div class="invest-wallet__details flex-col">
         <div data-invest-details class="u-LineBar flex-row-AI-cntr-Jsb">
           <p>Total Invested Amount</p>
-          <p>$1000</p>
+          <p>$0</p>
         </div>
         <div data-invest-details class="u-LineBar flex-row-AI-cntr-Jsb">
           <p>Wallet</p>
-          <p>$1000</p>
+          <p>$${Wallet.walletBalance(this._data.data)}</p>
         </div>
       </div>
       <div class="invest-wallet__cards-cont flex-col">
@@ -28,24 +29,49 @@ class InvestWallet extends View {
       </div> 
       
       <div data-wallet>
-        ${Wallet.addFundInputMarkup(this._data.data.wallet)}
+        ${Wallet.addFundInputMarkup(this._data.data)}
       </div>
     </section>
     `
   }
 
-  async init(bitcoinDetails, updateUserData) {
+  async init(getBitcoinDetails, updateUserData, getStockOpenPrice) {
     this.setTitle('Invest wallet || Slack');
-    this.#coin = await bitcoinDetails();
     this.updateData = updateUserData;
-    this.setCoinPrice();
+    await this.setBitcoinPrice(getBitcoinDetails);
+    await this.setStockPrice(getStockOpenPrice);
     this.addActiveClass();
     Wallet.addInputAmount(this._data.data);
   }
 
-  setCoinPrice() {
-    const price = document.querySelector('[data-price]');
-    price.textContent = `$${this.#coin.data.open}`;
+  async setBitcoinPrice(getBitcoinDetails) {
+    try {
+      const res = await getBitcoinDetails();
+      const price = document.querySelector('[data-price="bitcoin"]');
+
+      this.#coin = res;
+
+      if (!this.#coin) return price.textContent = 'Closed';
+      price.textContent = `$${this.#coin.open}`;
+    } catch (err) {
+      throw err
+    }
+  }
+
+  async setStockPrice(getStockOpenPrice) {
+    try {
+      const res = await getStockOpenPrice()
+      const price = document.querySelector('[data-price="SM"]');
+
+      //Couldn't find stock market api 
+      this.#openPrice = res;
+
+      if (!this.#openPrice) return price.textContent = 'Closed';
+
+      price.textContent = `$ ${this.#openPrice}`;
+    } catch (err) {
+      throw err
+    }
   }
 
   addActiveClass() {

@@ -10,7 +10,8 @@ class logoutView extends View {
 
     document.write('Redirecting to login page');
     await this.Delay(1000);
-
+    
+    sessionStorage.removeItem('isLogin');
     updateURL('_', true);
   }
 }

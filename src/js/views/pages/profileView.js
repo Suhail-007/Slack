@@ -1,6 +1,5 @@
 import View from '../View.js'
 import reAuthUser from '../components/reAuthUser.js'
-import { chartTypes, defaultUserPic } from '../../config.js';
 import { updateURL } from '../../helper.js'
 
 class ProfileView extends View {
@@ -10,7 +9,7 @@ class ProfileView extends View {
   _edit = false;
 
   _generateMarkup() {
-    const data = this._data.data;
+    const { personalInfo, extraInfo, preference } = this._data.data;
     return `
       <section class="section section__profile">
         <div class="section__heading tab-heading u-letter-spacing-sm">
@@ -19,17 +18,17 @@ class ProfileView extends View {
     
         <div class="profile__cont">
           <figure class="profile__cont-photo">
-            <img class='dp' loading="lazy" src="${this.#setUserPic(data)}" alt="user profile">
+            <img class='dp' loading="lazy" src="${this._setUserPic(extraInfo)}" alt="user profile">
           </figure>
           <div class='profile__bio'>
-            <p class="profile__user-name">${data.fullname}</p>
-            <p class="profile__bio">To never give up...</p>
+            <p class="profile__user-name">${personalInfo.fullname}</p>
+            <p class="profile__bio">${extraInfo.bio}</p>
           </div>
         </div>
     
         <div class="profile__info">
           <h3 class="tab-heading u-letter-spacing-sm">User Info</h3>
-          ${this.userInfo(data)}
+          ${this.userInfo(personalInfo)}
         </div>
     
         <hr>
@@ -42,34 +41,17 @@ class ProfileView extends View {
             <div class='u-LineBar'>
               <label for="theme">Theme</label>
               <select data-select='theme' name="theme" id="theme">
-                <option ${this.#isSelectedValue('system default')} value="system default">system default</option>
-                <option ${this.#isSelectedValue('light')} value="light">light</option>
-                <option ${this.#isSelectedValue('dark')} value="dark">dark</option>
+                <option ${this.#isSelected('system default')} value="system default">system default</option>
+                <option ${this.#isSelected('light')} value="light">light</option>
+                <option ${this.#isSelected('dark')} value="dark">dark</option>
               </select>
             </div>
           </div>
     
           <div>
             <h4 class="u-letter-spacing-sm">Chart Settings</h4>
-            <div class='u-LineBar'>
-              <label for="chartOne">Chart 1</label>
-              <select data-select='chartOne' name="chartOne" id="chartOne">
-                <option ${this.#isSelectedValue('doughtnut', 'chartOne')} value="doughnut">Doughnut</option>
-                <option ${this.#isSelectedValue('line', 'chartOne')} value="line">Line</option>
-                <option ${this.#isSelectedValue('bar', 'chartOne')} value="bar">Bar</option>
-                <option ${this.#isSelectedValue('pie', 'chartOne')} value="pie">Pie</option>
-              </select>
-            </div>
-              
-            <div class='u-LineBar'>
-              <label for="chartTwo">Chart 2</label>
-              <select data-select='chartTwo' name="chartTwo" id="chartTwo">
-                <option ${this.#isSelectedValue('line', 'chartTwo')} value="line">Line</option>
-                <option ${this.#isSelectedValue('bar', 'chartTwo')} value="bar">Bar</option>
-                <option ${this.#isSelectedValue('pie', 'chartTwo')} value="pie">Pie</option>
-                <option ${this.#isSelectedValue('doughnut', 'chartTwo')} value="doughnut">Doughnut</option>
-              </select>
-            </div>
+            ${this.chartsOptionsMarkup('roi', 'ROI')}
+            ${this.chartsOptionsMarkup('bi', 'Binary Income')}
           </div>
         </div>
         
@@ -81,33 +63,49 @@ class ProfileView extends View {
           <button type='button' data-cta='edit' class='btn btn-edit section__profile__buttons--edit'>Edit Profile</button>
           <button type='button' data-cta='delete' class='btn btn-delete section__profile__buttons--delete'>Delete Profile</button>
         </div>
+        
+        <!------ReAuthForm---->
         ${reAuthUser.renderData(false)}
       </section>
       `
   }
 
+  chartsOptionsMarkup(chart, chartTitle, selected) {
+    return `
+    <div class='u-LineBar'>
+      <label for="${chart}">${chartTitle} Chart</label>
+      <select data-select='chart' name="${chart}" id="${chart}">
+        <option ${this.#isSelected('doughtnut', chart)} value="doughnut">Doughnut</option>
+        <option ${this.#isSelected('line', chart)} value="line">Line</option>
+        <option ${this.#isSelected('bar', chart)} value="bar">Bar</option>
+        <option ${this.#isSelected('pie', chart)} value="pie">Pie</option>
+      </select>
+    </div>`
+  }
+
   userInfo(user) {
     const arr = [];
-     for (let key in user) {
-       if(typeof user[key] === 'object' && !Array.isArray(user[key]) || key === 'fullname') continue
-      arr.push(this.LineBar(key, user[key]));
+    for (let key in user) {
+      if (key === 'fullname') continue
+      arr.push(`
+        <div class='u-LineBar'>
+          <p>${key}</p>
+          <p>${user[key]}</p>
+        </div>
+      `);
     }
-    return arr.sort().join('');
+    return arr.sort().join('\n');
   }
 
-  LineBar(catNam, category) {
-    return `
-      <div class='u-LineBar'>
-        <p>${catNam}</p>
-        <p>${category}</p>
-      </div>
-    `
-  }
 
-  init(settings, deleteUserAndData, loginUser, renderTab) {
-    this.setTitle('Profile || Slack');
-    this.#addHandlerSettings(settings);
-    this.#callToActionBtns(deleteUserAndData, loginUser, renderTab);
+  async init(settings, deleteUserAndData, loginUser, renderTab) {
+    try {
+      this.setTitle('Profile || Slack');
+      this.#addHandlerSettings(settings);
+      this.#callToActionBtns(deleteUserAndData, loginUser, renderTab);
+    } catch (err) {
+      throw err
+    }
   }
 
   #addHandlerSettings(settings) {
@@ -115,22 +113,24 @@ class ProfileView extends View {
     this._settingsElem.addEventListener('click', settings);
   }
 
-  #isSelectedValue(value, selectOption = 'theme') {
+  #isSelected(value, selectOption = 'theme') {
     value = value.toLowerCase();
+    const { charts } = this._data.data.preference;
+    let isSelected;
 
     if (selectOption === 'theme') {
-      const selectedTheme = this._data.themeMode;
-      if (selectedTheme === value) return 'selected';
+      isSelected = this._data.data.preference.theme;
+      if (isSelected === value) return 'selected';
     }
 
-    if (selectOption === 'chartOne') {
-      const selectedTheme = chartTypes.chartOne;
-      if (selectedTheme === value) return 'selected';
+    if (selectOption === 'roi') {
+      isSelected = charts.roi
+      if (isSelected === value) return 'selected';
     }
 
-    if (selectOption === 'chartTwo') {
-      const selectedTheme = chartTypes.chartTwo;
-      if (selectedTheme === value) return 'selected'
+    if (selectOption === 'bi') {
+      isSelected = charts.bi
+      if (isSelected === value) return 'selected'
     }
   }
 
@@ -144,6 +144,7 @@ class ProfileView extends View {
           this._edit = true;
           updateURL(`profileEdit&edit=${this._edit}`);
           renderTab();
+          return
         }
         if (btn === 'delete') await this.#deleteAccount(deleteUserAndData, loginUser);
       } catch (err) {
@@ -155,12 +156,12 @@ class ProfileView extends View {
   async #deleteAccount(deleteUserAndData, loginUser) {
     try {
       reAuthUser.showForm();
+
       this._reAuthUserEmailPass = await reAuthUser.getReAuthInfo();
       //hide form
       reAuthUser.hideForm();
 
-      const email = this._reAuthUserEmailPass.reAuthEmail;
-      const password = this._reAuthUserEmailPass.reAuthPass;
+      const { reAuthEmail: email, reAuthPass: password } = this._reAuthUserEmailPass;
 
       //if user cancel the process exit from fn
       if (!email || !password) return;
@@ -169,7 +170,9 @@ class ProfileView extends View {
 
       const userConfirmation = confirm('Are you sure you want to delete your account? once done this operation can\'t be reversed');
 
-      if (!userConfirmation) return this.renderMessage('Great! You decided to stay :)', 'def', 5000);
+      if (!userConfirmation) return this.renderMessage('Great! You decided to stay <3', 'def', 5000);
+
+      this.renderMessage('re-authenticating', 'success', 1500);
 
       //login user again
       const currUser = await loginUser(email, password);
@@ -180,16 +183,12 @@ class ProfileView extends View {
 
       if (isDeleted) await this.renderMessage('Account deleted, Redirecting to login page', 'success', 2000);
 
-      //set wasLogin to false 
-      localStorage.setItem('wasLogin', false);
+      //set isLogin to false 
+      sessionStorage.removeItem('isLogin');
       updateURL('_', true);
     } catch (err) {
       throw err
     }
-  }
-
-  #setUserPic(user) {
-    return user.extraInfo.profilePic ? user.extraInfo.profilePic : defaultUserPic;
   }
 }
 

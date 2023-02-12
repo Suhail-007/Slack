@@ -1,5 +1,3 @@
-import { chartTypes } from '../config.js';
-
 //xAxisData
 const months = [
   'January',
@@ -16,38 +14,40 @@ const months = [
 //yAxisData
 const data = [0.30, 0.45, 0.35, 0.55, 0.35, 0.5, 0.80, 0.60, 0.2];
 
-const config = {
-  type: chartTypes.binaryIncome,
-  data: {
-    labels: months,
-    datasets: [{
-      data: data,
-      borderColor: 'rgba(142, 74, 237, 0.8)',
-      backgroundColor: '#fff',
-      fill: {
-        target: 'origin',
-        above: (context) => {
-          const chart = context.chart;
-          const { data, chartArea, scales, ctx } = chart;
-          if (!chartArea) return null
-          return belowGradient(ctx, data, chartArea, scales)
+function config(chartType) {
+  return {
+    type: chartType,
+    data: {
+      labels: months,
+      datasets: [{
+        data: data,
+        borderColor: 'rgba(142, 74, 237, 0.8)',
+        backgroundColor: '#fff',
+        fill: {
+          target: 'origin',
+          above: (context) => {
+            const chart = context.chart;
+            const { data, chartArea, scales, ctx } = chart;
+            if (!chartArea) return null
+            return belowGradient(ctx, data, chartArea, scales)
+          }
+        },
+          }],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          text: 'Binary Income || Direct Income'
         }
-      },
-      }],
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false
-      },
-      title: {
-        display: true,
-        text: 'Binary Income || Direct Income'
       }
-    }
-  },
-};
+    },
+  }
+}
 
 function belowGradient(ctx, data, chartArea, scales) {
   const { left, right, top, bottom, width, height } = chartArea;
@@ -60,4 +60,4 @@ function belowGradient(ctx, data, chartArea, scales) {
   return gradientBackground;
 }
 
-export default config
+export default config;
