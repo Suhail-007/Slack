@@ -51,6 +51,8 @@ const router = {
   'signup': {
     view: async function() {
       try {
+        await signUpView.loader();
+        await resetPassView.Delay(500);
         signUpView.renderData(user);
         signUpView.init(createUserSendEmailVerif, createUserData);
       } catch (err) {

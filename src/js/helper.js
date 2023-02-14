@@ -56,13 +56,11 @@ export function getCurrentDate() {
   const date = new Date()
   const year = date.getFullYear();
   let month = date.getMonth() + 1;
-  const monthDays = new Date(year, date.getMonth() + 1, 0).getDate();
   const day = date.getDate();
 
   month = month < 10 ? '0' + month : month;
 
   return {
-    date: `${year}-${month}-${monthDays}`,
     day,
     month,
     year

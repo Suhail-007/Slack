@@ -37,6 +37,9 @@ class SignUpView extends View {
         const fdObj = Object.fromEntries(fd);
         const { fullname, isPassSame } = this.isInputsCorrect(fdObj);
 
+        //disabled button
+        this.toggleBtnState();
+
         if (!fullname) throw Error('Please enter full name');
         if (!isPassSame) throw Error('Passwords do not match');
 
@@ -48,11 +51,12 @@ class SignUpView extends View {
 
         //create user data in firebase database
         const userData = await createUserData(user, fdObj);
-        
+
         if (userData) await this.renderMessage('User data created', 'success', 1500);
 
         updateURL('_', true);
       } catch (err) {
+        this.toggleBtnState(true);
         await this.renderMessage(err, 'error', 3000);
       }
     })
@@ -62,13 +66,12 @@ class SignUpView extends View {
     let { fullname, password, Repassword: rePassword } = fdObj;
 
     //check if user enter fullname
-    fullname = fullname.includes(' ');
+    fullname = fullname.trim().includes(' ');
 
     //check if passwords is same
     password = password.split('');
     rePassword = rePassword.split('');
     const isPassSame = password.every((l, i) => rePassword[i] === l);
-    console.log(fullname, isPassSame);
     return { fullname, isPassSame }
   }
 

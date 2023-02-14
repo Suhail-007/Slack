@@ -38,6 +38,9 @@ class EditProfileView extends View {
         //check if entered data is Valid
         const { fullname, isPassSame } = this.isInputsCorrect(fdObj);
 
+        //disabled btn
+        this.toggleBtnState();
+        
         if (fullname !== '' && !fullname) throw Error('Please enter full name');
         if (!isPassSame) throw Error('Passwords do not match');
 
@@ -71,6 +74,7 @@ class EditProfileView extends View {
         updateURL('profile');
         renderTab();
       } catch (err) {
+        this.toggleBtnState(true);
         await this.renderMessage(err, 'error', 3000);
       }
     })
@@ -119,7 +123,7 @@ class EditProfileView extends View {
     let { fullname, password, Repassword: rePassword } = fdObj;
 
     //check if user enter fullname
-    if (fullname !== '') fullname = fullname.includes(' ');
+    if (fullname !== '') fullname = fullname.trim().includes(' ');
 
     //check if passwords is same
     password = password.split('');

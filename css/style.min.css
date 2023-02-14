@@ -352,6 +352,12 @@ li:hover .nav__item--name {
   text-transform: capitalize;
 }
 
+button:disabled {
+  background: #CBCBCB;
+  color: #000;
+  border: 1px solid #CBCBCB;
+}
+
 .btn {
   border: none;
   border-radius: 0.5rem;
@@ -618,7 +624,6 @@ li:hover .nav__item--name {
 }
 .input__label__input {
   width: 100%;
-  font-family: inherit;
   font-size: 1.3rem;
   padding: 1rem 1rem 1rem 1.3rem;
   border: none;
@@ -1389,7 +1394,6 @@ header .nav_container_btn svg {
 .signup__form > input {
   margin-bottom: 1rem;
   padding: 0.7rem 1rem;
-  font-family: inherit;
   font-size: 1.3rem;
 }
 .signup__form > label {
@@ -1402,7 +1406,6 @@ header .nav_container_btn svg {
 .signup__form__phone-input :first-child {
   flex-basis: 5rem;
   width: 100%;
-  font-family: inherit;
   font-size: 1.3rem;
   padding: 0.8rem;
   outline: 0.5px solid var(--font-primary);
