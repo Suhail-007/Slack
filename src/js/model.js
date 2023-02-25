@@ -330,18 +330,18 @@ const applyTheme = function(elem) {
   }, { once: true })
 }
 
-export const systemDefaultTheme = function() {
+export const systemDefaultTheme = function(theme) {
   const hours = new Date().getHours();
   const isDayTime = hours >= 18 || hours <= 6;
 
-  if (isDayTime) document.body.classList.add('dark');
+  if (isDayTime && theme === 'dark') document.body.classList.add('dark');
   else document.body.classList.remove('dark');
 }
 
 //initialize the theme on pahe load
 export const initTheme = function(user) {
   const { theme } = user.data.preference;
-
+  
   //apply the theme
-  theme === 'system default' ? systemDefaultTheme() : theme === 'light' ? '' : theme === 'dark' ? document.body.classList.add('dark') : '';
+  theme === 'system default' ? systemDefaultTheme(theme) : theme === 'light' ? '' : theme === 'dark' ? document.body.classList.add('dark') : '';
 }

@@ -21,8 +21,8 @@
   }
 
   @if $breakpoint==tab-port {
-    //900px
-    @media only screen and (min-width: 56.25em) {
+    //768px
+    @media only screen and (min-width: 48em) {
       @content
     }
   }

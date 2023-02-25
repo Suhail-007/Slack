@@ -99,7 +99,7 @@ html {
     font-size: 80%;
   }
 }
-@media only screen and (min-width: 56.25em) {
+@media only screen and (min-width: 48em) {
   html {
     font-size: 85%;
   }
@@ -883,7 +883,13 @@ button:disabled {
   padding: 5rem 1.5rem;
 }
 .section__bottom-ref__img-cont {
-  width: 35rem;
+  display: flex;
+  /* width: 35rem; */
+}
+@media only screen and (min-width: 48em) {
+  .section__bottom-ref__img-cont {
+    width: 100%;
+  }
 }
 .section__bottom-ref__img-cont img {
   width: 100%;
