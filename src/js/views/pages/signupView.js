@@ -1,7 +1,7 @@
-import View from './View.js';
-import FORM from './components/Form.js';
-import { updateURL } from '../helper.js'
-import { defaultUserPic } from '../config.js'
+import View from '../View.js';
+import FORM from '../components/Form.js';
+import { updateURL } from '../../helper.js'
+import { defaultUserPic } from '../../config.js'
 
 class SignUpView extends View {
   _parentElem = document.querySelector('main');

@@ -79,11 +79,29 @@
 html {
   /* 1REM === 10PX */
   font-size: 62.5%;
-  /* 1REM === 5px*/
+  /* 1REM === 5PX*/
+  /* 1REM ===8PX */
+  /*1REM === 12.8PX*/
+  /*1REM === 13.6PX*/
 }
 @media only screen and (max-width: 21.9em) {
   html {
     font-size: 45%;
+  }
+}
+@media only screen and (min-width: 37.5em) {
+  html {
+    font-size: 50%;
+  }
+}
+@media only screen and (min-width: 43.75em) {
+  html {
+    font-size: 80%;
+  }
+}
+@media only screen and (min-width: 56.25em) {
+  html {
+    font-size: 85%;
   }
 }
 
@@ -131,6 +149,10 @@ main {
   min-height: 100vh;
   background-color: var(--white-bg);
   box-shadow: 0.1rem 0 0.5rem 0 var(--shadow-alpha-five);
+  /*   @include respon(l-phone) {
+    margin-top: 6rem;
+    margin-left: 6rem;
+  } */
 }
 main::after, main::before {
   content: "";

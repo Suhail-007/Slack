@@ -8,10 +8,25 @@
 html {
   /* 1REM === 10PX */
   font-size: 62.5%;
-  
-  /* 1REM === 5px*/
-  @include respon(sm-phone) {
+
+  /* 1REM === 5PX*/
+  @include respon(phone) {
     font-size: 45%;
+  }
+
+  /* 1REM ===8PX */
+  @include respon(m-phone) {
+    font-size: 50%;
+  }
+
+  /*1REM === 12.8PX*/
+  @include respon(l-phone) {
+    font-size: 80%;
+  }
+
+  /*1REM === 13.6PX*/
+  @include respon(tab-port) {
+    font-size: 85%;
   }
 }
 
@@ -60,6 +75,11 @@ main {
   min-height: 100vh;
   background-color: var(--white-bg);
   box-shadow: .1rem 0 .5rem 0 var(--shadow-alpha-five);
+
+  /*   @include respon(l-phone) {
+  margin-top: 6rem;
+  margin-left: 6rem;
+} */
 
   &::after,
   &::before {

@@ -1,5 +1,5 @@
-import View from './View.js';
-import { defaultUserPic } from '../config.js';
+import View from '../View.js';
+import { defaultUserPic } from '../../config.js';
 
 class homeView extends View {
   _parentElem = document.body;
