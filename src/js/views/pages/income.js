@@ -7,6 +7,8 @@ class Income extends View {
   _generateMarkup() {
     return `
     <section class='section section-income'>
+      <h2>Income</h2>
+    
       ${Inconvenience()}
       <div class="message-cont">
         <p class="message"></p>

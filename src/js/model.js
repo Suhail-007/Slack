@@ -247,7 +247,7 @@ const getBitcoinDetails = async function() {
   try {
     const url = `${cryptoConfig.url}&apiKey=${API_KEY}`;
     const data = await fetchURL(url);
-    if(!data) toggleModal('Try again after a minute to see prices');
+    if (!data) toggleModal('Try again after a minute to see prices');
     return data
   } catch (err) {
     throw err
@@ -330,11 +330,11 @@ const applyTheme = function(elem) {
   }, { once: true })
 }
 
-export const systemDefaultTheme = function(theme) {
+export const systemDefaultTheme = function() {
   const hours = new Date().getHours();
   const isDayTime = hours >= 18 || hours <= 6;
 
-  if (isDayTime && theme === 'dark') document.body.classList.add('dark');
+  if (isDayTime) document.body.classList.add('dark');
   else document.body.classList.remove('dark');
 }
 
@@ -343,5 +343,5 @@ export const initTheme = function(user) {
   const { theme } = user.data.preference;
   
   //apply the theme
-  theme === 'system default' ? systemDefaultTheme(theme) : theme === 'light' ? '' : theme === 'dark' ? document.body.classList.add('dark') : '';
+  theme === 'system default' ? systemDefaultTheme() : theme === 'light' ? document.body.classList.remove('dark') : theme === 'dark' ? document.body.classList.add('dark') : '';
 }

@@ -7,13 +7,7 @@ class PageNotFound extends View {
   init() {
     this.setTitle('Page Not Found');
 
-    document.write('Page not found');
-
-    setTimeout(() => {
-      history.back();
-      location.reload()
-    }, 2000);
-
+    document.write('Page not found \n Go back and refresh the page');
   }
 }
 

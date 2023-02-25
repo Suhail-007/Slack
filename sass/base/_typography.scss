@@ -32,7 +32,11 @@ li {
   text-transform: capitalize;
   text-align: left;
   justify-self: start;
-
+  
+  @include respon(tab-port) {
+    font-size: 1.6rem;
+  }
+  
   & p {
     margin: 0;
     margin-bottom: 1rem;
@@ -42,6 +46,10 @@ li {
 /* Statistics view */
 .statistics_boxes {
   font-size: 1.3rem;
+
+  @include respon(tab-port) {
+    font-size: 1.6rem;
+  }
 }
 
 .dollar-percentage p {
@@ -51,6 +59,10 @@ li {
   font-weight: 500;
   color: var(--font-primary);
   position: relative;
+
+  @include respon(tab-port) {
+    font-size: 1.6rem;
+  }
 }
 
 .icon_heading p,

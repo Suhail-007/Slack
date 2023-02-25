@@ -76,10 +76,10 @@ main {
   background-color: var(--white-bg);
   box-shadow: .1rem 0 .5rem 0 var(--shadow-alpha-five);
 
-  /*   @include respon(l-phone) {
+  @include respon(tab-port) {
   margin-top: 6rem;
   margin-left: 6rem;
-} */
+  }
 
   &::after,
   &::before {

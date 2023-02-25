@@ -149,10 +149,12 @@ main {
   min-height: 100vh;
   background-color: var(--white-bg);
   box-shadow: 0.1rem 0 0.5rem 0 var(--shadow-alpha-five);
-  /*   @include respon(l-phone) {
+}
+@media only screen and (min-width: 48em) {
+  main {
     margin-top: 6rem;
     margin-left: 6rem;
-  } */
+  }
 }
 main::after, main::before {
   content: "";
@@ -218,6 +220,11 @@ li:hover .nav__item--name {
   text-align: left;
   justify-self: start;
 }
+@media only screen and (min-width: 48em) {
+  .acc_div > div:last-child {
+    font-size: 1.6rem;
+  }
+}
 .acc_div > div:last-child p {
   margin: 0;
   margin-bottom: 1rem;
@@ -227,6 +234,11 @@ li:hover .nav__item--name {
 .statistics_boxes {
   font-size: 1.3rem;
 }
+@media only screen and (min-width: 48em) {
+  .statistics_boxes {
+    font-size: 1.6rem;
+  }
+}
 
 .dollar-percentage p {
   margin: 0;
@@ -235,6 +247,11 @@ li:hover .nav__item--name {
   font-weight: 500;
   color: var(--font-primary);
   position: relative;
+}
+@media only screen and (min-width: 48em) {
+  .dollar-percentage p {
+    font-size: 1.6rem;
+  }
 }
 
 .icon_heading p,
@@ -464,13 +481,19 @@ button:disabled {
   overflow: hidden;
   position: relative;
 }
+@media only screen and (min-width: 48em) {
+  .card--horizontal {
+    width: 16rem;
+    height: 22rem;
+  }
+}
 .card--vertical {
   display: flex;
   padding: 1.5rem;
   position: relative;
   border-radius: 0.5rem;
   color: var(--font-primary);
-  box-shadow: 0.3rem 0.3rem 0.5rem 0 var();
+  box-shadow: 0.3rem 0.3rem 0.5rem 0;
 }
 
 .message-cont {
@@ -763,6 +786,12 @@ button:disabled {
   -moz-border-radius: 2rem;
   border-radius: 1.8rem;
 }
+@media only screen and (min-width: 48em) {
+  .acc_div {
+    width: 27rem;
+    height: 15rem;
+  }
+}
 .acc_div div:first-child {
   background: #fff;
   display: flex;
@@ -815,8 +844,8 @@ button:disabled {
   border-radius: 0.5rem;
   padding: 0.3rem;
   width: 2.8rem;
-  position: relative;
   height: 2.8rem;
+  position: relative;
   box-shadow: 0.3rem 0.3rem 0.5rem 0 rgba(0, 0, 0, 0.1);
 }
 .box .icon_heading > div > svg {
@@ -884,7 +913,6 @@ button:disabled {
 }
 .section__bottom-ref__img-cont {
   display: flex;
-  /* width: 35rem; */
 }
 @media only screen and (min-width: 48em) {
   .section__bottom-ref__img-cont {
@@ -1225,7 +1253,7 @@ header .nav_container_btn svg {
   display: none;
 }
 
-.canvas div {
+.canvas-cont div {
   margin: 4.8rem 0;
 }
 

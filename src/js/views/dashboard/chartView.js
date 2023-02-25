@@ -10,7 +10,7 @@ class ChartView {
 
   renderChart() {
     return `
-      <section class="canvas"
+      <section class="canvas-cont"
         <div class="roi_income_chart_cont">
           <canvas id="roi"></canvas>
         </div>

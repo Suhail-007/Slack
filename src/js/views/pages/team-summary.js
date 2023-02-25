@@ -7,6 +7,8 @@ class TeamSummary extends View {
   _generateMarkup() {
     return `
     <section class='section section-team'>
+    <h2>Team Summary</h2>
+    
       ${Inconvenience()}
       
       <div class="message-cont">
