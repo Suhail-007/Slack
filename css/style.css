@@ -44,7 +44,7 @@
   --nav-bg: rgba(255, 255, 255, 0.9);
   --border-primary: hsl(258, 91%, 63%);
   --layer-one: rgba(255, 255, 255, 1);
-  --layer-one-secondary: --bg-primary;
+--layer-one: --bg-primary;
   --layer-two-shadow: hsla(221, 93%, 89%, 1);
   --input-bg: #fff;
   /* RGBA COLOR VALUES*/
@@ -857,7 +857,7 @@ header .nav_container_btn svg {
   --nav-bg: #000;
   --border-primary: hsl(258, 91%, 63%);
   --layer-one: rgba(105, 105, 105, 1);
-  --layer-one-secondary: hsla(221, 0%, 26%, 1);
+--layer-one: hsla(221, 0%, 26%, 1);
   --layer-two-shadow: hsla(221, 0%, 45%, 1);
   --input-bg: hsla(221, 1%, 15%, 0.5);
   /* RGBA COLOR VALUES*/

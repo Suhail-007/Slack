@@ -33,4 +33,10 @@
       @content
     }
   }
+  
+  @if $breakpoint==sm-desktop {
+    @media only screen and (min-width: 64em) {
+      @content
+    }
+  }
 }

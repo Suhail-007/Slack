@@ -7,8 +7,8 @@
   --blue-primary: hsla(215, 98%, 55%, 1);
   --cyan-primary: hsla(191, 91%, 48%, 1);
   --bg-footer: rgba(0, 0, 0, .1);
-  --font-SM: hsla(203, 100%, 97%, 1);
-  
+      --color-SM: hsla(203, 22%, 42%, 1);
+
   --btn-green: hsla(133, 100%, 85%, 1);
   --btn-green-font: hsla(133, 90%, 24%, 1);
 
@@ -21,7 +21,7 @@
   --bg-primary-alpha-six: hsla(221, 93%, 89%, 0.6);
   --bg-primary-alpha-seven: hsla(221, 93%, 89%, 0.7);
   --bg-primary-alpha-eight: hsla(221, 93%, 89%, 0.8);
-  
+
   --btn-green-alpha-five: hsla(133, 80%, 90%, .5);
 
   --purple-primary-alpha-two: hsla(258, 91%, 63%, 0.2);
@@ -62,8 +62,7 @@
   --white-bg: #fff;
   --nav-bg: rgba(255, 255, 255, 0.9);
   --border-primary: hsl(258, 91%, 63%);
-  --layer-one: rgba(255, 255, 255, 1);
-  --layer-one-secondary: --bg-primary;
+  --layer-one: --bg-primary;
   --layer-two-shadow: hsla(221, 93%, 89%, 1);
   --input-bg: #fff;
 

@@ -10,9 +10,9 @@ class ChartView {
 
   renderChart() {
     return `
-      <section class="canvas-cont"
+      <section class="canvas-cont">
         <div class="roi_income_chart_cont">
-          <canvas id="roi"></canvas>
+          <canvas width="300px" height="300px" id="roi"></canvas>
         </div>
         <div class="bi_income_chart_cont">
           <canvas width="300px" height="300px" id="bi"></canvas>

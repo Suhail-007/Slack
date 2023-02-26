@@ -36,6 +36,11 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.5rem 0;
+
+    @include respon(sm-desktop) {
+      max-width: 50rem;
+      justify-items: center;
+    }
   }
 
   .section__settings>div>div {

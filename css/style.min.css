@@ -7,7 +7,7 @@
   --blue-primary: hsla(215, 98%, 55%, 1);
   --cyan-primary: hsla(191, 91%, 48%, 1);
   --bg-footer: rgba(0, 0, 0, .1);
-  --font-SM: hsla(203, 100%, 97%, 1);
+  --color-SM: hsla(203, 22%, 42%, 1);
   --btn-green: hsla(133, 100%, 85%, 1);
   --btn-green-font: hsla(133, 90%, 24%, 1);
   /*Secondary Values*/
@@ -48,8 +48,7 @@
   --white-bg: #fff;
   --nav-bg: rgba(255, 255, 255, 0.9);
   --border-primary: hsl(258, 91%, 63%);
-  --layer-one: rgba(255, 255, 255, 1);
-  --layer-one-secondary: --bg-primary;
+  --layer-one: --bg-primary;
   --layer-two-shadow: hsla(221, 93%, 89%, 1);
   --input-bg: #fff;
   /* RGBA COLOR VALUES*/
@@ -102,6 +101,11 @@ html {
 @media only screen and (min-width: 48em) {
   html {
     font-size: 85%;
+  }
+}
+@media only screen and (min-width: 64em) {
+  html {
+    font-size: 95%;
   }
 }
 
@@ -175,6 +179,17 @@ main::after {
   left: -5%;
   z-index: -2;
   box-shadow: -0.1rem 0.1rem 1rem 0.5rem var(--layer-two-shadow);
+}
+
+.canvas-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media only screen and (min-width: 64em) {
+  .canvas-cont canvas {
+    width: 35rem !important;
+  }
 }
 
 .footer {
@@ -585,6 +600,11 @@ button:disabled {
   font-size: 1.7rem;
   box-shadow: 0.5rem 0.5rem 1rem 0.1rem var(--blue-primary-alpha-three);
 }
+@media only screen and (min-width: 64em) {
+  .wallet__deposit-income {
+    max-width: 60%;
+  }
+}
 .wallet__input-cont {
   padding: 0 1rem;
   font-size: 1.8rem;
@@ -602,6 +622,11 @@ button:disabled {
   align-self: start;
   transform: translateX(-1rem);
 }
+@media only screen and (min-width: 64em) {
+  .wallet__input-cont__input-btns > label {
+    align-self: center;
+  }
+}
 .wallet__input-cont__input-btns > input {
   border-radius: 1.1rem;
   border: none;
@@ -611,6 +636,11 @@ button:disabled {
   font-size: 1.6rem;
   background: var(--bg-primary-alpha-eight);
   color: var(--font-primary);
+}
+@media only screen and (min-width: 64em) {
+  .wallet__input-cont__input-btns > input {
+    max-width: 60%;
+  }
 }
 .wallet__input-cont__input-btns > input:focus, .wallet__input-cont__input-btns > input:hover {
   outline: 3px solid var(--blue-primary-alpha-three);
@@ -628,7 +658,11 @@ button:disabled {
   display: grid;
   grid-template-columns: 1fr;
   border-top-left-radius: 4rem;
+  overflow: hidden;
   position: relative;
+  /*   @include respon(sm-desktop){
+    max-width: 50rem;
+  } */
 }
 .form__section__logo--lg {
   width: 100%;
@@ -649,11 +683,16 @@ button:disabled {
 }
 
 .form__container {
-  width: 100%;
+  width: 99%;
   display: grid;
   transform: translateY(-4rem);
   border-radius: 3.5rem 3.5rem 0 0;
   border-top: 0.5px solid #CACACA;
+  /*   @include respon(sm-desktop) {
+    border: none;
+    border-radius: initial;
+    transform: translateY(-100%);
+  } */
 }
 .form__container--blur {
   backdrop-filter: blur(20px);
@@ -1273,6 +1312,12 @@ header .nav_container_btn svg {
   row-gap: 2rem;
   font-size: 1.4rem;
 }
+@media only screen and (min-width: 64em) {
+  .invest-wallet__details {
+    flex-direction: row !important;
+    column-gap: 1rem;
+  }
+}
 .invest-wallet__details > * {
   background: var(--bg-primary-alpha-five);
   box-shadow: 0.5rem 0.5rem 0.8rem 0 var(--shadow-alpha-three);
@@ -1315,7 +1360,7 @@ header .nav_container_btn svg {
 .invest-wallet .invest-card-SM {
   background: hsl(203deg, 100%, 97%);
   box-shadow: 0.3rem 0.5rem 0.5rem 0 var(--shadow-alpha-three);
-  color: var(--font-SM);
+  color: var(--color-SM);
 }
 .invest-wallet__heading {
   gap: 0 1rem;
@@ -1387,6 +1432,13 @@ header .nav_container_btn svg {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.5rem 0;
+}
+@media only screen and (min-width: 64em) {
+  .section__profile .profile__info,
+  .section__profile .section__settings > div {
+    max-width: 50rem;
+    justify-items: center;
+  }
 }
 .section__profile .section__settings > div > div {
   display: flex;
@@ -1477,7 +1529,7 @@ header .nav_container_btn svg {
   --bg-primary: hsla(222, 61%, 6%, 1);
   --bg-primary-second: hsla(235, 72%, 92%, 1);
   --bg-footer: #232323;
-  --font-SM: hsla(203, 100%, 67%, 1);
+  --color-SM: hsla(203, 100%, 67%, 1);
   --btn-green: hsla(133, 90%, 24%, 1);
   /*Secondary Values*/
   --bg-secondary: black;
@@ -1511,8 +1563,7 @@ header .nav_container_btn svg {
   --white-bg: #232323;
   --nav-bg: #000;
   --border-primary: hsl(258, 91%, 63%);
-  --layer-one: rgba(105, 105, 105, 1);
-  --layer-one-secondary: hsla(221, 0%, 26%, 1);
+  --layer-one: hsla(221, 0%, 26%, 1);
   --layer-two-shadow: hsla(221, 0%, 45%, 1);
   --input-bg: hsla(221, 1%, 15%, 0.5);
   /* RGBA COLOR VALUES*/

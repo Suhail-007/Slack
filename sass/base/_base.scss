@@ -28,6 +28,10 @@ html {
   @include respon(tab-port) {
     font-size: 85%;
   }
+
+  @include respon(sm-desktop) {
+    font-size: 95%;
+  }
 }
 
 body {
@@ -77,8 +81,8 @@ main {
   box-shadow: .1rem 0 .5rem 0 var(--shadow-alpha-five);
 
   @include respon(tab-port) {
-  margin-top: 6rem;
-  margin-left: 6rem;
+    margin-top: 6rem;
+    margin-left: 6rem;
   }
 
   &::after,
@@ -106,6 +110,18 @@ main {
     z-index: -2;
     box-shadow: -.1rem .1rem 1rem .5rem var(--layer-two-shadow);
   }
+}
+
+.canvas-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+@include respon(sm-desktop){
+  & canvas {
+    width: 35rem !important;
+  }
+}
 }
 
 .footer {
