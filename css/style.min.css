@@ -1400,12 +1400,21 @@ header .nav_container_btn svg {
   margin-inline: auto;
 }
 
+.section__profile {
+  height: auto !important;
+}
 .section__profile h3 {
   grid-column: span 2;
 }
 .section__profile .profile__cont {
   display: flex;
   gap: 0 2rem;
+}
+@media only screen and (min-width: 64em) {
+  .section__profile .profile__cont {
+    max-width: 45rem;
+    margin-inline: auto;
+  }
 }
 .section__profile .profile__cont-photo {
   margin: 0;
@@ -1435,9 +1444,9 @@ header .nav_container_btn svg {
 }
 @media only screen and (min-width: 64em) {
   .section__profile .profile__info,
-  .section__profile .section__settings > div {
-    max-width: 50rem;
-    justify-items: center;
+  .section__profile .section__settings {
+    max-width: 45rem;
+    margin-inline: auto;
   }
 }
 .section__profile .section__settings > div > div {
@@ -1460,11 +1469,27 @@ header .nav_container_btn svg {
   align-items: center;
   margin-top: 4rem;
 }
+@media only screen and (min-width: 64em) {
+  .section__profile .section__profile__buttons {
+    margin-inline: auto;
+  }
+}
 .section__profile .section__profile__buttons--delete, .section__profile .section__profile__buttons--edit {
   width: 80%;
 }
+@media only screen and (min-width: 64em) {
+  .section__profile .section__profile__buttons {
+    width: 70%;
+  }
+}
 .section__profile > .message-cont {
   margin-top: 2rem;
+  margin-inline: auto;
+}
+@media only screen and (min-width: 64em) {
+  .section__profile > .message-cont {
+    width: 70%;
+  }
 }
 
 .signup__form {

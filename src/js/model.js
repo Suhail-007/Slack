@@ -95,7 +95,6 @@ const router = {
         profileView.renderData(user);
         profileView.init(settings, deleteUserAndData, loginUser, renderTab);
       } catch (err) {
-        console.log(err);
         profileView.renderMessage('Failed to load profile, try reloading ' + err, 'error', 3000);
       }
     }
@@ -341,7 +340,7 @@ export const systemDefaultTheme = function() {
 //initialize the theme on pahe load
 export const initTheme = function(user) {
   const { theme } = user.data.preference;
-  
+
   //apply the theme
   theme === 'system default' ? systemDefaultTheme() : theme === 'light' ? document.body.classList.remove('dark') : theme === 'dark' ? document.body.classList.add('dark') : '';
 }

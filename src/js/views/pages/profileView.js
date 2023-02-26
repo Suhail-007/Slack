@@ -99,13 +99,9 @@ class ProfileView extends View {
 
 
   async init(settings, deleteUserAndData, loginUser, renderTab) {
-    try {
-      this.setTitle('Profile || Slack');
-      this.#addHandlerSettings(settings);
-      this.#callToActionBtns(deleteUserAndData, loginUser, renderTab);
-    } catch (err) {
-      throw err
-    }
+    this.setTitle('Profile || Slack');
+    this.#addHandlerSettings(settings);
+    this.#callToActionBtns(deleteUserAndData, loginUser, renderTab);
   }
 
   #addHandlerSettings(settings) {
@@ -148,7 +144,7 @@ class ProfileView extends View {
         }
         if (btn === 'delete') await this.#deleteAccount(deleteUserAndData, loginUser);
       } catch (err) {
-        throw err;
+        await this.renderMessage(err, 'error', 2000);
       }
     });
   }
@@ -164,13 +160,13 @@ class ProfileView extends View {
       const { reAuthEmail: email, reAuthPass: password } = this._reAuthUserEmailPass;
 
       //if user cancel the process exit from fn
-      if (!email || !password) return;
+      if (!email || !password) return await this.renderMessage('Email or Password field is empty.!', 'error', 2000);
 
       await this.Delay(1000);
 
       const userConfirmation = confirm('Are you sure you want to delete your account? once done this operation can\'t be reversed');
 
-      if (!userConfirmation) return this.renderMessage('Great! You decided to stay <3', 'def', 5000);
+      if (!userConfirmation) return await this.renderMessage('Great! You decided to stay <3', 'success', 2000);
 
       this.renderMessage('re-authenticating', 'success', 1500);
 
@@ -187,7 +183,7 @@ class ProfileView extends View {
       sessionStorage.removeItem('isLogin');
       updateURL('_', true);
     } catch (err) {
-      throw err
+      await this.renderMessage(err, 'error', 2000);
     }
   }
 }
