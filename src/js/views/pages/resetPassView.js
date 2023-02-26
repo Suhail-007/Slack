@@ -1,5 +1,5 @@
-import View from './View.js';
-import { updateURL } from '../helper.js';
+import View from '../View.js';
+import { updateURL } from '../../helper.js';
 
 class resetPassword extends View {
   _parentElem = document.querySelector('main');

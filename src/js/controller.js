@@ -1,11 +1,11 @@
-import * as model from './model.js';
+import { systemDefaultTheme, renderFromHistory, windowLoad } from './model.js';
 import { firebaseApp } from './firebase-app.js';
 
 class App {
   async init() {
-    model.systemDefaultTheme();
-    model.renderFromHistory();
-    model.windowLoad();
+    systemDefaultTheme();
+    renderFromHistory();
+    windowLoad();
   }
 }
 

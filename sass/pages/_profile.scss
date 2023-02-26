@@ -1,4 +1,6 @@
 .section__profile {
+  height: auto !important;
+
   & h3 {
     grid-column: span 2;
   }
@@ -6,6 +8,11 @@
   .profile__cont {
     display: flex;
     gap: 0 2rem;
+
+    @include respon(sm-desktop) {
+      max-width: 45rem;
+      margin-inline: auto;
+    }
 
     &-photo {
       margin: 0;
@@ -38,6 +45,14 @@
     gap: 0.5rem 0;
   }
 
+  .profile__info,
+  .section__settings {
+    @include respon(sm-desktop) {
+      max-width: 45rem;
+      margin-inline: auto;
+    }
+  }
+
   .section__settings>div>div {
     display: flex;
     justify-content: space-between;
@@ -60,14 +75,27 @@
     align-items: center;
     margin-top: 4rem;
 
+    @include respon(sm-desktop) {
+      margin-inline: auto;
+    }
+
     &--delete,
     &--edit {
       width: 80%;
+    }
+
+    @include respon(sm-desktop) {
+      width: 70%
     }
   }
 
   //error
   &>.message-cont {
     margin-top: 2rem;
+    margin-inline: auto;
+
+    @include respon(sm-desktop) {
+      width: 70%
+    }
   }
 }

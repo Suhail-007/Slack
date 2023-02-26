@@ -1,18 +1,41 @@
 @mixin respon($breakpoint) {
-  @if $breakpoint==sm-phone {
+  @if $breakpoint==phone {
+    //350px
     @media only screen and (max-width: 21.9em) {
       @content
     }
   }
 
-  @if $breakpoint==phone {
+  @if $breakpoint==m-phone {
+    //600px
     @media only screen and (min-width: 37.5em) {
       @content
     }
   }
 
+  @if $breakpoint==l-phone {
+    //700px
+    @media only screen and (min-width: 43.75em) {
+      @content
+    }
+  }
+
   @if $breakpoint==tab-port {
-    @media only screen and (min-width: 56.25em) {
+    //768px
+    @media only screen and (min-width: 48em) {
+      @content
+    }
+  }
+
+  @if $breakpoint==tab-land {
+    //1200px
+    @media only screen and (min-width: 75em) {
+      @content
+    }
+  }
+  
+  @if $breakpoint==sm-desktop {
+    @media only screen and (min-width: 64em) {
       @content
     }
   }

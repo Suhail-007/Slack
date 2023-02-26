@@ -7,7 +7,7 @@
   --blue-primary: hsla(215, 98%, 55%, 1);
   --cyan-primary: hsla(191, 91%, 48%, 1);
   --bg-footer: rgba(0, 0, 0, .1);
-  --font-SM: hsla(203, 100%, 97%, 1);
+  --color-SM: hsla(203, 22%, 42%, 1);
   --btn-green: hsla(133, 100%, 85%, 1);
   --btn-green-font: hsla(133, 90%, 24%, 1);
   /*Secondary Values*/
@@ -48,8 +48,7 @@
   --white-bg: #fff;
   --nav-bg: rgba(255, 255, 255, 0.9);
   --border-primary: hsl(258, 91%, 63%);
-  --layer-one: rgba(255, 255, 255, 1);
-  --layer-one-secondary: --bg-primary;
+  --layer-one: --bg-primary;
   --layer-two-shadow: hsla(221, 93%, 89%, 1);
   --input-bg: #fff;
   /* RGBA COLOR VALUES*/
@@ -79,11 +78,34 @@
 html {
   /* 1REM === 10PX */
   font-size: 62.5%;
-  /* 1REM === 5px*/
+  /* 1REM === 5PX*/
+  /* 1REM ===8PX */
+  /*1REM === 12.8PX*/
+  /*1REM === 13.6PX*/
 }
 @media only screen and (max-width: 21.9em) {
   html {
     font-size: 45%;
+  }
+}
+@media only screen and (min-width: 37.5em) {
+  html {
+    font-size: 50%;
+  }
+}
+@media only screen and (min-width: 43.75em) {
+  html {
+    font-size: 80%;
+  }
+}
+@media only screen and (min-width: 48em) {
+  html {
+    font-size: 85%;
+  }
+}
+@media only screen and (min-width: 64em) {
+  html {
+    font-size: 95%;
   }
 }
 
@@ -132,6 +154,12 @@ main {
   background-color: var(--white-bg);
   box-shadow: 0.1rem 0 0.5rem 0 var(--shadow-alpha-five);
 }
+@media only screen and (min-width: 48em) {
+  main {
+    margin-top: 6rem;
+    margin-left: 6rem;
+  }
+}
 main::after, main::before {
   content: "";
   position: absolute;
@@ -151,6 +179,17 @@ main::after {
   left: -5%;
   z-index: -2;
   box-shadow: -0.1rem 0.1rem 1rem 0.5rem var(--layer-two-shadow);
+}
+
+.canvas-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media only screen and (min-width: 64em) {
+  .canvas-cont canvas {
+    width: 35rem !important;
+  }
 }
 
 .footer {
@@ -196,6 +235,11 @@ li:hover .nav__item--name {
   text-align: left;
   justify-self: start;
 }
+@media only screen and (min-width: 48em) {
+  .acc_div > div:last-child {
+    font-size: 1.6rem;
+  }
+}
 .acc_div > div:last-child p {
   margin: 0;
   margin-bottom: 1rem;
@@ -205,6 +249,11 @@ li:hover .nav__item--name {
 .statistics_boxes {
   font-size: 1.3rem;
 }
+@media only screen and (min-width: 48em) {
+  .statistics_boxes {
+    font-size: 1.6rem;
+  }
+}
 
 .dollar-percentage p {
   margin: 0;
@@ -213,6 +262,11 @@ li:hover .nav__item--name {
   font-weight: 500;
   color: var(--font-primary);
   position: relative;
+}
+@media only screen and (min-width: 48em) {
+  .dollar-percentage p {
+    font-size: 1.6rem;
+  }
 }
 
 .icon_heading p,
@@ -352,6 +406,12 @@ li:hover .nav__item--name {
   text-transform: capitalize;
 }
 
+button:disabled {
+  background: #CBCBCB;
+  color: #000;
+  border: 1px solid #CBCBCB;
+}
+
 .btn {
   border: none;
   border-radius: 0.5rem;
@@ -436,13 +496,19 @@ li:hover .nav__item--name {
   overflow: hidden;
   position: relative;
 }
+@media only screen and (min-width: 48em) {
+  .card--horizontal {
+    width: 16rem;
+    height: 22rem;
+  }
+}
 .card--vertical {
   display: flex;
   padding: 1.5rem;
   position: relative;
   border-radius: 0.5rem;
   color: var(--font-primary);
-  box-shadow: 0.3rem 0.3rem 0.5rem 0 var();
+  box-shadow: 0.3rem 0.3rem 0.5rem 0;
 }
 
 .message-cont {
@@ -534,6 +600,11 @@ li:hover .nav__item--name {
   font-size: 1.7rem;
   box-shadow: 0.5rem 0.5rem 1rem 0.1rem var(--blue-primary-alpha-three);
 }
+@media only screen and (min-width: 64em) {
+  .wallet__deposit-income {
+    max-width: 60%;
+  }
+}
 .wallet__input-cont {
   padding: 0 1rem;
   font-size: 1.8rem;
@@ -551,6 +622,11 @@ li:hover .nav__item--name {
   align-self: start;
   transform: translateX(-1rem);
 }
+@media only screen and (min-width: 64em) {
+  .wallet__input-cont__input-btns > label {
+    align-self: center;
+  }
+}
 .wallet__input-cont__input-btns > input {
   border-radius: 1.1rem;
   border: none;
@@ -560,6 +636,11 @@ li:hover .nav__item--name {
   font-size: 1.6rem;
   background: var(--bg-primary-alpha-eight);
   color: var(--font-primary);
+}
+@media only screen and (min-width: 64em) {
+  .wallet__input-cont__input-btns > input {
+    max-width: 60%;
+  }
 }
 .wallet__input-cont__input-btns > input:focus, .wallet__input-cont__input-btns > input:hover {
   outline: 3px solid var(--blue-primary-alpha-three);
@@ -577,7 +658,11 @@ li:hover .nav__item--name {
   display: grid;
   grid-template-columns: 1fr;
   border-top-left-radius: 4rem;
+  overflow: hidden;
   position: relative;
+  /*   @include respon(sm-desktop){
+    max-width: 50rem;
+  } */
 }
 .form__section__logo--lg {
   width: 100%;
@@ -598,11 +683,16 @@ li:hover .nav__item--name {
 }
 
 .form__container {
-  width: 100%;
+  width: 99%;
   display: grid;
   transform: translateY(-4rem);
   border-radius: 3.5rem 3.5rem 0 0;
   border-top: 0.5px solid #CACACA;
+  /*   @include respon(sm-desktop) {
+    border: none;
+    border-radius: initial;
+    transform: translateY(-100%);
+  } */
 }
 .form__container--blur {
   backdrop-filter: blur(20px);
@@ -618,7 +708,6 @@ li:hover .nav__item--name {
 }
 .input__label__input {
   width: 100%;
-  font-family: inherit;
   font-size: 1.3rem;
   padding: 1rem 1rem 1rem 1.3rem;
   border: none;
@@ -736,6 +825,12 @@ li:hover .nav__item--name {
   -moz-border-radius: 2rem;
   border-radius: 1.8rem;
 }
+@media only screen and (min-width: 48em) {
+  .acc_div {
+    width: 27rem;
+    height: 15rem;
+  }
+}
 .acc_div div:first-child {
   background: #fff;
   display: flex;
@@ -788,8 +883,8 @@ li:hover .nav__item--name {
   border-radius: 0.5rem;
   padding: 0.3rem;
   width: 2.8rem;
-  position: relative;
   height: 2.8rem;
+  position: relative;
   box-shadow: 0.3rem 0.3rem 0.5rem 0 rgba(0, 0, 0, 0.1);
 }
 .box .icon_heading > div > svg {
@@ -856,7 +951,12 @@ li:hover .nav__item--name {
   padding: 5rem 1.5rem;
 }
 .section__bottom-ref__img-cont {
-  width: 35rem;
+  display: flex;
+}
+@media only screen and (min-width: 48em) {
+  .section__bottom-ref__img-cont {
+    width: 100%;
+  }
 }
 .section__bottom-ref__img-cont img {
   width: 100%;
@@ -1192,7 +1292,7 @@ header .nav_container_btn svg {
   display: none;
 }
 
-.canvas div {
+.canvas-cont div {
   margin: 4.8rem 0;
 }
 
@@ -1211,6 +1311,12 @@ header .nav_container_btn svg {
 .invest-wallet__details {
   row-gap: 2rem;
   font-size: 1.4rem;
+}
+@media only screen and (min-width: 64em) {
+  .invest-wallet__details {
+    flex-direction: row !important;
+    column-gap: 1rem;
+  }
 }
 .invest-wallet__details > * {
   background: var(--bg-primary-alpha-five);
@@ -1254,7 +1360,7 @@ header .nav_container_btn svg {
 .invest-wallet .invest-card-SM {
   background: hsl(203deg, 100%, 97%);
   box-shadow: 0.3rem 0.5rem 0.5rem 0 var(--shadow-alpha-three);
-  color: var(--font-SM);
+  color: var(--color-SM);
 }
 .invest-wallet__heading {
   gap: 0 1rem;
@@ -1294,12 +1400,21 @@ header .nav_container_btn svg {
   margin-inline: auto;
 }
 
+.section__profile {
+  height: auto !important;
+}
 .section__profile h3 {
   grid-column: span 2;
 }
 .section__profile .profile__cont {
   display: flex;
   gap: 0 2rem;
+}
+@media only screen and (min-width: 64em) {
+  .section__profile .profile__cont {
+    max-width: 45rem;
+    margin-inline: auto;
+  }
 }
 .section__profile .profile__cont-photo {
   margin: 0;
@@ -1327,6 +1442,13 @@ header .nav_container_btn svg {
   grid-template-columns: 1fr;
   gap: 0.5rem 0;
 }
+@media only screen and (min-width: 64em) {
+  .section__profile .profile__info,
+  .section__profile .section__settings {
+    max-width: 45rem;
+    margin-inline: auto;
+  }
+}
 .section__profile .section__settings > div > div {
   display: flex;
   justify-content: space-between;
@@ -1347,11 +1469,27 @@ header .nav_container_btn svg {
   align-items: center;
   margin-top: 4rem;
 }
+@media only screen and (min-width: 64em) {
+  .section__profile .section__profile__buttons {
+    margin-inline: auto;
+  }
+}
 .section__profile .section__profile__buttons--delete, .section__profile .section__profile__buttons--edit {
   width: 80%;
 }
+@media only screen and (min-width: 64em) {
+  .section__profile .section__profile__buttons {
+    width: 70%;
+  }
+}
 .section__profile > .message-cont {
   margin-top: 2rem;
+  margin-inline: auto;
+}
+@media only screen and (min-width: 64em) {
+  .section__profile > .message-cont {
+    width: 70%;
+  }
 }
 
 .signup__form {
@@ -1389,7 +1527,6 @@ header .nav_container_btn svg {
 .signup__form > input {
   margin-bottom: 1rem;
   padding: 0.7rem 1rem;
-  font-family: inherit;
   font-size: 1.3rem;
 }
 .signup__form > label {
@@ -1402,7 +1539,6 @@ header .nav_container_btn svg {
 .signup__form__phone-input :first-child {
   flex-basis: 5rem;
   width: 100%;
-  font-family: inherit;
   font-size: 1.3rem;
   padding: 0.8rem;
   outline: 0.5px solid var(--font-primary);
@@ -1418,7 +1554,7 @@ header .nav_container_btn svg {
   --bg-primary: hsla(222, 61%, 6%, 1);
   --bg-primary-second: hsla(235, 72%, 92%, 1);
   --bg-footer: #232323;
-  --font-SM: hsla(203, 100%, 67%, 1);
+  --color-SM: hsla(203, 100%, 67%, 1);
   --btn-green: hsla(133, 90%, 24%, 1);
   /*Secondary Values*/
   --bg-secondary: black;
@@ -1452,8 +1588,7 @@ header .nav_container_btn svg {
   --white-bg: #232323;
   --nav-bg: #000;
   --border-primary: hsl(258, 91%, 63%);
-  --layer-one: rgba(105, 105, 105, 1);
-  --layer-one-secondary: hsla(221, 0%, 26%, 1);
+  --layer-one: hsla(221, 0%, 26%, 1);
   --layer-two-shadow: hsla(221, 0%, 45%, 1);
   --input-bg: hsla(221, 1%, 15%, 0.5);
   /* RGBA COLOR VALUES*/

@@ -2,7 +2,12 @@
   display: grid;
   grid-template-columns: 1fr;
   border-top-left-radius: $border-top-left-radius;
+  overflow: hidden;
   position: relative;
+
+  /*   @include respon(sm-desktop){
+  max-width: 50rem;
+} */
 
   &__logo--lg {
     width: 100%;
@@ -26,11 +31,17 @@
 }
 
 .form__container {
-  width: 100%;
+  width: 99%;
   display: grid;
   transform: translateY(-4rem);
   border-radius: 3.5rem 3.5rem 0 0;
   border-top: .5px solid #CACACA;
+
+/*   @include respon(sm-desktop) {
+  border: none;
+  border-radius: initial;
+  transform: translateY(-100%);
+} */
 
   //blur effecr for form 
   &--blur {
@@ -49,7 +60,6 @@
 
   &__input {
     width: 100%;
-    font-family: inherit;
     font-size: 1.3rem;
     padding: 1rem 1rem 1rem 1.3rem;
     border: none;
@@ -116,7 +126,7 @@
 
   &>a {
     margin-left: .5rem;
-    color: var(--blue-primary); 
+    color: var(--blue-primary);
   }
 }
 

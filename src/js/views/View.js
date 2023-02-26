@@ -80,4 +80,16 @@ export default class View {
       }
     })
   }
+
+  toggleBtnState(remove = false) {
+    this.submitBtn = document.querySelector('[data-form-btn]');
+
+    if (remove) {
+      this.submitBtn.disabled = false;
+      return
+    }
+
+    this.submitBtn.setAttribute('disabled', true);
+  }
+
 }

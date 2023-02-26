@@ -36,7 +36,7 @@ class FORM {
         <input class="input__label__input" placeholder="Male/Female/Others" ${required} id="gender" name="gender" type="text">
   
         <label for="dob">DOB</label>
-        <input name="dob" ${required} id="dob" type="date" min="1960-01-31" max=${getCurrentDate().date}>
+        <input name="dob" ${required} id="dob" type="date" min="1960-01-31" max="${getCurrentDate().year-5}-12-31">
   
         <label for="state">State</label>
         <input class="input__label__input" placeholder="state you're currently living in" ${required} id="state"name="state" type="text">
@@ -49,7 +49,7 @@ class FORM {
           <p class="message"></p>
         </div>
   
-        <button class="btn btn-light-blue form__btn" type="submit">${buttonText}</button>
+        <button data-form-btn class="btn btn-light-blue form__btn" type="submit">${buttonText}</button>
   
         <p style='display:${showLoginBtn}' class="signup--login">Already have a account?<a href="/" data-link>Log In</a></p>
       </form>`

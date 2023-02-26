@@ -4,8 +4,13 @@
   &-ref {
     background: var(--purple-primary-alpha-three);
     padding: 5rem 1.5rem;
+
     &__img-cont {
-      width: 35rem;
+      display: flex;
+
+      @include respon(tab-port) {
+        width: 100%;
+      }
 
       & img {
         width: 100%;

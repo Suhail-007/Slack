@@ -31,7 +31,7 @@ function config(chartType) {
         title: {
           display: true,
           text: 'ROI Status'
-        }
+        },
       }
     },
   }

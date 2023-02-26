@@ -8,10 +8,29 @@
 html {
   /* 1REM === 10PX */
   font-size: 62.5%;
-  
-  /* 1REM === 5px*/
-  @include respon(sm-phone) {
+
+  /* 1REM === 5PX*/
+  @include respon(phone) {
     font-size: 45%;
+  }
+
+  /* 1REM ===8PX */
+  @include respon(m-phone) {
+    font-size: 50%;
+  }
+
+  /*1REM === 12.8PX*/
+  @include respon(l-phone) {
+    font-size: 80%;
+  }
+
+  /*1REM === 13.6PX*/
+  @include respon(tab-port) {
+    font-size: 85%;
+  }
+
+  @include respon(sm-desktop) {
+    font-size: 95%;
   }
 }
 
@@ -61,6 +80,11 @@ main {
   background-color: var(--white-bg);
   box-shadow: .1rem 0 .5rem 0 var(--shadow-alpha-five);
 
+  @include respon(tab-port) {
+    margin-top: 6rem;
+    margin-left: 6rem;
+  }
+
   &::after,
   &::before {
     content: "";
@@ -86,6 +110,18 @@ main {
     z-index: -2;
     box-shadow: -.1rem .1rem 1rem .5rem var(--layer-two-shadow);
   }
+}
+
+.canvas-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+@include respon(sm-desktop){
+  & canvas {
+    width: 35rem !important;
+  }
+}
 }
 
 .footer {

@@ -9,6 +9,11 @@
   -webkit-border-radius: 2rem;
   -moz-border-radius: 2rem;
   border-radius: 1.8rem;
+  
+  @include respon(tab-port) {
+    width: 27rem;
+    height: 15rem;
+  }
 
   & div:first-child {
     background: #fff;

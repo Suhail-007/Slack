@@ -1,9 +1,10 @@
-import View from './View.js';
-import { updateURL } from '../helper.js'
+import View from '../View.js';
+import { updateURL } from '../../helper.js'
 
 class loginView extends View {
   _parentElem = document.querySelector('main');
   _form;
+  #loginBtn
 
   _generateMarkup() {
     return `
@@ -36,7 +37,7 @@ class loginView extends View {
           
           <a class='form-link reset-password' href='/'>Forget your password?</a>
           
-          <button class="btn btn-light-blue form__btn" type="submit">Log in</button>
+          <button class="btn btn-light-blue form__btn" data-form-btn type="submit">Log in</button>
 
           <p class="form-link signup--login">Don't have account yet?<a data-signup='signup' href=''>Sign up</a></p>
         </form>
@@ -68,6 +69,7 @@ class loginView extends View {
     try {
       const { email, password } = userObj;
 
+      this.toggleBtnState();
       if (email) await this.renderMessage('Checking information', 'success', 1000);
 
       const user = await loginUser(email, password);
@@ -103,6 +105,7 @@ class loginView extends View {
       await this.renderTab();
     } catch (err) {
       await this.renderMessage(err, 'error', 2000);
+      this.toggleBtnState();
     }
   }
 
@@ -111,29 +114,18 @@ class loginView extends View {
       if (e.target.matches('.form-link') || e.target.closest('.form-link')) {
         e.preventDefault();
 
-        if (e.target.closest('.signup--login')) this.redirectToSignUp('signup');
-        if (e.target.matches('.reset-password')) this.redirectToResetPass('reset password');
+        if (e.target.closest('.signup--login')) this.redirectTo('signup');
+        if (e.target.matches('.reset-password')) this.redirectTo('reset password');
       }
     })
   }
 
-  async redirectToSignUp(redirectTo) {
+  async redirectTo(redirectTo) {
     try {
       updateURL(redirectTo);
-      await this.loader();
-      await this.Delay(2000);
       await this.renderTab();
     } catch (err) {
       this.renderMessage('refresh the page and retry ' + err, 'error', 2000)
-    }
-  }
-
-  async redirectToResetPass(redirectTo) {
-    try {
-      updateURL(redirectTo);
-      await this.renderTab();
-    } catch (err) {
-      this.renderMessage(err.message, 'error', 2000);
     }
   }
 

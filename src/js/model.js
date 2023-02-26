@@ -1,7 +1,7 @@
-import loginView from './views/loginView.js';
-import signUpView from './views/signupView.js';
-import resetPassView from './views/resetPassView.js';
-import homeView from './views/homeView.js';
+import loginView from './views/pages/loginView.js';
+import signUpView from './views/pages/signupView.js';
+import resetPassView from './views/pages/resetPassView.js';
+import homeView from './views/pages/homeView.js';
 import dashboardView from './views/dashboard/dashboardView.js';
 import chartView from './views/dashboard/chartView.js';
 import fundAndReferralView from './views/dashboard/fundAndReferralView.js';
@@ -51,6 +51,8 @@ const router = {
   'signup': {
     view: async function() {
       try {
+        await signUpView.loader();
+        await resetPassView.Delay(500);
         signUpView.renderData(user);
         signUpView.init(createUserSendEmailVerif, createUserData);
       } catch (err) {
@@ -93,7 +95,6 @@ const router = {
         profileView.renderData(user);
         profileView.init(settings, deleteUserAndData, loginUser, renderTab);
       } catch (err) {
-        console.log(err);
         profileView.renderMessage('Failed to load profile, try reloading ' + err, 'error', 3000);
       }
     }
@@ -245,7 +246,7 @@ const getBitcoinDetails = async function() {
   try {
     const url = `${cryptoConfig.url}&apiKey=${API_KEY}`;
     const data = await fetchURL(url);
-    if(!data) toggleModal('Try again after a minute to see prices');
+    if (!data) toggleModal('Try again after a minute to see prices');
     return data
   } catch (err) {
     throw err
@@ -341,5 +342,5 @@ export const initTheme = function(user) {
   const { theme } = user.data.preference;
 
   //apply the theme
-  theme === 'system default' ? systemDefaultTheme() : theme === 'light' ? '' : theme === 'dark' ? document.body.classList.add('dark') : '';
+  theme === 'system default' ? systemDefaultTheme() : theme === 'light' ? document.body.classList.remove('dark') : theme === 'dark' ? document.body.classList.add('dark') : '';
 }

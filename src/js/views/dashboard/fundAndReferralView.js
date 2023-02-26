@@ -11,7 +11,7 @@ class FundAndReferralView extends View {
       <div class="section__bottom-ref">
         <h2>REFER A FRIEND</h2>
         <div class="section__bottom-ref__img-cont">
-          <img src="./src/images/refer.jpeg" alt="refer a friend">
+          <img src="./src/images/m_refer.jpeg" alt="refer a friend">
         </div>
 
         <h4 class="section__bottom-ref__sub-head">Referral Link</h4>

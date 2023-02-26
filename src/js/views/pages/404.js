@@ -7,7 +7,7 @@ class PageNotFound extends View {
   init() {
     this.setTitle('Page Not Found');
 
-    document.write('Page not found');
+    document.write('Page not found \n Go back and refresh the page');
   }
 }
 
