@@ -65,6 +65,14 @@ export default class View {
     })
   }
 
+  messageMarkup() {
+    return `
+      <div class="message-cont">
+        <p class="message"></p>
+      </div>
+    `
+  }
+
   placeholderLabelToggle(parentElem) {
     parentElem.addEventListener('change', e => {
 

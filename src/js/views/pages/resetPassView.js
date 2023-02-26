@@ -22,9 +22,7 @@ class resetPassword extends View {
               <label class="input__label__label" for="email">Email</label>
             </div>
             
-            <section class="message-cont">
-              <p class="message"></p>
-            </section>
+            ${this.messageMarkup()}
             
             <button class="btn btn-light-blue form__btn" type="submit">Reset Password</button>
           </form>

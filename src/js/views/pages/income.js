@@ -10,9 +10,7 @@ class Income extends View {
       <h2>Income</h2>
     
       ${Inconvenience()}
-      <div class="message-cont">
-        <p class="message"></p>
-      </div>
+      ${this.messageMarkup()}
     </section>
     `
   }

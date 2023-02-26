@@ -41,9 +41,9 @@ class ProfileView extends View {
             <div class='u-LineBar'>
               <label for="theme">Theme</label>
               <select data-select='theme' name="theme" id="theme">
-                <option ${this.#isSelected('system default')} value="system default">system default</option>
-                <option ${this.#isSelected('light')} value="light">light</option>
-                <option ${this.#isSelected('dark')} value="dark">dark</option>
+                ${this.optionMarkup('system default')}
+                ${this.optionMarkup('light')}
+                ${this.optionMarkup('dark')}
               </select>
             </div>
           </div>
@@ -55,9 +55,8 @@ class ProfileView extends View {
           </div>
         </div>
         
-        <div class="message-cont">
-          <p class="message"></p>
-        </div>
+        <!----Message Component---->
+        ${this.messageMarkup()}
         
         <div data-btns-cont class='section__profile__buttons'>
           <button type='button' data-cta='edit' class='btn btn-edit section__profile__buttons--edit'>Edit Profile</button>
@@ -75,12 +74,19 @@ class ProfileView extends View {
     <div class='u-LineBar'>
       <label for="${chart}">${chartTitle} Chart</label>
       <select data-select='chart' name="${chart}" id="${chart}">
-        <option ${this.#isSelected('doughtnut', chart)} value="doughnut">Doughnut</option>
-        <option ${this.#isSelected('line', chart)} value="line">Line</option>
-        <option ${this.#isSelected('bar', chart)} value="bar">Bar</option>
-        <option ${this.#isSelected('pie', chart)} value="pie">Pie</option>
+        ${this.optionMarkup('doughnut', chart)}
+        ${this.optionMarkup('line', chart)}
+        ${this.optionMarkup('bar', chart)}
+        ${this.optionMarkup('pie', chart)}
       </select>
     </div>`
+  }
+
+  optionMarkup(value, selectedOption) {
+    return `
+      <option ${this.#isSelected(value, selectedOption)} value="${value}">
+        ${value}
+      </option>`
   }
 
   userInfo(user) {
@@ -114,19 +120,21 @@ class ProfileView extends View {
     const { charts } = this._data.data.preference;
     let isSelected;
 
-    if (selectOption === 'theme') {
-      isSelected = this._data.data.preference.theme;
-      if (isSelected === value) return 'selected';
-    }
-
-    if (selectOption === 'roi') {
-      isSelected = charts.roi
-      if (isSelected === value) return 'selected';
-    }
-
-    if (selectOption === 'bi') {
-      isSelected = charts.bi
-      if (isSelected === value) return 'selected'
+    switch (selectOption) {
+      case 'theme':
+        isSelected = this._data.data.preference.theme;
+        return isSelected === value && 'selected';
+        break;
+      case 'roi':
+        isSelected = charts.roi
+        return isSelected === value && 'selected';
+        break;
+      case 'bi':
+        isSelected = charts.bi
+        return isSelected === value && 'selected'
+        break;
+      default:
+        return
     }
   }
 

@@ -31,9 +31,7 @@ class loginView extends View {
             <label class="input__label__label" for="password">Password</label>
           </div>
           
-          <div class="message-cont">
-            <p class="message"></p>
-          </div>
+          ${this.messageMarkup()}
           
           <a class='form-link reset-password' href='/'>Forget your password?</a>
           
