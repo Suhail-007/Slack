@@ -1,8 +1,8 @@
 import View from '../View.js';
-import createNavLinks from '../components/createNavLink.js';
+import createNavLinks from '../../components/createNavLink.js';
 import { defaultUserPic } from '../../config.js';
 
-class homeView extends View {
+class headerFooter extends View {
   _parentElem = document.body;
 
   async generateHomeMarkup(data) {
@@ -90,4 +90,4 @@ class homeView extends View {
   }
 }
 
-export default new homeView();
+export default new headerFooter();

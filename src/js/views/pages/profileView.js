@@ -1,5 +1,5 @@
 import View from '../View.js'
-import reAuthUser from '../components/reAuthUser.js'
+import reAuthUser from '../../components/reAuthUser.js'
 import { updateURL } from '../../helper.js'
 
 class ProfileView extends View {

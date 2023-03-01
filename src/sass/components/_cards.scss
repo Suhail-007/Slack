@@ -1,5 +1,5 @@
 .card {
-  &--horizontal {
+  &--vertical {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -17,7 +17,7 @@
     }
   }
 
-  &--vertical {
+  &--horizontal {
     display: flex;
     padding: 1.5rem;
     position: relative;

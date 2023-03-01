@@ -1,10 +1,10 @@
 import loginView from './views/pages/loginView.js';
 import signUpView from './views/pages/signupView.js';
 import resetPassView from './views/pages/resetPassView.js';
-import homeView from './views/pages/homeView.js';
-import dashboardView from './views/dashboard/dashboardView.js';
-import chartView from './views/dashboard/chartView.js';
-import fundAndReferralView from './views/dashboard/fundAndReferralView.js';
+import headerFooterView from './views/pages/homeView.js';
+import homeView from './views/home/homeView.js';
+import chartView from './views/home/chartView.js';
+import fundAndReferralView from './views/home/fundAndReferralView.js';
 import profileView from './views/pages/profileView.js';
 import investWalletView from './views/pages/investWallet.js';
 import teamSummary from './views/pages/team-summary.js';
@@ -41,7 +41,7 @@ const router = {
 
         loginView.init(renderTab, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
         modalHandler();
-        homeView.removeHeaderFooter();
+        headerFooterView.removeHeaderFooter();
       } catch (err) {
         loginView.renderMessage(err, 'error', 4000)
       }
@@ -70,18 +70,17 @@ const router = {
     }
   },
 
-  'dashboard': {
+  'home': {
     view: async function() {
       try {
-        await dashboardView.loader();
-        await dashboardView.Delay(1000);
-        dashboardView.renderData(user);
+        await homeView.loader();
+        await homeView.Delay(1000);
+        homeView.renderData(user);
         chartView.createChart(user);
 
-        dashboardView.init(updateUserData, copyRefLink);
+        homeView.init(updateUserData, copyRefLink);
         initTheme(user)
       } catch (err) {
-        console.log(err);
         toggleModal(err);
       }
     }
@@ -106,7 +105,7 @@ const router = {
         await editProfileView.loader();
         await editProfileView.Delay(1000);
         editProfileView.renderData(user);
-        editProfileView.init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
+        editProfileView.init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, headerFooterView.removeHeaderFooter, loginUser);
       } catch (err) {
         console.log(err);
       }
@@ -183,7 +182,7 @@ export const renderTab = async function() {
     //signout the user if user go back to login page
     if (page === null && res) logoutUser();
 
-    //if user is signout and go back to dashboard redirect user to login page
+    //if user is signout and go back to home redirect user to login page
     if (!res && page != null && page !== 'signup' && page !== 'reset password') return updateURL('_', true);
 
     //if page not found
@@ -217,9 +216,9 @@ export const windowLoad = function() {
 }
 
 const initHome = function() {
-  homeView.generateHomeMarkup(user);
+  headerFooterView.generateHomeMarkup(user);
   NAV_TOGGLE_BTN();
-  homeView.navTab(renderTab, updateURL);
+  headerFooterView.navTab(renderTab, updateURL);
 }
 
 const scrollToTop = function() {

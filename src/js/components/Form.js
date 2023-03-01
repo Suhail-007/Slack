@@ -1,5 +1,5 @@
-import { updateURL, getCurrentDate } from '../../helper.js';
-import { defaultUserPic as formPic } from '../../config.js';
+import { updateURL, getCurrentDate } from '../helper.js';
+import { defaultUserPic as formPic } from '../config.js';
 
 class FORM {
   render(buttonText, formPic, showLoginBtn, required, passwordText) {

@@ -1,5 +1,5 @@
 import View from '../View.js';
-import { Inconvenience } from '../components/inconvenience.js';
+import { Inconvenience } from '../../components/inconvenience.js';
 
 class TeamSummary extends View {
   _parentElem = document.querySelector('main');

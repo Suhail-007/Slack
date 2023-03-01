@@ -93,7 +93,7 @@ export default class View {
     this.submitBtn = document.querySelector('[data-form-btn]');
 
     if (remove) {
-      this.submitBtn.disabled = false;
+      this.submitBtn.removeAttribute('disabled');
       return
     }
 

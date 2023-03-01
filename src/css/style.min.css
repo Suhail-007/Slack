@@ -448,7 +448,7 @@ button:disabled {
 .btn-grey-animated {
   padding: 1.6rem;
   border: none;
-  background-color: hsl(269deg, 55%, 96%);
+  background-color: hsl(269, 55%, 96%);
   color: #000;
   font-weight: 400;
   letter-spacing: 1;
@@ -484,7 +484,7 @@ button:disabled {
   background: var(--error);
 }
 
-.card--horizontal {
+.card--vertical {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -497,12 +497,12 @@ button:disabled {
   position: relative;
 }
 @media only screen and (min-width: 48em) {
-  .card--horizontal {
+  .card--vertical {
     width: 16rem;
     height: 22rem;
   }
 }
-.card--vertical {
+.card--horizontal {
   display: flex;
   padding: 1.5rem;
   position: relative;
@@ -533,7 +533,7 @@ button:disabled {
   display: block;
 }
 .message-cont.success > p {
-  color: hsl(109deg, 87%, 28%);
+  color: hsl(109, 87%, 28%);
 }
 
 .modal {
@@ -937,7 +937,7 @@ button:disabled {
 }
 .box-4::before {
   top: 70%;
-  background: linear-gradient(var(--dark-silver-alpha-eight), hsla(0deg, 0%, 100%, 0.5));
+  background: linear-gradient(var(--dark-silver-alpha-eight), hsla(0, 0%, 100%, 0.5));
 }
 .box-4 .icon_heading > div > svg {
   fill: var(--dark-silver-primary);
@@ -1353,12 +1353,12 @@ header .nav_container_btn svg {
   font-size: 1rem;
 }
 .invest-wallet .invest-card-bitcoin {
-  background: hsla(43deg, 74%, 70%, 0.3);
-  box-shadow: 0.2rem 0.2rem 0.5rem 0 hsla(48deg, 83%, 80%, 0.2);
-  color: hsl(43deg, 74%, 50%);
+  background: hsla(43, 74%, 70%, 0.3);
+  box-shadow: 0.2rem 0.2rem 0.5rem 0 hsla(48, 83%, 80%, 0.2);
+  color: hsl(43, 74%, 50%);
 }
 .invest-wallet .invest-card-SM {
-  background: hsl(203deg, 100%, 97%);
+  background: hsl(203, 100%, 97%);
   box-shadow: 0.3rem 0.5rem 0.5rem 0 var(--shadow-alpha-three);
   color: var(--color-SM);
 }

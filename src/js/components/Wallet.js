@@ -1,8 +1,7 @@
-import View from '../View.js';
-import investWallet from '../pages/investWallet.js';
-import { updateUserData } from '../../firebase-app.js';
-import { toggleModal } from '../../helper.js';
-import fundAndReferralView from '../dashboard/fundAndReferralView.js';
+import View from '../views/View.js';
+import investWallet from '../views/pages/investWallet.js';
+import { updateUserData } from '../firebase-app.js';
+import { toggleModal } from '../helper.js';
 
 class Wallet extends View {
   _btnsCont
