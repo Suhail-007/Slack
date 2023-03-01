@@ -1,5 +1,5 @@
 import View from '../View.js';
-import { Inconvenience } from '../components/inconvenience.js';
+import { Inconvenience } from '../../components/inconvenience.js';
 
 class Income extends View {
   _parentElem = document.querySelector('main');
@@ -10,9 +10,7 @@ class Income extends View {
       <h2>Income</h2>
     
       ${Inconvenience()}
-      <div class="message-cont">
-        <p class="message"></p>
-      </div>
+      ${this.messageMarkup()}
     </section>
     `
   }

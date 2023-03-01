@@ -1,8 +1,8 @@
 import View from '../View.js'
 import { updateURL, toggleModal, modalHandler } from '../../helper.js';
 import { defaultUserPic } from '../../config.js';
-import FORM from '../components/Form.js';
-import reAuthUser from '../components/reAuthUser.js';
+import FORM from '../../components/Form.js';
+import reAuthUser from '../../components/reAuthUser.js';
 
 class EditProfileView extends View {
   _parentElem = document.querySelector('main');
@@ -19,15 +19,15 @@ class EditProfileView extends View {
     </section>`
   }
 
-  async init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
+  async init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, removeHeaderFooter, loginUser) {
     this.setTitle('Edit User Information || Slack')
     toggleModal('Leave the fields empty which you do not wish to update.!');
 
-    this.updateData(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser);
+    this.updateData(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, removeHeaderFooter, loginUser);
     this.previewUserProfile();
   }
 
-  updateData(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, homeView, loginUser) {
+  updateData(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, removeHeaderFooter, loginUser) {
     const form = document.querySelector('form');
     form.addEventListener('submit', async e => {
       try {
@@ -40,7 +40,7 @@ class EditProfileView extends View {
 
         //disabled btn
         this.toggleBtnState();
-        
+
         if (fullname !== '' && !fullname) throw Error('Please enter full name');
         if (!isPassSame) throw Error('Passwords do not match');
 
@@ -64,7 +64,7 @@ class EditProfileView extends View {
         await updateUserData(updatedData);
 
         //remove & re render nav & footer
-        homeView.removeHeaderFooter();
+        removeHeaderFooter();
         initHome();
 
         toggleModal('Data updated.!');

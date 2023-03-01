@@ -1,6 +1,6 @@
 import View from '../View.js';
 import { updateURL } from '../../helper.js';
-
+import websiteImage from '../../../images/m_logo.jpg';
 class resetPassword extends View {
   _parentElem = document.querySelector('main');
   _form;
@@ -9,7 +9,7 @@ class resetPassword extends View {
     return `
       <section class="form__section">
         <div class="form__section__logo--lg">
-          <img class="form__section__img" loading='lazy' src="./src/images/m_logo.jpg" alt="Slack (website logo)">
+          <img class="form__section__img" loading='lazy' src="${websiteImage}" alt="website logo">
         </div>
   
         <div class="login__form__cont form__container form__container--blur">
@@ -22,9 +22,7 @@ class resetPassword extends View {
               <label class="input__label__label" for="email">Email</label>
             </div>
             
-            <section class="message-cont">
-              <p class="message"></p>
-            </section>
+            ${this.messageMarkup()}
             
             <button class="btn btn-light-blue form__btn" type="submit">Reset Password</button>
           </form>

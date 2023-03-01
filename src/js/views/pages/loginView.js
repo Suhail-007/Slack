@@ -1,5 +1,7 @@
 import View from '../View.js';
-import { updateURL } from '../../helper.js'
+import { updateURL } from '../../helper.js';
+import websiteImage from '../../../images/m_logo.jpg';
+import icons from '../../../images/icons.svg';
 
 class loginView extends View {
   _parentElem = document.querySelector('main');
@@ -10,7 +12,7 @@ class loginView extends View {
     return `
     <section class="form__section">
       <div class="form__section__logo--lg">
-        <img class="form__section__img" loading='lazy' src="./src/images/m_logo.jpg" alt="Slack (website logo)">
+        <img class="form__section__img" loading='lazy' src="${websiteImage}" alt="website logo">
       </div>
 
       <div class="login__form__cont form__container form__container--blur">
@@ -25,15 +27,13 @@ class loginView extends View {
           
           <div class="input__label">
             <svg data-show-password class='sm-svg input__label__password'>
-              <use href="./src/images/icons.svg#icon-eye-slash"></use>
+              <use href="${icons}#icon-eye-slash"></use>
             </svg>
             <input class="input__label__input" type='password' name='password' id='password'>
             <label class="input__label__label" for="password">Password</label>
           </div>
           
-          <div class="message-cont">
-            <p class="message"></p>
-          </div>
+          ${this.messageMarkup()}
           
           <a class='form-link reset-password' href='/'>Forget your password?</a>
           
@@ -79,7 +79,7 @@ class loginView extends View {
         sendEmailVerif();
         //signout the user 
         logoutUser();
-        throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email, check your inbox/spam tab`);
+        throw new Error(`Your email is not verified. We have sent email verification message on your mail. please verify your email and try again. \n check your inbox/spam tab`);
       }
 
       //throw error if user not found
@@ -99,13 +99,13 @@ class loginView extends View {
       //render nav & footer
       initHome();
 
-      updateURL('dashboard');
+      updateURL('home');
       sessionStorage.setItem('isLogin', true);
 
       await this.renderTab();
     } catch (err) {
       await this.renderMessage(err, 'error', 2000);
-      this.toggleBtnState();
+      this.toggleBtnState(true);
     }
   }
 
@@ -139,11 +139,11 @@ class loginView extends View {
       switch (inputPassElem.type) {
         case 'password':
           inputPassElem.setAttribute('type', 'text');
-          useElem.setAttribute('href', './src/images/icons.svg#icon-eye');
+          useElem.setAttribute('href', `${icons}#icon-eye`);
           break;
         case 'text':
           inputPassElem.setAttribute('type', 'password');
-          useElem.setAttribute('href', './src/images/icons.svg#icon-eye-slash');
+          useElem.setAttribute('href', `${icons}#icon-eye-slash`);
           break
         default:
           return

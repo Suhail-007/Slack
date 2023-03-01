@@ -1,6 +1,6 @@
 import View from '../View.js';
-import Wallet from '../components/Wallet.js';
-import { investCard } from '../components/Cards.js'
+import Wallet from '../../components/Wallet.js';
+import { investCard } from '../../components/Cards.js'
 
 class InvestWallet extends View {
   #coin;

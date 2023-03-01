@@ -1,5 +1,6 @@
 import View from '../View.js';
-import FORM from '../components/Form.js';
+import websiteImage from '../../../images/m_logo.jpg';
+import FORM from '../../components/Form.js';
 import { updateURL } from '../../helper.js'
 import { defaultUserPic } from '../../config.js'
 
@@ -10,7 +11,7 @@ class SignUpView extends View {
     return `
     <section class="form__section">
       <div class="form__section__logo--lg">
-        <img class="form__section__img" loading='lazy' src="/src/images/m_logo.jpg" alt="Slack (website logo)">
+        <img class="form__section__img" loading='lazy' src="${websiteImage}" alt="website logo">
       </div>
 
       <div class="form__container form__container--blur">

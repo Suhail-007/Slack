@@ -1,5 +1,6 @@
 import View from '../View.js'
-import Wallet from '../components/Wallet.js'
+import icons from '../../../images/icons.svg';
+import Wallet from '../../components/Wallet.js'
 
 class FundAndReferralView extends View {
   _parentElem = document.querySelector('main');
@@ -18,7 +19,7 @@ class FundAndReferralView extends View {
         <a href="#" data-ref-link class="ref_link">https://github.com/Suhail-007/dashboard-ui</a>
         <button data-copy-btn class="copy_ref_link btn btn-purple flex-row-AI-center">
           <svg>
-          <use href="./src/images/icons.svg#icon_copy"></use>
+          <use href="${icons}#icon_copy"></use>
           </svg>
           <span>
             Copy Referral Link

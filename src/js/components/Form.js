@@ -1,5 +1,5 @@
-import { updateURL, getCurrentDate } from '../../helper.js';
-import { defaultUserPic as formPic } from '../../config.js';
+import { updateURL, getCurrentDate } from '../helper.js';
+import { defaultUserPic as formPic } from '../config.js';
 
 class FORM {
   render(buttonText, formPic, showLoginBtn, required, passwordText) {
@@ -45,9 +45,9 @@ class FORM {
         <input class="input__label__input" placeholder="country you're currently living in" ${required} id="country" type="text" name="country">
   
   
-        <div class="message-cont">
-          <p class="message"></p>
-        </div>
+          <div class="message-cont">
+            <p class="message"></p>
+          </div>
   
         <button data-form-btn class="btn btn-light-blue form__btn" type="submit">${buttonText}</button>
   

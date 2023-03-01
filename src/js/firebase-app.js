@@ -1,5 +1,4 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js'
-import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js'
+import { initializeApp } from 'firebase/app'
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -12,7 +11,7 @@ import {
   signOut,
   deleteUser,
   updatePassword
-} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
+} from 'firebase/auth';
 import {
   getFirestore,
   collection,
@@ -22,14 +21,14 @@ import {
   deleteField,
   setDoc,
   onSnapshot
-} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
+} from 'firebase/firestore';
 import {
   getStorage,
   ref,
   uploadBytes,
   getDownloadURL,
   deleteObject
-} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js";
+} from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB0YK0OmBjg6AFeqa-Kl3sm0_b1FWZfQV4",
@@ -170,12 +169,12 @@ export const getUserDataAndUserPic = function(user) {
   return new Promise(function(resolve, reject) {
       unSubSnapShot = onSnapshot(doc(db, "users", currUser.uid), async doc => {
         try {
-        if (doc.exists()) {
-          user.data = doc.data();
-          await getUserImage(user.data);
-          resolve(true);
-        }
-        reject(false);
+          if (doc.exists()) {
+            user.data = doc.data();
+            await getUserImage(user.data);
+            resolve(true);
+          }
+          reject(false);
         } catch (err) {
           throw err
         }
@@ -211,7 +210,7 @@ export const getUserImage = async function(user) {
 
     const profilePicRef = ref(storage, `images/${uid}/${name}`);
 
-    //user obj model.js
+    //user obj model
     user.extraInfo.profilePic = await getDownloadURL(profilePicRef);
 
   } catch (err) {

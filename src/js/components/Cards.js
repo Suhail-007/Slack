@@ -1,7 +1,7 @@
 export function investCard(props) {
   const {price, iconName, heading } = props;
   return `
-    <div class="invest-card invest-card-${iconName} card--vertical flex-row-AI-center">
+    <div class="invest-card invest-card-${iconName} card--horizontal flex-row-AI-center">
       <div class="invest-wallet__heading flex-row-AI-center">
         <svg class="md-svg">
           <use href="./src/images/icons.svg#icon-${iconName}"></use>

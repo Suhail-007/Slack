@@ -65,6 +65,14 @@ export default class View {
     })
   }
 
+  messageMarkup() {
+    return `
+      <div class="message-cont">
+        <p class="message"></p>
+      </div>
+    `
+  }
+
   placeholderLabelToggle(parentElem) {
     parentElem.addEventListener('change', e => {
 
@@ -85,7 +93,7 @@ export default class View {
     this.submitBtn = document.querySelector('[data-form-btn]');
 
     if (remove) {
-      this.submitBtn.disabled = false;
+      this.submitBtn.removeAttribute('disabled');
       return
     }
 

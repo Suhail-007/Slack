@@ -1,4 +1,6 @@
 import View from '../View.js'
+import icons from '../../../images/icons.svg';
+
 
 class StatisticsView extends View {
   _parentElem = document.querySelector('main');
@@ -6,11 +8,11 @@ class StatisticsView extends View {
   _generateMarkup() {
     return `
     <section data-statistics-boxes class="statistics_boxes">
-      <div class="box card--horizontal box-1">
+      <div class="box card--vertical box-1">
         <div class="icon_heading">
           <div>
           <svg>
-            <use href="./src/images/icons.svg#icon_chart"></use>
+            <use href="${icons}#icon_chart"></use>
           </svg>
           </div>
           <p>Roi Income</p>
@@ -24,11 +26,11 @@ class StatisticsView extends View {
         </div>
       </div>
 
-      <div class="box card--horizontal box-2">
+      <div class="box card--vertical box-2">
         <div class="icon_heading">
           <div>
           <svg>
-            <use href="./src/images/icons.svg#icon_money-bag"></use>
+            <use href="${icons}#icon_money-bag"></use>
           </svg>
           </div>
 
@@ -43,11 +45,11 @@ class StatisticsView extends View {
         </div>
       </div>
 
-      <div class="box card--horizontal box-3">
+      <div class="box card--vertical box-3">
         <div class="icon_heading">
           <div>
           <svg>
-            <use href="./src/images/icons.svg#icon_binary-income"></use>
+            <use href="${icons}#icon_binary-income"></use>
           </svg>
           </div>
 
@@ -62,11 +64,11 @@ class StatisticsView extends View {
         </div>
       </div>
 
-      <div class="box card--horizontal box-4">
+      <div class="box card--vertical box-4">
         <div class="icon_heading">
           <div>
           <svg>
-            <use href=./src/images/icons.svg#current_income></use>
+            <use href="${icons}#current_income"></use>
           </svg>
           </div>
 
