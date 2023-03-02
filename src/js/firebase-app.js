@@ -29,6 +29,9 @@ import {
   getDownloadURL,
   deleteObject
 } from "firebase/storage";
+import { 
+  initializeAppCheck,
+ReCaptchaV3Provider } from 'firebase/app-check'
 
 const firebaseConfig = {
   apiKey: "AIzaSyB0YK0OmBjg6AFeqa-Kl3sm0_b1FWZfQV4",
@@ -42,7 +45,12 @@ const firebaseConfig = {
 };
 
 //init app
-export const firebaseApp = initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig);
+
+const appCheck = initializeAppCheck({
+  provider: new ReCaptchaV3Provider('6Lf5dMckAAAAAMtbaHU5kOiEc3iGgyw74aFSD8GV'),
+  isTokenAutoRefreshEnabled: true
+})
 
 //init services
 const storage = getStorage();

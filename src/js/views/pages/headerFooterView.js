@@ -1,6 +1,8 @@
 import View from '../View.js';
 import createNavLinks from '../../components/createNavLink.js';
 import { defaultUserPic } from '../../config.js';
+import icons from '../../../images/icons.svg';
+import websiteLogo from '../../../images/m_logo.jpg';
 
 class headerFooter extends View {
   _parentElem = document.body;
@@ -12,7 +14,6 @@ class headerFooter extends View {
   }
 
   removeHeaderFooter() {
-    //temporary function
     const header = document.querySelector('header')
     const footer = document.querySelector('footer');
 
@@ -27,7 +28,7 @@ class headerFooter extends View {
         <div class="header">
           <div class="website-logo-container">
             <div class="website-logo">
-              <img src="./src/images/m_logo.jpg" alt="Slack (website logo)">
+              <img src="${websiteLogo}" alt="website logo">
             </div>
             <p class="website_name">Slack</p>
           </div>
@@ -44,7 +45,7 @@ class headerFooter extends View {
         <div class="nav__container">
           <div class="nav__container__btn" data-navBtn-container>
             <svg>
-              <use xlink:href="./src/images/icons.svg#icon_hamburger-menu"></use>
+              <use xlink:href="${icons}#icon_hamburger-menu"></use>
             </svg>
           </div>
     
