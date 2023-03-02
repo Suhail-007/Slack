@@ -1,10 +1,8 @@
-import { systemDefaultTheme, renderFromHistory, windowLoad } from './model.js';
-//import { firebaseApp } from './firebase-app.js';
-import '../css/style.min.css';
+import {renderFromHistory, windowLoad } from './model.js';
+import '../sass/main.scss';
 
 class App {
   async init() {
-    systemDefaultTheme();
     renderFromHistory();
     windowLoad();
   }

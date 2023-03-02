@@ -1,6 +1,7 @@
 import View from '../View.js';
 import Wallet from '../../components/Wallet.js';
 import { investCard } from '../../components/Cards.js'
+import icons from '../../../images/icons.svg'
 
 class InvestWallet extends View {
   #coin;
@@ -24,8 +25,8 @@ class InvestWallet extends View {
         </div>
       </div>
       <div class="invest-wallet__cards-cont flex-col">
-        ${investCard({price: 0, iconName:'bitcoin', heading: 'Bitcoin'})}
-        ${investCard({price: 0, iconName:'SM', heading: 'Stock Market'})}
+        ${investCard({price: 0, icon:`${icons}#bitcoin`, heading: 'bitcoin', className:'bitcoin'})}
+        ${investCard({price: 0, icon:`${icons}#SM`, heading: 'stock market', className: 'SM'})}
       </div> 
       
       <div data-wallet>
@@ -48,7 +49,7 @@ class InvestWallet extends View {
     try {
       const res = await getBitcoinDetails();
       const price = document.querySelector('[data-price="bitcoin"]');
-
+      
       this.#coin = res;
 
       if (!this.#coin) return price.textContent = 'Closed';
