@@ -1,5 +1,6 @@
 import View from '../View.js'
 import icons from '../../../images/icons.svg';
+import referImg from '../../../images/m_refer.jpeg';
 import Wallet from '../../components/Wallet.js'
 
 class FundAndReferralView extends View {
@@ -12,7 +13,7 @@ class FundAndReferralView extends View {
       <div class="section__bottom-ref">
         <h2>REFER A FRIEND</h2>
         <div class="section__bottom-ref__img-cont">
-          <img src="./src/images/m_refer.jpeg" alt="refer a friend">
+          <img src="${referImg}" alt="refer a friend">
         </div>
 
         <h4 class="section__bottom-ref__sub-head">Referral Link</h4>

@@ -1,7 +1,7 @@
 import loginView from './views/pages/loginView.js';
 import signUpView from './views/pages/signupView.js';
 import resetPassView from './views/pages/resetPassView.js';
-import headerFooterView from './views/pages/homeView.js';
+import headerFooterView from './views/pages/headerFooterView.js';
 import homeView from './views/home/homeView.js';
 import chartView from './views/home/chartView.js';
 import fundAndReferralView from './views/home/fundAndReferralView.js';
@@ -37,6 +37,7 @@ const router = {
         await loginView.loader();
         await loginView.Delay(500);
         loginView.renderData(user);
+        systemDefaultTheme();
         loginAgainMessage();
 
         loginView.init(renderTab, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);

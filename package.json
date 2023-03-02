@@ -8,7 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "watch:sass": "sass ./src/sass/main.scss ./src/css/style.min.css -w",
-    "dev:build": "npm-run-all --parallel watch:sass dev"
+    "build:sass": "sass ./src/sass/main.scss ./src/css/style.min.css",
+    "dev:build": "npm-run-all --parallel watch:sass dev",
+    "build:all": "npm-run-all build:sass build"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
