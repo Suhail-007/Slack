@@ -1,5 +1,5 @@
 import { systemDefaultTheme, renderFromHistory, windowLoad } from './model.js';
-import { firebaseApp } from './firebase-app.js';
+//import { firebaseApp } from './firebase-app.js';
 import '../css/style.min.css';
 
 class App {
