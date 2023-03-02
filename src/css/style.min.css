@@ -1369,7 +1369,7 @@ header .nav_container_btn svg {
   font-size: 1.5rem;
   text-transform: capitalize;
 }
-.invest-wallet__heading > svg {
+.invest-wallet__heading svg {
   fill: currentColor;
 }
 

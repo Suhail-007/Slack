@@ -25,8 +25,8 @@ class InvestWallet extends View {
         </div>
       </div>
       <div class="invest-wallet__cards-cont flex-col">
-        ${investCard({price: 0, icon:`${icons}#bitcoin`, heading: 'bitcoin', className:'bitcoin'})}
-        ${investCard({price: 0, icon:`${icons}#SM`, heading: 'stock market', className: 'SM'})}
+        ${investCard({price: 0, icon:`${icons}#icon-bitcoin`, heading: 'bitcoin', className:'bitcoin'})}
+        ${investCard({price: 0, icon:`${icons}#icon-SM`, heading: 'stock market', className: 'SM'})}
       </div> 
       
       <div data-wallet>

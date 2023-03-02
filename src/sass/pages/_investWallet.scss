@@ -58,6 +58,7 @@
     background: hsla(43, 74%, 70%, .3);
     box-shadow: .2rem .2rem .5rem 0 hsla(48, 83%, 80%, .2);
     color: hsla(43, 74%, 50%, 1);
+
   }
 
   //stock market
@@ -75,8 +76,7 @@
       font-size: 1.5rem;
       text-transform: capitalize;
     }
-
-    &>svg {
+    & svg {
       fill: currentColor;
     }
   }
