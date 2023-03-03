@@ -1,7 +1,7 @@
 import loginView from './views/pages/loginView.js';
 import signUpView from './views/pages/signupView.js';
 import resetPassView from './views/pages/resetPassView.js';
-import headerFooterView from './views/pages/headerFooterView.js';
+import headerFooterView from './components/headerFooterView.js';
 import homeView from './views/home/homeView.js';
 import chartView from './views/home/chartView.js';
 import fundAndReferralView from './views/home/fundAndReferralView.js';
@@ -43,6 +43,7 @@ const router = {
         modalHandler();
         headerFooterView.removeHeaderFooter();
       } catch (err) {
+        console.log(err)
         loginView.renderMessage(err, 'error', 4000)
       }
     }
@@ -201,24 +202,36 @@ export const renderFromHistory = function() {
 export const windowLoad = function() {
   window.addEventListener('load', async () => {
     const { page } = getPage();
-    const res = await authChanged(user);
+    // const res = await authChanged(user);
 
-    if (page != null && res) {
-      renderTab();
-      scrollToTop();
-      initHome();
-      modalHandler();
-      initTheme(user)
-      return
-    }
-    return renderTab();
+    //if user is not on login page 
+    // if (page != null && res) {
+    //   renderTab();
+    //   scrollToTop();
+    //   initHome();
+    //   modalHandler();
+    //   initTheme(user)
+    //   return
+    // }
+
+    if (page === null) return renderTab()
+
+    renderTab();
+    scrollToTop();
+    // initHome();
+    modalHandler();
+    initTheme(user)
   });
 }
 
-const initHome = function() {
-  headerFooterView.generateHomeMarkup(user);
-  NAV_TOGGLE_BTN();
-  headerFooterView.navTab(renderTab, updateURL);
+const initHome = async function(user) {
+  try {
+    await headerFooterView.generateHomeMarkup(user);
+    NAV_TOGGLE_BTN();
+    headerFooterView.navTab(renderTab, updateURL);
+  } catch (err) {
+    throw err
+  }
 }
 
 const scrollToTop = function() {

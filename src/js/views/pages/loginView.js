@@ -70,7 +70,7 @@ class loginView extends View {
       const { email, password } = userObj;
 
       this.toggleBtnState();
-      if (email) await this.renderMessage('Checking information', 'success', 1000);
+      if (email) await this.renderMessage('Checking information', 'success', 500);
 
       const user = await loginUser(email, password);
 
@@ -85,25 +85,26 @@ class loginView extends View {
       //throw error if user not found
       if (!user) throw Error('You need to login again');
 
-      await this.renderMessage('Getting user data', 'success', 1000);
+      await this.renderMessage('Getting user data', 'success', 500);
 
       //get user data && image from firebase & update user obj
       const res = await getUserDataAndUserPic(this._data);
 
-      if (res) await this.renderMessage('Fetched data successfully', 'success', 1000);
+      if (res) await this.renderMessage('Fetched data successfully', 'success', 500);
 
-      await this.renderMessage('Logging User', 'success', 1000);
+      await this.renderMessage('Logging User', 'success', 500);
 
       //if users exist update url and call router to redirect users to login page else firebase will throw an error 
 
       //render nav & footer
-      initHome();
+      initHome(this._data);
 
       updateURL('home');
       sessionStorage.setItem('isLogin', true);
 
       await this.renderTab();
     } catch (err) {
+      console.log(err);
       await this.renderMessage(err, 'error', 2000);
       this.toggleBtnState(true);
     }
