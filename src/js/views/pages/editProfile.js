@@ -46,10 +46,10 @@ class EditProfileView extends View {
 
         toggleModal('Updating user data, don\'t leave the page or press back button.');
 
-        await this.renderMessage('Updating user data', 'success', 2000);
-
         const updatedData = this.updatedData(fdObj);
 
+        await this.renderMessage('Updating user data', 'success', 500);
+        
         //checks if password fields aren't empty
         if (fdObj.password) await this.updatePassword(updateUserPassword, loginUser, fdObj.password);
 
@@ -65,17 +65,17 @@ class EditProfileView extends View {
 
         //remove & re render nav & footer
         removeHeaderFooter();
-        initHome();
+        initHome(this._data);
 
         toggleModal('Data updated.!');
 
-        await this.renderMessage('Data updated!', 'success', 2000);
+        await this.renderMessage('Data updated!', 'success', 1000);
 
         updateURL('profile');
         renderTab();
       } catch (err) {
         this.toggleBtnState(true);
-        await this.renderMessage(err, 'error', 3000);
+        await this.renderMessage(err, 'error', 2000);
       }
     })
   }
@@ -153,7 +153,7 @@ class EditProfileView extends View {
       reAuthUser.hideForm();
       //if user cancel the process exit from fn
       if (!emailPass.reAuthEmail || !emailPass.reAuthPass) {
-        await this.renderMessage('we can\'t create something from nothing, can we? :)', 'error', 3000);
+        await this.renderMessage('we can\'t create something from nothing, can we? :)', 'error', 2000);
         return false
       }
 
@@ -162,7 +162,7 @@ class EditProfileView extends View {
       //login user again
       const currUser = await loginUser(email, pass);
 
-      await this.renderMessage('Updating your password', 'success', 1500);
+      await this.renderMessage('Updating your password', 'success', 1000);
 
       const isPassUpdated = await updateUserPassword(currUser, password);
 

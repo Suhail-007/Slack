@@ -149,7 +149,6 @@ const router = {
         incomeView.renderData(user);
         incomeView.init();
       } catch (err) {
-        console.log(err);
         incomeView.renderMessage(err, 'error', 4000);
       }
     }
@@ -202,7 +201,7 @@ export const renderFromHistory = function() {
 export const windowLoad = function() {
   window.addEventListener('load', async () => {
     const { page } = getPage();
-    // const res = await authChanged(user);
+    const res = await authChanged(user);
 
     //if user is not on login page 
     // if (page != null && res) {
@@ -218,7 +217,7 @@ export const windowLoad = function() {
 
     renderTab();
     scrollToTop();
-    // initHome();
+    // initHome(user);
     modalHandler();
     initTheme(user)
   });
@@ -241,10 +240,10 @@ const scrollToTop = function() {
   });
 }
 
-const loginAgainMessage = function() {
+const loginAgainMessage = async function() {
   const isLogin = sessionStorage.getItem('isLogin');
   if (isLogin) {
-    loginView.renderMessage('Login again to access your account', 'error', 4000);
+    await loginView.renderMessage('Login again to access your account', 'error', 1000);
   }
 }
 

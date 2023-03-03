@@ -105,7 +105,7 @@ class loginView extends View {
       await this.renderTab();
     } catch (err) {
       console.log(err);
-      await this.renderMessage(err, 'error', 2000);
+      await this.renderMessage(err, 'error', 1000);
       this.toggleBtnState(true);
     }
   }
