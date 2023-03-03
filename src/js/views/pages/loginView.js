@@ -12,7 +12,7 @@ class loginView extends View {
     return `
     <section class="form__section">
       <div class="form__section__logo--lg">
-        <img class="form__section__img" loading='lazy' src="${websiteImage}" alt="website logo">
+        <img class="form__section__img" src="${websiteImage}" alt="website logo">
       </div>
 
       <div class="login__form__cont form__container form__container--blur">
