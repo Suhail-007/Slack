@@ -36,9 +36,8 @@ class InvestWallet extends View {
     `
   }
 
-  async init(getBitcoinDetails, updateUserData, getStockOpenPrice) {
+  async init(getBitcoinDetails, getStockOpenPrice) {
     this.setTitle('Invest wallet || Slack');
-    this.updateData = updateUserData;
     await this.setBitcoinPrice(getBitcoinDetails);
     await this.setStockPrice(getStockOpenPrice);
     this.addActiveClass();
@@ -49,7 +48,7 @@ class InvestWallet extends View {
     try {
       const res = await getBitcoinDetails();
       const price = document.querySelector('[data-price="bitcoin"]');
-      
+
       this.#coin = res;
 
       if (!this.#coin) return price.textContent = 'Closed';

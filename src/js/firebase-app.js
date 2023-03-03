@@ -18,7 +18,6 @@ import {
   doc,
   deleteDoc,
   updateDoc,
-  deleteField,
   setDoc,
   onSnapshot
 } from 'firebase/firestore';
@@ -46,7 +45,7 @@ const firebaseConfig = {
 };
 
 //init app
-export const firebaseApp = initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig);
 
 const appCheck = initializeAppCheck(firebaseApp, {
   provider: new ReCaptchaV3Provider('6LclvcckAAAAALXB7BPnP3RT0gIUpQiCMCvYDk_m'),
@@ -55,14 +54,14 @@ const appCheck = initializeAppCheck(firebaseApp, {
 
 //init services
 const storage = getStorage();
-export const db = getFirestore(firebaseApp);
+const db = getFirestore(firebaseApp);
 const auth = getAuth();
 
-export let unSubSnapShot;
-export let unSubAuth;
+let unSubSnapShot;
+let unSubAuth;
 
 // const analytics = getAnalytics(firebaseApp);
-export const loginUser = async function(email, password) {
+const loginUser = async function(email, password) {
   try {
     await setPersistence(auth, browserSessionPersistence);
     await signInWithEmailAndPassword(auth, email, password);
@@ -72,7 +71,7 @@ export const loginUser = async function(email, password) {
   }
 }
 
-export const authChanged = function(user) {
+const authChanged = function(user) {
   return new Promise((resolve, reject) => {
       unSubAuth = onAuthStateChanged(auth, user => user ? resolve(user) : reject('no user is currently log in'))
     })
@@ -81,7 +80,7 @@ export const authChanged = function(user) {
 }
 
 //create user & send user email verification
-export const createUserSendEmailVerif = async function(email, password) {
+const createUserSendEmailVerif = async function(email, password) {
   try {
     const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
     const user = await userCredentials.user;
@@ -103,11 +102,11 @@ export const updateUserData = async function(field) {
   }
 }
 
-export const sendEmailVerif = async function() {
+const sendEmailVerif = async function() {
   await sendEmailVerification(auth.currentUser);
 }
 
-export const resetUserPass = async function(email) {
+const resetUserPass = async function(email) {
   try {
     return await sendPasswordResetEmail(auth, email);
   } catch (err) {
@@ -115,7 +114,7 @@ export const resetUserPass = async function(email) {
   }
 }
 
-export const updateUserPassword = async function(user, newPassword) {
+const updateUserPassword = async function(user, newPassword) {
   try {
     await updatePassword(user, newPassword);
   } catch (err) {
@@ -123,7 +122,7 @@ export const updateUserPassword = async function(user, newPassword) {
   }
 }
 
-export const logoutUser = async function() {
+const logoutUser = async function() {
   try {
     await signOut(auth);
     unSubAuth();
@@ -134,7 +133,7 @@ export const logoutUser = async function() {
 }
 
 //when user sign up create user data in firebase database
-export const createUserData = async function(user, formData) {
+const createUserData = async function(user, formData) {
   try {
     await setDoc(doc(db, 'users', user.uid), {
       personalInfo: {
@@ -173,7 +172,7 @@ export const createUserData = async function(user, formData) {
   }
 }
 
-export const getUserDataAndUserPic = function(user) {
+const getUserDataAndUserPic = function(user) {
   const currUser = auth.currentUser;
   return new Promise(function(resolve, reject) {
       unSubSnapShot = onSnapshot(doc(db, "users", currUser.uid), async doc => {
@@ -196,7 +195,7 @@ export const getUserDataAndUserPic = function(user) {
 
 const imagesRef = ref(storage, 'images');
 
-export const uploadPic = async function(user, file) {
+const uploadPic = async function(user, file) {
   //it's like this inside of images folder create user(user.id) folder there create a file name(file param) and upload that file to server. i.e images/user/file(same name as user have saved)
   try {
     const { name } = file;
@@ -210,7 +209,7 @@ export const uploadPic = async function(user, file) {
   }
 }
 
-export const getUserImage = async function(user) {
+const getUserImage = async function(user) {
   try {
     const { uid, profilePicName: name } = user.extraInfo;
 
@@ -227,7 +226,7 @@ export const getUserImage = async function(user) {
   }
 }
 
-export const deleteUserAndData = async function(user, currUser) {
+const deleteUserAndData = async function(user, currUser) {
   try {
     await deleteUserPic(user);
     await deleteUserDoc();
@@ -261,3 +260,22 @@ const deleteUserDoc = async function() {
     throw err
   }
 }
+
+const firebaseObj = {
+  loginUser,
+  createUserSendEmailVerif,
+  createUserData,
+  getUserDataAndUserPic,
+  resetUserPass,
+  sendEmailVerif,
+  logoutUser,
+  authChanged,
+  deleteUserAndData,
+  unSubAuth,
+  unSubSnapShot,
+  updateUserData,
+  uploadPic,
+  updateUserPassword
+}
+
+export default firebaseObj;

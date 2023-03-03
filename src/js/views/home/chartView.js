@@ -1,6 +1,6 @@
 import lineConfig from '../../charts/lineChart.js';
 import doughnutConfig from '../../charts/doughnutChart.js';
-import { Chart} from 'chart.js/auto';
+import { Chart } from 'chart.js/auto';
 
 //The most common is net income divided by the total cost of the investment, or ROI = Net income / Cost of investment x 100.
 
@@ -9,7 +9,7 @@ class ChartView {
   _doughnutChartElem;
   _lineChartElem;
 
-  renderChart() {
+  renderChartMarkup() {
     return `
       <section class="canvas-cont">
         <div class="roi_income_chart_cont">
@@ -69,4 +69,7 @@ class ChartView {
   }
 }
 
+// const CHART = new ChartView();
 export default new ChartView();
+// export default CHART;
+// export const createChart = CHART.createChart;

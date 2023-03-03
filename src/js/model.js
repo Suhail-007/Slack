@@ -3,7 +3,6 @@ import signUpView from './views/pages/signupView.js';
 import resetPassView from './views/pages/resetPassView.js';
 import headerFooterView from './components/headerFooterView.js';
 import homeView from './views/home/homeView.js';
-import chartView from './views/home/chartView.js';
 import fundAndReferralView from './views/home/fundAndReferralView.js';
 import profileView from './views/pages/profileView.js';
 import investWalletView from './views/pages/investWallet.js';
@@ -14,8 +13,8 @@ import editProfileView from './views/pages/editProfile.js';
 
 import { cryptoConfig, stockMarketConfig, API_KEY } from './config.js';
 import logoutUserView from './views/pages/logout.js';
-import { updateURL, NAV_TOGGLE_BTN, setLocalStorage, fetchURL, modalHandler, toggleModal } from './helper.js';
-import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, logoutUser, authChanged, deleteUserAndData, unSubAuth, unSubSnapShot, updateUserData, uploadPic, updateUserPassword } from './firebase-app.js';
+import { updateURL, NAV_TOGGLE_BTN, fetchURL, modalHandler, toggleModal } from './helper.js';
+import firebaseObj from './firebase-app.js';
 
 
 export const copyRefLink = async function(element) {
@@ -33,6 +32,7 @@ const router = {
   'null': {
     view: async function() {
       try {
+        const { loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic } = firebaseObj;
         await loginView.loader();
         await loginView.Delay(200);
         loginView.renderData(user);
@@ -43,7 +43,6 @@ const router = {
         modalHandler();
         headerFooterView.removeHeaderFooter();
       } catch (err) {
-        console.log(err)
         loginView.renderMessage(err, 'error', 4000)
       }
     }
@@ -52,6 +51,8 @@ const router = {
   'signup': {
     view: async function() {
       try {
+        const { createUserSendEmailVerif, createUserData } = firebaseObj;
+
         await signUpView.loader();
         await resetPassView.Delay(200);
         signUpView.renderData(user);
@@ -64,24 +65,31 @@ const router = {
 
   'reset password': {
     view: async function() {
-      await resetPassView.loader();
-      await resetPassView.Delay(200);
-      resetPassView.renderData('_');
-      resetPassView.init(resetUserPass);
+      try {
+        const { resetUserPass } = firebaseObj;
+
+        await resetPassView.loader();
+        await resetPassView.Delay(200);
+        resetPassView.renderData('_');
+        resetPassView.init(resetUserPass);
+      } catch (err) {
+        await resetPassView.renderMessage(err, 'error', 2000);
+      }
     }
   },
 
   'home': {
     view: async function() {
       try {
+        const { updateUserData, copyRefLink } = firebaseObj;
+
         await homeView.loader();
         await homeView.Delay(200);
         homeView.renderData(user);
-        chartView.createChart(user);
-
         homeView.init(updateUserData, copyRefLink);
         initTheme(user)
       } catch (err) {
+        console.log(err)
         toggleModal(err);
       }
     }
@@ -90,6 +98,7 @@ const router = {
   'profile': {
     view: async function() {
       try {
+        const { deleteUserAndData, loginUser } = firebaseObj;
         await profileView.loader();
         await profileView.Delay(200);
         profileView.renderData(user);
@@ -103,10 +112,20 @@ const router = {
   'profileEdit': {
     view: async function() {
       try {
+        const helper = {
+          renderTab,
+          initHome,
+          removeHeaderFooter: headerFooterView.removeHeaderFooter,
+          updateUserData: firebaseObj.updateUserData,
+          updateUserPassword: firebaseObj.updateUserPassword,
+          uploadPic: firebaseObj.uploadPic,
+          loginUser: firebaseObj.loginUser
+        };
+
         await editProfileView.loader();
         await editProfileView.Delay(200);
         editProfileView.renderData(user);
-        editProfileView.init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, headerFooterView.removeHeaderFooter, loginUser);
+        editProfileView.init(helper);
       } catch (err) {
         console.log(err);
       }
@@ -119,7 +138,7 @@ const router = {
         await investWalletView.loader();
         await investWalletView.Delay(200);
         investWalletView.renderData(user);
-        await investWalletView.init(getBitcoinDetails, updateUserData, getStockOpenPrice);
+        await investWalletView.init(getBitcoinDetails, getStockOpenPrice);
 
       } catch (err) {
         console.log(err);
@@ -157,6 +176,7 @@ const router = {
   'logout': {
     view: async function() {
       try {
+        const { logoutUser, unSubAuth, unSubSnapShot } = firebaseObj;
         await logoutUserView.init(logoutUser, unSubAuth, unSubSnapShot);
       } catch (err) {
         console.log(err);
@@ -174,6 +194,7 @@ const router = {
 export const renderTab = async function() {
   try {
     const { page } = getPage();
+    const { authChanged, logoutUser } = firebaseObj;
     const res = await authChanged(user);
 
     //scroll to top of every section
@@ -292,6 +313,7 @@ export const settings = async function(e) {
 
 const updateChart = async function(value, id) {
   try {
+    const { updateUserData } = firebaseObj;
     toggleModal('Please wait updating chart');
     id === 'roi' ? await updateUserData({ 'preference.charts.roi': value }) : await updateUserData({ 'preference.charts.bi': value });
     toggleModal('Chart updated');
@@ -303,6 +325,7 @@ const updateChart = async function(value, id) {
 const applyTheme = function(elem) {
   //assign event listener to select tag
   elem.addEventListener('change', async (e) => {
+    const { updateUserData } = firebaseObj;
     //get value
     const selectedValue = e.target.value.toLowerCase();
     const body = document.body;
@@ -345,3 +368,6 @@ export const initTheme = function(user) {
   //apply the theme
   theme === 'system default' ? systemDefaultTheme() : theme === 'light' ? document.body.classList.remove('dark') : theme === 'dark' ? document.body.classList.add('dark') : '';
 }
+
+
+//set up firebase object everywhere

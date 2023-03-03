@@ -1,8 +1,9 @@
+import View from '../views/View.js'
 import { updateURL, getCurrentDate } from '../helper.js';
 import { defaultUserPic as formPic } from '../config.js';
 
-class FORM {
-  render(buttonText, formPic, showLoginBtn, required, passwordText) {
+export default class FORM extends View {
+  form(buttonText, formPic, showLoginBtn, required, passwordText) {
     return `
       <form class="signup__form">
       
@@ -62,6 +63,32 @@ class FORM {
       updateURL(toWhere, home);
     })
   }
+  
+  previewUserProfile() {
+    const inputImgElem = document.querySelector('#profile');
+  
+    inputImgElem.addEventListener('change', () => {
+      const img = document.querySelector('[data-img-preview]');
+      const file = inputImgElem.files[0];
+  
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.addEventListener('load', () => img.src = fileReader.result);
+    })
+  }
+  
+  isInputsCorrect(fdObj) {
+    let { fullname, password, Repassword: rePassword } = fdObj;
+  
+    //check if user enter fullname
+    fullname = fullname.trim().includes(' ');
+  
+    //check if passwords is same
+    password = password.split('');
+    rePassword = rePassword.split('');
+    const isPassSame = password.every((l, i) => rePassword[i] === l);
+    return { fullname, isPassSame }
+  }
 }
 
-export default new FORM();
+// export default new FORM;

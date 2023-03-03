@@ -42,16 +42,15 @@ class resetPassword extends View {
       try {
         e.preventDefault();
         const email = this._form.email.value;
-        
-        if(!email) return await this.renderMessage('Yea, reset password mail has been sent to johndoe@mail.com xD', 'success', 3000);
-        
+
+        if (!email) return await this.renderMessage('Yea, reset password mail has been sent to johndoe@mail.com xD', 'success', 3000);
+
         await resetUserPass(email);
         await this.renderMessage('Password reset mail has been sent to your mail', 'success', 3000);
         await this.Delay(2000);
         updateURL('_', true);
       } catch (err) {
-        console.log(err);
-        await this.renderMessage(err, 'error', 2000);
+        throw err
       }
     })
   }

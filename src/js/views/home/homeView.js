@@ -10,7 +10,7 @@ class DashboardView extends View {
   _generateMarkup() {
     const sections = `
       ${minimalAccInfo.renderData(this._data, false, false)}
-      ${chartView.renderChart()}
+      ${chartView.renderChartMarkup()}
       ${statisticsView.renderData(this._data, false, false)}
       ${fundAndReferralView.renderData(this._data, false, false)}`;
     return sections;
@@ -19,6 +19,7 @@ class DashboardView extends View {
   init(updateUserData, handler) {
     this.setTitle('Dashboard || Slack');
     fundAndReferralView.init(updateUserData, handler);
+    chartView.createChart(this._data);
   }
 }
 
