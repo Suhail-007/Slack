@@ -5,7 +5,6 @@ import Wallet from '../../components/Wallet.js'
 
 class FundAndReferralView extends View {
   _parentElem = document.querySelector('main');
-  _copyButton;
 
   _generateMarkup() {
     return `
@@ -31,51 +30,44 @@ class FundAndReferralView extends View {
     </section>`;
   }
 
-  init(updateUserData, handler) {
-    this.updateUserData = updateUserData;
+  init() {
     Wallet.addInputAmount(this._data.data);
-    this.addHandlerCopyRef(handler);
+    this.addHandlerCopyRef();
     Wallet.toggleFundBtns();
   }
 
   _toastCopy() {
-    const body = document.body;
-
-    let html = `
+    const html = `
       <div class="toast_copy">
         <p>Copied</p>
       </div>`
 
-    body.insertAdjacentHTML('beforeend', html);
+    document.body.insertAdjacentHTML('beforeend', html);
     this._hideToastCopy();
   }
 
   _hideToastCopy() {
     const toast = document.querySelector('.toast_copy');
     toast.style.opacity = 1;
-    setTimeout(() => {
-      toast.style.opacity = 0;
-    }, 1000);
+    setTimeout(() => toast.style.opacity = 0, 1000);
   }
 
-  addHandlerCopyRef(handler) {
-    this._copyButton = document.querySelector('[data-copy-btn]');
+   addHandlerCopyRef() {
+    const copyBtn = document.querySelector('[data-copy-btn]');
     const refLink = document.querySelector('[data-ref-link]');
 
-    this._copyButton.addEventListener('click', e => {
+    copyBtn.addEventListener('click', async e => {
       const btn = e.target.closest('[data-copy-btn]');
 
       const btnSpanElem = btn.querySelector('span');
 
       if (!btn) return;
-      handler(refLink);
+      await navigator.clipboard.writeText(element.innerText);
 
       btnSpanElem.innerText = 'Copied';
       this._toastCopy();
 
-      setTimeout(() => {
-        btnSpanElem.innerText = 'Copy Referral Link';
-      }, 1000);
+      setTimeout(() => btnSpanElem.innerText = 'Copy Referral Link', 1000);
     })
   }
 }

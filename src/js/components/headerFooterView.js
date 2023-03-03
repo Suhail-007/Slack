@@ -1,16 +1,19 @@
-import View from '../views/View.js';
 import createNavLinks from './createNavLink.js';
 import { defaultUserPic } from '../config.js';
 import icons from '../../images/icons.svg';
 import websiteLogo from '../../images/m_logo.jpg';
 
-class headerFooter extends View {
+class headerFooter {
   _parentElem = document.body;
 
   async generateHomeMarkup(data) {
-    this._data = await data.data;
-    this._parentElem.insertAdjacentHTML('afterbegin', this.generateHeaderMarkup());
-    this._parentElem.insertAdjacentHTML('beforeend', this.generateFooterMarkup());
+    try {
+      this._data = await data.data;
+      this._parentElem.insertAdjacentHTML('afterbegin', this.generateHeaderMarkup());
+      this._parentElem.insertAdjacentHTML('beforeend', this.generateFooterMarkup());
+    } catch (err) {
+      throw err
+    }
   }
 
   removeHeaderFooter() {
@@ -81,13 +84,17 @@ class headerFooter extends View {
 
   navTab(renderTab, updateURL) {
     const nav = document.querySelector('[data-nav]');
-    
+
     nav.addEventListener('click', e => {
       const navLink = e.target.closest('.nav-link').dataset.nav;
       if (!navLink) return
       updateURL(navLink);
       renderTab();
     })
+  }
+
+  _setUserPic(user) {
+    return user.profilePic ? user.profilePic : defaultUserPic;
   }
 }
 

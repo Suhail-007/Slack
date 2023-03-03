@@ -27,9 +27,7 @@ class Wallet extends View {
           
           <input name='walletInfo' id="amount" type="text">
           
-          <div class="message-cont">
-            <p class="message"></p>
-          </div>
+            ${this.messageMarkup()}
           
           <button type='submit' class="btn btn-light-blue" data-cta='add'>Add Fund</button>
         </form>

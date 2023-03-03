@@ -90,5 +90,3 @@ export default class FORM extends View {
     return { fullname, isPassSame }
   }
 }
-
-// export default new FORM;

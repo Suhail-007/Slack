@@ -3,7 +3,6 @@ import signUpView from './views/pages/signupView.js';
 import resetPassView from './views/pages/resetPassView.js';
 import headerFooterView from './components/headerFooterView.js';
 import homeView from './views/home/homeView.js';
-import fundAndReferralView from './views/home/fundAndReferralView.js';
 import profileView from './views/pages/profileView.js';
 import investWalletView from './views/pages/investWallet.js';
 import teamSummary from './views/pages/team-summary.js';
@@ -15,11 +14,6 @@ import { cryptoConfig, stockMarketConfig, API_KEY } from './config.js';
 import logoutUserView from './views/pages/logout.js';
 import { updateURL, NAV_TOGGLE_BTN, fetchURL, modalHandler, toggleModal } from './helper.js';
 import firebaseObj from './firebase-app.js';
-
-
-export const copyRefLink = async function(element) {
-  await navigator.clipboard.writeText(element.innerText);
-}
 
 let isLogin = false;
 
@@ -81,15 +75,12 @@ const router = {
   'home': {
     view: async function() {
       try {
-        const { updateUserData, copyRefLink } = firebaseObj;
-
         await homeView.loader();
         await homeView.Delay(200);
         homeView.renderData(user);
-        homeView.init(updateUserData, copyRefLink);
+        homeView.init();
         initTheme(user)
       } catch (err) {
-        console.log(err)
         toggleModal(err);
       }
     }
