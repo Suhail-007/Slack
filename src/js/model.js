@@ -182,12 +182,13 @@ export const renderTab = async function() {
     //signout the user if user go back to login page
     if (page === null && res) logoutUser();
 
-    //if user is signout and go back to home redirect user to login page
+    //if user is signout and user try to navigate to anywhere except these, redirect user to login page
     if (!res && page != null && page !== 'signup' && page !== 'reset password') return updateURL('_', true);
 
     //if page not found
     if (router[page] === undefined) await router['404'].view();
 
+    //render page
     if (router[page]) await router[page].view();
   } catch (err) {
     toggleModal(err);
@@ -201,24 +202,13 @@ export const renderFromHistory = function() {
 export const windowLoad = function() {
   window.addEventListener('load', async () => {
     const { page } = getPage();
-    const res = await authChanged(user);
 
-    //if user is not on login page 
-    // if (page != null && res) {
-    //   renderTab();
-    //   scrollToTop();
-    //   initHome();
-    //   modalHandler();
-    //   initTheme(user)
-    //   return
-    // }
+    if (page === null) return await renderTab()
 
-    if (page === null) return renderTab()
-
-    renderTab();
+    await renderTab();
     scrollToTop();
-    // initHome(user);
     modalHandler();
+    await initHome(user);
     initTheme(user)
   });
 }
