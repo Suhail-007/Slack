@@ -15,7 +15,6 @@ import editProfileView from './views/pages/editProfile.js';
 import { cryptoConfig, stockMarketConfig, API_KEY } from './config.js';
 import logoutUserView from './views/pages/logout.js';
 import { updateURL, NAV_TOGGLE_BTN, setLocalStorage, fetchURL, modalHandler, toggleModal } from './helper.js';
-
 import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, logoutUser, authChanged, deleteUserAndData, unSubAuth, unSubSnapShot, updateUserData, uploadPic, updateUserPassword } from './firebase-app.js';
 
 
@@ -35,9 +34,9 @@ const router = {
     view: async function() {
       try {
         await loginView.loader();
-        await loginView.Delay(500);
+        await loginView.Delay(200);
         loginView.renderData(user);
-        // systemDefaultTheme();
+        systemDefaultTheme();
         loginAgainMessage();
 
         loginView.init(renderTab, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
@@ -53,7 +52,7 @@ const router = {
     view: async function() {
       try {
         await signUpView.loader();
-        await resetPassView.Delay(500);
+        await resetPassView.Delay(200);
         signUpView.renderData(user);
         signUpView.init(createUserSendEmailVerif, createUserData);
       } catch (err) {
@@ -65,7 +64,7 @@ const router = {
   'reset password': {
     view: async function() {
       await resetPassView.loader();
-      await resetPassView.Delay(1000);
+      await resetPassView.Delay(200);
       resetPassView.renderData('_');
       resetPassView.init(resetUserPass);
     }
@@ -75,7 +74,7 @@ const router = {
     view: async function() {
       try {
         await homeView.loader();
-        await homeView.Delay(1000);
+        await homeView.Delay(200);
         homeView.renderData(user);
         chartView.createChart(user);
 
@@ -91,7 +90,7 @@ const router = {
     view: async function() {
       try {
         await profileView.loader();
-        await profileView.Delay(1000);
+        await profileView.Delay(200);
         profileView.renderData(user);
         profileView.init(settings, deleteUserAndData, loginUser, renderTab);
       } catch (err) {
@@ -104,7 +103,7 @@ const router = {
     view: async function() {
       try {
         await editProfileView.loader();
-        await editProfileView.Delay(1000);
+        await editProfileView.Delay(200);
         editProfileView.renderData(user);
         editProfileView.init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, headerFooterView.removeHeaderFooter, loginUser);
       } catch (err) {
@@ -117,7 +116,7 @@ const router = {
     view: async function() {
       try {
         await investWalletView.loader();
-        await investWalletView.Delay(1000);
+        await investWalletView.Delay(200);
         investWalletView.renderData(user);
         await investWalletView.init(getBitcoinDetails, updateUserData, getStockOpenPrice);
 
@@ -131,7 +130,7 @@ const router = {
     view: async function() {
       try {
         await teamSummary.loader();
-        await teamSummary.Delay(1000);
+        await teamSummary.Delay(200);
         teamSummary.renderData(user);
         teamSummary.init();
       } catch (err) {
@@ -145,7 +144,7 @@ const router = {
     view: async function() {
       try {
         await incomeView.loader();
-        await incomeView.Delay(1000);
+        await incomeView.Delay(200);
         incomeView.renderData(user);
         incomeView.init();
       } catch (err) {

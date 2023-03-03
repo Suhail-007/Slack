@@ -406,12 +406,6 @@ li:hover .nav__item--name {
   text-transform: capitalize;
 }
 
-button:disabled {
-  background: #CBCBCB;
-  color: #000;
-  border: 1px solid #CBCBCB;
-}
-
 .btn {
   border: none;
   border-radius: 0.5rem;
