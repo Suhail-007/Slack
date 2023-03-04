@@ -54,18 +54,22 @@ class EditProfileView extends FORM {
         if (fdObj.password) {
           const { updateUserPassword, loginUser } = data;
           toggleModal('Updating Password, don\'t leave the page or press back button.');
-          
+
           await this.updatePassword(updateUserPassword, loginUser, fdObj.password);
-          
+
           toggleModal('Password Updated.');
         }
+        
         const profilePicName = updatedData.extraInfo.profilePicName;
 
         //update profile pic only if uploaded profile pic is different from current profile pic
         if (!(profilePicName !== this._data.data.extraInfo.profilePicName)) {
           const { uploadPic } = data;
+          
           toggleModal('Updating Profile Picture, don\'t leave the page or press back button.');
+          
           await uploadPic(this._data.data.extraInfo, fdObj.profile);
+          
           toggleModal('Profile Picture Updated.');
         }
 
@@ -151,7 +155,6 @@ class EditProfileView extends FORM {
 
       if (isPassUpdated) {
         await this.renderMessage('Password updated, you can now use your new password to login', 'success', 2000);
-        return true
       }
 
     } catch (err) {

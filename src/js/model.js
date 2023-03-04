@@ -167,8 +167,7 @@ const router = {
   'logout': {
     view: async function() {
       try {
-        const { logoutUser, unSubAuth, unSubSnapShot } = firebaseObj;
-        await logoutUserView.init(logoutUser, unSubAuth, unSubSnapShot);
+        await logoutUserView.init(firebaseObj.logoutUser);
       } catch (err) {
         console.log(err);
       }

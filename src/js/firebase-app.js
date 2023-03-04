@@ -41,7 +41,6 @@ const firebaseConfig = {
   messagingSenderId: "891949740369",
   appId: "1:891949740369:web:7f79bedd618ec20b8ca370",
   measurementId: "G-2W1X0W90WB",
-  storageBucket: 'gs://dashboard-ui-89564.appspot.com'
 };
 
 //init app
@@ -53,7 +52,7 @@ const appCheck = initializeAppCheck(firebaseApp, {
 })
 
 //init services
-const storage = getStorage();
+const storage = getStorage(firebaseApp);
 const db = getFirestore(firebaseApp);
 const auth = getAuth();
 
@@ -271,8 +270,6 @@ const firebaseObj = {
   logoutUser,
   authChanged,
   deleteUserAndData,
-  unSubAuth,
-  unSubSnapShot,
   updateUserData,
   uploadPic,
   updateUserPassword
