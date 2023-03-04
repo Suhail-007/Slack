@@ -32,12 +32,15 @@ html {
   @include respon(sm-desktop) {
     font-size: 95%;
   }
+  
+  @include respon(m-desktop) {
+    font-size: 105%;
+  }
 }
 
 body {
   margin: 0;
   padding: 0;
-  min-width: 100vw;
   min-height: 100vh;
   position: relative;
   background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)) no-repeat;
@@ -85,6 +88,11 @@ main {
     margin-left: 6rem;
   }
 
+  @include respon(m-desktop) {
+    max-width: 85vw;
+    margin-left: auto;
+  }
+
   &::after,
   &::before {
     content: "";
@@ -117,11 +125,11 @@ main {
   flex-direction: column;
   align-items: center;
 
-@include respon(sm-desktop){
-  & canvas {
-    width: 35rem !important;
+  @include respon(sm-desktop) {
+    & canvas {
+      width: 35rem !important;
+    }
   }
-}
 }
 
 .footer {

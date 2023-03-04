@@ -52,7 +52,7 @@ export default class FORM extends View {
   
         <button data-form-btn class="btn btn-light-blue form__btn" type="submit">${buttonText}</button>
   
-        <p style='display:${showLoginBtn}' class="signup--login">Already have a account?<a href="/" data-link>Log In</a></p>
+        <p style='display:${showLoginBtn}' class="signup-login">Already have a account?<a href="/" data-link>Log In</a></p>
       </form>`
   }
 

@@ -59,7 +59,6 @@ const auth = getAuth();
 let unSubSnapShot;
 let unSubAuth;
 
-// const analytics = getAnalytics(firebaseApp);
 const loginUser = async function(email, password) {
   try {
     await setPersistence(auth, browserSessionPersistence);

@@ -7,7 +7,6 @@ import profileView from './views/pages/profileView.js';
 import investWalletView from './views/pages/investWallet.js';
 import teamSummary from './views/pages/team-summary.js';
 import incomeView from './views/pages/income.js';
-import pageNotFoundView from './views/pages/404.js';
 import editProfileView from './views/pages/editProfile.js';
 
 import { cryptoConfig, stockMarketConfig, API_KEY } from './config.js';
@@ -38,7 +37,7 @@ const router = {
         await loginView.loader();
         await loginView.Delay(200);
         loginView.renderData(user);
-        systemDefaultTheme();
+        // systemDefaultTheme();
         loginAgainMessage();
 
         loginView.init(helper);
@@ -187,12 +186,6 @@ const router = {
       }
     }
   },
-
-  '404': {
-    view: function() {
-      pageNotFoundView.init();
-    }
-  }
 }
 
 export const renderTab = async function() {
@@ -209,9 +202,6 @@ export const renderTab = async function() {
 
     //if user is signout and user try to navigate to anywhere except these, redirect user to login page
     if (!res && page != null && page !== 'signup' && page !== 'reset password') return updateURL('_', true);
-
-    //if page not found
-    if (router[page] === undefined) await router['404'].view();
 
     //render page
     if (router[page]) await router[page].view();

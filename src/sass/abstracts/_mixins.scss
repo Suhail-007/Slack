@@ -29,14 +29,15 @@
 
   @if $breakpoint==tab-land {
     //1200px
-    @media only screen and (min-width: 75em) {
+    @media only screen and (min-width: 75em) and (orientation: landscape){
       @content
     }
   }
   
-  @if $breakpoint==sm-desktop {
-    @media only screen and (min-width: 64em) {
+  @if $breakpoint==m-desktop {
+    @media only screen and (min-width: 71em) {
       @content
     }
   }
+  
 }

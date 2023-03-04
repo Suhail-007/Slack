@@ -47,9 +47,11 @@ class headerFooter {
     
         <div class="nav__container">
           <div class="nav__container__btn" data-navBtn-container>
-            <svg>
-              <use xlink:href="${icons}#icon_hamburger-menu"></use>
-            </svg>
+            <button>
+              <svg>
+                <use xlink:href="${icons}#icon_hamburger-menu"></use>
+              </svg>
+            </button>
           </div>
     
           <nav class="navbar" data-nav>

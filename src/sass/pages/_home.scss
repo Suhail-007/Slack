@@ -13,6 +13,10 @@ header {
   .nav_container_btn svg {
     transform: scale(1.1);
     fill: var(--border-primary);
+    
+    @include respon(m-desktop) {
+      
+    }
   }
 }
 

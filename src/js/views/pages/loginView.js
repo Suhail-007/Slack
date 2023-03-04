@@ -39,7 +39,7 @@ class loginView extends View {
           
           <button class="btn btn-light-blue form__btn" data-form-btn type="submit">Log in</button>
 
-          <p class="form-link signup--login">Don't have account yet?<a data-signup='signup' href=''>Sign up</a></p>
+          <p class="form-link signup-login">Don't have account yet?<a data-signup='signup' href=''>Sign up</a></p>
         </form>
       </div>
     </section>`
@@ -116,7 +116,7 @@ class loginView extends View {
       if (e.target.matches('.form-link') || e.target.closest('.form-link')) {
         e.preventDefault();
 
-        if (e.target.closest('.signup--login')) this.redirectTo('signup');
+        if (e.target.closest('.signup-login')) this.redirectTo('signup');
         if (e.target.matches('.reset-password')) this.redirectTo('reset password');
       }
     })

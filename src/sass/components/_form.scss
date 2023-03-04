@@ -5,13 +5,11 @@
   overflow: hidden;
   position: relative;
 
-  /*   @include respon(sm-desktop){
-  max-width: 50rem;
-} */
-
   &__logo--lg {
     width: 100%;
     position: relative;
+    border-top-left-radius: $border-top-left-radius;
+    overflow: hidden;
 
     &::after {
       content: "";
@@ -31,17 +29,15 @@
 }
 
 .form__container {
-  width: 99%;
+  width: 100%;
   display: grid;
   transform: translateY(-4rem);
   border-radius: 3.5rem 3.5rem 0 0;
   border-top: .5px solid #CACACA;
-
-/*   @include respon(sm-desktop) {
-  border: none;
-  border-radius: initial;
-  transform: translateY(-100%);
-} */
+  
+  @include respon(m-desktop) {
+    transform: translateY(-8rem);
+  }
 
   //blur effecr for form 
   &--blur {
@@ -120,7 +116,7 @@
   }
 }
 
-.signup--login {
+.signup-login {
   margin-inline: auto;
   font-size: 1.4rem;
 
