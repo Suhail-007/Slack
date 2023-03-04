@@ -104,10 +104,10 @@ class ProfileView extends View {
   }
 
 
-  async init(settings, deleteUserAndData, loginUser, renderTab) {
+  async init(helperFuns) {
     this.setTitle('Profile || Slack');
-    this.#addHandlerSettings(settings);
-    this.#callToActionBtns(deleteUserAndData, loginUser, renderTab);
+    this.#addHandlerSettings(helperFuns.settings);
+    this.#callToActionBtns(helperFuns);
   }
 
   #addHandlerSettings(settings) {
@@ -138,19 +138,20 @@ class ProfileView extends View {
     }
   }
 
-  #callToActionBtns(deleteUserAndData, loginUser, renderTab) {
+  #callToActionBtns(handlers) {
     const btnsCont = document.querySelector('[data-btns-cont]');
 
     btnsCont.addEventListener('click', async e => {
       try {
         const btn = e.target.dataset.cta;
         if (btn === 'edit') {
+          const { renderTab } = handlers;
           this._edit = true;
           updateURL(`profileEdit&edit=${this._edit}`);
           renderTab();
           return
         }
-        if (btn === 'delete') await this.#deleteAccount(deleteUserAndData, loginUser);
+        if (btn === 'delete') await this.#deleteAccount(handlers.deleteUserAndData, handlers.loginUser);
       } catch (err) {
         await this.renderMessage(err, 'error', 2000);
       }

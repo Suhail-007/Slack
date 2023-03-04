@@ -45,37 +45,38 @@ class loginView extends View {
     </section>`
   }
 
-  init(router, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome) {
+  init(helper) {
     this._form = document.querySelector('form');
     this.setTitle('Log In || Slack');
-    this.renderTab = router;
+    this.renderTab = helper.renderTab;
     this.placeholderLabelToggle(this._form);
-    this.getLoginCredentials(loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
+    this.getLoginCredentials(helper);
     this.formLinkRedirects();
     this.togglePasswordInputType();
   }
 
-  getLoginCredentials(loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome) {
+  getLoginCredentials(helper) {
     this._form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(this._form)];
       const userObj = Object.fromEntries(fd);
 
-      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
+      this.#getUserFromFirebase(userObj, helper);
     })
   }
 
-  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome) {
+  async #getUserFromFirebase(userObj, handler) {
     try {
       const { email, password } = userObj;
 
       this.toggleBtnState();
       if (email) await this.renderMessage('Checking information', 'success', 500);
 
-      const user = await loginUser(email, password);
+      const user = await handler.loginUser(email, password);
 
       // send verification if email not verified
       if (!user.emailVerified) {
+        const { sendEmailVerif, logoutUser } = handler;
         sendEmailVerif();
         //signout the user 
         logoutUser();
@@ -88,7 +89,7 @@ class loginView extends View {
       await this.renderMessage('Getting user data', 'success', 500);
 
       //get user data && image from firebase & update user obj
-      const res = await getUserDataAndUserPic(this._data);
+      const res = await handler.getUserDataAndUserPic(this._data);
 
       if (res) await this.renderMessage('Fetched data successfully', 'success', 500);
 
@@ -97,7 +98,7 @@ class loginView extends View {
       //if users exist update url and call router to redirect users to login page else firebase will throw an error 
 
       //render nav & footer
-      initHome(this._data);
+      handler.initHome(this._data);
 
       updateURL('home');
       sessionStorage.setItem('isLogin', true);

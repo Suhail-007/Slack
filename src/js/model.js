@@ -26,14 +26,22 @@ const router = {
   'null': {
     view: async function() {
       try {
-        const { loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic } = firebaseObj;
+        const helper = {
+          renderTab,
+          initHome,
+
+          loginUser: firebaseObj.loginUser,
+          sendEmailVerif: firebaseObj.sendEmailVerif,
+          logoutUser: firebaseObj.logoutUser,
+          getUserDataAndUserPic: firebaseObj.getUserDataAndUserPic,
+        };
         await loginView.loader();
         await loginView.Delay(200);
         loginView.renderData(user);
         systemDefaultTheme();
         loginAgainMessage();
 
-        loginView.init(renderTab, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
+        loginView.init(helper);
         modalHandler();
         headerFooterView.removeHeaderFooter();
       } catch (err) {
@@ -89,11 +97,17 @@ const router = {
   'profile': {
     view: async function() {
       try {
-        const { deleteUserAndData, loginUser } = firebaseObj;
+        const helper = {
+          settings,
+          renderTab,
+          deleteUserAndData: firebaseObj.deleteUserAndData,
+          loginUser: firebaseObj.loginUser
+        };
+
         await profileView.loader();
         await profileView.Delay(200);
         profileView.renderData(user);
-        profileView.init(settings, deleteUserAndData, loginUser, renderTab);
+        profileView.init(helper);
       } catch (err) {
         profileView.renderMessage('Failed to load profile, try reloading ' + err, 'error', 3000);
       }
