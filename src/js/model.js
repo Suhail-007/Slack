@@ -218,7 +218,7 @@ export const windowLoad = function() {
   window.addEventListener('load', async () => {
     const { page } = getPage();
 
-    if (page === null) return await renderTab()
+    if (page === null || page === 'signup' || page === 'reset password') return await renderTab()
 
     await renderTab();
     scrollToTop();

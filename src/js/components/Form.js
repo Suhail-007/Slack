@@ -37,7 +37,7 @@ export default class FORM extends View {
         <input class="input__label__input" placeholder="Male/Female/Others" ${required} id="gender" name="gender" type="text">
   
         <label for="dob">DOB</label>
-        <input name="dob" ${required} id="dob" type="date" min="1960-01-31" max="${getCurrentDate().year-5}-12-31">
+        <input value='1990-01-01' name="dob" ${required} id="dob" type="date" min="1960-01-31" max="${getCurrentDate().year-5}-12-31">
   
         <label for="state">State</label>
         <input class="input__label__input" placeholder="state you're currently living in" ${required} id="state"name="state" type="text">
