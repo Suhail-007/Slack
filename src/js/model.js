@@ -240,7 +240,7 @@ export const windowLoad = function() {
     modalHandler();
     await initHome(user);
     initTheme(user);
-    selectActiveTab(history.state.page);
+    selectActiveTab(history.state?.page);
     hideScroll()
   });
 }
