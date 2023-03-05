@@ -100,7 +100,7 @@ class loginView extends View {
       //render nav & footer
       handler.initHome(this._data);
 
-      updateURL('home');
+      updateURL('dashboard');
       sessionStorage.setItem('isLogin', true);
 
       await this.renderTab();

@@ -13,10 +13,13 @@ header {
   .nav_container_btn svg {
     transform: scale(1.1);
     fill: var(--border-primary);
-    
-    @include respon(m-desktop) {
-      
-    }
+  }
+
+  @include respon(m-desktop) {
+    position: initial;
+    flex-direction: column !important;
+    background: none;
+    box-shadow: none;
   }
 }
 
@@ -69,20 +72,6 @@ header {
   box-shadow: .1rem 0px 10px .1rem var(--shadow);
 }
 
-//hide profile for mob view 
-//temporary placed here
-.user_profile_container_desktop {
-  display: none;
-}
-
 .canvas-cont div {
   margin: 4.8rem 0;
-}
-
-.hidden {
-  display: none;
-}
-
-.website_name {
-  display: none;
 }

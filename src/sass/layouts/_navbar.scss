@@ -1,8 +1,17 @@
 .nav__container {
-  &__btn>svg {
-    width: 3.5rem;
-    height: 3.5rem;
-    fill: var(--purple-primary);
+  &__btn>button {
+    background: none;
+    border: none;
+
+    @include respon(m-desktop) {
+      display: none;
+    }
+
+    &>svg {
+      width: 3.5rem;
+      height: 3.5rem;
+      fill: var(--purple-primary);
+    }
   }
 }
 
@@ -14,20 +23,28 @@
   bottom: 0;
   opacity: 0;
   pointer-events: none;
+  visibility: hidden;
   font-size: 1.5rem;
   transition: all 300ms ease-in-out;
   background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
   box-shadow: 0px .1rem 1.5rem .2rem var(--shadow-alpha-six);
+
+  @include respon(m-desktop) {
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    background: none;
+    box-shadow: none;
+  }
 
   //open on click 
   &.open {
     right: 0;
     opacity: 1;
     pointer-events: auto;
+    visibility: visible;
   }
-  
-  
-  
 
   &>ul {
     list-style: none;
@@ -37,12 +54,25 @@
     flex-direction: column;
     width: 50vw;
 
+    @include respon(m-desktop) {
+      column-gap: .2rem;
+      flex-direction: row;
+      width: auto;
+    }
+
     &>li {
       display: flex;
       align-items: center;
       width: fit-content;
       position: relative;
       margin-top: 1rem;
+      flex-shrink: 0;
+
+      @include respon(m-desktop) {
+        &>span {
+          display: flex;
+        }
+      }
 
       & svg {
         width: 0px;
@@ -53,11 +83,16 @@
         fill: var(--border-primary);
       }
 
-      &:hover svg {
+      &:hover svg,
+      &.active svg {
         opacity: 1;
         width: 2rem;
         height: 2rem;
         margin-right: 1rem;
+        
+        @include respon(m-desktop) {
+          margin-right: 0;
+        }
       }
 
       &::before {
@@ -73,7 +108,8 @@
         opacity: 0;
       }
 
-      &:hover::before {
+      &:hover::before,
+      &.active::before {
         transition: 300ms ease-in;
         opacity: 1;
       }
@@ -110,5 +146,9 @@
     display: grid;
     place-items: center;
     filter: drop-shadow(0px 0px 10px var(--light-shadow-white));
+  }
+
+  @include respon(m-desktop) {
+    display: none;
   }
 }

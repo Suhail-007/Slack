@@ -90,8 +90,9 @@ main {
   }
 
   @include respon(m-desktop) {
-    max-width: 85vw;
+    max-width: 90vw;
     margin-left: auto;
+    margin-top: 0;
   }
 
   &::after,

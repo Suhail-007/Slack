@@ -1,7 +1,7 @@
 import icons from '../../images/icons.svg';
 const navLinks = [
   {
-    name: 'home',
+    name: 'dashboard',
     icon: `${icons}#icon_dashboard`
   },
   {
@@ -13,11 +13,11 @@ const navLinks = [
     icon: `${icons}#icon_invest-wallet`
   },
   {
-    name: 'Team summary',
+    name: 'team summary',
     icon: `${icons}#icon_team-summary`
   },
   {
-    name: 'Income',
+    name: 'income',
     icon: `${icons}#icon_income`
   },
   {
@@ -46,7 +46,7 @@ const creaneNavLinks = function() {
 
   return navLinks.map(link => {
     return `
-      <li data-nav="${link.name}" class="nav_item nav-link">
+      <li data-nav="${link.name}" class="nav_item nav-link ${link.name === 'dashboard' && 'active'}">
         <svg>
           <use xlink:href="${link.icon}"></use>
         </svg>

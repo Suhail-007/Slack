@@ -33,11 +33,12 @@ const router = {
           sendEmailVerif: firebaseObj.sendEmailVerif,
           logoutUser: firebaseObj.logoutUser,
           getUserDataAndUserPic: firebaseObj.getUserDataAndUserPic,
+          selectActiveTab,
         };
         await loginView.loader();
         await loginView.Delay(200);
         loginView.renderData(user);
-        // systemDefaultTheme();
+        systemDefaultTheme();
         loginAgainMessage();
 
         loginView.init(helper);
@@ -79,14 +80,14 @@ const router = {
     }
   },
 
-  'home': {
+  'dashboard': {
     view: async function() {
       try {
         await homeView.loader();
         await homeView.Delay(200);
         homeView.renderData(user);
         homeView.init();
-        initTheme(user)
+        initTheme(user);
       } catch (err) {
         toggleModal(err);
       }
@@ -211,21 +212,37 @@ export const renderTab = async function() {
 }
 
 export const renderFromHistory = function() {
-  window.addEventListener('popstate', renderTab);
+  window.addEventListener('popstate', () => {
+    const page = getPage();
+
+    //add the class to navlink
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(li => li.classList.remove('active'));
+
+    renderTab();
+    if (page != null) selectActiveTab(history.state.page);
+  });
 }
 
 export const windowLoad = function() {
   window.addEventListener('load', async () => {
     const { page } = getPage();
 
-    if (page === null || page === 'signup' || page === 'reset password') return await renderTab()
+    if (page === null || page === 'signup' || page === 'reset password') return await renderTab();
 
     await renderTab();
     scrollToTop();
     modalHandler();
     await initHome(user);
-    initTheme(user)
+    initTheme(user);
+    selectActiveTab(history.state.page);
   });
+}
+
+const selectActiveTab = function(tab) {
+  if (tab) document.querySelector(`[data-nav='${tab}']`).classList.add('active')
+  else document.querySelector(`[data-nav='dashboard']`).classList.add('active');
 }
 
 const initHome = async function(user) {

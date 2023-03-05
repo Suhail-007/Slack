@@ -17,9 +17,15 @@ li {
     color: var(--font-primary);
     transition: color 200ms;
     user-select: none;
+    font-size: 1.4rem;
+
+    @include respon(m-desktop) {
+      font-size: 1.22rem;
+    }
   }
 
-  &:hover .nav__item--name {
+  &:hover .nav__item--name,
+  &.active .nav__item--name {
     color: var(--border-primary);
   }
 }
@@ -32,11 +38,11 @@ li {
   text-transform: capitalize;
   text-align: left;
   justify-self: start;
-  
+
   @include respon(tab-port) {
     font-size: 1.6rem;
   }
-  
+
   & p {
     margin: 0;
     margin-bottom: 1rem;

@@ -20,7 +20,7 @@ export const updateURL = function(page, reset = false) {
     location.href = new URL(location.origin + location.pathname, location.href);
     return
   };
-  history.pushState('', '', `?page=${page}`);
+  history.pushState({ page }, '', `?page=${page}`);
 }
 
 const Timeout = function(ms) {
