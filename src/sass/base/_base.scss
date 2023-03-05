@@ -44,6 +44,10 @@ body {
   min-height: 100vh;
   position: relative;
   background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)) no-repeat;
+  
+  @include respon(m-desktop) {
+    overflow: auto !important;
+  }
 }
 
 body input,
@@ -78,14 +82,13 @@ body button {
 main {
   position: relative;
   border-top-left-radius: $border-top-left-radius;
-  margin-top: 4rem;
+  margin-top: .5rem;
   margin-left: 4rem;
   min-height: 100vh;
   background-color: var(--white-bg);
   box-shadow: .1rem 0 .5rem 0 var(--shadow-alpha-five);
 
   @include respon(tab-port) {
-    margin-top: 6rem;
     margin-left: 6rem;
   }
 

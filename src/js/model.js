@@ -44,6 +44,7 @@ const router = {
         loginView.init(helper);
         modalHandler();
         headerFooterView.removeHeaderFooter();
+        hideScroll()
       } catch (err) {
         loginView.renderMessage(err, 'error', 4000)
       }
@@ -59,6 +60,7 @@ const router = {
         await resetPassView.Delay(200);
         signUpView.renderData(user);
         signUpView.init(createUserSendEmailVerif, createUserData);
+        hideScroll()
       } catch (err) {
         signUpView.renderMessage(err, 'success')
       }
@@ -74,6 +76,7 @@ const router = {
         await resetPassView.Delay(200);
         resetPassView.renderData('_');
         resetPassView.init(resetUserPass);
+        hideScroll();
       } catch (err) {
         await resetPassView.renderMessage(err, 'error', 2000);
       }
@@ -88,6 +91,7 @@ const router = {
         homeView.renderData(user);
         homeView.init();
         initTheme(user);
+        hideScroll();
       } catch (err) {
         toggleModal(err);
       }
@@ -237,6 +241,7 @@ export const windowLoad = function() {
     await initHome(user);
     initTheme(user);
     selectActiveTab(history.state.page);
+    hideScroll()
   });
 }
 
@@ -260,6 +265,13 @@ const scrollToTop = function() {
     top: 0,
     behavior: 'smooth'
   });
+}
+
+const hideScroll = function() {
+  const { page } = getPage();
+
+  if (page == null || page === 'reset password') document.body.style.overflow = 'hidden';
+  else document.body.style.overflow = 'initial';
 }
 
 const loginAgainMessage = async function() {
