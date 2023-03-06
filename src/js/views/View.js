@@ -65,7 +65,7 @@ export default class View {
 
     //remove class & message after x secs
     return new Promise((resolve) => {
-     timeout = setTimeout(() => {
+      timeout = setTimeout(() => {
         messageCont.classList.remove(className);
         resolve()
       }, ms);

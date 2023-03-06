@@ -277,7 +277,7 @@ const hideScroll = function() {
 const loginAgainMessage = async function() {
   const isLogin = sessionStorage.getItem('isLogin');
   if (isLogin) {
-    await loginView.renderMessage('Login again to access your account', 'error', 1000);
+    await loginView.renderMessage('Login again to access your account', 'error', 4000);
   }
 }
 
