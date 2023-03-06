@@ -21,7 +21,7 @@
     }
 
     & p {
-      font-size: 2rem;
+      font-size: 1.7rem;
       margin-left: 2rem;
       font-family: cursive, sans-serif, helvetica;
     }
@@ -34,7 +34,7 @@
 
 
   & p {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 
   @include respon(m-desktop) {

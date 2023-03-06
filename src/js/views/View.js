@@ -50,15 +50,22 @@ export default class View {
   }
 
   renderMessage(msg, className, ms) {
+    let timeout;
+
     const messageCont = document.querySelector('.message-cont');
     const messageElem = messageCont.querySelector('p');
+
+    //remove classes and clear timer
+    messageCont.classList.remove('success');
+    messageCont.classList.remove('error');
+    timeout && clearTimeout(timeout)
 
     messageElem.textContent = msg;
     messageCont.classList.add(className);
 
     //remove class & message after x secs
     return new Promise((resolve) => {
-      setTimeout(() => {
+     timeout = setTimeout(() => {
         messageCont.classList.remove(className);
         resolve()
       }, ms);
