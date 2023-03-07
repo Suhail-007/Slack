@@ -1,7 +1,7 @@
 import View from '../View.js';
 import Wallet from '../../components/Wallet.js';
-// import icons from './src/images/icons.svg';
-import icons from '../../../images/icons.svg';
+// import icons from './src/assets/icons.svg';
+import icons from '../../../assets/icons.svg';
 
 class MinimalAccView extends View {
   _parentElem = document.querySelector('main');

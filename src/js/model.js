@@ -217,7 +217,7 @@ export const renderTab = async function() {
 
 export const renderFromHistory = function() {
   window.addEventListener('popstate', () => {
-    const page = getPage();
+    const { page } = getPage();
 
     //add the class to navlink
     const navLinks = document.querySelectorAll('.nav-link');
@@ -225,7 +225,9 @@ export const renderFromHistory = function() {
     navLinks.forEach(li => li.classList.remove('active'));
 
     renderTab();
-    if (page != null) selectActiveTab(history.state.page);
+    if (page !== null && page !== 'signup' && page !== 'reset password') {
+      selectActiveTab(history.state?.page);
+    }
   });
 }
 

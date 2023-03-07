@@ -1,4 +1,4 @@
-import icons from '../../images/icons.svg';
+import icons from '../../assets/icons.svg';
 const navLinks = [
   {
     name: 'dashboard',

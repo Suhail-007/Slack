@@ -1,7 +1,8 @@
 import View from '../View.js';
 import { updateURL } from '../../helper.js';
-import websiteImage from '../../../images/m_logo.jpg';
-import icons from '../../../images/icons.svg';
+import m_logoImg from '../../../assets/m_logo.jpg';
+import d_logoImg from '../../../assets/d_logo.jpg';
+import icons from '../../../assets/icons.svg';
 
 class loginView extends View {
   _parentElem = document.querySelector('main');
@@ -12,7 +13,8 @@ class loginView extends View {
     return `
     <section class="form__section">
       <div class="form__section__logo--lg">
-        <img class="form__section__img" src="${websiteImage}" alt="website logo">
+      <img class="form__section__img" src="${m_logoImg}" srcset="${m_logoImg}, 100w, ${d_logoImg} 1'300w"
+      sizes="(min-width: 56.25em) 20vw" src="${d_logoImg}" alt="website logo">
       </div>
 
       <div class="login__form__cont form__container form__container--blur">

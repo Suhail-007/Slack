@@ -1,6 +1,6 @@
 import View from '../View.js';
 import { updateURL } from '../../helper.js';
-import websiteImage from '../../../images/m_logo.jpg';
+import websiteImage from '../../../assets/m_logo.jpg';
 class resetPassword extends View {
   _parentElem = document.querySelector('main');
   _form;

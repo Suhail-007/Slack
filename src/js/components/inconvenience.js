@@ -1,4 +1,4 @@
-import underWork from '../../images/d_under-work.svg';
+import underWork from '../../assets/d_under-work.svg';
 
 export function Inconvenience() {
   return `

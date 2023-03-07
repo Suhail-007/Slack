@@ -1,4 +1,4 @@
-import websiteImage from '../../../images/m_logo.jpg';
+import websiteImage from '../../../assets/m_logo.jpg';
 import FORM from '../../components/Form.js';
 import { updateURL } from '../../helper.js'
 import { defaultUserPic } from '../../config.js';

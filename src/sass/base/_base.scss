@@ -45,7 +45,7 @@ body {
   position: relative;
   background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)) no-repeat;
   
-  @include respon(m-desktop) {
+  @include respon(tab-port) {
     overflow: auto !important;
   }
 }

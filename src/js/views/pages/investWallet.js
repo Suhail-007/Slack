@@ -1,7 +1,7 @@
 import View from '../View.js';
 import Wallet from '../../components/Wallet.js';
 import { investCard } from '../../components/Cards.js'
-import icons from '../../../images/icons.svg'
+import icons from '../../../assets/icons.svg'
 
 class InvestWallet extends View {
   #coin;

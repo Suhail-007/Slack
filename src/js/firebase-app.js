@@ -191,13 +191,13 @@ const getUserDataAndUserPic = function(user) {
     })
 }
 
-const imagesRef = ref(storage, 'images');
+const assetsRef = ref(storage, 'assets');
 
 const uploadPic = async function(user, file) {
-  //it's like this inside of images folder create user(user.id) folder there create a file name(file param) and upload that file to server. i.e images/user/file(same name as user have saved)
+  //it's like this inside of assets folder create user(user.id) folder there create a file name(file param) and upload that file to server. i.e assets/user/file(same name as user have saved)
   try {
     const { name } = file;
-    const profilePicRef = ref(storage, `images/${user.uid}/${name}`);
+    const profilePicRef = ref(storage, `assets/${user.uid}/${name}`);
     // // 
     const snapshot = await uploadBytes(profilePicRef, file);
     console.log('Image uploaded to server');
@@ -214,7 +214,7 @@ const getUserImage = async function(user) {
     //if there's no profie pic name ref in user return & use default profile
     if (name === '') return
 
-    const profilePicRef = ref(storage, `images/${uid}/${name}`);
+    const profilePicRef = ref(storage, `assets/${uid}/${name}`);
 
     //user obj model
     user.extraInfo.profilePic = await getDownloadURL(profilePicRef);
@@ -241,7 +241,7 @@ const deleteUserPic = async function(user) {
 
     if (!profilePic && !name) return;
 
-    const profilePicRef = ref(storage, `images/${uid}/${name}`);
+    const profilePicRef = ref(storage, `assets/${uid}/${name}`);
     await deleteObject(profilePicRef);
   } catch (err) {
     throw err

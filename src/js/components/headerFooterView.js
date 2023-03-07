@@ -1,7 +1,7 @@
 import createNavLinks from './createNavLink.js';
 import { defaultUserPic } from '../config.js';
-import icons from '../../images/icons.svg';
-import websiteLogo from '../../images/m_logo.jpg';
+import icons from '../../assets/icons.svg';
+import websiteLogo from '../../assets/m_logo.jpg';
 
 class headerFooter {
   _parentElem = document.body;

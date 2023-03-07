@@ -1,5 +1,5 @@
 import View from '../View.js'
-import icons from '../../../images/icons.svg';
+import icons from '../../../assets/icons.svg';
 
 
 class StatisticsView extends View {

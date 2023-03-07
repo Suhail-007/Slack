@@ -1,6 +1,6 @@
 import View from '../View.js'
-import icons from '../../../images/icons.svg';
-import referImg from '../../../images/m_refer.jpeg';
+import icons from '../../../assets/icons.svg';
+import referImg from '../../../assets/m_refer.jpeg';
 import Wallet from '../../components/Wallet.js'
 
 class FundAndReferralView extends View {
