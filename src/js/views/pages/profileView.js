@@ -18,10 +18,10 @@ class ProfileView extends View {
     
         <div class="profile__cont">
           <figure class="profile__cont-photo">
-            <img class='dp' loading="lazy" src="${this._setUserPic(extraInfo)}" alt="user profile">
+            <img data-user-dp class='dp' loading="lazy" src="${this._setUserPic(extraInfo)}" alt="user profile">
           </figure>
           <div class='profile__bio'>
-            <p class="profile__user-name">${personalInfo.fullname}</p>
+            <p data-username class="profile__user-name">${personalInfo.fullname}</p>
             <p class="profile__bio">${extraInfo.bio}</p>
           </div>
         </div>

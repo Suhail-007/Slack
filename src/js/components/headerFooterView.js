@@ -40,7 +40,7 @@ class headerFooter {
           <div class=" user_profile_container user_profile_container_desktop hidden">
             <p data-username class="username">${this._data.personalInfo.fullname}</p>
             <div class="user_profile">
-              <img data-profile-img class='dp' loading="lazy" src="${this._setUserPic(this._data.extraInfo)}" alt="user profile">
+              <img data-user-dp class='dp' loading="lazy" src="${this._setUserPic(this._data.extraInfo)}" alt="user profile">
             </div>
           </div>
         </div>
@@ -55,10 +55,10 @@ class headerFooter {
           </div>
     
           <nav class="navbar" data-nav>
-            <div data-nav='profile' class="user-profile-container user-profile-container_mob nav-link">
+            <div data-nav='profileNav' class="user-profile-container user-profile-container_mob nav-link">
               <p data-username class="user-profile-container_username">${this._data.personalInfo.fullname}</p>
               <div class="user-profile-container_profile">
-                <img data-profile-img class='dp' loading="lazy" src="${this._setUserPic(this._data.extraInfo)}" alt="user profile">
+                <img data-user-dp class='dp' loading="lazy" src="${this._setUserPic(this._data.extraInfo)}" alt="user profile">
               </div>
             </div>
     
@@ -96,8 +96,15 @@ class headerFooter {
 
       navLinks.forEach(li => li.classList.remove('active'));
 
-      navLink.classList.add('active');
 
+      if (navLink.dataset.nav === 'profileNav') {
+        updateURL('profile');
+        document.querySelector('[data-nav="profile"]').classList.add('active');
+        renderTab();
+        return
+      }
+
+      navLink.classList.add('active');
       updateURL(navLink.dataset.nav);
       renderTab();
     })

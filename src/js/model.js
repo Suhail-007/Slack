@@ -33,7 +33,6 @@ const router = {
           sendEmailVerif: firebaseObj.sendEmailVerif,
           logoutUser: firebaseObj.logoutUser,
           getUserDataAndUserPic: firebaseObj.getUserDataAndUserPic,
-          selectActiveTab,
         };
         await loginView.loader();
         await loginView.Delay(200);
@@ -123,8 +122,6 @@ const router = {
       try {
         const helper = {
           renderTab,
-          initHome,
-          removeHeaderFooter: headerFooterView.removeHeaderFooter,
           updateUserData: firebaseObj.updateUserData,
           updateUserPassword: firebaseObj.updateUserPassword,
           uploadPic: firebaseObj.uploadPic,
@@ -196,6 +193,7 @@ const router = {
 export const renderTab = async function() {
   try {
     const { page } = getPage();
+    
     const { authChanged, logoutUser } = firebaseObj;
     const res = await authChanged(user);
 
@@ -242,23 +240,25 @@ export const windowLoad = function() {
     modalHandler();
     await initHome(user);
     initTheme(user);
-    selectActiveTab(history.state?.page);
     hideScroll()
   });
 }
 
 const selectActiveTab = function(tab) {
-
-  if (tab === 'profileEdit&edit=true') return
-  if (tab) document.querySelector(`[data-nav='${tab}']`).classList.add('active')
+  if (tab === 'profileEdit') document.querySelector(`[data-nav='profile']`).classList.add('active');
+  else if (tab) document.querySelector(`[data-nav='${tab}']`).classList.add('active')
   else document.querySelector(`[data-nav='dashboard']`).classList.add('active');
+  
+  console.log(document.querySelector(`[data-nav='${tab}']`));
 }
 
 const initHome = async function(user) {
   try {
+    const { page } = getPage();
     await headerFooterView.generateHomeMarkup(user);
     NAV_TOGGLE_BTN();
     headerFooterView.navTab(renderTab, updateURL);
+    selectActiveTab(page);
   } catch (err) {
     throw err
   }
@@ -275,7 +275,7 @@ const hideScroll = function() {
   const { page } = getPage();
 
   if (page == null || page === 'reset password') document.body.style.overflow = 'hidden';
-  else document.body.style.overflow = 'initial';
+  else document.body.style.overflow = 'auto';
 }
 
 const loginAgainMessage = async function() {
@@ -388,8 +388,8 @@ export const systemDefaultTheme = function() {
   else document.body.classList.remove('dark');
 }
 
-//initialize the theme on pahe load
-export const initTheme = function(user) {
+//initialize the theme on page load
+const initTheme = function(user) {
   const { theme } = user.data.preference;
 
   //apply the theme

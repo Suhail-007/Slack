@@ -107,4 +107,13 @@ export default class View {
     this.submitBtn.setAttribute('disabled', true);
   }
 
+  updateSidebar(updateSrc, updateName) {
+    const profilePicture = document.querySelectorAll('[data-user-dp]');
+    const username = document.querySelectorAll('[data-username]');
+
+    profilePicture.forEach(p => p.src = updateSrc);
+
+    username.forEach(name => name.textContent = updateName);
+  }
+
 }

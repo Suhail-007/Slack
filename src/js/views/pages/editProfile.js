@@ -31,7 +31,7 @@ class EditProfileView extends FORM {
     form.addEventListener('submit', async e => {
       try {
         e.preventDefault();
-        const { initHome, removeHeaderFooter, updateUserData, renderTab } = data;
+        const { updateUserData, renderTab } = data;
         const fd = new FormData(form);
         const fdObj = Object.fromEntries(fd);
 
@@ -83,11 +83,11 @@ class EditProfileView extends FORM {
 
         updateURL('profile');
 
-        //remove & re render nav & footer
-        removeHeaderFooter();
-        await initHome(this._data);
+        //update name and user pic everywhere
+        this.updateSidebar(this._data.data.extraInfo.profilePic, this._data.data.personalInfo.fullname);
 
-//navigate back user to profile tab
+
+        //navigate back user to profile tab
         renderTab();
       } catch (err) {
         this.toggleBtnState(true);

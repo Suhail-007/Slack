@@ -46,7 +46,7 @@ const creaneNavLinks = function() {
 
   return navLinks.map(link => {
     return `
-      <li data-nav="${link.name}" class="nav_item nav-link ${link.name === 'dashboard' && 'active'}">
+      <li data-nav="${link.name}" class="nav_item nav-link">
         <svg>
           <use xlink:href="${link.icon}"></use>
         </svg>
