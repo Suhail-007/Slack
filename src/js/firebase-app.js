@@ -156,8 +156,8 @@ const createUserData = async function(user, formData) {
       preference: {
         theme: 'system default',
         charts: {
-          roi: 'Doughnut',
-          bi: 'Line'
+          roi: 'doughnut',
+          bi: 'line'
         }
       }
     });
@@ -193,13 +193,13 @@ const getUserDataAndUserPic = function(user) {
 
 const assetsRef = ref(storage, 'assets');
 
-const uploadPic = async function(user, file) {
+const uploadPic = async function(user, imageFile) {
   //it's like this inside of assets folder create user(user.id) folder there create a file name(file param) and upload that file to server. i.e assets/user/file(same name as user have saved)
   try {
-    const { name } = file;
+    const { name } = imageFile;
     const profilePicRef = ref(storage, `assets/${user.uid}/${name}`);
     // // 
-    const snapshot = await uploadBytes(profilePicRef, file);
+    const snapshot = await uploadBytes(profilePicRef, imageFile);
     console.log('Image uploaded to server');
     return snapshot
   } catch (err) {

@@ -59,32 +59,35 @@ class EditProfileView extends FORM {
 
           toggleModal('Password Updated.');
         }
-        
-        const profilePicName = updatedData.extraInfo.profilePicName;
 
-        //update profile pic only if uploaded profile pic is different from current profile pic
-        if (!(profilePicName !== this._data.data.extraInfo.profilePicName)) {
+        if (fdObj.profile.name !== '') {
+
           const { uploadPic } = data;
-          
+
           toggleModal('Updating Profile Picture, don\'t leave the page or press back button.');
-          
+
           await uploadPic(this._data.data.extraInfo, fdObj.profile);
-          
+
           toggleModal('Profile Picture Updated.');
         }
 
         //update data after user passwprd is updated
         await updateUserData(updatedData);
 
-        //remove & re render nav & footer
-        removeHeaderFooter();
-        initHome(this._data);
-
         toggleModal('Data updated.!');
 
         await this.renderMessage('Data updated!', 'success', 1000);
 
+        //reset form just in case
+        form.reset();
+
         updateURL('profile');
+
+        //remove & re render nav & footer
+        removeHeaderFooter();
+        await initHome(this._data);
+
+//navigate back user to profile tab
         renderTab();
       } catch (err) {
         this.toggleBtnState(true);

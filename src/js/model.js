@@ -248,6 +248,8 @@ export const windowLoad = function() {
 }
 
 const selectActiveTab = function(tab) {
+
+  if (tab === 'profileEdit&edit=true') return
   if (tab) document.querySelector(`[data-nav='${tab}']`).classList.add('active')
   else document.querySelector(`[data-nav='dashboard']`).classList.add('active');
 }
