@@ -1,2 +1,2 @@
 # Slack
-live-site: slack007.netlify.app
+live-site: https://slack007.netlify.app
