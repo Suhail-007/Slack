@@ -193,7 +193,7 @@ const router = {
 export const renderTab = async function() {
   try {
     const { page } = getPage();
-    
+
     const { authChanged, logoutUser } = firebaseObj;
     const res = await authChanged(user);
 
@@ -248,8 +248,6 @@ const selectActiveTab = function(tab) {
   if (tab === 'profileEdit') document.querySelector(`[data-nav='profile']`).classList.add('active');
   else if (tab) document.querySelector(`[data-nav='${tab}']`).classList.add('active')
   else document.querySelector(`[data-nav='dashboard']`).classList.add('active');
-  
-  console.log(document.querySelector(`[data-nav='${tab}']`));
 }
 
 const initHome = async function(user) {
@@ -258,6 +256,7 @@ const initHome = async function(user) {
     await headerFooterView.generateHomeMarkup(user);
     NAV_TOGGLE_BTN();
     headerFooterView.navTab(renderTab, updateURL);
+
     selectActiveTab(page);
   } catch (err) {
     throw err

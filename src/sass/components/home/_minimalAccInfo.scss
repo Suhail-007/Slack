@@ -14,6 +14,11 @@
     width: 27rem;
     height: 15rem;
   }
+  
+  @include respon(m-desktop) {
+    width: 22rem;
+    height: 12rem;
+  }
 
   & div:first-child {
     background: #fff;

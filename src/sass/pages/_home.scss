@@ -23,18 +23,54 @@ header {
   }
 }
 
+article.section {
+  padding: 0;
+}
+
 .account_info {
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 3rem 0;
   padding: 8rem 0;
+
+  @include respon(m-desktop) {
+    position: absolute;
+    top: 4%;
+    left: -15%;
+    padding: 0;
+  }
+
 }
 
-.canvas {
-  margin: 8rem 0;
-  padding: 0 1.6rem;
+.canvas-cont {
+  display: flex;
+  flex-direction: column;
+  margin: 4rem 0;
+
+  @include respon(m-desktop) {
+    align-items: flex-end;
+  }
+  
+  @include respon(l-desktop) {
+    align-items: center;
+  }
+
+  & canvas {
+    padding: 0 1.6rem;
+    width: 100% !important;
+    height: 100% !important;
+
+    @include respon(sm-desktop) {
+      width: 35rem !important;
+    }
+
+    @include respon(m-desktop) {
+      width: 40rem !important;
+    }
+  }
 }
+
 
 .statistics_boxes {
   display: grid;

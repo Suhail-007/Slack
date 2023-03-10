@@ -93,7 +93,7 @@ main {
   }
 
   @include respon(m-desktop) {
-    max-width: 90vw;
+    max-width: 85vw;
     margin-left: auto;
     margin-top: 0;
   }
@@ -122,18 +122,6 @@ main {
     left: $second-layer-left;
     z-index: -2;
     box-shadow: -.1rem .1rem 1rem .5rem var(--layer-two-shadow);
-  }
-}
-
-.canvas-cont {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @include respon(sm-desktop) {
-    & canvas {
-      width: 35rem !important;
-    }
   }
 }
 

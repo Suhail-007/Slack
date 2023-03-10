@@ -8,12 +8,14 @@ class DashboardView extends View {
   _parentElem = document.querySelector('main');
 
   _generateMarkup() {
-    const sections = `
-      ${minimalAccInfo.renderData(this._data, false, false)}
-      ${chartView.renderChartMarkup()}
-      ${statisticsView.renderData(this._data, false, false)}
-      ${fundAndReferralView.renderData(this._data, false, false)}`;
-    return sections;
+    const article = `
+      <article class='section'>
+        ${minimalAccInfo.renderData(this._data, false, false)}
+        ${chartView.renderChartMarkup()}
+        ${statisticsView.renderData(this._data, false, false)}
+        ${fundAndReferralView.renderData(this._data, false, false)}
+      </article>`;
+    return article;
   }
 
   init(copyRefHanfler) {

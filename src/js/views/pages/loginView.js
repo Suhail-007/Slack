@@ -100,7 +100,7 @@ class loginView extends View {
       //if users exist update url and call router to redirect users to login page else firebase will throw an error 
 
       //render nav & footer
-      handler.initHome(this._data);
+      await handler.initHome(this._data);
 
       updateURL('dashboard');
       sessionStorage.setItem('isLogin', true);

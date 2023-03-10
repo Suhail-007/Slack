@@ -37,7 +37,7 @@ class headerFooter {
           </div>
     
           <!----this is for desktop version---->
-          <div class=" user_profile_container user_profile_container_desktop hidden">
+          <div data-nav="profileNav" class=" user_profile_container user_profile_container_desktop hidden">
             <p data-username class="username">${this._data.personalInfo.fullname}</p>
             <div class="user_profile">
               <img data-user-dp class='dp' loading="lazy" src="${this._setUserPic(this._data.extraInfo)}" alt="user profile">
@@ -54,7 +54,7 @@ class headerFooter {
             </button>
           </div>
     
-          <nav class="navbar" data-nav>
+          <nav class="navbar" data-navbar>
             <div data-nav='profileNav' class="user-profile-container user-profile-container_mob nav-link">
               <p data-username class="user-profile-container_username">${this._data.personalInfo.fullname}</p>
               <div class="user-profile-container_profile">
@@ -85,11 +85,11 @@ class headerFooter {
   }
 
   navTab(renderTab, updateURL) {
-    const nav = document.querySelector('[data-nav]');
+    const nav = document.querySelector('[data-navbar]');
 
     nav.addEventListener('click', e => {
       const navLink = e.target.closest('.nav-link');
-
+      
       if (!navLink) return
 
       const navLinks = document.querySelectorAll('.nav-link');
