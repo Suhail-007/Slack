@@ -8,7 +8,7 @@ class MinimalAccView extends View {
   
   _generateMarkup() {
     return `
-    <section class="account_info" data-minimal-acc-info>
+    <section class="account_info u-margin-bottom" data-minimal-acc-info>
       <div class="total_cont acc_div">
         <div>
           <svg>

@@ -7,7 +7,7 @@ class StatisticsView extends View {
 
   _generateMarkup() {
     return `
-    <section data-statistics-boxes class="statistics_boxes">
+    <section data-statistics-boxes class="statistics_boxes u-margin-bottom">
       <div class="box card--vertical box-1">
         <div class="icon_heading">
           <div>

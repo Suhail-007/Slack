@@ -33,7 +33,7 @@ html {
     font-size: 95%;
   }
   
-  @include respon(m-desktop) {
+  @include respon(l-desktop) {
     font-size: 105%;
   }
 }
@@ -92,10 +92,9 @@ main {
     margin-left: 6rem;
   }
 
-  @include respon(m-desktop) {
+  @include respon(l-desktop) {
     max-width: 85vw;
     margin-left: auto;
-    margin-top: 0;
   }
 
   &::after,

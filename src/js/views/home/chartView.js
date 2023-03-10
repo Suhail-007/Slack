@@ -11,7 +11,7 @@ class ChartView {
 
   renderChartMarkup() {
     return `
-      <section class="canvas-cont">
+      <section class="canvas-cont u-margin-bottom">
         <div class="roi_income_chart_cont">
           <canvas width="300px" height="300px" id="roi"></canvas>
         </div>

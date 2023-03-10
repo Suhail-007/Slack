@@ -1,6 +1,6 @@
 .acc_div {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: min-content 1fr;
   align-items: center;
   width: 25rem;
   height: 13rem;
@@ -9,14 +9,14 @@
   -webkit-border-radius: 2rem;
   -moz-border-radius: 2rem;
   border-radius: 1.8rem;
-  
+
   @include respon(tab-port) {
     width: 27rem;
     height: 15rem;
   }
-  
+
   @include respon(m-desktop) {
-    width: 22rem;
+    width: 23rem;
     height: 12rem;
   }
 

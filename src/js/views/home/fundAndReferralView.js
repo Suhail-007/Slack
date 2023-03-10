@@ -8,7 +8,7 @@ class FundAndReferralView extends View {
 
   _generateMarkup() {
     return `
-    <section class="section__bottom">
+    <section class="section__bottom u-margin-bottom">
       <div class="section__bottom-ref">
         <h2>REFER A FRIEND</h2>
         <div class="section__bottom-ref__img-cont">
