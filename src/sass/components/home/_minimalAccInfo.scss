@@ -1,6 +1,6 @@
 .acc_div {
   display: grid;
-  grid-template-columns: min-content 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   width: 25rem;
   height: 13rem;
@@ -16,6 +16,7 @@
   }
 
   @include respon(m-desktop) {
+    grid-template-columns: min-content 1fr;
     width: 23rem;
     height: 12rem;
   }

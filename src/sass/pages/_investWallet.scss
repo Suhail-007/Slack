@@ -17,12 +17,17 @@
       width: 0;
       padding-block: 1rem;
       opacity: 0;
-      transition: width 1300ms cubic-bezier(.02, .18, .42, 1.36), opacity 200ms ease-in-out;
+    }
+
+    @keyframes fullWidth {
+      100% {
+        width: 100%;
+        opacity: 1;
+      }
     }
 
     &>div.active {
-      width: 100%;
-      opacity: 1;
+      animation: fullWidth 1600ms cubic-bezier(.02, .18, .42, 1.36) forwards;
     }
   }
 
@@ -90,7 +95,7 @@
       fill: currentColor;
     }
   }
-  
+
   & .message-cont {
     @include respon(sm-desktop) {
       width: 65%;
