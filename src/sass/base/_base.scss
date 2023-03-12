@@ -123,7 +123,7 @@ main {
   //first overlay
   &::before {
     top: $second-layer-top;
-    left: calc($second-layer-left / 2);
+    left: calc($second-layer-left / 3);
     z-index: -1;
     box-shadow: 0 .1rem .5rem .3rem var(--layer-one-secondary);
 
@@ -134,10 +134,15 @@ main {
 
   //second overlay
   &::after {
-    top: calc($second-layer-top * 3);
+    top: calc($second-layer-top /4);
     left: $second-layer-left;
     z-index: -2;
     box-shadow: -.1rem .1rem 1rem .5rem var(--layer-two-shadow);
+
+    @include respon(m-desktop) {
+      top: calc($second-layer-top * 1.5);
+      left: calc($second-layer-left/2);
+    }
 
     @include respon(xl-desktop) {
       left: calc($second-layer-left / 1.5);

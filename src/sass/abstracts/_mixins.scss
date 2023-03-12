@@ -31,24 +31,28 @@
     }
   }
 
+  //1024px
   @if $breakpoint==sm-desktop {
     @media only screen and (min-width: 64em) {
       @content
     }
   }
 
+  //1140px
   @if $breakpoint==m-desktop {
     @media only screen and (min-width: 71em) {
       @content
     }
   }
 
+  //1440px
   @if $breakpoint==l-desktop {
     @media only screen and (min-width: 90em) {
       @content
     }
   }
 
+  //2560px
   @if $breakpoint==xl-desktop {
     @media only screen and (min-width: 160em) {
       @content
