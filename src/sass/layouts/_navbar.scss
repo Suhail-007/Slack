@@ -70,7 +70,7 @@
       position: relative;
       margin-top: 1rem;
       flex-shrink: 0;
-
+      
       @include respon(m-desktop) {
         &>span {
           display: flex;
@@ -92,7 +92,7 @@
         width: 2rem;
         height: 2rem;
         margin-right: 1rem;
-        
+
         @include respon(m-desktop) {
           margin-right: 0;
         }

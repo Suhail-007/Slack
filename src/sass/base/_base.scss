@@ -32,9 +32,13 @@ html {
   @include respon(sm-desktop) {
     font-size: 95%;
   }
-  
+
   @include respon(l-desktop) {
     font-size: 105%;
+  }
+
+  @include respon(xl-desktop) {
+    font-size: 120%;
   }
 }
 
@@ -44,7 +48,7 @@ body {
   min-height: 100vh;
   position: relative;
   background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)) no-repeat;
-  
+
   @include respon(tab-port) {
     overflow: auto !important;
   }
@@ -55,7 +59,7 @@ body button {
   font-family: inherit !important;
   letter-spacing: 1px;
   line-height: 110%;
-  
+
 }
 
 .website-logo>img {
@@ -97,6 +101,11 @@ main {
     margin-left: auto;
   }
 
+  @include respon(xl-desktop) {
+    max-width: 90vw;
+    border-top-left-radius: calc($border-top-left-radius * 2);
+  }
+
   &::after,
   &::before {
     content: "";
@@ -105,6 +114,10 @@ main {
     bottom: 0;
     background: var(--bg-primary-alpha-five);
     border-top-left-radius: $border-top-left-radius;
+
+    @include respon(xl-desktop) {
+      border-top-left-radius: calc($border-top-left-radius * 2);
+    }
   }
 
   //first overlay
@@ -113,6 +126,10 @@ main {
     left: calc($second-layer-left / 2);
     z-index: -1;
     box-shadow: 0 .1rem .5rem .3rem var(--layer-one-secondary);
+
+    @include respon(xl-desktop) {
+      left: calc($second-layer-left / 3);
+    }
   }
 
   //second overlay
@@ -121,6 +138,10 @@ main {
     left: $second-layer-left;
     z-index: -2;
     box-shadow: -.1rem .1rem 1rem .5rem var(--layer-two-shadow);
+
+    @include respon(xl-desktop) {
+      left: calc($second-layer-left / 1.5);
+    }
   }
 }
 

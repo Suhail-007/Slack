@@ -36,6 +36,7 @@
       @content
     }
   }
+
   @if $breakpoint==m-desktop {
     @media only screen and (min-width: 71em) {
       @content
@@ -44,6 +45,12 @@
 
   @if $breakpoint==l-desktop {
     @media only screen and (min-width: 90em) {
+      @content
+    }
+  }
+
+  @if $breakpoint==xl-desktop {
+    @media only screen and (min-width: 160em) {
       @content
     }
   }

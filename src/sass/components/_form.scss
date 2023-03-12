@@ -10,6 +10,10 @@
     position: relative;
     border-top-left-radius: $border-top-left-radius;
     overflow: hidden;
+    
+    @include respon(xl-desktop) {
+      border-top-left-radius: calc($border-top-left-radius * 2);
+    }
 
     &::after {
       content: "";

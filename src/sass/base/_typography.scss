@@ -22,6 +22,11 @@ li {
     @include respon(m-desktop) {
       font-size: 1.22rem;
     }
+
+    @include respon(xl-desktop) {
+      font-size: 1.6rem;
+      letter-spacing: 1px;
+    }
   }
 
   &:hover .nav__item--name,
@@ -112,12 +117,20 @@ li {
     &__sub-head {
       font-size: 1.8rem;
       font-weight: 400;
+
+      @include respon(xl-desktop) {
+        font-size: 2rem;
+      }
     }
 
     & a {
       text-decoration: none;
       font-size: 1.6rem;
       color: var(--font-primary);
+
+      @include respon(xl-desktop) {
+        font-size: 1.8rem;
+      }
     }
   }
 }

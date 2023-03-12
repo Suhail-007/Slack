@@ -38,13 +38,13 @@ function config(chartType) {
       responsive: true,
       plugins: {
         legend: {
-          display: false
+          display: false,
         },
         title: {
           display: true,
           text: 'Binary Income || Direct Income'
         }
-      }
+      },
     },
   }
 }
