@@ -28,6 +28,8 @@ article.section {
   
   @include respon(xl-desktop) {
     max-width: 100% !important;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
