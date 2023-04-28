@@ -7,8 +7,8 @@
     font-size: 1.4rem;
 
     @include respon(sm-desktop) {
-      flex-direction: row !important;
-      column-gap: 1rem;
+      flex-direction: row;
+      column-gap: 2rem;
     }
 
     &>* {
@@ -17,18 +17,32 @@
       width: 0;
       padding-block: 1rem;
       opacity: 0;
-      transition: width 1300ms cubic-bezier(.02, .18, .42, 1.36), opacity 200ms ease-in-out;
+    }
+
+    @keyframes fullWidth {
+      100% {
+        width: 100%;
+        opacity: 1;
+      }
     }
 
     &>div.active {
-      width: 100%;
-      opacity: 1;
+      animation: fullWidth 1600ms cubic-bezier(.02, .18, .42, 1.36) forwards;
     }
   }
 
   &__cards-cont {
     margin-top: 3rem;
     row-gap: 1rem;
+
+    @include respon(sm-desktop) {
+      flex-direction: row;
+      column-gap: 2rem;
+
+      .invest-card {
+        width: 100%;
+      }
+    }
   }
 
   .invest-card {
@@ -58,6 +72,7 @@
     background: hsla(43, 74%, 70%, .3);
     box-shadow: .2rem .2rem .5rem 0 hsla(48, 83%, 80%, .2);
     color: hsla(43, 74%, 50%, 1);
+
   }
 
   //stock market
@@ -73,10 +88,18 @@
 
     &>h4 {
       font-size: 1.5rem;
+      text-transform: capitalize;
     }
 
-    &>svg {
+    & svg {
       fill: currentColor;
+    }
+  }
+
+  & .message-cont {
+    @include respon(sm-desktop) {
+      width: 65%;
+      margin-inline: auto;
     }
   }
 }

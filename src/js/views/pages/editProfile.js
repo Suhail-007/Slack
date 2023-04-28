@@ -1,10 +1,9 @@
-import View from '../View.js'
 import { updateURL, toggleModal, modalHandler } from '../../helper.js';
 import { defaultUserPic } from '../../config.js';
 import FORM from '../../components/Form.js';
 import reAuthUser from '../../components/reAuthUser.js';
 
-class EditProfileView extends View {
+class EditProfileView extends FORM {
   _parentElem = document.querySelector('main');
 
   _generateMarkup() {
@@ -13,25 +12,26 @@ class EditProfileView extends View {
     <h2 class='u-letter-spacing-sm u-margin-bottom-big section__edit__heading'>
       Edit Your Profile
     </h2>
-      ${FORM.render('Done', `${this._setUserPic(this._data.data.extraInfo)}`, 'none', 'value=""', 'New Password')}
+      ${this.form('Done', `${this._setUserPic(this._data.data.extraInfo)}`, 'none', 'value=""', 'New Password')}
       
       ${reAuthUser.renderData(false)}
     </section>`
   }
 
-  async init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, removeHeaderFooter, loginUser) {
+  async init(data) {
     this.setTitle('Edit User Information || Slack')
     toggleModal('Leave the fields empty which you do not wish to update.!');
 
-    this.updateData(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, removeHeaderFooter, loginUser);
+    this.updateData(data);
     this.previewUserProfile();
   }
 
-  updateData(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, removeHeaderFooter, loginUser) {
+  updateData(data) {
     const form = document.querySelector('form');
     form.addEventListener('submit', async e => {
       try {
         e.preventDefault();
+        const { updateUserData, renderTab } = data;
         const fd = new FormData(form);
         const fdObj = Object.fromEntries(fd);
 
@@ -41,41 +41,57 @@ class EditProfileView extends View {
         //disabled btn
         this.toggleBtnState();
 
-        if (fullname !== '' && !fullname) throw Error('Please enter full name');
-        if (!isPassSame) throw Error('Passwords do not match');
+        if (!fullname && fdObj.fullname !== '') throw Error('Please enter full name');
+        if (!isPassSame && fdObj.password !== '') throw Error('Passwords do not match');
 
         toggleModal('Updating user data, don\'t leave the page or press back button.');
 
-        await this.renderMessage('Updating user data', 'success', 2000);
-
         const updatedData = this.updatedData(fdObj);
 
+        await this.renderMessage('Updating user data', 'success', 500);
+
         //checks if password fields aren't empty
-        if (fdObj.password) await this.updatePassword(updateUserPassword, loginUser, fdObj.password);
+        if (fdObj.password) {
+          const { updateUserPassword, loginUser } = data;
+          toggleModal('Updating Password, don\'t leave the page or press back button.');
 
-        const profilePicName = updatedData.extraInfo.profilePicName;
+          await this.updatePassword(updateUserPassword, loginUser, fdObj.password);
 
-        //update profile pic only if uploaded profile pic is different from current profile pic
-        if (!(profilePicName !== this._data.data.extraInfo.profilePicName)) {
+          toggleModal('Password Updated.');
+        }
+
+        if (fdObj.profile.name !== '') {
+
+          const { uploadPic } = data;
+
+          toggleModal('Updating Profile Picture, don\'t leave the page or press back button.');
+
           await uploadPic(this._data.data.extraInfo, fdObj.profile);
+
+          toggleModal('Profile Picture Updated.');
         }
 
         //update data after user passwprd is updated
         await updateUserData(updatedData);
 
-        //remove & re render nav & footer
-        removeHeaderFooter();
-        initHome();
-
         toggleModal('Data updated.!');
 
-        await this.renderMessage('Data updated!', 'success', 2000);
+        await this.renderMessage('Data updated!', 'success', 1000);
+
+        //reset form just in case
+        form.reset();
 
         updateURL('profile');
+
+        //update name and user pic everywhere
+        this.updateSidebar(this._data.data.extraInfo.profilePic, this._data.data.personalInfo.fullname);
+
+
+        //navigate back user to profile tab
         renderTab();
       } catch (err) {
         this.toggleBtnState(true);
-        await this.renderMessage(err, 'error', 3000);
+        await this.renderMessage(err, 'error', 2000);
       }
     })
   }
@@ -119,32 +135,6 @@ class EditProfileView extends View {
     }
   }
 
-  isInputsCorrect(fdObj) {
-    let { fullname, password, Repassword: rePassword } = fdObj;
-
-    //check if user enter fullname
-    if (fullname !== '') fullname = fullname.trim().includes(' ');
-
-    //check if passwords is same
-    password = password.split('');
-    rePassword = rePassword.split('');
-    const isPassSame = password.every((l, i) => rePassword[i] === l);
-    return { fullname, isPassSame }
-  }
-
-  previewUserProfile() {
-    const inputImgElem = document.querySelector('#profile');
-
-    inputImgElem.addEventListener('change', () => {
-      const img = document.querySelector('[data-img-preview]');
-      const file = inputImgElem.files[0];
-
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.addEventListener('load', () => img.src = fileReader.result);
-    })
-  }
-
   async updatePassword(updateUserPassword, loginUser, password) {
     try {
       reAuthUser.showForm();
@@ -153,7 +143,7 @@ class EditProfileView extends View {
       reAuthUser.hideForm();
       //if user cancel the process exit from fn
       if (!emailPass.reAuthEmail || !emailPass.reAuthPass) {
-        await this.renderMessage('we can\'t create something from nothing, can we? :)', 'error', 3000);
+        await this.renderMessage('we can\'t create something from nothing, can we? :)', 'error', 2000);
         return false
       }
 
@@ -162,13 +152,12 @@ class EditProfileView extends View {
       //login user again
       const currUser = await loginUser(email, pass);
 
-      await this.renderMessage('Updating your password', 'success', 1500);
+      await this.renderMessage('Updating your password', 'success', 1000);
 
       const isPassUpdated = await updateUserPassword(currUser, password);
 
       if (isPassUpdated) {
         await this.renderMessage('Password updated, you can now use your new password to login', 'success', 2000);
-        return true
       }
 
     } catch (err) {

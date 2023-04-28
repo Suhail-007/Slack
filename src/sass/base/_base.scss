@@ -32,15 +32,26 @@ html {
   @include respon(sm-desktop) {
     font-size: 95%;
   }
+
+  @include respon(l-desktop) {
+    font-size: 105%;
+  }
+
+  @include respon(xl-desktop) {
+    font-size: 120%;
+  }
 }
 
 body {
   margin: 0;
   padding: 0;
-  min-width: 100vw;
   min-height: 100vh;
   position: relative;
   background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)) no-repeat;
+
+  @include respon(tab-port) {
+    overflow: auto !important;
+  }
 }
 
 body input,
@@ -48,6 +59,7 @@ body button {
   font-family: inherit !important;
   letter-spacing: 1px;
   line-height: 110%;
+
 }
 
 .website-logo>img {
@@ -74,15 +86,24 @@ body button {
 main {
   position: relative;
   border-top-left-radius: $border-top-left-radius;
-  margin-top: 4rem;
+  margin-top: .5rem;
   margin-left: 4rem;
   min-height: 100vh;
   background-color: var(--white-bg);
   box-shadow: .1rem 0 .5rem 0 var(--shadow-alpha-five);
 
   @include respon(tab-port) {
-    margin-top: 6rem;
     margin-left: 6rem;
+  }
+
+  @include respon(l-desktop) {
+    max-width: 85vw;
+    margin-left: auto;
+  }
+
+  @include respon(xl-desktop) {
+    max-width: 90vw;
+    border-top-left-radius: calc($border-top-left-radius * 2);
   }
 
   &::after,
@@ -93,35 +114,40 @@ main {
     bottom: 0;
     background: var(--bg-primary-alpha-five);
     border-top-left-radius: $border-top-left-radius;
+
+    @include respon(xl-desktop) {
+      border-top-left-radius: calc($border-top-left-radius * 2);
+    }
   }
 
   //first overlay
   &::before {
     top: $second-layer-top;
-    left: calc($second-layer-left / 2);
+    left: calc($second-layer-left / 3);
     z-index: -1;
     box-shadow: 0 .1rem .5rem .3rem var(--layer-one-secondary);
+
+    @include respon(xl-desktop) {
+      left: calc($second-layer-left / 3);
+    }
   }
 
   //second overlay
   &::after {
-    top: calc($second-layer-top * 3);
+    top: calc($second-layer-top /4);
     left: $second-layer-left;
     z-index: -2;
     box-shadow: -.1rem .1rem 1rem .5rem var(--layer-two-shadow);
-  }
-}
 
-.canvas-cont {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    @include respon(m-desktop) {
+      top: calc($second-layer-top * 1.5);
+      left: calc($second-layer-left/2);
+    }
 
-@include respon(sm-desktop){
-  & canvas {
-    width: 35rem !important;
+    @include respon(xl-desktop) {
+      left: calc($second-layer-left / 1.5);
+    }
   }
-}
 }
 
 .footer {

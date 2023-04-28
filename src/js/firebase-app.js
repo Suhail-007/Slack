@@ -18,7 +18,6 @@ import {
   doc,
   deleteDoc,
   updateDoc,
-  deleteField,
   setDoc,
   onSnapshot
 } from 'firebase/firestore';
@@ -29,9 +28,10 @@ import {
   getDownloadURL,
   deleteObject
 } from "firebase/storage";
-import { 
+import {
   initializeAppCheck,
-ReCaptchaV3Provider } from 'firebase/app-check'
+  ReCaptchaV3Provider
+} from 'firebase/app-check';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB0YK0OmBjg6AFeqa-Kl3sm0_b1FWZfQV4",
@@ -41,27 +41,25 @@ const firebaseConfig = {
   messagingSenderId: "891949740369",
   appId: "1:891949740369:web:7f79bedd618ec20b8ca370",
   measurementId: "G-2W1X0W90WB",
-  storageBucket: 'gs://dashboard-ui-89564.appspot.com'
 };
 
 //init app
 const firebaseApp = initializeApp(firebaseConfig);
 
-const appCheck = initializeAppCheck({
-  provider: new ReCaptchaV3Provider('6Lf5dMckAAAAAMtbaHU5kOiEc3iGgyw74aFSD8GV'),
+const appCheck = initializeAppCheck(firebaseApp, {
+  provider: new ReCaptchaV3Provider('6LclvcckAAAAALXB7BPnP3RT0gIUpQiCMCvYDk_m'),
   isTokenAutoRefreshEnabled: true
 })
 
 //init services
-const storage = getStorage();
-export const db = getFirestore(firebaseApp);
+const storage = getStorage(firebaseApp);
+const db = getFirestore(firebaseApp);
 const auth = getAuth();
 
-export let unSubSnapShot;
-export let unSubAuth;
+let unSubSnapShot;
+let unSubAuth;
 
-// const analytics = getAnalytics(firebaseApp);
-export const loginUser = async function(email, password) {
+const loginUser = async function(email, password) {
   try {
     await setPersistence(auth, browserSessionPersistence);
     await signInWithEmailAndPassword(auth, email, password);
@@ -71,7 +69,7 @@ export const loginUser = async function(email, password) {
   }
 }
 
-export const authChanged = function(user) {
+const authChanged = function(user) {
   return new Promise((resolve, reject) => {
       unSubAuth = onAuthStateChanged(auth, user => user ? resolve(user) : reject('no user is currently log in'))
     })
@@ -80,7 +78,7 @@ export const authChanged = function(user) {
 }
 
 //create user & send user email verification
-export const createUserSendEmailVerif = async function(email, password) {
+const createUserSendEmailVerif = async function(email, password) {
   try {
     const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
     const user = await userCredentials.user;
@@ -102,11 +100,11 @@ export const updateUserData = async function(field) {
   }
 }
 
-export const sendEmailVerif = async function() {
+const sendEmailVerif = async function() {
   await sendEmailVerification(auth.currentUser);
 }
 
-export const resetUserPass = async function(email) {
+const resetUserPass = async function(email) {
   try {
     return await sendPasswordResetEmail(auth, email);
   } catch (err) {
@@ -114,7 +112,7 @@ export const resetUserPass = async function(email) {
   }
 }
 
-export const updateUserPassword = async function(user, newPassword) {
+const updateUserPassword = async function(user, newPassword) {
   try {
     await updatePassword(user, newPassword);
   } catch (err) {
@@ -122,7 +120,7 @@ export const updateUserPassword = async function(user, newPassword) {
   }
 }
 
-export const logoutUser = async function() {
+const logoutUser = async function() {
   try {
     await signOut(auth);
     unSubAuth();
@@ -133,7 +131,7 @@ export const logoutUser = async function() {
 }
 
 //when user sign up create user data in firebase database
-export const createUserData = async function(user, formData) {
+const createUserData = async function(user, formData) {
   try {
     await setDoc(doc(db, 'users', user.uid), {
       personalInfo: {
@@ -158,8 +156,8 @@ export const createUserData = async function(user, formData) {
       preference: {
         theme: 'system default',
         charts: {
-          roi: 'Doughnut',
-          bi: 'Line'
+          roi: 'doughnut',
+          bi: 'line'
         }
       }
     });
@@ -172,7 +170,7 @@ export const createUserData = async function(user, formData) {
   }
 }
 
-export const getUserDataAndUserPic = function(user) {
+const getUserDataAndUserPic = function(user) {
   const currUser = auth.currentUser;
   return new Promise(function(resolve, reject) {
       unSubSnapShot = onSnapshot(doc(db, "users", currUser.uid), async doc => {
@@ -193,15 +191,15 @@ export const getUserDataAndUserPic = function(user) {
     })
 }
 
-const imagesRef = ref(storage, 'images');
+const assetsRef = ref(storage, 'assets');
 
-export const uploadPic = async function(user, file) {
-  //it's like this inside of images folder create user(user.id) folder there create a file name(file param) and upload that file to server. i.e images/user/file(same name as user have saved)
+const uploadPic = async function(user, imageFile) {
+  //it's like this inside of assets folder create user(user.id) folder there create a file name(file param) and upload that file to server. i.e assets/user/file(same name as user have saved)
   try {
-    const { name } = file;
-    const profilePicRef = ref(storage, `images/${user.uid}/${name}`);
+    const { name } = imageFile;
+    const profilePicRef = ref(storage, `assets/${user.uid}/${name}`);
     // // 
-    const snapshot = await uploadBytes(profilePicRef, file);
+    const snapshot = await uploadBytes(profilePicRef, imageFile);
     console.log('Image uploaded to server');
     return snapshot
   } catch (err) {
@@ -209,14 +207,14 @@ export const uploadPic = async function(user, file) {
   }
 }
 
-export const getUserImage = async function(user) {
+const getUserImage = async function(user) {
   try {
     const { uid, profilePicName: name } = user.extraInfo;
 
     //if there's no profie pic name ref in user return & use default profile
     if (name === '') return
 
-    const profilePicRef = ref(storage, `images/${uid}/${name}`);
+    const profilePicRef = ref(storage, `assets/${uid}/${name}`);
 
     //user obj model
     user.extraInfo.profilePic = await getDownloadURL(profilePicRef);
@@ -226,7 +224,7 @@ export const getUserImage = async function(user) {
   }
 }
 
-export const deleteUserAndData = async function(user, currUser) {
+const deleteUserAndData = async function(user, currUser) {
   try {
     await deleteUserPic(user);
     await deleteUserDoc();
@@ -243,7 +241,7 @@ const deleteUserPic = async function(user) {
 
     if (!profilePic && !name) return;
 
-    const profilePicRef = ref(storage, `images/${uid}/${name}`);
+    const profilePicRef = ref(storage, `assets/${uid}/${name}`);
     await deleteObject(profilePicRef);
   } catch (err) {
     throw err
@@ -260,3 +258,20 @@ const deleteUserDoc = async function() {
     throw err
   }
 }
+
+const firebaseObj = {
+  loginUser,
+  createUserSendEmailVerif,
+  createUserData,
+  getUserDataAndUserPic,
+  resetUserPass,
+  sendEmailVerif,
+  logoutUser,
+  authChanged,
+  deleteUserAndData,
+  updateUserData,
+  uploadPic,
+  updateUserPassword
+}
+
+export default firebaseObj;

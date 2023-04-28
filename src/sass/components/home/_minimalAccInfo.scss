@@ -9,10 +9,16 @@
   -webkit-border-radius: 2rem;
   -moz-border-radius: 2rem;
   border-radius: 1.8rem;
-  
+
   @include respon(tab-port) {
     width: 27rem;
     height: 15rem;
+  }
+
+  @include respon(m-desktop) {
+    grid-template-columns: min-content 1fr;
+    width: 23rem;
+    height: 12rem;
   }
 
   & div:first-child {

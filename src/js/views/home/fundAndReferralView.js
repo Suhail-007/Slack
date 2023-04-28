@@ -1,15 +1,14 @@
 import View from '../View.js'
-import icons from '../../../images/icons.svg';
-import referImg from '../../../images/m_refer.jpeg';
+import icons from '../../../assets/icons.svg';
+import referImg from '../../../assets/m_refer.jpeg';
 import Wallet from '../../components/Wallet.js'
 
 class FundAndReferralView extends View {
   _parentElem = document.querySelector('main');
-  _copyButton;
 
   _generateMarkup() {
     return `
-    <section class="section__bottom">
+    <section class="section__bottom u-margin-bottom">
       <div class="section__bottom-ref">
         <h2>REFER A FRIEND</h2>
         <div class="section__bottom-ref__img-cont">
@@ -31,51 +30,44 @@ class FundAndReferralView extends View {
     </section>`;
   }
 
-  init(updateUserData, handler) {
-    this.updateUserData = updateUserData;
+  init() {
     Wallet.addInputAmount(this._data.data);
-    this.addHandlerCopyRef(handler);
+    this.addHandlerCopyRef();
     Wallet.toggleFundBtns();
   }
 
   _toastCopy() {
-    const body = document.body;
-
-    let html = `
+    const html = `
       <div class="toast_copy">
         <p>Copied</p>
       </div>`
 
-    body.insertAdjacentHTML('beforeend', html);
+    document.body.insertAdjacentHTML('beforeend', html);
     this._hideToastCopy();
   }
 
   _hideToastCopy() {
     const toast = document.querySelector('.toast_copy');
     toast.style.opacity = 1;
-    setTimeout(() => {
-      toast.style.opacity = 0;
-    }, 1000);
+    setTimeout(() => toast.style.opacity = 0, 1000);
   }
 
-  addHandlerCopyRef(handler) {
-    this._copyButton = document.querySelector('[data-copy-btn]');
+   addHandlerCopyRef() {
+    const copyBtn = document.querySelector('[data-copy-btn]');
     const refLink = document.querySelector('[data-ref-link]');
 
-    this._copyButton.addEventListener('click', e => {
+    copyBtn.addEventListener('click', async e => {
       const btn = e.target.closest('[data-copy-btn]');
 
       const btnSpanElem = btn.querySelector('span');
 
       if (!btn) return;
-      handler(refLink);
+      await navigator.clipboard.writeText(element.innerText);
 
       btnSpanElem.innerText = 'Copied';
       this._toastCopy();
 
-      setTimeout(() => {
-        btnSpanElem.innerText = 'Copy Referral Link';
-      }, 1000);
+      setTimeout(() => btnSpanElem.innerText = 'Copy Referral Link', 1000);
     })
   }
 }

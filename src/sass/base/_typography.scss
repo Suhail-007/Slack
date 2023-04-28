@@ -17,9 +17,20 @@ li {
     color: var(--font-primary);
     transition: color 200ms;
     user-select: none;
+    font-size: 1.4rem;
+
+    @include respon(m-desktop) {
+      font-size: 1.22rem;
+    }
+
+    @include respon(xl-desktop) {
+      font-size: 1.6rem;
+      letter-spacing: 1px;
+    }
   }
 
-  &:hover .nav__item--name {
+  &:hover .nav__item--name,
+  &.active .nav__item--name {
     color: var(--border-primary);
   }
 }
@@ -32,11 +43,11 @@ li {
   text-transform: capitalize;
   text-align: left;
   justify-self: start;
-  
+
   @include respon(tab-port) {
     font-size: 1.6rem;
   }
-  
+
   & p {
     margin: 0;
     margin-bottom: 1rem;
@@ -106,12 +117,20 @@ li {
     &__sub-head {
       font-size: 1.8rem;
       font-weight: 400;
+
+      @include respon(xl-desktop) {
+        font-size: 2rem;
+      }
     }
 
     & a {
       text-decoration: none;
       font-size: 1.6rem;
       color: var(--font-primary);
+
+      @include respon(xl-desktop) {
+        font-size: 1.8rem;
+      }
     }
   }
 }

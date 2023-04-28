@@ -15,17 +15,12 @@ export const NAV_TOGGLE_BTN = function() {
   });
 };
 
-//set Local Storage
-export const setLocalStorage = function(key, value) {
-  localStorage.setItem(`${key}`, JSON.stringify(`${value}`));
-}
-
 export const updateURL = function(page, reset = false) {
   if (reset) {
     location.href = new URL(location.origin + location.pathname, location.href);
     return
   };
-  history.pushState('', '', `?page=${page}`);
+  history.pushState({ page }, '', `?page=${page}`);
 }
 
 const Timeout = function(ms) {
@@ -56,9 +51,10 @@ export function getCurrentDate() {
   const date = new Date()
   const year = date.getFullYear();
   let month = date.getMonth() + 1;
-  const day = date.getDate();
+  let day = date.getDate();
 
   month = month < 10 ? '0' + month : month;
+  day = day < 10 ? '0' + day : day;
 
   return {
     day,

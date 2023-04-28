@@ -8,22 +8,38 @@
 
 .login__form {
   justify-self: center;
-  color: var(--font-primary);
-  width: 60%;
-
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(5, min-content);
+
+  color: var(--font-primary);
+  width: 60%;
   margin-top: 1rem;
   row-gap: 2rem;
+
+  @include respon(m-desktop) {
+    width: 70%;
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+
+    & .input__label {
+      width: 70%;
+      margin-inline: auto;
+    }
+
+    & .message-cont {
+      width: 70%;
+      margin-inline: auto;
+    }
+  }
 
   & button {
     justify-self: center;
   }
-}
 
-.reset-password {
-  color: var(--blue-primary);
-  font-size: 1.3rem;
-  margin-inline: auto;
+  .reset-password {
+    color: var(--blue-primary);
+    font-size: 1.3rem;
+    margin-inline: auto;
+  }
 }

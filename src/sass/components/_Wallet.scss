@@ -24,7 +24,7 @@
     font-size: 1.7rem;
     box-shadow: .5rem .5rem 1rem .1rem var(--blue-primary-alpha-three);
 
-    @include respon(sm-desktop) {
+    @include respon(tab-port) {
       max-width: 60%;
     }
   }
@@ -47,7 +47,7 @@
         align-self: start;
         transform: translateX(-1rem);
         
-        @include respon(sm-desktop) {
+        @include respon(tab-port) {
           align-self: center;
         }
       }
@@ -62,7 +62,7 @@
         background: var(--bg-primary-alpha-eight);
         color: var(--font-primary);
                
-        @include respon(sm-desktop) {
+        @include respon(tab-port) {
           max-width: 60%;
         }
 

@@ -1,10 +1,9 @@
-import View from '../View.js';
-import websiteImage from '../../../images/m_logo.jpg';
+import websiteImage from '../../../assets/m_logo.jpg';
 import FORM from '../../components/Form.js';
 import { updateURL } from '../../helper.js'
-import { defaultUserPic } from '../../config.js'
+import { defaultUserPic } from '../../config.js';
 
-class SignUpView extends View {
+class SignUpView extends FORM {
   _parentElem = document.querySelector('main');
 
   _generateMarkup() {
@@ -17,7 +16,7 @@ class SignUpView extends View {
       <div class="form__container form__container--blur">
 
         <h2 class="form__container__heading login__heading">Create Account</h2>
-        ${FORM.render('Sign up', defaultUserPic, 'block', 'required', 'Password')}
+        ${this.form('Sign up', defaultUserPic, 'block', 'required', 'Password')}
       </div>
     </section>`
   }
@@ -26,7 +25,7 @@ class SignUpView extends View {
     this.setTitle('Sign up || Slack');
     this.getSignInDetails(createUserSendEmailVerif, createUserData);
     this.previewUserProfile();
-    FORM.redirectTo('_', true);
+    this.redirectTo('_', true);
   }
 
   getSignInDetails(createUserSendEmailVerif, createUserData) {
@@ -60,32 +59,6 @@ class SignUpView extends View {
         this.toggleBtnState(true);
         await this.renderMessage(err, 'error', 3000);
       }
-    })
-  }
-
-  isInputsCorrect(fdObj) {
-    let { fullname, password, Repassword: rePassword } = fdObj;
-
-    //check if user enter fullname
-    fullname = fullname.trim().includes(' ');
-
-    //check if passwords is same
-    password = password.split('');
-    rePassword = rePassword.split('');
-    const isPassSame = password.every((l, i) => rePassword[i] === l);
-    return { fullname, isPassSame }
-  }
-
-  previewUserProfile() {
-    const inputImgElem = document.querySelector('#profile');
-
-    inputImgElem.addEventListener('change', () => {
-      const img = document.querySelector('[data-img-preview]');
-      const file = inputImgElem.files[0];
-
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.addEventListener('load', () => img.src = fileReader.result);
     })
   }
 }

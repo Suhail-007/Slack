@@ -406,12 +406,6 @@ li:hover .nav__item--name {
   text-transform: capitalize;
 }
 
-button:disabled {
-  background: #CBCBCB;
-  color: #000;
-  border: 1px solid #CBCBCB;
-}
-
 .btn {
   border: none;
   border-radius: 0.5rem;
@@ -1367,8 +1361,9 @@ header .nav_container_btn svg {
 }
 .invest-wallet__heading > h4 {
   font-size: 1.5rem;
+  text-transform: capitalize;
 }
-.invest-wallet__heading > svg {
+.invest-wallet__heading svg {
   fill: currentColor;
 }
 

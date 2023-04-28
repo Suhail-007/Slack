@@ -1,6 +1,7 @@
 import View from '../View.js';
 import Wallet from '../../components/Wallet.js';
 import { investCard } from '../../components/Cards.js'
+import icons from '../../../assets/icons.svg'
 
 class InvestWallet extends View {
   #coin;
@@ -24,8 +25,8 @@ class InvestWallet extends View {
         </div>
       </div>
       <div class="invest-wallet__cards-cont flex-col">
-        ${investCard({price: 0, iconName:'bitcoin', heading: 'Bitcoin'})}
-        ${investCard({price: 0, iconName:'SM', heading: 'Stock Market'})}
+        ${investCard({price: 0, icon:`${icons}#icon-bitcoin`, heading: 'bitcoin', className:'bitcoin'})}
+        ${investCard({price: 0, icon:`${icons}#icon-SM`, heading: 'stock market', className: 'SM'})}
       </div> 
       
       <div data-wallet>
@@ -35,9 +36,8 @@ class InvestWallet extends View {
     `
   }
 
-  async init(getBitcoinDetails, updateUserData, getStockOpenPrice) {
+  async init(getBitcoinDetails, getStockOpenPrice) {
     this.setTitle('Invest wallet || Slack');
-    this.updateData = updateUserData;
     await this.setBitcoinPrice(getBitcoinDetails);
     await this.setStockPrice(getStockOpenPrice);
     this.addActiveClass();

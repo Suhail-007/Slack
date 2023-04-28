@@ -1,14 +1,14 @@
 import View from '../View.js';
 import Wallet from '../../components/Wallet.js';
-// import icons from './src/images/icons.svg';
-import icons from '../../../images/icons.svg';
+// import icons from './src/assets/icons.svg';
+import icons from '../../../assets/icons.svg';
 
 class MinimalAccView extends View {
   _parentElem = document.querySelector('main');
   
   _generateMarkup() {
     return `
-    <section class="account_info" data-minimal-acc-info>
+    <section class="account_info u-margin-bottom" data-minimal-acc-info>
       <div class="total_cont acc_div">
         <div>
           <svg>

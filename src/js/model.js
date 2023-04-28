@@ -1,27 +1,18 @@
 import loginView from './views/pages/loginView.js';
 import signUpView from './views/pages/signupView.js';
 import resetPassView from './views/pages/resetPassView.js';
-import headerFooterView from './views/pages/headerFooterView.js';
+import headerFooterView from './components/headerFooterView.js';
 import homeView from './views/home/homeView.js';
-import chartView from './views/home/chartView.js';
-import fundAndReferralView from './views/home/fundAndReferralView.js';
 import profileView from './views/pages/profileView.js';
 import investWalletView from './views/pages/investWallet.js';
 import teamSummary from './views/pages/team-summary.js';
 import incomeView from './views/pages/income.js';
-import pageNotFoundView from './views/pages/404.js';
 import editProfileView from './views/pages/editProfile.js';
 
 import { cryptoConfig, stockMarketConfig, API_KEY } from './config.js';
 import logoutUserView from './views/pages/logout.js';
-import { updateURL, NAV_TOGGLE_BTN, setLocalStorage, fetchURL, modalHandler, toggleModal } from './helper.js';
-
-import { loginUser, createUserSendEmailVerif, createUserData, getUserDataAndUserPic, resetUserPass, sendEmailVerif, logoutUser, authChanged, deleteUserAndData, unSubAuth, unSubSnapShot, updateUserData, uploadPic, updateUserPassword } from './firebase-app.js';
-
-
-export const copyRefLink = async function(element) {
-  await navigator.clipboard.writeText(element.innerText);
-}
+import { updateURL, NAV_TOGGLE_BTN, fetchURL, modalHandler, toggleModal } from './helper.js';
+import firebaseObj from './firebase-app.js';
 
 let isLogin = false;
 
@@ -34,15 +25,25 @@ const router = {
   'null': {
     view: async function() {
       try {
+        const helper = {
+          renderTab,
+          initHome,
+
+          loginUser: firebaseObj.loginUser,
+          sendEmailVerif: firebaseObj.sendEmailVerif,
+          logoutUser: firebaseObj.logoutUser,
+          getUserDataAndUserPic: firebaseObj.getUserDataAndUserPic,
+        };
         await loginView.loader();
-        await loginView.Delay(500);
+        await loginView.Delay(200);
         loginView.renderData(user);
         systemDefaultTheme();
         loginAgainMessage();
 
-        loginView.init(renderTab, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
+        loginView.init(helper);
         modalHandler();
         headerFooterView.removeHeaderFooter();
+        hideScroll()
       } catch (err) {
         loginView.renderMessage(err, 'error', 4000)
       }
@@ -52,10 +53,13 @@ const router = {
   'signup': {
     view: async function() {
       try {
+        const { createUserSendEmailVerif, createUserData } = firebaseObj;
+
         await signUpView.loader();
-        await resetPassView.Delay(500);
+        await resetPassView.Delay(200);
         signUpView.renderData(user);
         signUpView.init(createUserSendEmailVerif, createUserData);
+        hideScroll()
       } catch (err) {
         signUpView.renderMessage(err, 'success')
       }
@@ -64,23 +68,29 @@ const router = {
 
   'reset password': {
     view: async function() {
-      await resetPassView.loader();
-      await resetPassView.Delay(1000);
-      resetPassView.renderData('_');
-      resetPassView.init(resetUserPass);
+      try {
+        const { resetUserPass } = firebaseObj;
+
+        await resetPassView.loader();
+        await resetPassView.Delay(200);
+        resetPassView.renderData('_');
+        resetPassView.init(resetUserPass);
+        hideScroll();
+      } catch (err) {
+        await resetPassView.renderMessage(err, 'error', 2000);
+      }
     }
   },
 
-  'home': {
+  'dashboard': {
     view: async function() {
       try {
         await homeView.loader();
-        await homeView.Delay(1000);
+        await homeView.Delay(200);
         homeView.renderData(user);
-        chartView.createChart(user);
-
-        homeView.init(updateUserData, copyRefLink);
-        initTheme(user)
+        homeView.init();
+        initTheme(user);
+        hideScroll();
       } catch (err) {
         toggleModal(err);
       }
@@ -90,10 +100,17 @@ const router = {
   'profile': {
     view: async function() {
       try {
+        const helper = {
+          settings,
+          renderTab,
+          deleteUserAndData: firebaseObj.deleteUserAndData,
+          loginUser: firebaseObj.loginUser
+        };
+
         await profileView.loader();
-        await profileView.Delay(1000);
+        await profileView.Delay(200);
         profileView.renderData(user);
-        profileView.init(settings, deleteUserAndData, loginUser, renderTab);
+        profileView.init(helper);
       } catch (err) {
         profileView.renderMessage('Failed to load profile, try reloading ' + err, 'error', 3000);
       }
@@ -103,10 +120,18 @@ const router = {
   'profileEdit': {
     view: async function() {
       try {
+        const helper = {
+          renderTab,
+          updateUserData: firebaseObj.updateUserData,
+          updateUserPassword: firebaseObj.updateUserPassword,
+          uploadPic: firebaseObj.uploadPic,
+          loginUser: firebaseObj.loginUser
+        };
+
         await editProfileView.loader();
-        await editProfileView.Delay(1000);
+        await editProfileView.Delay(200);
         editProfileView.renderData(user);
-        editProfileView.init(updateUserData, renderTab, updateUserPassword, uploadPic, initHome, headerFooterView.removeHeaderFooter, loginUser);
+        editProfileView.init(helper);
       } catch (err) {
         console.log(err);
       }
@@ -117,9 +142,9 @@ const router = {
     view: async function() {
       try {
         await investWalletView.loader();
-        await investWalletView.Delay(1000);
+        await investWalletView.Delay(200);
         investWalletView.renderData(user);
-        await investWalletView.init(getBitcoinDetails, updateUserData, getStockOpenPrice);
+        await investWalletView.init(getBitcoinDetails, getStockOpenPrice);
 
       } catch (err) {
         console.log(err);
@@ -131,7 +156,7 @@ const router = {
     view: async function() {
       try {
         await teamSummary.loader();
-        await teamSummary.Delay(1000);
+        await teamSummary.Delay(200);
         teamSummary.renderData(user);
         teamSummary.init();
       } catch (err) {
@@ -145,11 +170,10 @@ const router = {
     view: async function() {
       try {
         await incomeView.loader();
-        await incomeView.Delay(1000);
+        await incomeView.Delay(200);
         incomeView.renderData(user);
         incomeView.init();
       } catch (err) {
-        console.log(err);
         incomeView.renderMessage(err, 'error', 4000);
       }
     }
@@ -158,23 +182,19 @@ const router = {
   'logout': {
     view: async function() {
       try {
-        await logoutUserView.init(logoutUser, unSubAuth, unSubSnapShot);
+        await logoutUserView.init(firebaseObj.logoutUser);
       } catch (err) {
         console.log(err);
       }
     }
   },
-
-  '404': {
-    view: function() {
-      pageNotFoundView.init();
-    }
-  }
 }
 
 export const renderTab = async function() {
   try {
     const { page } = getPage();
+
+    const { authChanged, logoutUser } = firebaseObj;
     const res = await authChanged(user);
 
     //scroll to top of every section
@@ -183,12 +203,10 @@ export const renderTab = async function() {
     //signout the user if user go back to login page
     if (page === null && res) logoutUser();
 
-    //if user is signout and go back to home redirect user to login page
+    //if user is signout and user try to navigate to anywhere except these, redirect user to login page
     if (!res && page != null && page !== 'signup' && page !== 'reset password') return updateURL('_', true);
 
-    //if page not found
-    if (router[page] === undefined) await router['404'].view();
-
+    //render page
     if (router[page]) await router[page].view();
   } catch (err) {
     toggleModal(err);
@@ -196,30 +214,53 @@ export const renderTab = async function() {
 }
 
 export const renderFromHistory = function() {
-  window.addEventListener('popstate', renderTab);
+  window.addEventListener('popstate', () => {
+    const { page } = getPage();
+
+    //add the class to navlink
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(li => li.classList.remove('active'));
+
+    renderTab();
+    if (page !== null && page !== 'signup' && page !== 'reset password') {
+      selectActiveTab(history.state?.page);
+    }
+  });
 }
 
 export const windowLoad = function() {
   window.addEventListener('load', async () => {
     const { page } = getPage();
-    const res = await authChanged(user);
 
-    if (page != null && res) {
-      renderTab();
-      scrollToTop();
-      initHome();
-      modalHandler();
-      initTheme(user)
-      return
-    }
-    return renderTab();
+    if (page === null || page === 'signup' || page === 'reset password') return await renderTab();
+
+    await renderTab();
+    scrollToTop();
+    modalHandler();
+    await initHome(user);
+    initTheme(user);
+    hideScroll()
   });
 }
 
-const initHome = function() {
-  headerFooterView.generateHomeMarkup(user);
-  NAV_TOGGLE_BTN();
-  headerFooterView.navTab(renderTab, updateURL);
+const selectActiveTab = function(tab) {
+  if (tab === 'profileEdit') document.querySelector(`[data-nav='profile']`).classList.add('active');
+  else if (tab) document.querySelector(`[data-nav='${tab}']`).classList.add('active')
+  else document.querySelector(`[data-nav='dashboard']`).classList.add('active');
+}
+
+const initHome = async function(user) {
+  try {
+    const { page } = getPage();
+    await headerFooterView.generateHomeMarkup(user);
+    NAV_TOGGLE_BTN();
+    headerFooterView.navTab(renderTab, updateURL);
+
+    selectActiveTab(page);
+  } catch (err) {
+    throw err
+  }
 }
 
 const scrollToTop = function() {
@@ -229,10 +270,17 @@ const scrollToTop = function() {
   });
 }
 
-const loginAgainMessage = function() {
+const hideScroll = function() {
+  const { page } = getPage();
+
+  if (page == null || page === 'reset password') document.body.style.overflow = 'hidden';
+  else document.body.style.overflow = 'auto';
+}
+
+const loginAgainMessage = async function() {
   const isLogin = sessionStorage.getItem('isLogin');
   if (isLogin) {
-    loginView.renderMessage('Login again to access your account', 'error', 4000);
+    await loginView.renderMessage('Login again to access your account', 'error', 4000);
   }
 }
 
@@ -291,6 +339,7 @@ export const settings = async function(e) {
 
 const updateChart = async function(value, id) {
   try {
+    const { updateUserData } = firebaseObj;
     toggleModal('Please wait updating chart');
     id === 'roi' ? await updateUserData({ 'preference.charts.roi': value }) : await updateUserData({ 'preference.charts.bi': value });
     toggleModal('Chart updated');
@@ -302,6 +351,7 @@ const updateChart = async function(value, id) {
 const applyTheme = function(elem) {
   //assign event listener to select tag
   elem.addEventListener('change', async (e) => {
+    const { updateUserData } = firebaseObj;
     //get value
     const selectedValue = e.target.value.toLowerCase();
     const body = document.body;
@@ -337,10 +387,13 @@ export const systemDefaultTheme = function() {
   else document.body.classList.remove('dark');
 }
 
-//initialize the theme on pahe load
-export const initTheme = function(user) {
+//initialize the theme on page load
+const initTheme = function(user) {
   const { theme } = user.data.preference;
 
   //apply the theme
   theme === 'system default' ? systemDefaultTheme() : theme === 'light' ? document.body.classList.remove('dark') : theme === 'dark' ? document.body.classList.add('dark') : '';
 }
+
+
+//set up firebase object everywhere

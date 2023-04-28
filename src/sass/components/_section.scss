@@ -1,9 +1,16 @@
 .section {
-  border-top-left-radius: 4rem;
-  padding: 1rem 1rem 3rem 2rem;
+  border-top-left-radius: $border-top-left-radius;
+  padding: 1rem 0rem 3rem 2rem;
   min-height: $section-min-height;
   background-color: var(--white-bg);
   color: var(--font-primary);
+
+  @include respon(xl-desktop) {
+    border-top-left-radius: calc($border-top-left-radius * 2);
+    padding: 2rem 1rem 3rem 2rem;
+    max-width: 95rem;
+    margin-inline: auto;
+  }
 
   &_items {
     display: flex;

@@ -1,7 +1,8 @@
 import View from '../View.js';
 import { updateURL } from '../../helper.js';
-import websiteImage from '../../../images/m_logo.jpg';
-import icons from '../../../images/icons.svg';
+import m_logoImg from '../../../assets/m_logo.jpg';
+import d_logoImg from '../../../assets/d_logo.jpg';
+import icons from '../../../assets/icons.svg';
 
 class loginView extends View {
   _parentElem = document.querySelector('main');
@@ -12,7 +13,8 @@ class loginView extends View {
     return `
     <section class="form__section">
       <div class="form__section__logo--lg">
-        <img class="form__section__img" loading='lazy' src="${websiteImage}" alt="website logo">
+      <img class="form__section__img" src="${m_logoImg}" srcset="${m_logoImg}, 100w, ${d_logoImg} 1'300w"
+      sizes="(min-width: 56.25em) 20vw" src="${d_logoImg}" alt="website logo">
       </div>
 
       <div class="login__form__cont form__container form__container--blur">
@@ -39,43 +41,44 @@ class loginView extends View {
           
           <button class="btn btn-light-blue form__btn" data-form-btn type="submit">Log in</button>
 
-          <p class="form-link signup--login">Don't have account yet?<a data-signup='signup' href=''>Sign up</a></p>
+          <p class="form-link signup-login">Don't have account yet?<a data-signup='signup' href=''>Sign up</a></p>
         </form>
       </div>
     </section>`
   }
 
-  init(router, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome) {
+  init(helper) {
     this._form = document.querySelector('form');
     this.setTitle('Log In || Slack');
-    this.renderTab = router;
+    this.renderTab = helper.renderTab;
     this.placeholderLabelToggle(this._form);
-    this.getLoginCredentials(loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
+    this.getLoginCredentials(helper);
     this.formLinkRedirects();
     this.togglePasswordInputType();
   }
 
-  getLoginCredentials(loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome) {
+  getLoginCredentials(helper) {
     this._form.addEventListener('submit', e => {
       e.preventDefault();
       const fd = [...new FormData(this._form)];
       const userObj = Object.fromEntries(fd);
 
-      this.#getUserFromFirebase(userObj, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome);
+      this.#getUserFromFirebase(userObj, helper);
     })
   }
 
-  async #getUserFromFirebase(userObj, loginUser, sendEmailVerif, logoutUser, getUserDataAndUserPic, initHome) {
+  async #getUserFromFirebase(userObj, handler) {
     try {
       const { email, password } = userObj;
 
       this.toggleBtnState();
-      if (email) await this.renderMessage('Checking information', 'success', 1000);
+      if (email) await this.renderMessage('Checking information', 'success', 500);
 
-      const user = await loginUser(email, password);
+      const user = await handler.loginUser(email, password);
 
       // send verification if email not verified
       if (!user.emailVerified) {
+        const { sendEmailVerif, logoutUser } = handler;
         sendEmailVerif();
         //signout the user 
         logoutUser();
@@ -85,26 +88,26 @@ class loginView extends View {
       //throw error if user not found
       if (!user) throw Error('You need to login again');
 
-      await this.renderMessage('Getting user data', 'success', 1000);
+      await this.renderMessage('Getting user data', 'success', 500);
 
       //get user data && image from firebase & update user obj
-      const res = await getUserDataAndUserPic(this._data);
+      const res = await handler.getUserDataAndUserPic(this._data);
 
-      if (res) await this.renderMessage('Fetched data successfully', 'success', 1000);
+      if (res) await this.renderMessage('Fetched data successfully', 'success', 500);
 
-      await this.renderMessage('Logging User', 'success', 1000);
+      await this.renderMessage('Logging User', 'success', 500);
 
       //if users exist update url and call router to redirect users to login page else firebase will throw an error 
 
       //render nav & footer
-      initHome();
+      await handler.initHome(this._data);
 
-      updateURL('home');
+      updateURL('dashboard');
       sessionStorage.setItem('isLogin', true);
 
       await this.renderTab();
     } catch (err) {
-      await this.renderMessage(err, 'error', 2000);
+      await this.renderMessage(err, 'error', 1000);
       this.toggleBtnState(true);
     }
   }
@@ -114,7 +117,7 @@ class loginView extends View {
       if (e.target.matches('.form-link') || e.target.closest('.form-link')) {
         e.preventDefault();
 
-        if (e.target.closest('.signup--login')) this.redirectTo('signup');
+        if (e.target.closest('.signup-login')) this.redirectTo('signup');
         if (e.target.matches('.reset-password')) this.redirectTo('reset password');
       }
     })
