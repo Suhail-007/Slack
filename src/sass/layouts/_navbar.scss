@@ -59,8 +59,6 @@
       column-gap: .8rem;
       flex-direction: row;
       width: auto;
-      overflow-x: scroll;
-      overflow-y: hidden;
     }
 
     &>li {
@@ -70,7 +68,7 @@
       position: relative;
       margin-top: 1rem;
       flex-shrink: 0;
-      
+
       @include respon(m-desktop) {
         &>span {
           display: flex;

@@ -25,7 +25,7 @@ header {
 
 article.section {
   padding: 0;
-  
+
   @include respon(xl-desktop) {
     max-width: 100% !important;
     display: grid;

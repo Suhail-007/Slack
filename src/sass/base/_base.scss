@@ -29,17 +29,10 @@ html {
     font-size: 85%;
   }
 
-  @include respon(sm-desktop) {
-    font-size: 95%;
-  }
-
-  @include respon(l-desktop) {
+  @include respon(xl-desktop) {
     font-size: 105%;
   }
 
-  @include respon(xl-desktop) {
-    font-size: 120%;
-  }
 }
 
 body {
